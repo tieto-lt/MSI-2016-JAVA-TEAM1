@@ -4,7 +4,7 @@ function Service ($http) {
 
     this.create = function(user) {
         console.log(user);
-        return $http.post('/api/user/', user);
+        return $http.post('/api/user', user);
     };
 
 }
