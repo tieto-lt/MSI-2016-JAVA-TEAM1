@@ -36,7 +36,15 @@ module.config(function($stateProvider, $urlRouterProvider) {
     .state('root.ItemDetails', {
       url: "/items/:id",
       template: "<item-details></item-details>"
-    });
+    })
+    .state('root.registration', {
+      url: "/registration",
+      template:"<new-user></new-user>",
+      data: {
+        isPublic: true
+      }
+    })
+    ;
 });
 
 module.run(['$transitions', 'Session', '$state', function($transitions, Session, $state) {
