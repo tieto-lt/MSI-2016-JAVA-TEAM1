@@ -70,6 +70,7 @@ public class OAuth2Config implements AuthorizationServerConfigurer, ResourceServ
         // @formatter:off
         http.authorizeRequests()
                 .antMatchers("/api/**").authenticated()
+                .antMatchers("/api/user").permitAll() // registration endpoint allowed for all
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
         // @formatter:on

@@ -16,14 +16,7 @@ public class RolesController extends BaseController {
     @RequestMapping(method = RequestMethod.GET, path = "/api/roles")
     public String all() {
 
-        return new String("[\n" +
-                "  {\n" +
-                "    \"id\": 777,\n" +
-                "    \"name\": \"RolesVeikia\",\n" +
-                "    \"quantity\": 47,\n" +
-                "    \"size\": \"100x100\"\n" +
-                "  }\n" +
-                "]");
+        return new String("test");
     }
 
 }
