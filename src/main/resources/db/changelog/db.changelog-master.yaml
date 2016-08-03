@@ -144,3 +144,80 @@ databaseChangeLog:
                 name: authority
                 value: 'ADMIN'
             tableName: authorities
+
+  - changeSet:
+      id: 7
+      author: Darius
+      changes:
+        - delete:
+              tableName: authorities
+        - delete:
+              tableName: users
+
+  - changeSet:
+      id: 8
+      author: Darius
+      changes:
+        - insert:
+            columns:
+            - column:
+                name: username
+                value: 'admin'
+            - column:
+                name: password
+                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
+            - column:
+                name: enabled
+                valueBoolean: true
+            tableName: users
+        - insert:
+            columns:
+            - column:
+                name: username
+                value: 'admin'
+            - column:
+                name: authority
+                value: 'ROLE_ADMIN'
+            tableName: authorities
+        - insert:
+            columns:
+            - column:
+                name: username
+                value: 'user'
+            - column:
+                name: password
+                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
+            - column:
+                name: enabled
+                valueBoolean: true
+            tableName: users
+        - insert:
+            columns:
+            - column:
+                name: username
+                value: 'user'
+            - column:
+                name: authority
+                value: 'ROLE_USER'
+            tableName: authorities
+        - insert:
+            columns:
+            - column:
+                name: username
+                value: 'operator'
+            - column:
+                name: password
+                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
+            - column:
+                name: enabled
+                valueBoolean: true
+            tableName: users
+        - insert:
+            columns:
+            - column:
+                name: username
+                value: 'operator'
+            - column:
+                name: authority
+                value: 'ROLE_OPERATOR'
+            tableName: authorities

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,12 @@ public class BaseController {
     private ResponseEntity<Void> handleResourceNotFoundException(DataNotFoundException e) {
         LOG.debug("Data not found", e);
         return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    private ResponseEntity<Void> handleResourceNotFoundException(AccessDeniedException e) {
+        LOG.debug("Access Denied", e);
+        return ResponseEntity.status(403).build();
     }
 
     @ExceptionHandler(Exception.class)
