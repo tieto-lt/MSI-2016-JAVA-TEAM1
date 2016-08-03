@@ -7,6 +7,7 @@ function Controller($state, AuthService) {
     vm.password = undefined;
 
     vm.login = login;
+    vm.goToRegistration = goToRegistration;
     vm.error = undefined;
 
     function login() {
@@ -18,6 +19,9 @@ function Controller($state, AuthService) {
             function (err) {
                 vm.error = err.data.error_description;
             });
+    }
+    function goToRegistration(){
+        $state.go('root.registration');
     }
 
 }
