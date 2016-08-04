@@ -12,14 +12,14 @@ import lt.tieto.msi2016.user.repository.UserRepository;
 import lt.tieto.msi2016.user.repository.model.UserDb;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by it11 on 16.8.3.
- */
+@Service
 public class UserService {
 
     @Autowired
@@ -27,6 +27,9 @@ public class UserService {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Transactional(readOnly = true)
     public User get(Long id) {
@@ -45,6 +48,7 @@ public class UserService {
 
     @Transactional
     public User createUser(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         UserDb db = repository.create(mapToUserDb(user));
         roleService.createRole(new Role(db.getId(), db.getUsername(), Roles.CUSTOMER));
         return mapToUser(db);
@@ -54,7 +58,6 @@ public class UserService {
         User api = new User();
         api.setId(db.getId());
         api.setUsername(db.getUsername());
-        api.setPassword(db.getPassword());
         api.setEnabled(db.getEnabled());
         api.setName(db.getName());
         api.setEmail(db.getEmail());
@@ -67,7 +70,7 @@ public class UserService {
         db.setId(id);
         db.setUsername(api.getUsername());
         db.setPassword(api.getPassword());
-        db.setEnabled(api.getEnabled());
+        db.setEnabled(Boolean.TRUE);
         db.setName(api.getName());
         db.setEmail(api.getEmail());
         db.setPhone(api.getPhone());

@@ -13,7 +13,7 @@ function Controller($state, Session) {
 
     function logout() {
         Session.invalidate();
-        $state.go('root.Login');
+        $state.go('root.login');
     }
 }
 

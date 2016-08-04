@@ -18,7 +18,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
         isPublic: true
       }
     })
-    .state('root.Login', {
+    .state('root.login', {
       url: "/login",
       template: "<login></login>",
       data: {
@@ -61,7 +61,7 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
     },
     function () {
       if (!Session.isSessionActive()) {
-        return $state.target("root.Login");
+        return $state.target("root.login");
       }
     });
 }]);

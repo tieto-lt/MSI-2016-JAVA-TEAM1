@@ -1,8 +1,11 @@
 package lt.tieto.msi2016.user.controller;
 
 import lt.tieto.msi2016.item.model.Item;
+import lt.tieto.msi2016.item.service.ItemService;
 import lt.tieto.msi2016.user.model.User;
+import lt.tieto.msi2016.user.service.UserService;
 import lt.tieto.msi2016.utils.controller.BaseController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController  extends BaseController {
 
-    //private static final String template = "Hello";
+    @Autowired
+    private UserService service;
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/user")
-    public User createItem(@RequestBody User user) {
-        System.out.println(user);
-
+    public User createUser(@RequestBody User user) {
+        service.createUser(user);
         return user;
     }
 
