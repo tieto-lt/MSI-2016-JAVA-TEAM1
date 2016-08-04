@@ -19,7 +19,7 @@ function Controller($state, AuthService, Session) {
                     $state.go('root.admin');
                 } else if  ("ROLE_OPERATOR" == role) {
                     $state.go('root.operator');
-                } else if  ("ROLE_USER" == role) {
+                } else if  ("ROLE_CUSTOMER" == role) {
                     $state.go('root.customerFirst');
                 }
             },
