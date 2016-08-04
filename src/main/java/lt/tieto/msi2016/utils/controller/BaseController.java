@@ -28,13 +28,13 @@ public class BaseController {
     @ExceptionHandler(AccessDeniedException.class)
     private ResponseEntity<Void> handleResourceNotFoundException(AccessDeniedException e) {
         LOG.debug("Access Denied", e);
-        return ResponseEntity.status(403).build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @ExceptionHandler(Exception.class)
     private ResponseEntity<Void> exception(Exception e) {
         LOG.error("Internal error", e);
-        return ResponseEntity.status(500).build();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
