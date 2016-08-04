@@ -1,13 +1,9 @@
-package lt.tieto.msi2016.user.model;
+package lt.tieto.msi2016.user.repository.model;
 
+import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-/**
- * Created by it11 on 16.8.3.
- */
-
-
-public class User {
+public class UserDb extends DbModel {
 
     private Long id;
     private String username;
@@ -17,10 +13,13 @@ public class User {
     private String email;
     private String phone;
 
+
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
