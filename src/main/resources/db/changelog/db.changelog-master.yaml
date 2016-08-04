@@ -221,3 +221,107 @@ databaseChangeLog:
                 name: authority
                 value: 'ROLE_OPERATOR'
             tableName: authorities
+
+  - changeSet:
+      id: 9
+      author: Darius
+      changes:
+        - dropTable:
+            tableName: authorities
+        - dropTable:
+            tableName: users
+
+  - changeSet:
+      id: 10
+      author: Darius
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(60)
+              - column:
+                  name: enabled
+                  type: boolean
+              - column:
+                  name: name
+                  type: nvarchar(60)
+              - column:
+                  name: email
+                  type: nvarchar(60)
+              - column:
+                  name: phone
+                  type: nvarchar(60)
+        - addUniqueConstraint:
+            columnNames: username
+            constraintName: unique_usr_usrname
+            deferrable: true
+            disabled: true
+            initiallyDeferred: true
+            tableName: users
+        - addAutoIncrement:
+              columnDataType: int
+              columnName: id
+              incrementBy: 1
+              startWith: 1
+              tableName: users
+
+  - changeSet:
+      id: 11
+      author: Darius
+      changes:
+        - createTable:
+            tableName: authorities
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authority
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: authorities
+            constraintName: fk_username_auth
+            referencedColumnNames: id
+            referencedTableName: users
+        - createIndex:
+            columns:
+              - column:
+                  name: username
+            indexName: idx_authorities_username
+            tableName: authorities
+        - addAutoIncrement:
+              columnDataType: int
+              columnName: id
+              incrementBy: 1
+              startWith: 1
+              tableName: authorities

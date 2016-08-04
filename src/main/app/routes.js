@@ -18,7 +18,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
         isPublic: true
       }
     })
-    .state('root.Login', {
+    .state('root.login', {
       url: "/login",
       template: "<login></login>",
       data: {
@@ -37,6 +37,11 @@ module.config(function($stateProvider, $urlRouterProvider) {
       url: "/items/:id",
       template: "<item-details></item-details>"
     })
+    .state('root.admin', {
+       url: "/admin",
+       template: "<admin-home></admin-home>"
+    })
+
     .state('root.rolesList', {
           url: "/roles",
           template: "<roles-list></roles-list>"
@@ -48,7 +53,17 @@ module.config(function($stateProvider, $urlRouterProvider) {
         isPublic: true
       }
     })
-    ;
+
+    .state('root.operator', {
+          url: "/operator",
+          template:"<home-operator></home-operator>",
+    })
+
+     .state('root.customerFirst', {
+              url: "/customer",
+              template:"<customer-first></customer-first>",
+        })
+
 });
 
 module.run(['$transitions', 'Session', '$state', function($transitions, Session, $state) {
@@ -61,7 +76,7 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
     },
     function () {
       if (!Session.isSessionActive()) {
-        return $state.target("root.Login");
+        return $state.target("root.login");
       }
     });
 }]);
