@@ -325,3 +325,40 @@ databaseChangeLog:
               incrementBy: 1
               startWith: 1
               tableName: authorities
+  - changeSet:
+      id: 12
+      author: Darius
+      changes:
+        - insert:
+            columns:
+            - column:
+                name: username
+                value: 'admin'
+            - column:
+                name: password
+                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
+            - column:
+                name: enabled
+                valueBoolean: true
+            - column:
+                name: name
+                valueBoolean: 'adminas'
+            - column:
+                name: email
+                valueBoolean: 'adminas@gmail.com'
+            - column:
+                name: phone
+                valueBoolean: '+37061234567'
+            tableName: users
+        - insert:
+            columns:
+            - column:
+                name: user_id
+                value: 1
+            - column:
+                name: username
+                value: 'admin'
+            - column:
+                name: authority
+                value: 'ROLE_ADMIN'
+            tableName: authorities
