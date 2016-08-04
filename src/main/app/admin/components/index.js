@@ -1,1 +1,1 @@
-require('admin_home/home');
+require('home/home');

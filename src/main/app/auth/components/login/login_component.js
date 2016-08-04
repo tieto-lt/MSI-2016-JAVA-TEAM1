@@ -16,12 +16,11 @@ function Controller($state, AuthService, Session) {
                 vm.error = undefined;
                 var role = Session.getRole();
                 if ("ROLE_ADMIN" == role) {
-                   $state.go('root.admin');
-                } else if  ("ROLE_OPERATOR" == role)
-                {
-                    console.log("This is operator page");
+                    $state.go('root.admin');
+                } else if  ("ROLE_OPERATOR" == role) {
                     $state.go('root.operator');
-                    console.log("This is operator page2");
+                } else if  ("ROLE_USER" == role) {
+                    $state.go('root.customerFirst');
                 }
             },
             function (err) {

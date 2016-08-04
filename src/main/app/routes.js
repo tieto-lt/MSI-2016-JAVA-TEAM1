@@ -59,6 +59,11 @@ module.config(function($stateProvider, $urlRouterProvider) {
           template:"<home-operator></home-operator>",
     })
 
+     .state('root.customerFirst', {
+              url: "/customer",
+              template:"<customer-first></customer-first>",
+        })
+
 });
 
 module.run(['$transitions', 'Session', '$state', function($transitions, Session, $state) {
