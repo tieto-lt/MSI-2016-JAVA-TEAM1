@@ -34,6 +34,7 @@ public class ItemService {
 
     @Transactional
     public Item createOrUpdateItem(Long id, Item item) {
+        //************
         if (repository.exists(id)) {
             ItemDb updated = repository.update(mapToItemDb(id, item));
             return mapToItem(updated);
