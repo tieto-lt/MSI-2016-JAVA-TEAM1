@@ -1,6 +1,7 @@
 var module = require('main_module');
 
-
+function Controller() {
+}
 
 require('./operator.scss');
 module.component('homeOperator', {

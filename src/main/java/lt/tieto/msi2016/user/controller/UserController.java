@@ -16,15 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController  extends BaseController {
 
-    //private static final String template = "Hello";
-
     @RequestMapping(method = RequestMethod.POST, path = "/api/user")
     public User createItem(@RequestBody User user) {
         System.out.println(user);
-
         return user;
     }
-
-
 
 }

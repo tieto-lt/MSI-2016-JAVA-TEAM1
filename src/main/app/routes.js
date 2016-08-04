@@ -48,6 +48,11 @@ module.config(function($stateProvider, $urlRouterProvider) {
         isPublic: true
       }
     })
+
+    .state('root.operator', {
+          url: "/operator",
+          template:"<home-operator></home-operator>",
+    })
     ;
 });
 
