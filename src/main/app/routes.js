@@ -41,7 +41,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
        url: "/admin",
        template: "<admin-home></admin-home>"
     })
-    })
+
     .state('root.rolesList', {
           url: "/roles",
           template: "<roles-list></roles-list>"
@@ -58,7 +58,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
           url: "/operator",
           template:"<home-operator></home-operator>",
     })
-    ;
+
 });
 
 module.run(['$transitions', 'Session', '$state', function($transitions, Session, $state) {
