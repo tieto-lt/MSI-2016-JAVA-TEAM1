@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller($state, AuthService) {
+function Controller($state, AuthService, Session) {
 
     var vm = this;
     vm.username = undefined;
@@ -13,7 +13,10 @@ function Controller($state, AuthService) {
         AuthService.login(vm.username, vm.password).then(
             function (response) {
                 vm.error = undefined;
-                $state.go('root.itemList');
+                var role = Session.getRole();
+                if ("ADMIN" == role) {
+                   $state.go('root.admin');
+                }
             },
             function (err) {
                 vm.error = err.data.error_description;
@@ -22,8 +25,7 @@ function Controller($state, AuthService) {
 
 }
 
-
-Controller.$inject = ['$state', 'AuthService'];
+Controller.$inject = ['$state', 'AuthService', 'Session'];
 require('login.scss');
 module.component('login', {
     controller: Controller,
