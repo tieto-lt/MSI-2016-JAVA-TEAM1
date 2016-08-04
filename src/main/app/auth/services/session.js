@@ -7,6 +7,7 @@ function Service ($cookies, jwtHelper, $http) {
     this.getToken = getToken;
     this.invalidate = invalidate;
     this.isSessionActive = isSessionActive;
+    this.getRole = getRole;
     this.initHttp = initHttp;
 
     function initHttp() {
@@ -40,6 +41,12 @@ function Service ($cookies, jwtHelper, $http) {
 
     function invalidate() {
         return $cookies.remove("access_token");
+    }
+
+     function getRole() {
+      var accessToken =  getSession();
+      console.log(accessToken.authorities);
+      return accessToken.authorities;
     }
 }
 
