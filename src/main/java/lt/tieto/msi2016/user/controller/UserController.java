@@ -1,15 +1,12 @@
 package lt.tieto.msi2016.user.controller;
 
-import lt.tieto.msi2016.item.model.Item;
-import lt.tieto.msi2016.item.service.ItemService;
+import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.user.model.User;
 import lt.tieto.msi2016.user.service.UserService;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by it11 on 16.8.3.
@@ -27,6 +24,18 @@ public class UserController  extends BaseController {
         service.createUser(user);
         return user;
     }
+
+
+
+
+    @Secured(Roles.CUSTOMER)
+    @RequestMapping(method = RequestMethod.GET, path = "/api/user/{id}")
+    public Long getUserData(@PathVariable Long id) {
+        return id;
+    }
+
+
+
 
 
 
