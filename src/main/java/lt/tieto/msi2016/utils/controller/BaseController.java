@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,10 +25,16 @@ public class BaseController {
         return ResponseEntity.notFound().build();
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    private ResponseEntity<Void> handleResourceNotFoundException(AccessDeniedException e) {
+        LOG.debug("Access Denied", e);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
     @ExceptionHandler(Exception.class)
     private ResponseEntity<Void> exception(Exception e) {
         LOG.error("Internal error", e);
-        return ResponseEntity.status(500).build();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

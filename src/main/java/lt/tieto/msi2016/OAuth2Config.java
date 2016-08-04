@@ -65,10 +65,13 @@ public class OAuth2Config implements AuthorizationServerConfigurer, ResourceServ
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
     }
 
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http.authorizeRequests()
+
+                .antMatchers("/api/user").permitAll() // registration endpoint allowed for all
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
