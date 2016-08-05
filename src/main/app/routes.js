@@ -41,6 +41,10 @@ module.config(function($stateProvider, $urlRouterProvider) {
        url: "/admin",
        template: "<admin-home></admin-home>"
     })
+    .state('root.adminRole', {
+       url: "/admin/role",
+       template: "<roles-management></roles-management>"
+    })
 
     .state('root.rolesList', {
           url: "/roles",

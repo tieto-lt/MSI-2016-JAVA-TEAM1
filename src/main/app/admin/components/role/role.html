@@ -1,0 +1,39 @@
+<div>
+    <h1>User roles</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>username</th>
+            <th>customer</th>
+            <th>operator</th>
+            <th>admin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="role in $ctrl.roles">
+            <td>
+                {{$index + 1 }}
+            </td>
+            <td>
+                {{role.username}}
+            </td>
+            <td>
+                <div>
+                    <input type="radio" id='customer' ng-model="role.authority" value="ROLE_CUSTOMER">
+                </div>
+            </td>
+            <td>
+                <div>
+                    <input type="radio" id='operator' ng-model="role.authority" value="ROLE_OPERATOR">
+                </div>
+            </td>
+            <td>
+                <div>
+                    <input type="radio" id='admin' ng-model="role.authority" value="ROLE_ADMIN">
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
