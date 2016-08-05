@@ -10,16 +10,20 @@ function Controller($state, AuthService, Session) {
     vm.goToRegistration = goToRegistration;
     vm.error = undefined;
 
+    //roles
+    var ROLE_ADMIN = "ROLE_ADMIN";
+    var ROLE_OPERATOR ="ROLE_OPERATOR";
+    var ROLE_CUSTOMER = "ROLE_CUSTOMER";
     function login() {
         AuthService.login(vm.username, vm.password).then(
             function (response) {
                 vm.error = undefined;
                 var role = Session.getRole();
-                if ("ROLE_ADMIN" == role) {
+                if (ROLE_ADMIN == role) {
                     $state.go('root.admin');
-                } else if  ("ROLE_OPERATOR" == role) {
+                } else if  (ROLE_OPERATOR == role) {
                     $state.go('root.operator');
-                } else if  ("ROLE_CUSTOMER" == role) {
+                } else if  (ROLE_CUSTOMER == role) {
                     $state.go('root.customerFirst');
                 }
             },
