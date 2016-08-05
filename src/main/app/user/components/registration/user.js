@@ -30,6 +30,7 @@ function Controller($state, $scope, UserService) {
     }
 
     function doPasswordNotMatch() {
+    console.log($scope);
         return vm.user.password != vm.passwordRepeat;
     }
 }
