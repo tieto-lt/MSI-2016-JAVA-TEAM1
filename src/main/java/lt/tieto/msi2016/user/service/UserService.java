@@ -11,6 +11,7 @@ import lt.tieto.msi2016.user.model.User;
 import lt.tieto.msi2016.user.repository.UserRepository;
 import lt.tieto.msi2016.user.repository.model.UserDb;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
+import lt.tieto.msi2016.utils.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,11 @@ public class UserService {
 
     @Transactional
     public User createUser(User user) {
+        UserDb userByUsername = getUserByUsername(user.getUsername());
+        if (userByUsername != null) {
+            throw new ValidationException("username", "already exists");
+        }
+
         user.setPassword(encoder.encode(user.getPassword()));
         UserDb db = repository.create(mapToUserDb(user));
         roleService.createRole(new Role(db.getId(), db.getUsername(), Roles.CUSTOMER));
@@ -75,6 +81,10 @@ public class UserService {
         db.setEmail(api.getEmail());
         db.setPhone(api.getPhone());
         return db;
+    }
+
+    private UserDb getUserByUsername(String username) {
+        return repository.getUserByUsername(username);
     }
 
     private static UserDb mapToUserDb(User api) {

@@ -1,29 +1,39 @@
 package lt.tieto.msi2016.user.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-/**
- * Created by it11 on 16.8.3.
- */
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 public class User {
 
     private Long id;
+
+    @NotNull
+    @Size(min = 2)
     private String username;
+
+    @NotNull
+    @Size(min = 6)
     private String password;
-    private Boolean enabled;
+
+    @NotNull
+    @Pattern(regexp="[A-Za-z]{1,25}$")
     private String name;
+
+    @Pattern(regexp="^.+@.+\\..+$")
     private String email;
+
+    @Pattern(regexp="^(\\+3706) *(\\d{7})$")
+    @NotNull
     private String phone;
 
-    public Long getId() {
-        return id;
-    }
+    private Boolean enabled;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() {return id;}
+
+    public void setId(Long id) {this.id = id;}
 
     public String getUsername() {
         return username;
