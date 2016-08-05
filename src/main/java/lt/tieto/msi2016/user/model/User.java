@@ -11,15 +11,15 @@ public class User {
     private Long id;
 
     @NotNull
-    @Size(min = 3)
+    @Size(min = 2)
     private String username;
 
     @NotNull
-    @Size(min = 8)
+    @Size(min = 6)
     private String password;
 
     @NotNull
-    @Pattern(regexp="[A-Za-z]{3,20}$")
+    @Pattern(regexp="[A-Za-z]{1,25}$")
     private String name;
 
     @Pattern(regexp="^.+@.+\\..+$")
