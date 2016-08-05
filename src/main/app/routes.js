@@ -13,7 +13,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('root.home', {
       url: '/',
-      template: "<h4>This is home</h4>",
+      template: "<login></login>",
       data: {
         isPublic: true
       }
