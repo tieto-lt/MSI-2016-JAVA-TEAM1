@@ -1,9 +1,11 @@
 package lt.tieto.msi2016.utils.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
+import lt.tieto.msi2016.utils.exception.ValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -48,6 +50,15 @@ public class BaseController {
                      .collect(Collectors.toList());
     }
 
+    @ExceptionHandler(ValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    private List<FieldValidationError> handleResourceNotFoundException(ValidationException e) {
+        LOG.debug("Validation error", e);
+        ArrayList<FieldValidationError> errors = new ArrayList<>();
+        errors.add(new FieldValidationError(e.getName(), e.getMessage()));
+        return errors;
+    }
+
     public static class FieldValidationError {
         private String name;
         private String message;
@@ -56,7 +67,6 @@ public class BaseController {
             this.name = name;
             this.message = message;
         }
-
 
         public String getName() {
             return name;

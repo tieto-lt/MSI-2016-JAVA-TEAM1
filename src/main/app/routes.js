@@ -39,12 +39,26 @@ module.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('root.admin', {
        url: "/admin",
-       template: "<admin-home></admin-home>"
+       template: "<admin-home></admin-home>",
+       data: {
+         roles: ["ROLE_ADMIN"]
+       }
+
+    })
+    .state('root.adminRole', {
+       url: "/admin/role",
+       template: "<roles-management></roles-management>",
+       data: {
+        roles: ["ROLE_ADMIN"]
+       }
     })
 
     .state('root.rolesList', {
           url: "/roles",
-          template: "<roles-list></roles-list>"
+          template: "<roles-list></roles-list>",
+          data: {
+            roles: ["ROLE_ADMIN"]
+          }
     })
     .state('root.registration', {
       url: "/registration",
@@ -57,27 +71,32 @@ module.config(function($stateProvider, $urlRouterProvider) {
     .state('root.operator', {
           url: "/operator",
           template:"<home-operator></home-operator>",
+          data: {
+            roles: ["ROLE_OPERATOR"]
+          }
     })
 
-     .state('root.customerFirst', {
-              url: "/customer",
-              template:"<customer-first></customer-first>",
+    .state('root.customerFirst', {
+          url: "/customer",
+          template:"<customer-first></customer-first>",
+          data: {
+            roles: ["ROLE_CUSTOMER"]
+          }
     })
-
-     .state('root.orderComponent', {
-              url:"/order",
-              template:"<order-component></order-component>",
-     })
-
-
-
-
+    .state('root.orderComponent', {
+             url:"/order",
+             template:"<order-component></order-component>",
+             data: {
+               roles: ["ROLE_CUSTOMER"]
+             }
+    })
 });
 
 module.run(['$transitions', 'Session', '$state', function($transitions, Session, $state) {
 
   Session.initHttp();
 
+  // check public pages
   $transitions.onStart(
     {
       to: function (state) { return !state.data || !state.data.isPublic; }
@@ -87,4 +106,38 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
         return $state.target("root.login");
       }
     });
+
+    $transitions.onStart(
+        {
+          to: function (state) { return state.data && state.data.roles && state.data.roles.indexOf("ROLE_ADMIN") >= 0; }
+        },
+        function () {
+           if (Session.getRole().indexOf("ROLE_ADMIN") < 0) {
+             return $state.target('root.home');
+           }
+        });
+
+
+
+     $transitions.onStart(
+             {
+               to: function (state) { return state.data && state.data.roles && state.data.roles.indexOf("ROLE_OPERATOR") >= 0; }
+             },
+             function () {
+                if (Session.getRole().indexOf("ROLE_OPERATOR") < 0) {
+                  return $state.target('root.home');
+                }
+             });
+
+         $transitions.onStart(
+                    {
+                      to: function (state) { return state.data && state.data.roles && state.data.roles.indexOf("ROLE_CUSTOMER") >= 0; }
+                    },
+                    function () {
+                       if (Session.getRole().indexOf("ROLE_CUSTOMER") < 0) {
+                         return $state.target('root.home');
+                       }
+                    });
+
+
 }]);

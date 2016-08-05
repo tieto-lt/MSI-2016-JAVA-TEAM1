@@ -1,32 +1,37 @@
 var module = require('main_module');
 
-module.controller('ValidationController', function($scope) {
-
-        $scope.submitForm = function() {
-            if ($scope.userForm.$valid) {
-                alert('Signed up successfully!');
-            }
-        };
-});
-
-function Controller($state, UserService) {
+function Controller($state, $scope, UserService) {
     var vm = this;
 
     vm.user = {};
+    vm.passwordRepeat = undefined;
 
     vm.create = create;
     vm.errors = [];
+    vm.doPasswordNotMatch = doPasswordNotMatch;
+
+    console.log(vm.user);
 
     function create() {
-            UserService.create(vm.user).then(
-                function () {
-                    $state.go('root.login');
-                },
-                function (err) {
-                    console.log('Error', err);
-                }
-            );
-        }
+        console.log(vm.user);
+        vm.errors = [];
+        UserService.create(vm.user).then(
+            function () {
+                $state.go('root.login');
+            },
+            function (err) {
+                console.log('Error', err);
+                err.data.forEach(function(e) {
+                    var errorMessage = e.name + "    " + e.message;
+                    vm.errors.push(errorMessage );
+                })
+            }
+        );
+    }
+
+    function doPasswordNotMatch() {
+        return vm.user.password != vm.passwordRepeat;
+    }
 }
 
 /*$scope.isSuitable = function(){
@@ -36,7 +41,7 @@ function Controller($state, UserService) {
     return true;
 }*/
 
-Controller.$inject = ['$state','UserService'];
+Controller.$inject = ['$state', '$scope', 'UserService'];
 
 require('./user.scss');
 module.component('newUser', {
