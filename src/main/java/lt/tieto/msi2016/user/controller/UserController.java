@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by it11 on 16.8.3.
- */
-
+import javax.validation.Valid;
 
 @RestController
 public class UserController  extends BaseController {
@@ -20,23 +17,13 @@ public class UserController  extends BaseController {
     private UserService service;
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/user")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody @Valid User user) {
         service.createUser(user);
         return user;
     }
-
-
-
-
     @Secured(Roles.CUSTOMER)
     @RequestMapping(method = RequestMethod.GET, path = "/api/user/{id}")
     public Long getUserData(@PathVariable Long id) {
         return id;
     }
-
-
-
-
-
-
 }
