@@ -74,165 +74,6 @@ databaseChangeLog:
 
   - changeSet:
       id: 4
-      author: tieto
-      changes:
-        - createTable:
-            tableName: users
-            columns:
-              - column:
-                  name: username
-                  type: varchar(45)
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: password
-                  type: varchar(60)
-              - column:
-                  name: enabled
-                  type: boolean
-
-  - changeSet:
-      id: 5
-      author: tieto
-      changes:
-        - createTable:
-            tableName: authorities
-            columns:
-              - column:
-                  name: username
-                  type: varchar(255)
-              - column:
-                  name: authority
-                  type: varchar(45)
-
-        - addForeignKeyConstraint:
-            baseColumnNames: username
-            baseTableName: authorities
-            constraintName: fk_username_auth
-            referencedColumnNames: username
-            referencedTableName: users
-        - createIndex:
-            columns:
-              - column:
-                  name: username
-            indexName: idx_authorities_username
-            tableName: authorities
-
-  - changeSet:
-      id: 6
-      author: tieto
-      changes:
-        - insert:
-            columns:
-            - column:
-                name: username
-                value: 'admin'
-            - column:
-                name: password
-                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
-            - column:
-                name: enabled
-                valueBoolean: true
-            tableName: users
-        - insert:
-            columns:
-            - column:
-                name: username
-                value: 'admin'
-            - column:
-                name: authority
-                value: 'ADMIN'
-            tableName: authorities
-
-  - changeSet:
-      id: 7
-      author: Darius
-      changes:
-        - delete:
-              tableName: authorities
-        - delete:
-              tableName: users
-
-  - changeSet:
-      id: 8
-      author: Darius
-      changes:
-        - insert:
-            columns:
-            - column:
-                name: username
-                value: 'admin'
-            - column:
-                name: password
-                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
-            - column:
-                name: enabled
-                valueBoolean: true
-            tableName: users
-        - insert:
-            columns:
-            - column:
-                name: username
-                value: 'admin'
-            - column:
-                name: authority
-                value: 'ROLE_ADMIN'
-            tableName: authorities
-        - insert:
-            columns:
-            - column:
-                name: username
-                value: 'user'
-            - column:
-                name: password
-                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
-            - column:
-                name: enabled
-                valueBoolean: true
-            tableName: users
-        - insert:
-            columns:
-            - column:
-                name: username
-                value: 'user'
-            - column:
-                name: authority
-                value: 'ROLE_USER'
-            tableName: authorities
-        - insert:
-            columns:
-            - column:
-                name: username
-                value: 'operator'
-            - column:
-                name: password
-                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
-            - column:
-                name: enabled
-                valueBoolean: true
-            tableName: users
-        - insert:
-            columns:
-            - column:
-                name: username
-                value: 'operator'
-            - column:
-                name: authority
-                value: 'ROLE_OPERATOR'
-            tableName: authorities
-
-  - changeSet:
-      id: 9
-      author: Darius
-      changes:
-        - dropTable:
-            tableName: authorities
-        - dropTable:
-            tableName: users
-
-  - changeSet:
-      id: 10
       author: Darius
       changes:
         - createTable:
@@ -279,7 +120,7 @@ databaseChangeLog:
               tableName: users
 
   - changeSet:
-      id: 11
+      id: 5
       author: Darius
       changes:
         - createTable:
@@ -325,8 +166,9 @@ databaseChangeLog:
               incrementBy: 1
               startWith: 1
               tableName: authorities
+
   - changeSet:
-      id: 12
+      id: 6
       author: Darius
       changes:
         - insert:
@@ -342,14 +184,19 @@ databaseChangeLog:
                 valueBoolean: true
             - column:
                 name: name
-                valueBoolean: 'adminas'
+                value: 'adminas'
             - column:
                 name: email
-                valueBoolean: 'adminas@gmail.com'
+                value: 'admin@gmail.com'
             - column:
                 name: phone
-                valueBoolean: '+37061234567'
+                value: '+37060303003'
             tableName: users
+
+  - changeSet:
+      id: 7
+      author: Darius
+      changes:
         - insert:
             columns:
             - column:
@@ -361,4 +208,92 @@ databaseChangeLog:
             - column:
                 name: authority
                 value: 'ROLE_ADMIN'
+            tableName: authorities
+
+
+
+  - changeSet:
+      id: 8
+      author: Darius
+      changes:
+        - insert:
+            columns:
+            - column:
+                name: username
+                value: 'operator'
+            - column:
+                name: password
+                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
+            - column:
+                name: enabled
+                valueBoolean: true
+            - column:
+                name: name
+                value: 'operatorius'
+            - column:
+                name: email
+                value: 'operator@gmail.com'
+            - column:
+                name: phone
+                value: '+37063333333'
+            tableName: users
+
+  - changeSet:
+      id: 9
+      author: Darius
+      changes:
+        - insert:
+            columns:
+            - column:
+                name: user_id
+                value: 2
+            - column:
+                name: username
+                value: 'operator'
+            - column:
+                name: authority
+                value: 'ROLE_OPERATOR'
+            tableName: authorities
+
+  - changeSet:
+      id: 10
+      author: Darius
+      changes:
+        - insert:
+            columns:
+            - column:
+                name: username
+                value: 'customer'
+            - column:
+                name: password
+                value: '$2a$10$goYUjJpDuhxXrFWO60lPkufOIEMoUQ9MmdkHYb2q6k0lVlEJH2Nve'
+            - column:
+                name: enabled
+                valueBoolean: true
+            - column:
+                name: name
+                value: 'customeris'
+            - column:
+                name: email
+                value: 'customer@gmail.com'
+            - column:
+                name: phone
+                value: '+37060322222'
+            tableName: users
+
+  - changeSet:
+      id: 11
+      author: Darius
+      changes:
+        - insert:
+            columns:
+            - column:
+                name: user_id
+                value: 3
+            - column:
+                name: username
+                value: 'customer'
+            - column:
+                name: authority
+                value: 'ROLE_CUSTOMER'
             tableName: authorities
