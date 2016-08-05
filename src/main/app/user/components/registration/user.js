@@ -22,7 +22,7 @@ function Controller($state, $scope, UserService) {
             function (err) {
                 console.log('Error', err);
                 err.data.forEach(function(e) {
-                    var errorMessage = "Field " + e.name + " " + e.message;
+                    var errorMessage = e.name + "    " + e.message;
                     vm.errors.push(errorMessage );
                 })
             }

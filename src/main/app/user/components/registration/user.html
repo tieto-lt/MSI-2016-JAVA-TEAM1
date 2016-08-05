@@ -10,16 +10,15 @@
                         <h2>Create new user</h2>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine && !userForm.username.$pattern }">
-                        <label>Username</label>
-                        <input placeholder="Username" ng-pattern="/^\S*$/" type="text" name="username" class="form-control" ng-model="$ctrl.user.username" ng-minlength="3" required>
+                        <label>User name</label>
+                        <input placeholder="User name" ng-pattern="/^\S*$/" type="text" name="username" class="form-control" ng-model="$ctrl.user.username" ng-minlength="2" required>
                         <p ng-show="userForm.username.$error.minlength" class="help-block">Username is too short.</p>
                         <p ng-show="userForm.username.$error.pattern" class="help-block">Please enter a valid user name. No spaces are allowed </p>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine && !userForm.name.$pattern }">
+                    <div class="form-group"ng-class="{ 'has-error' : userForm.name.$required || !userForm.name.$pattern }">
                         <label>Name</label>
-                        <input placeholder="Name" type="text" name="name" class="form-control" ng-model="$ctrl.user.name"ng-pattern="/^([a-zA-Z ]){3,30}$/">
-                        <p ng-show="userForm.name.$invalid && !userForm.name.$pattern" class="help-block">You name must consist at least from 3 characters.</p>
-                        <p ng-show="userForm.name.$error.pattern" class="help-block">You name must consist at least from 3 characters.</p>
+                        <input placeholder="Name" type="text" name="name" class="form-control" ng-model="$ctrl.user.name"ng-pattern="/^([a-zA-Z ]){1,25}$/" required>
+                        <p ng-show="userForm.name.$required" class="help-block">You name must consist at least from 1 character.</p>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
                         <label>Email</label>
@@ -33,7 +32,7 @@
                     </div>
                     <div class="form-group"  ng-class="{ 'has-error' : userForm.password.$invalid}">
                         <label class="control-label" for="password">Password</label>
-                        <input placeholder="Password"id="password" name = "password" type="password" ng-minlength="8" class="form-control" ng-model="$ctrl.user.password">
+                        <input placeholder="Password"id="password" name = "password" type="password" ng-minlength="6" class="form-control" ng-model="$ctrl.user.password">
                         <p ng-show="userForm.password.$error.minlength" class="help-block">Password is too short.</p>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error' : userForm.password2.$dirty && $ctrl.doPasswordNotMatch()}">
