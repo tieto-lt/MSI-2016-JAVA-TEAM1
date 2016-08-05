@@ -15,6 +15,8 @@ function Controller($state, Session) {
         Session.invalidate();
         $state.go('root.login');
     }
+
+
 }
 
 

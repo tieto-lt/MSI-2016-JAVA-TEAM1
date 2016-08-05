@@ -15,6 +15,7 @@ function Controller($state, AuthService, Session) {
             function (response) {
                 vm.error = undefined;
                 var role = Session.getRole();
+                role = role && role[0];
                 if ("ROLE_ADMIN" == role) {
                     $state.go('root.admin');
                 } else if  ("ROLE_OPERATOR" == role) {

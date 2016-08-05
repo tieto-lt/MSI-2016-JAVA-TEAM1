@@ -62,7 +62,15 @@ module.config(function($stateProvider, $urlRouterProvider) {
      .state('root.customerFirst', {
               url: "/customer",
               template:"<customer-first></customer-first>",
-        })
+    })
+
+     .state('root.orderComponent', {
+              url:"/order",
+              template:"<order-component></order-component>",
+     })
+
+
+
 
 });
 
