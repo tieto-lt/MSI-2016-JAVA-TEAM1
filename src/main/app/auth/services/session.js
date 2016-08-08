@@ -45,7 +45,10 @@ function Service ($cookies, jwtHelper, $http) {
 
      function getRole() {
       var accessToken =  getSession();
-      return accessToken.authorities;
+      if (accessToken) {
+        return accessToken.authorities;
+      }
+      return [];
     }
 }
 

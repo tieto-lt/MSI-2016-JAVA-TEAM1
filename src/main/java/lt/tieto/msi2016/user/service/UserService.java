@@ -49,7 +49,7 @@ public class UserService {
 
     @Transactional
     public User createUser(User user) {
-        UserDb userByUsername = getUserByUsername(user.getUsername());
+        UserDb userByUsername = getUserDbByUsername(user.getUsername());
         if (userByUsername != null) {
             throw new ValidationException("username", "already exists");
         }
@@ -58,6 +58,12 @@ public class UserService {
         UserDb db = repository.create(mapToUserDb(user));
         roleService.createRole(new Role(db.getId(), db.getUsername(), Roles.CUSTOMER));
         return mapToUser(db);
+    }
+
+    @Transactional(readOnly = true)
+    public User getUserByUsername(String username) {
+        UserDb user = repository.getUserByUsername(username);
+        return mapToUser(user);
     }
 
     private static User mapToUser(UserDb db) {
@@ -83,7 +89,7 @@ public class UserService {
         return db;
     }
 
-    private UserDb getUserByUsername(String username) {
+    private UserDb getUserDbByUsername(String username) {
         return repository.getUserByUsername(username);
     }
 

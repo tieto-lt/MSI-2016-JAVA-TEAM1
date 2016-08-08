@@ -21,6 +21,7 @@ public class UserController  extends BaseController {
         service.createUser(user);
         return user;
     }
+
     @Secured(Roles.CUSTOMER)
     @RequestMapping(method = RequestMethod.GET, path = "/api/user/{id}")
     public Long getUserData(@PathVariable Long id) {

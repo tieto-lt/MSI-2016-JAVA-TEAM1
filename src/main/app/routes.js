@@ -13,7 +13,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('root.home', {
       url: '/',
-      template: "<h4>This is home</h4>",
+      template: "<login></login>",
       data: {
         isPublic: true
       }
@@ -41,19 +41,24 @@ module.config(function($stateProvider, $urlRouterProvider) {
        url: "/admin",
        template: "<admin-home></admin-home>",
        data: {
-                         roles: ["ROLE_ADMIN"]
-                        }
+         roles: ["ROLE_ADMIN"]
+       }
 
     })
     .state('root.adminRole', {
        url: "/admin/role",
-       template: "<roles-management></roles-management>"
+       template: "<roles-management></roles-management>",
+       data: {
+        roles: ["ROLE_ADMIN"]
+       }
     })
 
     .state('root.rolesList', {
           url: "/roles",
-          template: "<roles-list></roles-list>"
-
+          template: "<roles-list></roles-list>",
+          data: {
+            roles: ["ROLE_ADMIN"]
+          }
     })
     .state('root.registration', {
       url: "/registration",
@@ -67,18 +72,24 @@ module.config(function($stateProvider, $urlRouterProvider) {
           url: "/operator",
           template:"<home-operator></home-operator>",
           data: {
-                  roles: ["ROLE_OPERATOR"]
-                 }
+            roles: ["ROLE_OPERATOR"]
+          }
     })
 
-     .state('root.customerFirst', {
-              url: "/customer",
-              template:"<customer-first></customer-first>",
-              data: {
-                      roles: ["ROLE_CUSTOMER"]
-                     }
-        })
-
+    .state('root.customerFirst', {
+          url: "/customer",
+          template:"<customer-first></customer-first>",
+          data: {
+            roles: ["ROLE_CUSTOMER"]
+          }
+    })
+    .state('root.orderComponent', {
+             url:"/order",
+             template:"<order-component></order-component>",
+             data: {
+               roles: ["ROLE_CUSTOMER"]
+             }
+    })
 });
 
 module.run(['$transitions', 'Session', '$state', function($transitions, Session, $state) {
@@ -95,11 +106,6 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
         return $state.target("root.login");
       }
     });
-
-    // check is page allowed by role
-
-    //Ssession.getRole()  - esamos roles
-    //state.data.roles - roles kuriu reikia puslapiui
 
     $transitions.onStart(
         {
@@ -123,40 +129,15 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
                 }
              });
 
-
-      $transitions.onStart(
-              {
-                to: function (state) { return state.data && state.data.roles && state.data.roles.indexOf("ROLE_CUSTOMER") >= 0; }
-              },
-              function () {
-                 if (Session.getRole().indexOf("ROLE_CUSTOMER") < 0) {
-                   return $state.target('root.home');
-                 }
-              });
-
-
-//    $transitions.onStart(
-//        {
-//          to: function (state) {
-////          console.log(state.data.roles);
-//            return state.data && state.data.roles;
-//          }
-//        },
-//        function () {
-//                   console.log("Im in protected page~!")
-//                   console.log($state.data.roles);
-//                   var currentUserRole = Session.getRole();
-//                   console.log($state);
-//                   //console.log($state.data.roles);
-//                   if (!$state.data.roles.indexOf( currentUserRole  )) {
-//                     return $state.target('root.home');
-//                   }
-//
-//        });
-
-
-
-
+         $transitions.onStart(
+                    {
+                      to: function (state) { return state.data && state.data.roles && state.data.roles.indexOf("ROLE_CUSTOMER") >= 0; }
+                    },
+                    function () {
+                       if (Session.getRole().indexOf("ROLE_CUSTOMER") < 0) {
+                         return $state.target('root.home');
+                       }
+                    });
 
 
 }]);
