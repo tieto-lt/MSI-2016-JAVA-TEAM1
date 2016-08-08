@@ -8,6 +8,7 @@ function Controller(RoleService) {
 
     vm.roles = [];
 
+    vm.update = update;
     vm.$onInit = function() {
         _loadList();
     };
@@ -20,6 +21,21 @@ function Controller(RoleService) {
             },
             function(err) {
                 console.log('Error', err);
+            });
+    }
+
+    function update(index) {
+
+        RoleService.update(vm.roles[index]).then(
+            function () {
+                console.log('Update success');
+            },
+            function (err) {
+                if (err.status === 400) {
+                    vm.errors = err.data;
+                } else {
+                    console.log('Error', err);
+                }
             });
     }
 }

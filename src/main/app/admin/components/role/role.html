@@ -20,20 +20,22 @@
             </td>
             <td>
                 <div>
-                    <input type="radio" id='customer' ng-model="role.authority" value="ROLE_CUSTOMER">
+                    <input type="radio" id='customer' ng-model="role.authority" value="ROLE_CUSTOMER" ng-change="$ctrl.update($index)">
                 </div>
             </td>
             <td>
                 <div>
-                    <input type="radio" id='lt.tieto.msi2016.operator' ng-model="role.authority" value="ROLE_OPERATOR">
+                    <input type="radio" id='operator' ng-model="role.authority" value="ROLE_OPERATOR" ng-change="$ctrl.update($index)">
                 </div>
             </td>
             <td>
                 <div>
-                    <input type="radio" id='admin' ng-model="role.authority" value="ROLE_ADMIN">
+                    <input type="radio" id='admin' ng-model="role.authority" value="ROLE_ADMIN" ng-change="$ctrl.update($index)">
                 </div>
             </td>
         </tr>
         </tbody>
+
+        <button class="btn btn-warning" ng-click="$ctrl.update()">save</button>
     </table>
 </div>
