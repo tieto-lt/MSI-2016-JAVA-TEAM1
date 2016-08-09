@@ -25,7 +25,7 @@ public class User {
     @Pattern(regexp="^.+@.+\\..+$")
     private String email;
 
-    @Pattern(regexp="^(\\+3706) *(\\d{7})$")
+    @Pattern(regexp="^(\\+370) *(\\d{8})$")
     @NotNull
     private String phone;
 

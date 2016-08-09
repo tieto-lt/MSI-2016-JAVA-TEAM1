@@ -6,10 +6,6 @@ function Controller(UserService) {
   vm.order = {};
   vm.user = {};
 
-  vm.order.name = undefined;
-  vm.order.email = undefined;
-  vm.order.phone = undefined;
-
   vm.$onInit = function() {
           _loadOrderDetails();
   };

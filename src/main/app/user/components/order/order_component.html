@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.phone.$invalid && !orderForm.phone.$pattern}">
                             <label>Phone </label>
-                            <input  placeholder="+3706" ng-pattern="/^(\+3706) *(\d{7})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.order.phone" >
+                            <input  placeholder="+370" ng-pattern="/^(\+370) *(\d{8})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.order.phone" >
                             <p ng-show="orderForm.phone.$error.pattern" class="help-block">Enter a valid phone number.</p>
                         </div>
 
