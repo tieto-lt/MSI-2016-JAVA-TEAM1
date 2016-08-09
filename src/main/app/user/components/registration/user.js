@@ -10,10 +10,7 @@ function Controller($state, $scope, UserService) {
     vm.errors = [];
     vm.doPasswordNotMatch = doPasswordNotMatch;
 
-    console.log(vm.user);
-
     function create() {
-        console.log(vm.user);
         vm.errors = [];
         UserService.create(vm.user).then(
             function () {
@@ -33,13 +30,6 @@ function Controller($state, $scope, UserService) {
         return vm.user.password != vm.passwordRepeat;
     }
 }
-
-/*$scope.isSuitable = function(){
-    if(username.toLowerCase().localeCompare("admin")||username.toLowerCase().localeCompare("operator")||username.toLowerCase().localeCompare("user"){
-        return false;
-    }
-    return true;
-}*/
 
 Controller.$inject = ['$state', '$scope', 'UserService'];
 
