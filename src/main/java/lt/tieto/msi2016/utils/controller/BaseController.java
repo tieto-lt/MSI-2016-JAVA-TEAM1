@@ -36,7 +36,8 @@ public class BaseController {
     @ExceptionHandler(Exception.class)
     private ResponseEntity<Void> exception(Exception e) {
         LOG.error("Internal error", e);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

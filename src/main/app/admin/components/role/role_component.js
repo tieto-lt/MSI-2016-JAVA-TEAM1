@@ -8,6 +8,9 @@ function Controller(RoleService) {
 
     vm.roles = [];
 
+    vm.error = '';
+    vm.success = '';
+
     vm.update = update;
     vm.$onInit = function() {
         _loadList();
@@ -21,21 +24,21 @@ function Controller(RoleService) {
             },
             function(err) {
                 console.log('Error', err);
+                vm.error = err.statusText;
             });
     }
 
     function update(index) {
-
+        vm.error = '';
+        vm.success = '';
         RoleService.update(vm.roles[index]).then(
             function () {
                 console.log('Update success');
+                var username = vm.roles[index].username;
+                vm.success = username + " role updated successfully.";
             },
             function (err) {
-                if (err.status === 400) {
-                    vm.errors = err.data;
-                } else {
-                    console.log('Error', err);
-                }
+                vm.error = err.statusText;
             });
     }
 }
