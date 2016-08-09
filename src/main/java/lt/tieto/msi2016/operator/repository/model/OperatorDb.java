@@ -7,13 +7,6 @@ public class OperatorDb extends DbModel {
 
     private Long id;
     private String token;
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    private String username;
     private Long userId;
     private OperatorStatus status;
 
@@ -63,7 +56,7 @@ public class OperatorDb extends DbModel {
                 .append("id", id)
                 .append("token", token)
                 .append("userId", userId)
-                .append("operatorStatus", status)
+                .append("status", status)
                 .toString();
     }
 }

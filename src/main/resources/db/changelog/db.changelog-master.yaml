@@ -345,3 +345,67 @@ databaseChangeLog:
               startWith: 1
               tableName: operator_verification
 
+  - changeSet:
+      id: 13
+      author: Mark
+      changes:
+        - createTable:
+            tableName: mission
+            columns:
+              - column:
+                  name: mission_id
+                  type: integer
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: submited_by
+                  type: integer
+              - column:
+                  name: executed_by
+                  type: integer
+              - column:
+                  name: submmission_date
+                  type: timestamp
+              - column:
+                  name: execution_date
+                  type: timestamp
+              - column:
+                  name: video_base_64
+                  type: clob
+              - column:
+                  name: image
+                  type: clob
+              - column:
+                  name: navigation_data
+                  type: clob
+              - column:
+                  name: mission_state
+                  type: clob
+
+
+
+        - addForeignKeyConstraint:
+            baseColumnNames: submited_by
+            baseTableName: mission
+            constraintName: fk_submited_by_mission
+            referencedColumnNames: id
+            referencedTableName: users
+        - addForeignKeyConstraint:
+            baseColumnNames: executed_by
+            baseTableName: mission
+            constraintName: fk_executed_by_mission
+            referencedColumnNames: id
+            referencedTableName: users
+        - createIndex:
+            columns:
+              - column:
+                  name: mission_id
+            indexName: idx_status_username
+            tableName: mission
+        - addAutoIncrement:
+              columnDataType: int
+              columnName: mission_id
+              incrementBy: 1
+              startWith: 1
+              tableName: mission

@@ -10,10 +10,7 @@ function Controller($state, $scope, UserService) {
     vm.errors = [];
     vm.doPasswordNotMatch = doPasswordNotMatch;
 
-    console.log(vm.user);
-
     function create() {
-        console.log(vm.user);
         vm.errors = [];
         UserService.create(vm.user).then(
             function () {
@@ -30,7 +27,6 @@ function Controller($state, $scope, UserService) {
     }
 
     function doPasswordNotMatch() {
-    console.log($scope);
         return vm.user.password != vm.passwordRepeat;
     }
 }
