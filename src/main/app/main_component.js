@@ -8,6 +8,7 @@ function Controller($state, Session, AuthService) {
     vm.isCustomer = isCustomer;
     vm.isOperator = isOperator;
     vm.isAdmin = isAdmin;
+    vm.isLoggedIn = isLoggedIn;
 
     function isLogoutVisible() {
         return Session.isSessionActive();
@@ -33,6 +34,11 @@ function Controller($state, Session, AuthService) {
           if ("ROLE_OPERATOR" == role)
           return true;
      }
+
+    function isLoggedIn() {
+         console.log(Session.isSessionActive());
+         return Session.isSessionActive();
+    }
 
 }
 
