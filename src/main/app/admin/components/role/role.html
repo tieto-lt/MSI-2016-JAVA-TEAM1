@@ -6,7 +6,7 @@
             <th>#</th>
             <th>username</th>
             <th>customer</th>
-            <th>lt.tieto.msi2016.operator</th>
+            <th>operator</th>
             <th>admin</th>
         </tr>
         </thead>
@@ -35,7 +35,11 @@
             </td>
         </tr>
         </tbody>
-
-        <button class="btn btn-warning" ng-click="$ctrl.update()">save</button>
     </table>
+    <div class="alert alert-danger" role="alert" ng-show="$ctrl.error">
+        {{$ctrl.error}}
+    </div>
+    <div class="alert alert-success" role="alert" ng-show="$ctrl.success">
+        {{$ctrl.success}}
+    </div>
 </div>

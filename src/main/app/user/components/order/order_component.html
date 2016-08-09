@@ -5,31 +5,31 @@
         <div class="row">
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    <form name="userForm" ng-submit="submitForm()" novalidate>
+                    <form name="orderForm" ng-submit="submitForm()" novalidate>
 
                         <div class="form-group">
-                            <h2>Create new order</h2>
+                            <h2>Create new order</h1>
+                            </h2>
                         </div>
-
-                        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine && !userForm.name.$pattern }">
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.name.$invalid && !orderForm.name.$pristine && !orderForm.name.$pattern }">
                             <label>Name</label>
-                            <input placeholder="Name" type="text" name="name" class="form-control" ng-model="$ctrl.user.name"ng-pattern="/^([a-zA-Z ]){2,30}$/">
-                            <p ng-show="userForm.name.$invalid && !userForm.name.$pattern" class="help-block">You name must consist at least from 3 characters.</p>
-                            <p ng-show="userForm.name.$error.pattern" class="help-block">You name must consist at least from 3 characters.</p>
+                            <input placeholder="Name" type="text" name="name" class="form-control" ng-model="$ctrl.order.name"ng-pattern="/^([a-zA-Z ]){2,30}$/">
+                            <p ng-show="orderForm.name.$invalid && !orderForm.name.$pattern" class="help-block">You name must consist at least from 3 characters.</p>
+                            <p ng-show="orderForm.name.$error.pattern" class="help-block">You name must consist at least from 3 characters.</p>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.email.$invalid && !orderForm.email.$pristine }">
                             <label>Email</label>
-                            <input placeholder="Email"type="email" name="email" class="form-control" ng-model="$ctrl.user.email">
-                            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                            <input placeholder="Email"type="email" name="email" class="form-control" ng-model="$ctrl.order.email">
+                            <p ng-show="orderForm.email.$invalid && !orderForm.email.$pristine" class="help-block">Enter a valid email.</p>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pattern}">
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.phone.$invalid && !orderForm.phone.$pattern}">
                             <label>Phone </label>
-                            <input  placeholder="+3706" ng-pattern="/^(\+3706) *(\d{7})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.user.phone" >
-                            <p ng-show="userForm.phone.$error.pattern" class="help-block">Enter a valid phone number.</p>
+                            <input  placeholder="+3706" ng-pattern="/^(\+3706) *(\d{7})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.order.phone" >
+                            <p ng-show="orderForm.phone.$error.pattern" class="help-block">Enter a valid phone number.</p>
                         </div>
 
                         <div class="form-group">
-                            <button id="signupSubmit" type="submit" ng-click="$ctrl.create()" class="btn btn-info btn-block" ng-disabled="userForm.$invalid">Place your order</button>
+                            <button id="signupSubmit" type="submit" ng-click="$ctrl.create()" class="btn btn-info btn-block" ng-disabled="orderForm.$invalid">Place your order</button>
                         </div>
 
                         <hr>
