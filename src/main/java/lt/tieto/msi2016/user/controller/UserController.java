@@ -17,7 +17,8 @@ public class UserController  extends BaseController {
     private UserService service;
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/user")
-    public User createUser(@RequestBody @Valid User user) {
+    public User createUser(@RequestBody @Valid User user)
+    {
         service.createUser(user);
         return user;
     }

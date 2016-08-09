@@ -38,7 +38,13 @@ function Controller(RoleService) {
                 vm.success = username + " role updated successfully.";
             },
             function (err) {
-                vm.error = err.statusText;
+                if (err.staus != 500) {
+                    vm.error = err.data.message;
+                }
+                else {
+                    vm.error = err.statusText;
+                }
+                _loadList();
             });
     }
 }

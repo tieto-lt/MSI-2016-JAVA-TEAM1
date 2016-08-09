@@ -1,7 +1,7 @@
-package lt.tieto.msi2016.mission.controller;
+package lt.tieto.msi2016.mission.controller.operator;
 
-import lt.tieto.msi2016.mission.model.Mission;
-import lt.tieto.msi2016.mission.model.MissionCommand;
+import lt.tieto.msi2016.mission.model.operator.Mission;
+import lt.tieto.msi2016.mission.model.operator.MissionCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +16,9 @@ public class MissionsHolder {
     static {
         mockMissions.add(mission("1-takeoff-land", "takeoff", "land"));
         mockMissions.add(mission("2-picture", command("wait", 1000), command("takePicture"), command("wait", 1000)));
+        mockMissions.add(mission("2-picture", command("wait", 1000), command("takePicture"), command("wait", 1000)));
+        mockMissions.add(mission("6-forw-back", command("takeoff"), command("forward", 1),
+                command("hover", 1000), command("backward", 1), command("land")));
     }
 
     public static Optional<Mission> removeMission(String id) {

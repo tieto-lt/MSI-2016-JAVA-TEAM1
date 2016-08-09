@@ -1,4 +1,4 @@
-package lt.tieto.msi2016.mission.model;
+package lt.tieto.msi2016.mission.model.operator;
 
 public class MissionImage {
 
