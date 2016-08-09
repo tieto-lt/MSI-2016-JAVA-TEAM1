@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+<div class="msi-registration-form">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                    <div class="form-group">
+                        <h5>Here is a magic place where you can generate your TOKEN. Please do not share him :) </h5>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group" ng-model="$ctrl.token">
+                            <button id="signupSubmit" type="submit" ng-click="$ctrl.generateToken(); $ctrl.getStatus();" class="btn btn-info btn-block">Generate new token</button>
+                    <div>
+                            <h5>Operator status: </h5>
+                            <h6>{{$ctrl.status}}</h6>
+                            <p>                 </p>
+                    </div>
+                            <h5>Your token: </h5>
+                            <h6>{{$ctrl.token}}</h6>
+                            <h4>{{$ctrl.message}}</h4>
+                        </div>
+
+                    </div>
+                    <hr>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</html>
+

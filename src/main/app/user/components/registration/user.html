@@ -16,15 +16,11 @@
                         <p ng-show="userForm.username.$error.pattern" class="help-block">Please enter a valid user name. No spaces are allowed </p>
                     </div>
 
-
-
                     <div class="form-group"ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
                         <label>Name</label>
                         <input placeholder="Name" type="text" name="name" class="form-control" ng-model="$ctrl.user.name"ng-pattern="/^([a-zA-Z ]){1,25}$/" required ng-minlength="1" >
                         <p ng-show="userForm.name.$error.required && !userForm.name.$pristine" class="help-block">You name must consist at least from 1 character.</p>
                     </div>
-
-
                     <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
                         <label>Email</label>
                         <input placeholder="Email"type="email" name="email" class="form-control" ng-model="$ctrl.user.email">
@@ -46,7 +42,7 @@
                         <p ng-show="userForm.password2.$dirty && $ctrl.doPasswordNotMatch()" class="help-block">Passwords do not match.</p>
                     </div>
                     <div class="form-group">
-                        <button id="signupSubmit" type="submit" ng-click="$ctrl.create()" class="btn btn-info btn-block" ng-disabled="userForm.$invalid">Create your account</button>
+                        <button id="signupSubmit" type="submit" ng-click="$ctrl.create()" class="btn btn-info btn-block" ng-disabled="userForm.$invalid && !$ctrl.doPasswordNotMatch()">Create your account</button>
                     </div>
                     <div class="alert alert-danger" role="alert" ng-repeat="error in $ctrl.errors">
                         {{error}}

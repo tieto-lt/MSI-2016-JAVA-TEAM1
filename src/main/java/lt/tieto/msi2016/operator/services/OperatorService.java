@@ -29,7 +29,7 @@ public class OperatorService {
         OperatorModel operator = new OperatorModel();
         operator.setOperatorID(id);
         operator.setToken("test-token");
-        operator.setStatus(OperatorModel.Status.VERIFIED);
+        operator.setStatus(OperatorModel.Status.TOKENISSUE);
         return operator;
     }
 }
