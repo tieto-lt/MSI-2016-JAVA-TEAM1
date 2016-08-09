@@ -211,7 +211,6 @@ databaseChangeLog:
             tableName: authorities
 
 
-
   - changeSet:
       id: 8
       author: Darius
@@ -297,3 +296,52 @@ databaseChangeLog:
                 name: authority
                 value: 'ROLE_CUSTOMER'
             tableName: authorities
+
+  - changeSet:
+      id: 12
+      author: Mark
+      changes:
+        - createTable:
+            tableName: operator_verification
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: token
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: operator_verification
+            constraintName: fk_user_id_userss
+            referencedColumnNames: id
+            referencedTableName: users
+        - createIndex:
+            columns:
+              - column:
+                  name: user_id
+            indexName: idx_status_username
+            tableName: operator_verification
+        - addAutoIncrement:
+              columnDataType: int
+              columnName: id
+              incrementBy: 1
+              startWith: 1
+              tableName: operator_verification
+

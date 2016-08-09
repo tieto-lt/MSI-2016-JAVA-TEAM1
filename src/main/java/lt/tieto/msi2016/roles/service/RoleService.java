@@ -3,8 +3,6 @@ package lt.tieto.msi2016.roles.service;
 import lt.tieto.msi2016.roles.model.Role;
 import lt.tieto.msi2016.roles.repository.RoleRepository;
 import lt.tieto.msi2016.roles.repository.model.RoleDb;
-import lt.tieto.msi2016.user.model.User;
-import lt.tieto.msi2016.user.repository.model.UserDb;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
