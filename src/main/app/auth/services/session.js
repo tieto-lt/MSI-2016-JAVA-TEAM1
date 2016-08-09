@@ -50,6 +50,14 @@ function Service ($cookies, jwtHelper, $http) {
       }
       return [];
     }
+
+    function getUsername() {
+      var accessToken =  getSession();
+      if (accessToken) {
+        return accessToken.user_name;
+      }
+      return '';
+    }
 }
 
 Service.$inject = ['$cookies', 'jwtHelper', '$http'];
