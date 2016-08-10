@@ -1,32 +1,29 @@
 package lt.tieto.msi2016.mission.controller;
 
 
-import lt.tieto.msi2016.item.model.Item;
-import lt.tieto.msi2016.item.service.ItemService;
-import lt.tieto.msi2016.mission.model.MissionResultInternal;
-import lt.tieto.msi2016.mission.service.MissionService;
-import lt.tieto.msi2016.roles.Roles;
+import lt.tieto.msi2016.mission.model.MissionResultUI;
+import lt.tieto.msi2016.mission.model.operator.MissionResult;
+import lt.tieto.msi2016.mission.service.MissionResultsService;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 public class MissionResultsController extends BaseController {
 
     @Autowired
-    private MissionService service;
+    private MissionResultsService service;
 
-    @RequestMapping(method = RequestMethod.GET, path = "/api/internalMissions/{id}")
-    public MissionResultInternal get(@PathVariable Long id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/api/missionsUI/{id}")
+    public MissionResultUI get(@PathVariable Long id) throws IOException {
         return service.get(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/api/internalMissions")
-    public List<MissionResultInternal> all() {
+    @RequestMapping(method = RequestMethod.GET, path = "/api/missionsUI")
+    public List<MissionResultUI> all() throws IOException {
         return service.all();
     }
 
