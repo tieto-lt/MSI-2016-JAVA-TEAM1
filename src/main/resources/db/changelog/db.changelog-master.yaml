@@ -352,7 +352,7 @@ databaseChangeLog:
             tableName: orders
             columns:
               - column:
-                  name: order_id
+                  name: id
                   type: integer
                   autoIncrement: true
                   constraints:
@@ -391,12 +391,15 @@ databaseChangeLog:
             tableName: mission_results
             columns:
               - column:
-                  name: mission_id
+                  name: id
                   type: integer
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
+              - column:
+                  name: mission_id
+                  type: integer
               - column:
                   name: order_id
                   type: integer
@@ -428,7 +431,7 @@ databaseChangeLog:
             baseColumnNames: order_id
             baseTableName: mission_results
             constraintName: fk_order_id
-            referencedColumnNames: order_id
+            referencedColumnNames: id
             referencedTableName: orders
         - addForeignKeyConstraint:
             baseColumnNames: executed_by
@@ -439,12 +442,12 @@ databaseChangeLog:
         - createIndex:
             columns:
               - column:
-                  name: mission_id
+                  name: id
             indexName: idx_status_username
             tableName: mission_results
         - addAutoIncrement:
               columnDataType: int
-              columnName: mission_id
+              columnName: id
               incrementBy: 1
               startWith: 1
               tableName: mission_results

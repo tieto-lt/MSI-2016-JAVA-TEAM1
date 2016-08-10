@@ -5,12 +5,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
-/**
- * Created by it11 on 16.8.9.
- */
-
-
-
 public class MissionResultsDb extends DbModel {
 
     private Long id;
