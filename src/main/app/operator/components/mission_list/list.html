@@ -13,12 +13,15 @@
             <div class="panel-body" style="text-align: right" ng-transclude></div>
         </div>
     </script>
-    <uib-accordion close-others="oneAtATime">
+    <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
         <div uib-accordion-group class="panel-default" is-open="status.open">
-            <uib-accordion-heading>
-                Mission name <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            <uib-accordion-heading >
+               {{$index+1}}. {{ mission.title}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </uib-accordion-heading>
-            Information
+            <p>id: {{results[$index].id}}</p>
+            <p>start: {{results[$index].start}}</p>
+            <p>image: {{results[$index].image}}</p>
+            <p>battery status: {{results[$index].batteryStatus}}</p>
         </div>
     </uib-accordion>
 

@@ -4,6 +4,8 @@ function Controller( $scope, MissionService) {
 
     var vm = this;
     vm.missions = {};
+    vm.information = {};
+    vm.results = {};
     $scope.oneAtATime = true;
 
     vm.$onInit = function() {
@@ -13,31 +15,30 @@ function Controller( $scope, MissionService) {
     function _loadList() {
         MissionService.getAllMissions().then(
             function (response) {
-            console.log(response.data);
-                vm.missions = response.data;
+                console.log(response.data);
+//                vm.missions = response.data;
+                vm.missions = [
+                    {id: 1, title: "Test mission ", date: new Date()},
+                    {id: 2, title: "Another test mission", date: new Date()},
+                    {id: 1, title: "Test mission ", date: new Date()},
+                    {id: 2, title: "Another test mission", date: new Date()},
+                    {id: 1, title: "Test mission ", date: new Date()},
+                    {id: 2, title: "Another test mission", date: new Date()},
+                ];
+
+                $scope.results = [
+                    {id : 5, start: "Start", finish :"Finish", image: "Image", batteryStatus: 50},
+                    {id : 10, start: "Start", image: "Image", batteryStatus: 99},
+                    {id : 5, start: "Start", finish :"Finish", image: "Image", batteryStatus: 0},
+                    {id : 10, start: "Start", image: "Image", batteryStatus: 20},
+                ];
+
+                $scope.status = false;
             },
             function (err) {
                 console.log('Error',err);
             });
      }
-
-    $scope.groups = [
-       {
-          title: 'Dynamic Group Header - 1',
-          content: 'Dynamic Group Body - 1'
-        },
-        {
-          title: 'Dynamic Group Header - 2',
-          content: 'Dynamic Group Body - 2'
-        }
-    ];
-
-    $scope.items = ['Item 1', 'Item 2', 'Item 3'];
-
-    $scope.addItem = function() {
-       var newItemNo = $scope.items.length + 1;
-       $scope.items.push('Item ' + newItemNo);
-     };
 
      $scope.status = {
        isCustomHeaderOpen: false,
