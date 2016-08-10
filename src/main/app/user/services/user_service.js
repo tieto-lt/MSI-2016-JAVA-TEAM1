@@ -7,10 +7,14 @@ function Service ($http) {
         return $http.post('/api/user', user);
     };
 
-
     this.get = function() {
         return $http.get('/api/user/current');
     };
+
+    this.createOrder = function () {
+        return $http.post('/api/order',{});
+    }
+
 }
 
 Service.$inject = ['$http'];

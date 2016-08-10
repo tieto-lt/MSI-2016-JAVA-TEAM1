@@ -27,11 +27,11 @@ function Controller($state,VerificationService) {
             function(response){
                 vm.status = response.data.operatorStatus;
                 if(response.data.operatorStatus == "TOKENISSUE"){
-                vm.message = "Do not forget to execute test mission to be completely verified!"
-                vm.status = "TOKEN ISSUE";
+                    vm.message = "Do not forget to execute test mission to be completely verified!"
+                    vm.status = "TOKEN ISSUE";
                 }
                 if(response.data.operatorStatus == "NOTVERIFIED"){
-                vm.status = "NOT VERIFIED";
+                    vm.status = "NOT VERIFIED";
                 }
             },
             function(err){

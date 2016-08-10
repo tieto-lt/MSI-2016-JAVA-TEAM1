@@ -14,7 +14,7 @@ public class OrderController {
     @Autowired
     private OrderService service;
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/api/order")
+    @RequestMapping(method = RequestMethod.POST, path = "/api/order")
     public OrderModel createOrder(OrderModel order) {
         return service.createOrder(order);
     }

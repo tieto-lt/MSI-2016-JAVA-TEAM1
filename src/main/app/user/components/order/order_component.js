@@ -5,6 +5,8 @@ function Controller(UserService) {
   var vm = this;
   vm.order = {};
   vm.user = {};
+  vm.createOrder = createOrder;
+
 
   vm.$onInit = function() {
           _loadOrderDetails();
@@ -22,9 +24,19 @@ function Controller(UserService) {
     }
 
     function _setOrder() {
-        vm.order.name = vm.user.name;
         vm.order.email = vm.user.email;
         vm.order.phone = vm.user.phone;
+    }
+
+    function createOrder(){
+        UserService.createOrder().then(
+            function(response) {
+             vm.message = true;
+            },
+            function (err) {
+             vm.error = true;
+            }
+        );
     }
 
 }
