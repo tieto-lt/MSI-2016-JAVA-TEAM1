@@ -27,9 +27,4 @@ public class MissionResultsController extends BaseController {
         return service.all();
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/api/missionsUI")
-    public MissionResultUI saveMissionResult(@RequestBody MissionResult missionResult) throws IOException {
-        return service.saveMissionResult(missionResult);
-    }
-
 }
