@@ -5,8 +5,10 @@ import lt.tieto.msi2016.item.model.Item;
 import lt.tieto.msi2016.item.service.ItemService;
 import lt.tieto.msi2016.mission.model.MissionResultInternal;
 import lt.tieto.msi2016.mission.service.MissionService;
+import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
