@@ -18,6 +18,10 @@ public class OperatorModel {
         return status;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     public void setOperatorID(Long operatorID) {
         this.operatorID = operatorID;
     }

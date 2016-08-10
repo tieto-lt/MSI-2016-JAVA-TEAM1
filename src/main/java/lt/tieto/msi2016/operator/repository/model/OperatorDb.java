@@ -46,9 +46,11 @@ public class OperatorDb extends DbModel {
         return status;
     }
 
+
     public void setStatus(OperatorStatus status) {
         this.status = status;
     }
+
 
     @Override
     public String toString() {

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.tieto.msi2016.mission.model.Mission;
 import lt.tieto.msi2016.mission.model.MissionResult;
 import lt.tieto.msi2016.mission.model.Missions;
+import lt.tieto.msi2016.operator.model.OperatorModel;
+import lt.tieto.msi2016.operator.services.OperatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ public class MissionController {
 
     @Autowired
     ObjectMapper mapper;
+    public OperatorService service;
 
     private static Logger LOG = LoggerFactory.getLogger(MissionController.class);
 
@@ -44,6 +47,8 @@ public class MissionController {
             @RequestBody MissionResult missionResult,
             @RequestParam String operatorToken) throws IOException {
         LOG.info("Completing mission {} {}", missionId, missionResult);
+
+        service.verifyAndUpdateStatus(missionResult, operatorToken);
     }
 
 }
