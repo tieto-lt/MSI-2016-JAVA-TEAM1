@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 
-public class MissionResultDb extends DbModel {
+public class MissionResultsDb extends DbModel {
 
     private Long missionId;
     private Long orderId;

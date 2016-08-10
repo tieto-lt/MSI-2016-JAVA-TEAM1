@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class MissionService {
+public class MissionResultsService {
 
     @Transactional(readOnly = true)
     public MissionResultInternal get(Long id) {
