@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.mission.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import lt.tieto.msi2016.mission.model.MissionResultUI;
 import lt.tieto.msi2016.mission.model.operator.MissionImage;
 import lt.tieto.msi2016.mission.model.operator.MissionNavigationData;
@@ -7,8 +8,7 @@ import lt.tieto.msi2016.mission.model.operator.MissionResult;
 import lt.tieto.msi2016.mission.repository.MissionResults;
 import lt.tieto.msi2016.mission.repository.model.MissionResultsDb;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +51,6 @@ public class MissionResultsService {
 
     private MissionResultUI mapToMissionResultUI(MissionResultsDb db) throws IOException {
         List<MissionNavigationData> navigationData = objectMapper.readValue(db.getNavigationData(), new TypeReference<List<MissionNavigationData>>() {});
-
         MissionResultUI api = new MissionResultUI();
         api.setId(db.getId());
         api.setStartNavigationData(navigationData != null ? navigationData.get(0) : null);
