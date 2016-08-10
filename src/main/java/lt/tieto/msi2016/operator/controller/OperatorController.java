@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.operator.controller;
 
+import lt.tieto.msi2016.operator.model.TokenModel;
 import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.operator.model.OperatorModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,13 @@ public class OperatorController {
     @Autowired
     private OperatorService service;
 
-
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.POST, path = "/api/token")
-    public String generateToken(){
-        return service.generateToken();
-}
+    public TokenModel generateToken() {
+        TokenModel token = new TokenModel();
+        token.setToken(service.generateToken());
+        return token;
+    }
 
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.GET, path = "/api/operator")

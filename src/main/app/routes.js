@@ -67,7 +67,6 @@ module.config(function($stateProvider, $urlRouterProvider) {
         isPublic: true
       }
     })
-
     .state('root.operator', {
           url: "/operator",
           template:"<home-operator></home-operator>",
@@ -75,7 +74,6 @@ module.config(function($stateProvider, $urlRouterProvider) {
             roles: ["ROLE_OPERATOR"]
           }
     })
-
     .state('root.customerFirst', {
           url: "/customer",
           template:"<customer-first></customer-first>",
@@ -83,6 +81,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
             roles: ["ROLE_CUSTOMER"]
           }
     })
+    .state('root.token', {
+              url: "/operator/token",
+              template:"<operator-verification></operator-verification>",
+              data: {
+                roles: ["ROLE_OPERATOR"]
+              }
+     })
     .state('root.orderComponent', {
              url:"/order",
              template:"<order-component></order-component>",

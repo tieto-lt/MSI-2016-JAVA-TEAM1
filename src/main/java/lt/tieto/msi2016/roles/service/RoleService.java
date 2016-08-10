@@ -1,8 +1,10 @@
 package lt.tieto.msi2016.roles.service;
 
+import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.roles.model.Role;
 import lt.tieto.msi2016.roles.repository.RoleRepository;
 import lt.tieto.msi2016.roles.repository.model.RoleDb;
+import lt.tieto.msi2016.utils.exception.BusinessException;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,11 +37,25 @@ public class RoleService {
     @Transactional
     public Role createOrUpdateRole(Long id, Role role) {
         if (repository.exists(id)) {
-            RoleDb updated = repository.update(mapToRoleDb(id, role));
-            return mapToRole(updated);
+            return updateRole(id, role);
         } else {
             RoleDb created = repository.create(mapToRoleDb(id, role));
             return mapToRole(created);
+        }
+    }
+
+    @Transactional
+    public Boolean isLastAdmin(Long authorityId){
+        return Roles.ADMIN.equals(get(authorityId).getAuthority()) && (repository.getAdminsCount() == 1);
+    }
+
+
+    @Transactional
+    private synchronized Role updateRole(Long id, Role role) {
+        if (!isLastAdmin(id)) {
+            return mapToRole(repository.update(mapToRoleDb(id, role)));
+        } else {
+            throw new BusinessException("You can't remove last admin from the system");
         }
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lt.tieto.msi2016.utils.exception.BusinessException;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import lt.tieto.msi2016.utils.exception.ValidationException;
 import org.slf4j.Logger;
@@ -60,6 +61,13 @@ public class BaseController {
         return errors;
     }
 
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    private BusinessError handleBusinessException(BusinessException e) {
+        LOG.debug("Business error", e);
+        return new BusinessError(e.getMessage());
+    }
+
     public static class FieldValidationError {
         private String name;
         private String message;
@@ -71,6 +79,18 @@ public class BaseController {
 
         public String getName() {
             return name;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
+
+    public static class BusinessError {
+        private String message;
+
+        BusinessError(String message) {
+            this.message = message;
         }
 
         public String getMessage() {
