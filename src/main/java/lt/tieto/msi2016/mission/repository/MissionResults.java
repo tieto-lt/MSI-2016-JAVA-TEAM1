@@ -11,7 +11,7 @@ public class MissionResults extends BaseRepository<MissionResultsDb> {
 
     private static final RowMapper<MissionResultsDb> ROW_MAPPER = (rs, rowNum) -> {
         MissionResultsDb item = new MissionResultsDb();
-        item.setId(rs.getLong("mission_results_id"));
+        item.setId(rs.getLong("id"));
         item.setMissionId(rs.getLong("mission_id"));
         item.setOrderId(rs.getLong("order_id"));
         item.setExecutedBy(rs.getLong("executed_by"));
@@ -25,7 +25,7 @@ public class MissionResults extends BaseRepository<MissionResultsDb> {
     };
 
     private static final RowUnmapper<MissionResultsDb> ROW_UNMAPPER = MissionResultDb -> mapOf(
-            "mission_results_id", MissionResultDb.getId(),
+            "id", MissionResultDb.getId(),
             "mission_id", MissionResultDb.getMissionId(),
             "order_id", MissionResultDb.getOrderId(),
             "executed_by", MissionResultDb.getExecutedBy(),
@@ -41,6 +41,6 @@ public class MissionResults extends BaseRepository<MissionResultsDb> {
     );
 
     public MissionResults() {
-        super(ROW_MAPPER, ROW_UNMAPPER, "mission_results", "mission_results_id");
+        super(ROW_MAPPER, ROW_UNMAPPER, "mission_results", "id");
     }
 }
