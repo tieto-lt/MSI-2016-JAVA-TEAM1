@@ -15,7 +15,7 @@ public class MissionResults extends BaseRepository<MissionResultsDb> {
         item.setOrderId(rs.getLong("order_id"));
         item.setExecutedBy(rs.getLong("executed_by"));
         item.setExecutionDate(rs.getString("execution_date"));
-        item.setBatteryStatus(rs.getLong("battery_status"));
+        item.setBatteryStatus(rs.getBigDecimal("battery_status"));
         item.setVideoBase64(rs.getString("video_base_64"));
         item.setImages(rs.getString("images"));
         item.setNavigationData(rs.getString("navigation_data"));

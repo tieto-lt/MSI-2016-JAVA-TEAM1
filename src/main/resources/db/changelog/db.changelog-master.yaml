@@ -408,7 +408,7 @@ databaseChangeLog:
                   type: timestamp
               - column:
                   name: battery_status
-                  type: integer
+                  type: numeric
               - column:
                   name: video_base64
                   type: clob

@@ -5,10 +5,10 @@ import java.util.List;
 
 public class MissionResult {
 
-    public String missionId;
-    public List<MissionNavigationData> navigationData;
-    public List<MissionImage> images;
-    public String videoBase64;
+    private String missionId;
+    private List<MissionNavigationData> navigationData;
+    private List<MissionImage> images;
+    private String videoBase64;
 
     public String getMissionId() {
         return missionId;
