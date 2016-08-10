@@ -26,14 +26,12 @@ public class MissionResultsDb extends DbModel {
         Initialized, InProgress, Completed, Error
     }
 
-    @Override
-    public Long getId() {
-        return missionId;
+    public void setMissionId(Long missionId) {
+        this.missionId = missionId;
     }
 
-    @Override
-    public void setId(Long missionId) {
-        this.missionId = missionId;
+    public Long getMissionId() {
+        return missionId;
     }
 
     public void setExecutedBy(Long executedBy) {
@@ -104,6 +102,7 @@ public class MissionResultsDb extends DbModel {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .append("id", getId())
                 .append("missionId", missionId)
                 .append("orderId", orderId)
                 .append("executedBy", executedBy)
