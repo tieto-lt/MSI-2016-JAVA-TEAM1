@@ -1,10 +1,10 @@
-package lt.tieto.msi2016.mission.controller;
+package lt.tieto.msi2016.mission.controller.operator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lt.tieto.msi2016.mission.model.Mission;
-import lt.tieto.msi2016.mission.model.MissionResult;
-import lt.tieto.msi2016.mission.model.Missions;
-import lt.tieto.msi2016.operator.model.OperatorModel;
+import lt.tieto.msi2016.mission.controller.operator.MissionsHolder;
+import lt.tieto.msi2016.mission.model.operator.Mission;
+import lt.tieto.msi2016.mission.model.operator.MissionResult;
+import lt.tieto.msi2016.mission.model.operator.Missions;
 import lt.tieto.msi2016.operator.services.OperatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,16 +13,15 @@ import org.springframework.util.Base64Utils;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 public class MissionController {
 
     @Autowired
     ObjectMapper mapper;
-    public OperatorService service;
+    @Autowired
+    private OperatorService service;
 
     private static Logger LOG = LoggerFactory.getLogger(MissionController.class);
 

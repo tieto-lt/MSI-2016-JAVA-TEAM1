@@ -5,7 +5,8 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" ui-sref="root.home">JAVAINIAI</a>
+                <a ng-hide="$ctrl.isLoggedIn()" class="navbar-brand"  ui-sref="root.home">JAVAINIAI</a>
+                <a ng-show="$ctrl.isLoggedIn()" class="navbar-brand">JAVAINIAI</a>
             </div>
 
             <ul class="nav nav-pills">
@@ -13,6 +14,7 @@
                 <li><a ng-show="$ctrl.isAdmin()" ui-sref="root.adminRole">Roles</a></li>
                 <li><a ng-show="$ctrl.isOperator()" ui-sref="root.lt.tieto.msi2016.operator">Operator</a></li>
                 <li><a ng-show="$ctrl.isCustomer()" ui-sref="root.orderComponent">Orders</a></li>
+                <li><a ng-show="$ctrl.isOperator()" ui-sref="root.token">Verification</a></li>
                 <li></li>
 
                 <li><a><logout></logout></a></li>

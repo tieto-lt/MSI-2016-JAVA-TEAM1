@@ -9,15 +9,15 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 
-public class MissionDb extends DbModel {
+public class MissionResultsDb extends DbModel {
 
-    private Long id;
-    private Long submitedBy;
+    private Long missionId;
+    private Long orderId;
     private Long executedBy;
-    private String submmissionDate;
     private String executionDate;
+    private Long batteryStatus;
     private String videoBase64;
-    private String image;
+    private String images;
     private String navigationData;
     private MissionState missionState;
 
@@ -28,36 +28,28 @@ public class MissionDb extends DbModel {
 
     @Override
     public Long getId() {
-        return id;
+        return missionId;
     }
 
     @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getSubmitedBy() {
-        return submitedBy;
-    }
-
-    public void setSubmitedBy(Long submitedBy) {
-        this.submitedBy = submitedBy;
-    }
-
-    public Long getExecutedBy() {
-        return executedBy;
+    public void setId(Long missionId) {
+        this.missionId = missionId;
     }
 
     public void setExecutedBy(Long executedBy) {
         this.executedBy = executedBy;
     }
 
-    public String getSubmmissionDate() {
-        return submmissionDate;
+    public Long getExecutedBy() {
+        return executedBy;
     }
 
-    public void setSubmmissionDate(String submmissionDate) {
-        this.submmissionDate = submmissionDate;
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public String getExecutionDate() {
@@ -66,6 +58,14 @@ public class MissionDb extends DbModel {
 
     public void setExecutionDate(String executionDate) {
         this.executionDate = executionDate;
+    }
+
+    public void setBatteryStatus(Long batteryStatus) {
+        this.batteryStatus = batteryStatus;
+    }
+
+    public Long getBatteryStatus() {
+        return batteryStatus;
     }
 
     public String getVideoBase64() {
@@ -93,24 +93,24 @@ public class MissionDb extends DbModel {
     }
 
 
-    public String getImage() {
-        return image;
+    public String getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImages(String images) {
+        this.images = images;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("id", id)
-                .append("submitedBy", submitedBy)
+                .append("missionId", missionId)
+                .append("orderId", orderId)
                 .append("executedBy", executedBy)
-                .append("submmissionDate", submmissionDate)
                 .append("executionDate", executionDate)
+                .append("batteryStatus", batteryStatus)
                 .append("videoBase64", videoBase64)
-                .append("image", image)
+                .append("images", images)
                 .append("navigationData", navigationData)
                 .append("state", missionState)
                 .toString();

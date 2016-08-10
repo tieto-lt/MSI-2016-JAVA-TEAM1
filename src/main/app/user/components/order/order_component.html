@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <div class="container">
@@ -6,32 +7,40 @@
             <div class="panel panel-primary">
                 <div class="panel-body">
                     <form name="orderForm" ng-submit="submitForm()" novalidate>
-
                         <div class="form-group">
                             <h2>Create new order</h1>
                             </h2>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error' : orderForm.name.$invalid && !orderForm.name.$pristine && !orderForm.name.$pattern }">
-                            <label>Name</label>
-                            <input placeholder="Name" type="text" name="name" class="form-control" ng-model="$ctrl.order.name"ng-pattern="/^([a-zA-Z ]){2,30}$/">
-                            <p ng-show="orderForm.name.$invalid && !orderForm.name.$pattern" class="help-block">You name must consist at least from 3 characters.</p>
-                            <p ng-show="orderForm.name.$error.pattern" class="help-block">You name must consist at least from 3 characters.</p>
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.missionname.$invalid && !orderForm.missionname.$pristine }">
+                            <label>Mission name</label>
+                            <input placeholder="Mission name" type="text" name="missionname" class="form-control" ng-model="$ctrl.order.missionname"ng-pattern="/^([a-zA-Z ]){5,30}$/" required>
+                            <p ng-show="orderForm.missionname.$invalid && !orderForm.missionname.$pristine" class="help-block">Mission name must consist from 5 to 30 characters.</p>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.name.$invalid && !orderForm.name.$pristine}">
+                            <label>Full name</label>
+                            <input placeholder="Full name" type="text" name="name" class="form-control" ng-model="$ctrl.order.name"ng-pattern="/^([a-zA-Z ]){1,255}$/" required>
+                            <p ng-show="orderForm.name.$invalid && !orderForm.name.$pristine" class="help-block">Your name must consist at least from 1 character</p>
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.email.$invalid && !orderForm.email.$pristine }">
                             <label>Email</label>
-                            <input placeholder="Email"type="email" name="email" class="form-control" ng-model="$ctrl.order.email">
+                            <input placeholder="Email"type="email" name="email" class="form-control" ng-model="$ctrl.order.email" required>
                             <p ng-show="orderForm.email.$invalid && !orderForm.email.$pristine" class="help-block">Enter a valid email.</p>
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.phone.$invalid && !orderForm.phone.$pattern}">
                             <label>Phone </label>
-                            <input  placeholder="+370" ng-pattern="/^(\+370) *(\d{8})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.order.phone" >
+                            <input  placeholder="+370" ng-pattern="/^(\+(370+|3705)) *(\d{8})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.order.phone" required >
                             <p ng-show="orderForm.phone.$error.pattern" class="help-block">Enter a valid phone number.</p>
                         </div>
-
-                        <div class="form-group">
-                            <button id="signupSubmit" type="submit" ng-click="$ctrl.create()" class="btn btn-info btn-block" ng-disabled="orderForm.$invalid">Place your order</button>
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
+                            <label>Details</label>
+                            <input placeholder="Details" type="text" name="details" class="form-control" ng-model="$ctrl.order.details"ng-maxlength="255">
+                            <p ng-show="orderForm.details.$error.maxlength" class="help-block">Too many characters</p>
                         </div>
-
+                        <div  class="form-group">
+                            <button id="signupSubmit" type="submit" name = click ng-click="$ctrl.createOrder()" class="btn btn-info btn-block" ng-disabled="orderForm.$invalid">Place your order</button>
+                            <div class="alert alert-success" ng-show="$ctrl.message">Success!</div>
+                            <div class="alert alert-danger" ng-show="$ctrl.error">Something went wrong</div>
+                        </div>
                         <hr>
                     </form>
                 </div>

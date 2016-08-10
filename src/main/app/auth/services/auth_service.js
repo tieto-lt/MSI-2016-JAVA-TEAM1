@@ -25,8 +25,11 @@ function Service ($http, $httpParamSerializer, $cookies) {
             });
     }
 
-    function logout(){
-        return $http.delete('/api/logout');
+    function logout() {
+        return $http.delete('/api/logout')
+            .then(function() {
+                $http.defaults.headers.common.Authorization = undefined;
+            });
     }
 }
 

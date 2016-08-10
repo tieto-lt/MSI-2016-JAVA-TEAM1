@@ -1,16 +1,15 @@
 package lt.tieto.msi2016.operator.services;
 
-import com.nurkiewicz.jdbcrepository.RowUnmapper;
-import lt.tieto.msi2016.mission.model.MissionImage;
-import lt.tieto.msi2016.mission.model.MissionResult;
+import lt.tieto.msi2016.mission.model.operator.MissionImage;
+import lt.tieto.msi2016.mission.model.operator.MissionResult;
+import lt.tieto.msi2016.operator.OperatorStatus;
 import lt.tieto.msi2016.operator.model.OperatorModel;
 import lt.tieto.msi2016.operator.repository.OperatorVerification;
 import lt.tieto.msi2016.operator.repository.model.OperatorDb;
 import lt.tieto.msi2016.utils.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -21,18 +20,19 @@ public class OperatorService {
     @Autowired
     private SecurityService securityService;
 
+    @Autowired
     private OperatorVerification repository;
 
     public OperatorModel verifyAndUpdateStatus(MissionResult missionResult, String token) {
         if (isMissionSuccessful( missionResult)){
-            updateOperatorStatus(token , OperatorDb.OperatorStatus.VERIFIED );
+            updateOperatorStatus(token , OperatorStatus.Status.VERIFIED);
         }
 
         return null;
     }
 
 
-    private OperatorModel updateOperatorStatus(String token ,OperatorDb.OperatorStatus status) {
+    private OperatorModel updateOperatorStatus(String token ,OperatorStatus.Status status) {
         OperatorDb model  = repository.operatorByToken(token);
         model.setStatus(status);
 
@@ -53,9 +53,22 @@ public class OperatorService {
 
         Long id = securityService.getCurrentUser().getId();
         OperatorModel operator = new OperatorModel();
-        operator.setOperatorID(id);
+        operator.setUserId(id);
         operator.setToken(token);
-        // Please save me to DB, thanks.
+        operator.setStatus(OperatorStatus.Status.TOKENISSUE);
+        // Saves generated token to database
+    /*    OperatorDb operatorDb=repository.operatorByUserID(id);
+
+        if(operatorDb.getStatus() == null){
+            operatorDb.setStatus(OperatorDb.OperatorStatus.NONVERIFIED);
+        }
+
+        OperatorModel operator=mapToOperator(operatorDb);*/
+
+
+
+        repository.create(mapToOperatorDb(operator));
+
 
         return token;
     }
@@ -63,17 +76,20 @@ public class OperatorService {
     public OperatorModel getOperatorStatus(){
         Long id = securityService.getCurrentUser().getId();
         OperatorModel operator = new OperatorModel();
-        operator.setOperatorID(id);
+        operator.setUserId(id);
         operator.setToken("test-token");
-        operator.setStatus(OperatorModel.Status.VERIFIED);
+        operator.setStatus(OperatorStatus.Status.TOKENISSUE);
         return operator;
     }
 
     private static OperatorModel mapToOperator(OperatorDb db) {
         OperatorModel api = new OperatorModel();
-        api.setOperatorID(db.getId());
+        api.setId(db.getId());
+        api.setUserId(db.getUserId());
         api.setToken(db.getToken());
-        api.setStatus(OperatorDb.OperatorStatus.valueOf(db.getStatus())  );
+        api.setStatus(OperatorStatus.Status.valueOf(db.getStatus().toString()));
+
+
 
         return api;
     }
@@ -82,14 +98,15 @@ public class OperatorService {
         OperatorDb db = new OperatorDb();
         db.setId(id);
         db.setToken(api.getToken());
-        db.setStatus(api.getOperatorStatus();
+        db.setUserId(api.getUserId());
+        db.setStatus(OperatorStatus.Status.valueOf(api.getStatus().toString()));
         return db;
     }
 
 
 
     private static OperatorDb mapToOperatorDb(OperatorModel api) {
-        return mapToOperatorDb(api.getOperatorID(), api);
+        return mapToOperatorDb(api.getId(), api);
     }
 
 

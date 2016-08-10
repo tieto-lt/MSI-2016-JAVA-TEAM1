@@ -31,13 +31,6 @@ function Controller($state, $scope, UserService) {
     }
 }
 
-/*$scope.isSuitable = function(){
-    if(username.toLowerCase().localeCompare("admin")||username.toLowerCase().localeCompare("operator")||username.toLowerCase().localeCompare("user"){
-        return false;
-    }
-    return true;
-}*/
-
 Controller.$inject = ['$state', '$scope', 'UserService'];
 
 require('./user.scss');
