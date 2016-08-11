@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by it11 on 16.8.8.
  */
@@ -47,13 +49,19 @@ public class OperatorVerification extends BaseRepository <OperatorDb > {
     }
 
     public OperatorDb operatorByToken(String token) {
-        OperatorDb selectedOperator = template.queryForObject(SELECT_OPERATOR_TOKEN, new Object[] {token} , ROW_MAPPER);
-        return selectedOperator;
+        List<OperatorDb> list = template.query(SELECT_OPERATOR_TOKEN, new Object[]{token}, ROW_MAPPER);
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
     }
 
     public OperatorDb operatorByUserID(Long user_id) {
-        OperatorDb selectedOperator = template.queryForObject(SELECT_OPERATOR_USER_ID, new Object[] {user_id} , ROW_MAPPER);
-        return selectedOperator;
+        List <OperatorDb> selectedOperators = template.query(SELECT_OPERATOR_USER_ID, new Object[] {user_id} , ROW_MAPPER);
+        if(!selectedOperators.isEmpty()){
+            return selectedOperators.get(0);
+        }
+        return null;
     }
 
 

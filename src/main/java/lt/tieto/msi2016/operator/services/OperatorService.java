@@ -34,10 +34,13 @@ public class OperatorService {
 
     private OperatorModel updateOperatorStatus(String token ,OperatorStatus.Status status) {
         OperatorDb model  = repository.operatorByToken(token);
-        model.setStatus(status);
+        if (model != null) {
+            model.setStatus(status);
 
-        OperatorDb updated = repository.update(model);
-        return mapToOperator(updated);
+            OperatorDb updated = repository.update(model);
+            return mapToOperator(updated);
+        }
+        return null;
     }
 
     private boolean isMissionSuccessful(MissionResult missionResult/*, String token*/) {
@@ -55,31 +58,27 @@ public class OperatorService {
         OperatorModel operator = new OperatorModel();
         operator.setUserId(id);
         operator.setToken(token);
-        operator.setStatus(OperatorStatus.Status.TOKENISSUE);
-        // Saves generated token to database
-    /*    OperatorDb operatorDb=repository.operatorByUserID(id);
+        operator.setStatus(OperatorStatus.Status.NOTVERIFIED);
 
-        if(operatorDb.getStatus() == null){
-            operatorDb.setStatus(OperatorDb.OperatorStatus.NONVERIFIED);
+       OperatorDb operatorDb = repository.operatorByUserID(id);
+        if (operatorDb == null){
+            repository.create(mapToOperatorDb(operator));
+        } else if (operatorDb.getStatus()== OperatorStatus.Status.NOTVERIFIED){
+            operator.setId(operatorDb.getId());
+            repository.update(mapToOperatorDb(operator));
+        } else if (operatorDb.getStatus()== OperatorStatus.Status.VERIFIED){
+            operator.setId(operatorDb.getId());
+            operator.setStatus(OperatorStatus.Status.VERIFIED);
+            repository.update(mapToOperatorDb(operator));
         }
-
-        OperatorModel operator=mapToOperator(operatorDb);*/
-
-        OperatorDb operatorDb=repository.operatorByUserID(id);
-
-        repository.create(mapToOperatorDb(operator));
-
 
         return token;
     }
 
-    public OperatorModel getOperatorStatus(){
+    public OperatorStatus.Status getOperatorStatus(){
         Long id = securityService.getCurrentUser().getId();
-        OperatorModel operator = new OperatorModel();
-        operator.setUserId(id);
-        operator.setToken("test-token");
-        operator.setStatus(OperatorStatus.Status.TOKENISSUE);
-        return operator;
+        OperatorDb operatorDb = repository.operatorByUserID(id);
+        return operatorDb.getStatus();
     }
 
     private static OperatorModel mapToOperator(OperatorDb db) {
