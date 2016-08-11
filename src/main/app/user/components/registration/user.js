@@ -16,6 +16,7 @@ function Controller($state, $scope, UserService, Session, AuthService) {
 
     function create() {
         vm.errors = [];
+        console.log(vm.user);
         UserService.create(vm.user).then(
             function () {
                 $state.go('root.login');
