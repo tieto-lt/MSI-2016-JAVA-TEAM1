@@ -28,7 +28,7 @@ function Controller($state,VerificationService) {
                 vm.status = response.data.operatorStatus;
                 if(response.data.operatorStatus == "TOKENISSUE"){
                     vm.message = "Do not forget to execute test mission to be completely verified!"
-                    vm.status = "TOKEN ISSUE";
+                    vm.status = "TOKEN ISSUED";
                 }
                 if(response.data.operatorStatus == "NOTVERIFIED"){
                     vm.status = "NOT VERIFIED";

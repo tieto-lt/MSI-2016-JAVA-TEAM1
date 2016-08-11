@@ -65,7 +65,7 @@ public class OperatorService {
 
         OperatorModel operator=mapToOperator(operatorDb);*/
 
-
+        OperatorDb operatorDb=repository.operatorByUserID(id);
 
         repository.create(mapToOperatorDb(operator));
 

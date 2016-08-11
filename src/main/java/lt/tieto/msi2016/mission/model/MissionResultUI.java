@@ -1,23 +1,25 @@
 package lt.tieto.msi2016.mission.model;
 
-import lt.tieto.msi2016.mission.model.operator.*;
+import lt.tieto.msi2016.mission.model.operator.MissionImage;
+import lt.tieto.msi2016.mission.model.operator.MissionNavigationData;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-public class MissionResultInternal {
+public class MissionResultUI {
 
-    public Long missionId;
-    public MissionNavigationData startNavigationData;
-    public MissionNavigationData finishNavigationData;
-    public List<MissionImage> images;
-    public Integer batteryStatus;
+    private Long id;
+    private MissionNavigationData startNavigationData;
+    private MissionNavigationData finishNavigationData;
+    private List<MissionImage> images;
+    private BigDecimal batteryStatus;
 
-    public Long getMissionId() {
-        return missionId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMissionId(Long missionId) {
-        this.missionId = missionId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public MissionNavigationData getStartNavigationData() {
@@ -44,11 +46,11 @@ public class MissionResultInternal {
         this.images = images;
     }
 
-    public Integer getBatteryStatus() {
+    public BigDecimal getBatteryStatus() {
         return batteryStatus;
     }
 
-    public void setBatteryStatus(Integer batteryStatus) {
+    public void setBatteryStatus(BigDecimal batteryStatus) {
         this.batteryStatus = batteryStatus;
     }
 }
