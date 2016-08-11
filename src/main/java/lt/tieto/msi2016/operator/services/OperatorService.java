@@ -31,6 +31,9 @@ public class OperatorService {
         return null;
     }
 
+    public Boolean isOperatorValidByToken(String token){
+        return repository.operatorByToken(token) != null;
+    }
 
     private OperatorModel updateOperatorStatus(String token ,OperatorStatus.Status status) {
         OperatorDb model  = repository.operatorByToken(token);
