@@ -7,6 +7,7 @@ import lt.tieto.msi2016.mission.model.operator.MissionNavigationData;
 import lt.tieto.msi2016.mission.model.operator.MissionResult;
 import lt.tieto.msi2016.mission.repository.MissionResultsRepository;
 import lt.tieto.msi2016.mission.repository.model.MissionResultsDb;
+import lt.tieto.msi2016.operator.services.OperatorService;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.time.DateUtils;
@@ -48,7 +49,9 @@ public class MissionResultsService {
 
     @Transactional
     public MissionResultUI saveMissionResult(MissionResult missionResult) throws IOException {
+
         return mapToMissionResultUI(repository.create(mapToMissionResultsDb(missionResult)));
+
     }
 
     private MissionResultUI mapToMissionResultUI(MissionResultsDb db) throws IOException {

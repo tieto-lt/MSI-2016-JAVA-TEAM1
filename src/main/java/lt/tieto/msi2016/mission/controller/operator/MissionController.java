@@ -8,6 +8,7 @@ import lt.tieto.msi2016.mission.model.operator.Missions;
 
 import lt.tieto.msi2016.mission.service.MissionResultsService;
 
+import lt.tieto.msi2016.operator.services.OperatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class MissionController {
     @Autowired
     ObjectMapper mapper;
     @Autowired
-
-
-    private MissionResultsService service;
+    private MissionResultsService missionResultsService;
+    @Autowired
+    private OperatorService operatorService;
 
 
     private static Logger LOG = LoggerFactory.getLogger(MissionController.class);
@@ -53,7 +54,9 @@ public class MissionController {
         LOG.info("Completing mission {} {}", missionId, missionResult);
 
 
-        service.saveMissionResult(missionResult);
+        missionResultsService.saveMissionResult(missionResult);
+        operatorService.verifyAndUpdateStatus(missionResult, operatorToken);
+
 
     }
 

@@ -43,7 +43,7 @@ public class OperatorService {
         return null;
     }
 
-    private boolean isMissionSuccessful(MissionResult missionResult/*, String token*/) {
+    private boolean isMissionSuccessful(MissionResult missionResult) {
         List<MissionImage> images=missionResult.getImages();
         return !images.isEmpty();
     }
