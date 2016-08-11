@@ -25,7 +25,6 @@ public class MissionResultsController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/missionsUI")
     public List<MissionResultUI> all() throws IOException {
-
         return service.all();
     }
 }

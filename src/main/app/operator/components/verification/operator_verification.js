@@ -9,6 +9,14 @@ function Controller($state,VerificationService) {
     vm.generateToken = generateToken;
     vm.getStatus = getStatus;
     vm.message = undefined;
+
+
+    vm.$onInit = function() {
+       getStatus();
+    };
+
+
+
     function generateToken(){
     console.log('Token controller!!');
         VerificationService.generateToken().then(

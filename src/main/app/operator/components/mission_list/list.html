@@ -16,13 +16,33 @@
     <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
         <div uib-accordion-group class="panel-default" is-open="status.open">
             <uib-accordion-heading >
-               {{$index+1}}. {{ mission.title}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                {{mission.id}} . <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </uib-accordion-heading>
-            <p>id: {{results[$index].id}}</p>
-            <p>start: {{results[$index].start}}</p>
-            <p>image: {{results[$index].image}}</p>
-            <p>battery status: {{results[$index].batteryStatus}}</p>
+            <p>ID : {{mission.id}}</p>
+            
+            <p>Drone's coordinates at the beginning:</p>
+            <p>x: {{mission.startNavigationData.x}}</p>
+            <p>y: {{mission.startNavigationData.y}}</p>
+            <p>z: {{mission.startNavigationData.z}}</p>
+
+            <p>Drone's coordinates at the end:</p>
+            <p>x: {{mission.finishNavigationData.x}}</p>
+            <p>y: {{mission.finishNavigationData.y}}</p>
+            <p>z: {{mission.finishNavigationData.z}}</p>
+
+            <p>Battery status: {{mission.batteryStatus}}</p>
+            <div ng-repeat="image in mission.images">
+                <img ng-src="data:image/png;base64,{{image.imageBase64}}">
+            </div>
+            <div ng-repeat="image in mission.images">
+                <img ng-src="data:image/png;base64,{{image.imageBase64}}">
+            </div>
+            <div ng-repeat="image in mission.images">
+                <img ng-src="data:image/png;base64,{{image.imageBase64}}">
+            </div>
+
         </div>
+
     </uib-accordion>
 
 </div>
