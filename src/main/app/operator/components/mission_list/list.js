@@ -29,9 +29,9 @@ function Controller($scope, MissionService) {
                     mission.startNavigationData.y = mission.startNavigationData.y || 0;
                     mission.startNavigationData.z = mission.startNavigationData.z || 0;
 
-                    mission.finishNavigationData.x = mission.startNavigationData.x || 0;
-                    mission.finishNavigationData.y = mission.startNavigationData.y || 0;
-                    mission.finishNavigationData.z = mission.startNavigationData.z || 0;
+                    mission.finishNavigationData.x = mission.finishNavigationData.x || 0;
+                    mission.finishNavigationData.y = mission.finishNavigationData.y || 0;
+                    mission.finishNavigationData.z = mission.finishNavigationData.z || 0;
                 });
                 $scope.status = false;
             },
