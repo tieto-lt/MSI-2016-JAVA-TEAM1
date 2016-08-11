@@ -7,6 +7,8 @@ import org.joda.time.DateTime;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
+
 @Repository
 public class MissionResultsRepository extends BaseRepository<MissionResultsDb> {
 
@@ -16,7 +18,7 @@ public class MissionResultsRepository extends BaseRepository<MissionResultsDb> {
         item.setMissionId(rs.getLong("mission_id"));
         item.setOrderId(rs.getLong("order_id"));
         item.setExecutedBy(rs.getLong("executed_by"));
-        item.setExecutionDate(new DateTime(rs.getTimestamp("execution_date")));
+        item.setExecutionDate(new DateTime(rs.getDate("execution_date").getTime()));
         item.setBatteryStatus(rs.getBigDecimal("battery_status"));
         item.setVideoBase64(rs.getString("video_base64"));
         item.setImages(rs.getString("images"));
@@ -30,7 +32,7 @@ public class MissionResultsRepository extends BaseRepository<MissionResultsDb> {
             "mission_id", MissionResultDb.getMissionId(),
             "order_id", MissionResultDb.getOrderId(),
             "executed_by", MissionResultDb.getExecutedBy(),
-            "execution_date", MissionResultDb.getExecutionDate(),
+            "execution_date", new Timestamp(MissionResultDb.getExecutionDate().getMillis()),
             "battery_status", MissionResultDb.getBatteryStatus(),
             "video_base64", MissionResultDb.getVideoBase64(),
             "images", MissionResultDb.getImages(),

@@ -1,16 +1,14 @@
 package lt.tieto.msi2016.mission.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.tieto.msi2016.mission.model.MissionResultUI;
 import lt.tieto.msi2016.mission.model.operator.MissionImage;
 import lt.tieto.msi2016.mission.model.operator.MissionNavigationData;
 import lt.tieto.msi2016.mission.model.operator.MissionResult;
 import lt.tieto.msi2016.mission.repository.MissionResultsRepository;
 import lt.tieto.msi2016.mission.repository.model.MissionResultsDb;
-import lt.tieto.msi2016.operator.services.OperatorService;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.time.DateUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
