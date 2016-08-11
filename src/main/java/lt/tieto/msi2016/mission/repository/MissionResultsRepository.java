@@ -24,6 +24,7 @@ public class MissionResultsRepository extends BaseRepository<MissionResultsDb> {
         item.setImages(rs.getString("images"));
         item.setNavigationData(rs.getString("navigation_data"));
         item.setMissionState(MissionResultsDb.MissionState.valueOf(rs.getString("mission_state")));
+        item.setMissionName(rs.getString("mission_name"));
         return item;
     };
 
@@ -37,7 +38,8 @@ public class MissionResultsRepository extends BaseRepository<MissionResultsDb> {
             "video_base64", MissionResultDb.getVideoBase64(),
             "images", MissionResultDb.getImages(),
             "navigation_data", MissionResultDb.getNavigationData(),
-            "mission_state", MissionResultDb.getMissionState().toString()
+            "mission_state", MissionResultDb.getMissionState().toString(),
+            "mission_name", MissionResultDb.getMissionName()
     );
 
     public MissionResultsRepository() {

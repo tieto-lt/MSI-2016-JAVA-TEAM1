@@ -13,6 +13,7 @@ public class MissionResultUI {
     private MissionNavigationData finishNavigationData;
     private List<MissionImage> images;
     private BigDecimal batteryStatus;
+    private String missionName;
 
     public Long getId() {
         return id;
@@ -52,5 +53,13 @@ public class MissionResultUI {
 
     public void setBatteryStatus(BigDecimal batteryStatus) {
         this.batteryStatus = batteryStatus;
+    }
+
+    public String getMissionName() {
+        return missionName;
+    }
+
+    public void setMissionName(String missionName) {
+        this.missionName = missionName;
     }
 }

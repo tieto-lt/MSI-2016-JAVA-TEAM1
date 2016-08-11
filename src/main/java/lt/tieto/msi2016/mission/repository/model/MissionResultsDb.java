@@ -23,6 +23,7 @@ public class MissionResultsDb extends DbModel {
     private String images;
     private String navigationData;
     private MissionState missionState;
+    private String missionName;
 
 
     public enum MissionState {
@@ -102,6 +103,14 @@ public class MissionResultsDb extends DbModel {
         this.images = images;
     }
 
+    public String getMissionName() {
+        return missionName;
+    }
+
+    public void setMissionName(String missionName) {
+        this.missionName = missionName;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -115,6 +124,7 @@ public class MissionResultsDb extends DbModel {
                 .append("images", images)
                 .append("navigationData", navigationData)
                 .append("state", missionState)
+                .append("missionName", missionName)
                 .toString();
     }
 }

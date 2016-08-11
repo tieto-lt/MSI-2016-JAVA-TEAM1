@@ -60,6 +60,7 @@ public class MissionResultsService {
         api.setFinishNavigationData(navigationData != null ? navigationData.get(navigationData.size() - 1) : null);
         api.setImages(objectMapper.readValue(db.getImages(), new TypeReference<List<MissionImage>>() {}));
         api.setBatteryStatus(navigationData != null ? navigationData.get(navigationData.size() - 1).getBattery() : null);
+        api.setMissionName(db.getMissionName());
         return api;
     }
 
@@ -74,6 +75,7 @@ public class MissionResultsService {
         db.setImages(objectMapper.writeValueAsString(api.getImages()));
         db.setNavigationData(objectMapper.writeValueAsString(api.getNavigationData()));
         db.setMissionState(MissionResultsDb.MissionState.Completed);
+        db.setMissionName(api.getMissionId());
         return db;
     }
 }
