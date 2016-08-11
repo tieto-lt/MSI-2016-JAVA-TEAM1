@@ -11,6 +11,7 @@ import lt.tieto.msi2016.operator.services.OperatorService;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.time.DateUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,7 +71,7 @@ public class MissionResultsService {
         db.setMissionId(null); // only for test missions
         //db.setOrderId();
         //db.setExecutedBy();
-        db.setExecutionDate(new Date());
+        db.setExecutionDate(new DateTime());
         db.setBatteryStatus(api.getNavigationData().get(api.getNavigationData().size() - 1).battery);
         db.setVideoBase64(api.getVideoBase64());
         db.setImages(objectMapper.writeValueAsString(api.getImages()));

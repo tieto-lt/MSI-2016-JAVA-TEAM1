@@ -34,8 +34,14 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
+    @Autowired
+    private SecurityService securityService;
+
     @Transactional(readOnly = true)
     public User get(Long id) {
+        if (securityService.getCurrentUser().getId() != id) {
+            throw new AccessDeniedException("Cannot access user data id=" + id);
+        }
         UserDb user = repository.findOne(id);
         if (user != null) {
             return mapToUser(user);

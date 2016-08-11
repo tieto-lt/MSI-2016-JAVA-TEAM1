@@ -3,6 +3,7 @@ package lt.tieto.msi2016.mission.repository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.mission.repository.model.MissionResultsDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
+import org.joda.time.DateTime;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ public class MissionResultsRepository extends BaseRepository<MissionResultsDb> {
         item.setMissionId(rs.getLong("mission_id"));
         item.setOrderId(rs.getLong("order_id"));
         item.setExecutedBy(rs.getLong("executed_by"));
-        item.setExecutionDate(rs.getDate("execution_date"));
+        item.setExecutionDate(new DateTime(rs.getTimestamp("execution_date")));
         item.setBatteryStatus(rs.getBigDecimal("battery_status"));
         item.setVideoBase64(rs.getString("video_base64"));
         item.setImages(rs.getString("images"));
