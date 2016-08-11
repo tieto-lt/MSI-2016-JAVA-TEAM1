@@ -14,3 +14,15 @@
 .navbar .navbar-collapse {
   text-align: center;
 }
+
+.msi-status {
+    padding: 15px;
+
+    &.msi-verified {
+        background: rgba(173, 222, 151, 0.5);
+    }
+
+    &.msi-unverified {
+        background: rgba(222, 151, 151, 0.83);
+    }
+}
