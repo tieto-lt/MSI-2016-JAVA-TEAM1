@@ -426,6 +426,9 @@ databaseChangeLog:
                   type: varchar(45)
                   constraints:
                     nullable: false
+              - column:
+                  name: mission_name
+                  type: nvarchar(60)
 
         - addForeignKeyConstraint:
             baseColumnNames: order_id
