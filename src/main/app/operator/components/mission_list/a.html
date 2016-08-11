@@ -1,7 +1,3 @@
-<!doctype html>
-<html>
-<body>
-<div>
 <div>
     <script type="text/ng-template" id="group-template.html">
         <div class="panel-heading">
@@ -35,29 +31,18 @@
             <p>z: {{mission.finishNavigationData.z}}</p>
 
             <p>Battery status: {{mission.batteryStatus}}</p>
-
-
-            <div id="slides_control">
-                <div>
-                    <uib-carousel interval="$ctrl.myInterval" active="$ctrl.activeSlide">
-                        <uib-slide ng-repeat="image in mission.images" index="$index">
-                            <img ng-src="data:image/png;base64,{{image.imageBase64}}">
-                            <div class="carousel-caption">
-                            </div>
-                        </uib-slide>
-                    </uib-carousel>
-                </div>
+            <div ng-repeat="image in mission.images">
+                <img ng-src="data:image/png;base64,{{image.imageBase64}}">
             </div>
-
-
+            <div ng-repeat="image in mission.images">
+                <img ng-src="data:image/png;base64,{{image.imageBase64}}">
+            </div>
+            <div ng-repeat="image in mission.images">
+                <img ng-src="data:image/png;base64,{{image.imageBase64}}">
+            </div>
 
         </div>
 
     </uib-accordion>
 
 </div>
-</div>
-</body>
-</html>
-
-

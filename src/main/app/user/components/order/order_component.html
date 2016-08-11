@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html>
-<div class="container">
+<div class="msi-order-form">
     <div>
         <div class="row">
             <div class="panel panel-primary">
@@ -33,8 +33,8 @@
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
                             <label>Details</label>
-                            <input placeholder="Details" type="text" name="details" class="form-control" ng-model="$ctrl.order.details"ng-maxlength="255">
-                            <p ng-show="orderForm.details.$error.maxlength" class="help-block">Too many characters. The maximum number of characters for this field is 255.</p>
+                            <textarea placeholder="Details" type="text" name="details" class="form-control" ng-model="$ctrl.order.details"ng-maxlength="255"></textarea>
+                            <p ng-show="orderForm.details.$error.maxlength" class="help-block">Too many characters. Your details must consist at least from 1 character.</p>
                         </div>
                         <div  class="form-group">
                             <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-info btn-block" ng-disabled="orderForm.$invalid">Place your order</button>
