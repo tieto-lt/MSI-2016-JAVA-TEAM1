@@ -4,10 +4,6 @@ import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
-/**
- * Created by it11 on 16.8.9.
- */
-
 
 
 public class OrdersDb extends DbModel {
