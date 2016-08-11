@@ -4,6 +4,7 @@ import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class MissionResultsDb extends DbModel {
 
@@ -11,7 +12,7 @@ public class MissionResultsDb extends DbModel {
     private Long missionId;
     private Long orderId;
     private Long executedBy;
-    private String executionDate;
+    private Date executionDate;
     private BigDecimal batteryStatus;
     private String videoBase64;
     private String images;
@@ -57,11 +58,11 @@ public class MissionResultsDb extends DbModel {
         this.executedBy = executedBy;
     }
 
-    public String getExecutionDate() {
+    public Date getExecutionDate() {
         return executionDate;
     }
 
-    public void setExecutionDate(String executionDate) {
+    public void setExecutionDate(Date executionDate) {
         this.executionDate = executionDate;
     }
 

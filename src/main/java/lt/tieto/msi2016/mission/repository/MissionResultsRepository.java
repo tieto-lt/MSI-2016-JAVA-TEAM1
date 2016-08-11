@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MissionResults extends BaseRepository<MissionResultsDb> {
+public class MissionResultsRepository extends BaseRepository<MissionResultsDb> {
 
     private static final RowMapper<MissionResultsDb> ROW_MAPPER = (rs, rowNum) -> {
         MissionResultsDb item = new MissionResultsDb();
@@ -15,7 +15,7 @@ public class MissionResults extends BaseRepository<MissionResultsDb> {
         item.setMissionId(rs.getLong("mission_id"));
         item.setOrderId(rs.getLong("order_id"));
         item.setExecutedBy(rs.getLong("executed_by"));
-        item.setExecutionDate(rs.getString("execution_date"));
+        item.setExecutionDate(rs.getDate("execution_date"));
         item.setBatteryStatus(rs.getBigDecimal("battery_status"));
         item.setVideoBase64(rs.getString("video_base64"));
         item.setImages(rs.getString("images"));
@@ -34,13 +34,10 @@ public class MissionResults extends BaseRepository<MissionResultsDb> {
             "video_base64", MissionResultDb.getVideoBase64(),
             "images", MissionResultDb.getImages(),
             "navigation_data", MissionResultDb.getNavigationData(),
-            "mission_state", MissionResultDb.getMissionState()
-
-
-
+            "mission_state", MissionResultDb.getMissionState().toString()
     );
 
-    public MissionResults() {
+    public MissionResultsRepository() {
         super(ROW_MAPPER, ROW_UNMAPPER, "mission_results", "id");
     }
 }
