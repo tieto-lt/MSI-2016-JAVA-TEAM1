@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller($state, AuthService, Session) {
+function Controller($rootScope, $state, AuthService, Session) {
 
     var vm = this;
     vm.username = undefined;
@@ -27,6 +27,7 @@ function Controller($state, AuthService, Session) {
                 } else if  (ROLE_CUSTOMER == role) {
                     $state.go('root.customerFirst');
                 }
+                $rootScope.$emit('userLoggedIn', {});
             },
             function (err) {
                 vm.error = err.data.error_description;
@@ -38,7 +39,7 @@ function Controller($state, AuthService, Session) {
 
 }
 
-Controller.$inject = ['$state', 'AuthService', 'Session'];
+Controller.$inject = ['$rootScope', '$state', 'AuthService', 'Session'];
 require('login.scss');
 module.component('login', {
     controller: Controller,

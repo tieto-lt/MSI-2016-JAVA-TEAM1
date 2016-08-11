@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller($state, Session, AuthService) {
+function Controller($rootScope, $state, $interval, Session, AuthService, VerificationService) {
 
     var vm = this;
 
@@ -10,6 +10,17 @@ function Controller($state, Session, AuthService) {
     vm.isAdmin = isAdmin;
     vm.isLoggedIn = isLoggedIn;
 
+    vm.isOperatorVerified = false;
+
+
+    vm.$onInit = function() {
+       $interval(checkOperator, 5000);
+
+       $rootScope.$on('userLoggedIn', function() {
+            checkOperator();;
+       });
+    };
+
     function isLogoutVisible() {
         return Session.isSessionActive();
     }
@@ -17,31 +28,40 @@ function Controller($state, Session, AuthService) {
     function isCustomer() {
         var role = Session.getRole();
         role = role && role[0];
-        if ("ROLE_CUSTOMER" == role) {
-        return true;
-        }
+        return "ROLE_CUSTOMER" == role;
     }
 
     function isAdmin() {
           var role = Session.getRole();
           role = role && role[0];
-          if ("ROLE_ADMIN" == role)
-          return true;
+          return "ROLE_ADMIN" == role;
      }
     function isOperator() {
           var role = Session.getRole();
           role = role && role[0];
-          if ("ROLE_OPERATOR" == role)
-          return true;
+          return "ROLE_OPERATOR" == role
      }
 
     function isLoggedIn() {
          return Session.isSessionActive();
     }
 
+    function checkOperator() {
+        if (isLoggedIn() && isOperator()) {
+            VerificationService.getStatus().then(
+                function(response){
+                    vm.isOperatorVerified = response.data == "VERIFIED";
+                },
+                function(err){
+                     console.log('Error',err);
+                }
+            )
+        }
+    }
+
 }
 
-Controller.$inject = ['$state', 'Session', 'AuthService'];
+Controller.$inject = ['$rootScope', '$state', '$interval', 'Session', 'AuthService', 'VerificationService'];
 
 
 var templateUrl = require('./main.html');
