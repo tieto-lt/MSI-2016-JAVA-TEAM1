@@ -18,6 +18,15 @@ function Controller( $scope, MissionService) {
             function (response) {
                 vm.missions = response.data;
                 console.log(vm.missions);
+                vm.missions.forEach(function (mission) {
+                    mission.startNavigationData.x = mission.startNavigationData.x || 0;
+                    mission.startNavigationData.y = mission.startNavigationData.y || 0;
+                    mission.startNavigationData.z = mission.startNavigationData.z || 0;
+
+                    mission.finishNavigationData.x = mission.startNavigationData.x || 0;
+                    mission.finishNavigationData.y = mission.startNavigationData.y || 0;
+                    mission.finishNavigationData.z = mission.startNavigationData.z || 0;
+                });
                 $scope.status = false;
             },
             function (err) {

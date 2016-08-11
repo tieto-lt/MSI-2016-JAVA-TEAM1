@@ -96,7 +96,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
               }
      })
     .state('root.orderComponent', {
-             url:"/order",
+             url:"/customer/order",
              template:"<order-component></order-component>",
              data: {
                roles: ["ROLE_CUSTOMER"]

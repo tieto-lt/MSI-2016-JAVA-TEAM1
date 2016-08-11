@@ -20,7 +20,7 @@ public class User {
 
     @NotNull
     @Pattern(regexp="[A-Za-z]{1,25}$")
-    private String name;
+    private String fullName;
 
     @Pattern(regexp="^.+@.+\\..+$")
     private String email;
@@ -60,11 +60,11 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -90,7 +90,7 @@ public class User {
                 .append("username", username)
                 .append("password", password)
                 .append("enabled", enabled)
-                .append("name", name)
+                .append("name", fullName)
                 .append("email", email)
                 .append("phone", phone)
                 .toString();
