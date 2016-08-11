@@ -5,16 +5,18 @@ import lt.tieto.msi2016.mission.model.MissionResultUI;
 import lt.tieto.msi2016.mission.model.operator.MissionImage;
 import lt.tieto.msi2016.mission.model.operator.MissionNavigationData;
 import lt.tieto.msi2016.mission.model.operator.MissionResult;
-import lt.tieto.msi2016.mission.repository.MissionResults;
+import lt.tieto.msi2016.mission.repository.MissionResultsRepository;
 import lt.tieto.msi2016.mission.repository.model.MissionResultsDb;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,7 +25,7 @@ public class MissionResultsService {
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
-    private MissionResults repository;
+    private MissionResultsRepository repository;
 
     @Transactional(readOnly = true)
     public MissionResultUI get(Long id) throws IOException {
@@ -62,10 +64,10 @@ public class MissionResultsService {
 
     private MissionResultsDb mapToMissionResultsDb(MissionResult api) throws IOException {
         MissionResultsDb db = new MissionResultsDb();
-        db.setMissionId(Long.valueOf(api.getMissionId()));
+        db.setMissionId(null); // only for test missions
         //db.setOrderId();
         //db.setExecutedBy();
-        //db.setExecutionDate();
+        db.setExecutionDate(new Date());
         db.setBatteryStatus(api.getNavigationData().get(api.getNavigationData().size() - 1).battery);
         db.setVideoBase64(api.getVideoBase64());
         db.setImages(objectMapper.writeValueAsString(api.getImages()));
