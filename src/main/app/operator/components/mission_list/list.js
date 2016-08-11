@@ -13,11 +13,12 @@ function Controller( $scope, MissionService) {
         };
 
     function _loadList() {
-        MissionService.getAllMissions().then(
+        MissionService.getAllMissionsResults().then(
             function (response) {
-                console.log(response.data);
+                vm.missions = response.data;
+                console.log(vm.missions);
 //                vm.missions = response.data;
-                vm.missions = [
+                /*vm.missions = [
                     {id: 1, title: "Test mission ", date: new Date()},
                     {id: 2, title: "Another test mission", date: new Date()},
                     {id: 1, title: "Test mission ", date: new Date()},
@@ -32,7 +33,7 @@ function Controller( $scope, MissionService) {
                     {id : 5, start: "Start", finish :"Finish", image: "Image", batteryStatus: 0},
                     {id : 10, start: "Start", image: "Image", batteryStatus: 20},
                 ];
-
+*/
                 $scope.status = false;
             },
             function (err) {
@@ -40,6 +41,9 @@ function Controller( $scope, MissionService) {
             });
      }
 
+     function getToken(){
+
+     }
      $scope.status = {
        isCustomHeaderOpen: false,
        isFirstOpen: true,

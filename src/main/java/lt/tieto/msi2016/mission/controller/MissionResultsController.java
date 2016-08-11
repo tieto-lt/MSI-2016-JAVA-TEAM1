@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class MissionResultsController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/missionsUI")
     public List<MissionResultUI> all() throws IOException {
+
         return service.all();
     }
-
 }
