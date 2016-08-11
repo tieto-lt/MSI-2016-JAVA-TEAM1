@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.operator.controller;
 
+import lt.tieto.msi2016.operator.OperatorStatus;
 import lt.tieto.msi2016.operator.model.TokenModel;
 import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.operator.model.OperatorModel;
@@ -28,7 +29,7 @@ public class OperatorController {
 
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.GET, path = "/api/operator")
-    public OperatorModel getOperatorStatus() {
+    public OperatorStatus.Status getOperatorStatus() {
         return service.getOperatorStatus();
     }
 }

@@ -4,6 +4,8 @@ import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
+import java.math.BigDecimal;
+
 /**
  * Created by it11 on 16.8.9.
  */
@@ -16,7 +18,7 @@ public class MissionResultsDb extends DbModel {
     private Long orderId;
     private Long executedBy;
     private DateTime executionDate;
-    private Long batteryStatus;
+    private BigDecimal batteryStatus;
     private String videoBase64;
     private String images;
     private String navigationData;
@@ -59,12 +61,12 @@ public class MissionResultsDb extends DbModel {
         this.executionDate = executionDate;
     }
 
-    public void setBatteryStatus(Long batteryStatus) {
-        this.batteryStatus = batteryStatus;
+    public BigDecimal getBatteryStatus() {
+        return batteryStatus;
     }
 
-    public Long getBatteryStatus() {
-        return batteryStatus;
+    public void setBatteryStatus(BigDecimal batteryStatus) {
+        this.batteryStatus = batteryStatus;
     }
 
     public String getVideoBase64() {

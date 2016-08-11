@@ -10,6 +10,7 @@ public class MissionNavigationData {
     public BigDecimal z;
     public BigDecimal altitude;
     public BigDecimal altitudeMeters;
+    public BigDecimal battery;
 
     public BigDecimal getX() {
         return x;
@@ -49,5 +50,13 @@ public class MissionNavigationData {
 
     public void setAltitudeMeters(BigDecimal altitudeMeters) {
         this.altitudeMeters = altitudeMeters;
+    }
+
+    public BigDecimal getBattery() {
+        return battery;
+    }
+
+    public void setBattery(BigDecimal battery) {
+        this.battery = battery;
     }
 }

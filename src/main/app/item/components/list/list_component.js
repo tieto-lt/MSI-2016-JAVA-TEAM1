@@ -22,7 +22,6 @@ function Controller(ItemService) {
     }
 }
 
-//Angular Component Configuration
 Controller.$inject = ['ItemService'];
 
 module.component('itemList', {

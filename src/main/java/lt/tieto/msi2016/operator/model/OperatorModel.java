@@ -1,44 +1,53 @@
 package lt.tieto.msi2016.operator.model;
 
+import lt.tieto.msi2016.operator.OperatorStatus;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class OperatorModel {
 
-    private Long operatorID;
+    private Long id;
     private String token;
-    private Status status;
+    private Long userId;
+    private OperatorStatus.Status status;
 
-    public enum Status{VERIFIED, NOTVERIFIED, TOKENISSUE}
-
-    public void setStatus(Status status) {
-        this.status = status;
+    public Long getId() {
+        return id;
     }
 
-    public Status getOperatorStatus() {
-        return status;
-    }
-
-    public void setOperatorID(Long operatorID) {
-        this.operatorID = operatorID;
-    }
-
-    public Long getOperatorID() {
-        return operatorID;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getToken() {
         return token;
     }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public OperatorStatus.Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(OperatorStatus.Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("operatorID", operatorID)
+                .append("id", id)
                 .append("token", token)
+                .append("userId", userId)
                 .append("status", status)
                 .toString();
     }
