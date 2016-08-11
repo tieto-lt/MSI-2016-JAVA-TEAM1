@@ -18,8 +18,8 @@
 
                     <div class="form-group"ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
                         <label>Full name</label>
-                        <input placeholder="Full name" type="text" name="name" class="form-control" ng-model="$ctrl.user.name"ng-pattern="/^([a-zA-Z ]){1,25}$/" required ng-minlength="1" >
-                        <p ng-show="userForm.name.$error.required && !userForm.name.$pristine" class="help-block">You name must consist at least from 1 character.</p>
+                        <input placeholder="Full name" type="text" name="fullName" class="form-control" ng-model="$ctrl.user.fullName"ng-pattern="/^([a-zA-Z ]){1,25}$/" required ng-minlength="1" >
+                        <p ng-show="userForm.fullName.$error.required && !userForm.fullName.$pristine" class="help-block">You name must consist at least from 1 character.</p>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
                         <label>Email</label>

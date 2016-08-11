@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller($state, $scope, UserService) {
+function Controller($state, $scope, UserService, Session, AuthService) {
     var vm = this;
 
     vm.user = {};
@@ -9,6 +9,10 @@ function Controller($state, $scope, UserService) {
     vm.create = create;
     vm.errors = [];
     vm.doPasswordNotMatch = doPasswordNotMatch;
+
+    vm.$onInit = function() {
+        AuthService.redirectToHomePage();
+    }
 
     function create() {
         vm.errors = [];
@@ -31,7 +35,7 @@ function Controller($state, $scope, UserService) {
     }
 }
 
-Controller.$inject = ['$state', '$scope', 'UserService'];
+Controller.$inject = ['$state', '$scope', 'UserService', 'Session', 'AuthService'];
 
 require('./user.scss');
 module.component('newUser', {

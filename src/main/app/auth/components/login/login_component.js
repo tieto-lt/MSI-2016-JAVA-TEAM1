@@ -14,6 +14,11 @@ function Controller($state, AuthService, Session) {
     var ROLE_ADMIN = "ROLE_ADMIN";
     var ROLE_OPERATOR ="ROLE_OPERATOR";
     var ROLE_CUSTOMER = "ROLE_CUSTOMER";
+
+    vm.$onInit = function() {
+        AuthService.redirectToHomePage();
+    }
+
     function login() {
         AuthService.login(vm.username, vm.password).then(
             function (response) {
@@ -35,7 +40,6 @@ function Controller($state, AuthService, Session) {
     function goToRegistration(){
         $state.go('root.registration');
     }
-
 }
 
 Controller.$inject = ['$state', 'AuthService', 'Session'];
