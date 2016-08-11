@@ -1,9 +1,10 @@
 module = require('main_module');
 
-function Service ($http, $httpParamSerializer, $cookies) {
+function Service ($http, $httpParamSerializer, $cookies, $state, Session) {
 
     this.login = login;
     this.logout = logout;
+    this.redirectToHomePage = redirectToHomePage;
 
     function login(username, password) {
         var data = { grant_type:"password", username: username, password: password, client_id: "web-ui" };
@@ -31,7 +32,26 @@ function Service ($http, $httpParamSerializer, $cookies) {
                 $http.defaults.headers.common.Authorization = undefined;
             });
     }
+
+    function redirectToHomePage() {
+        var ROLE_ADMIN = "ROLE_ADMIN";
+        var ROLE_OPERATOR ="ROLE_OPERATOR";
+        var ROLE_CUSTOMER = "ROLE_CUSTOMER"
+
+        if (Session.isSessionActive()) {
+            var role = Session.getRole();
+            console.log("You are already logged in as "+role);
+            role = role && role[0];
+            if (ROLE_ADMIN == role) {
+                $state.go('root.admin');
+            } else if  (ROLE_OPERATOR == role) {
+                $state.go('root.operator');
+            } else if  (ROLE_CUSTOMER == role) {
+                $state.go('root.customerFirst');
+            }
+        }
+    }
 }
 
-Service.$inject = ['$http', '$httpParamSerializer', '$cookies'];
+Service.$inject = ['$http', '$httpParamSerializer', '$cookies', '$state', 'Session'];
 module.service('AuthService', Service);

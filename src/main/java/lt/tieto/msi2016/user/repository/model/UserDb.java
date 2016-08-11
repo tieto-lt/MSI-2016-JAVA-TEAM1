@@ -9,7 +9,7 @@ public class UserDb extends DbModel {
     private String username;
     private String password;
     private Boolean enabled;
-    private String name;
+    private String fullName;
     private String email;
     private String phone;
 
@@ -49,11 +49,11 @@ public class UserDb extends DbModel {
     }
 
     public String getName() {
-        return name;
+        return fullName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.fullName = name;
     }
 
     public String getEmail() {
@@ -79,7 +79,7 @@ public class UserDb extends DbModel {
                 .append("username", username)
                 .append("password", password)
                 .append("enabled", enabled)
-                .append("name", name)
+                .append("name", fullName)
                 .append("email", email)
                 .append("phone", phone)
                 .toString();

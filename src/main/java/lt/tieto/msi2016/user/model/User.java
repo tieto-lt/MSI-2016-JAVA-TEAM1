@@ -19,7 +19,7 @@ public class User {
     private String password;
 
     @NotNull
-    @Pattern(regexp="[A-Za-z]{1,25}$")
+    @Pattern(regexp="[A-Za-z ]{1,25}$")
     private String name;
 
     @Pattern(regexp="^.+@.+\\..+$")

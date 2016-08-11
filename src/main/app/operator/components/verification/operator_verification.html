@@ -6,24 +6,13 @@
         <div class="panel panel-primary">
             <div class="panel-body">
                     <div class="form-group">
-                        <h5>Please do not share the token</h5>
+                        <h4><center>Please do not share the token</center></h4>
+                        <button id="signupSubmit" type="submit" ng-click="$ctrl.generateToken(); $ctrl.getStatus();" class="btn btn-info btn-block">Generate new token</button>
+                        <hr>
+                        <h5>Your token: {{$ctrl.token}}</h5>
+                        <hr>
+                        <h4><center>{{$ctrl.message}}</center></h4>
                     </div>
-                    <div class="form-group">
-                        <div class="form-group" ng-model="$ctrl.token">
-                            <button id="signupSubmit" type="submit" ng-click="$ctrl.generateToken(); $ctrl.getStatus();" class="btn btn-info btn-block">Generate new token</button>
-                    <div>
-                            <h5>Operator status: </h5>
-                            <h6>{{$ctrl.status}}</h6>
-                            <p>                 </p>
-                    </div>
-                            <h5>Your token: </h5>
-                            <h6>{{$ctrl.token}}</h6>
-                            <h4>{{$ctrl.message}}</h4>
-                        </div>
-
-                    </div>
-                    <hr>
-                </form>
             </div>
         </div>
     </div>
