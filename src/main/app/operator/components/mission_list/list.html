@@ -34,7 +34,13 @@
             <p>y: {{mission.finishNavigationData.y}}</p>
             <p>z: {{mission.finishNavigationData.z}}</p>
 
-            <p>Battery status: {{mission.batteryStatus}}</p>
+            <p>Battery status: </p>
+            <div class="progress" style="width: 640px">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{mission.batteryStatus}}%;">
+                    {{mission.batteryStatus}}%
+                </div>
+            </div>
+
 
 
             <div id="slides_control">
