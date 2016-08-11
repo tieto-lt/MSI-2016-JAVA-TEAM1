@@ -11,8 +11,8 @@ function Service ($http) {
         return $http.get('/api/user/current');
     };
 
-    this.createOrder = function () {
-        return $http.post('/api/order',{});
+    this.createOrder = function(order) {
+        return $http.post('/api/order', order);
     }
 
 }

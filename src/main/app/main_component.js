@@ -36,7 +36,6 @@ function Controller($state, Session, AuthService) {
      }
 
     function isLoggedIn() {
-         console.log(Session.isSessionActive());
          return Session.isSessionActive();
     }
 

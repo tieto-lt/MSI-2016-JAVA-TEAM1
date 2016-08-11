@@ -2,6 +2,7 @@ package lt.tieto.msi2016.mission.repository.model;
 
 import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.joda.time.DateTime;
 
 /**
  * Created by it11 on 16.8.9.
@@ -14,7 +15,7 @@ public class MissionResultsDb extends DbModel {
     private Long missionId;
     private Long orderId;
     private Long executedBy;
-    private String executionDate;
+    private DateTime executionDate;
     private Long batteryStatus;
     private String videoBase64;
     private String images;
@@ -50,11 +51,11 @@ public class MissionResultsDb extends DbModel {
         this.orderId = orderId;
     }
 
-    public String getExecutionDate() {
+    public DateTime getExecutionDate() {
         return executionDate;
     }
 
-    public void setExecutionDate(String executionDate) {
+    public void setExecutionDate(DateTime executionDate) {
         this.executionDate = executionDate;
     }
 

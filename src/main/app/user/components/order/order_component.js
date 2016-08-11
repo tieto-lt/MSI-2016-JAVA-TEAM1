@@ -26,11 +26,13 @@ function Controller(UserService) {
     function _setOrder() {
         vm.order.email = vm.user.email;
         vm.order.phone = vm.user.phone;
+        vm.order.fullName = vm.user.name;
     }
 
     function createOrder(){
-        UserService.createOrder().then(
+        UserService.createOrder(vm.order).then(
             function(response) {
+             console.log(vm.order);
              vm.message = true;
             },
             function (err) {
