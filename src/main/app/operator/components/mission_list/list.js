@@ -65,4 +65,3 @@ module.component('missionList', {
     controller: Controller,
     templateUrl: require('./list.html')
 });
-
