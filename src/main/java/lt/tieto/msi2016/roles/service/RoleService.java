@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.roles.service;
 
+import lt.tieto.msi2016.operator.services.OperatorService;
 import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.roles.model.Role;
 import lt.tieto.msi2016.roles.repository.RoleRepository;
@@ -18,6 +19,8 @@ public class RoleService {
 
     @Autowired
     private RoleRepository repository;
+    @Autowired
+    private OperatorService operatorService;
 
     @Transactional(readOnly = true)
     public Role get(Long id) {
@@ -37,6 +40,11 @@ public class RoleService {
     @Transactional
     public Role createOrUpdateRole(Long id, Role role) {
         if (repository.exists(id)) {
+            if (Roles.OPERATOR.equals(role.getAuthority())){
+                operatorService.createOperatorVerificationStatus(role.getUserId());
+            } else {
+                operatorService.deleteOperatorVerificationStatus(role.getUserId());
+            }
             return updateRole(id, role);
         } else {
             RoleDb created = repository.create(mapToRoleDb(id, role));
