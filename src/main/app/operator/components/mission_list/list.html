@@ -22,9 +22,8 @@
         </div>
         <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
             <div uib-accordion-group class="panel-default" is-open="status.open">
-                <uib-accordion-heading >{{$index+1}} . {{mission.missionName}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                <uib-accordion-heading >{{mission.missionName}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </uib-accordion-heading>
-                <p>ID : {{mission.id}}</p>
 
                 <p>Drone's coordinates at the beginning:</p>
                 <p>x: {{mission.startNavigationData.x}}</p>
@@ -44,7 +43,7 @@
                 </div>
                 <div id="slides_control">
                     <div>
-                        <uib-carousel interval="$ctrl.myInterval" active="$ctrl.activeSlide">
+                        <uib-carousel active="$ctrl.activeSlide">
                             <uib-slide ng-repeat="image in mission.images" index="$index">
                                 <img ng-src="data:image/png;base64,{{image.imageBase64}}">
                                 <div class="carousel-caption">
