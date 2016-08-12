@@ -17,10 +17,12 @@
             <div class="panel-body" style="text-align: right" ng-transclude></div>
         </div>
     </script>
+    <div class="alert alert-info" ng-show="$ctrl.message"  align="center">
+        <strong>You have not run any missions yet!</strong>
+    </div>
     <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
         <div uib-accordion-group class="panel-default" is-open="status.open">
-            <uib-accordion-heading >
-                {{mission.id}} . <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            <uib-accordion-heading >{{$index+1}} . {{mission.missionName}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </uib-accordion-heading>
             <p>ID : {{mission.id}}</p>
 
@@ -40,9 +42,6 @@
                     {{mission.batteryStatus}}%
                 </div>
             </div>
-
-
-
             <div id="slides_control">
                 <div>
                     <uib-carousel interval="$ctrl.myInterval" active="$ctrl.activeSlide">

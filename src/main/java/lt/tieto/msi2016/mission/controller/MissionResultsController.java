@@ -25,6 +25,15 @@ public class MissionResultsController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/missionsUI")
     public List<MissionResultUI> all() throws IOException {
-        return service.all();
+       /* MissionResultUI a = new MissionResultUI();
+        MissionResultUI ab = new MissionResultUI();
+        a.setMissionName("name");
+        ab.setMissionName("Mission name");
+        List<MissionResultUI> list = new ArrayList<>();
+        list.add(a);
+        list.add(a);
+        list.add(a);
+        list.add(ab);*/
+       return service.all();
     }
 }
