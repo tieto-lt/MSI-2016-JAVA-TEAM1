@@ -2,67 +2,65 @@
 <html>
 <body>-->
 <div>
-<div>
-    <script type="text/ng-template" id="group-template.html">
-        <div class="panel-heading">
-            <h4 class="panel-title" style="color:#fa39c3">
-                <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+    <div>
+        <script type="text/ng-template" id="group-template.html">
+            <div class="panel-heading">
+                <h4 class="panel-title" style="color:#fa39c3">
+                    <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
           <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
             {{heading}}
           </span>
-                </a>
-            </h4>
+                    </a>
+                </h4>
+            </div>
+            <div class="panel-collapse collapse" uib-collapse="!isOpen">
+                <div class="panel-body" style="text-align: right" ng-transclude></div>
+            </div>
+        </script>
+        <div class="alert alert-info" ng-show="$ctrl.message"  align="center">
+            <strong>You have not run any missions yet!</strong>
         </div>
-        <div class="panel-collapse collapse" uib-collapse="!isOpen">
-            <div class="panel-body" style="text-align: right" ng-transclude></div>
-        </div>
-    </script>
-    <div class="alert alert-info" ng-show="$ctrl.message"  align="center">
-        <strong>You have not run any missions yet!</strong>
+        <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
+            <div uib-accordion-group class="panel-default" is-open="status.open">
+                <uib-accordion-heading >{{$index+1}} . {{mission.missionName}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                </uib-accordion-heading>
+                <p>ID : {{mission.id}}</p>
+
+                <p>Drone's coordinates at the beginning:</p>
+                <p>x: {{mission.startNavigationData.x}}</p>
+                <p>y: {{mission.startNavigationData.y}}</p>
+                <p>z: {{mission.startNavigationData.z}}</p>
+
+                <p>Drone's coordinates at the end:</p>
+                <p>x: {{mission.finishNavigationData.x}}</p>
+                <p>y: {{mission.finishNavigationData.y}}</p>
+                <p>z: {{mission.finishNavigationData.z}}</p>
+
+                <p>Battery status: </p>
+                <div class="progress" style="width: 640px">
+                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{mission.batteryStatus}}%;">
+                        {{mission.batteryStatus}}%
+                    </div>
+                </div>
+                <div id="slides_control">
+                    <div>
+                        <uib-carousel interval="$ctrl.myInterval" active="$ctrl.activeSlide">
+                            <uib-slide ng-repeat="image in mission.images" index="$index">
+                                <img ng-src="data:image/png;base64,{{image.imageBase64}}">
+                                <div class="carousel-caption">
+                                </div>
+                            </uib-slide>
+                        </uib-carousel>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </uib-accordion>
+
     </div>
-    <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
-        <div uib-accordion-group class="panel-default" is-open="status.open">
-            <uib-accordion-heading >{{$index+1}} . {{mission.missionName}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-            </uib-accordion-heading>
-            <p>ID : {{mission.id}}</p>
-
-            <p>Drone's coordinates at the beginning:</p>
-            <p>x: {{mission.startNavigationData.x}}</p>
-            <p>y: {{mission.startNavigationData.y}}</p>
-            <p>z: {{mission.startNavigationData.z}}</p>
-
-            <p>Drone's coordinates at the end:</p>
-            <p>x: {{mission.finishNavigationData.x}}</p>
-            <p>y: {{mission.finishNavigationData.y}}</p>
-            <p>z: {{mission.finishNavigationData.z}}</p>
-
-            <p>Battery status: </p>
-            <div class="progress" style="width: 640px">
-                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{mission.batteryStatus}}%;">
-                    {{mission.batteryStatus}}%
-                </div>
-            </div>
-            <div id="slides_control">
-                <div>
-                    <uib-carousel interval="$ctrl.myInterval" active="$ctrl.activeSlide">
-                        <uib-slide ng-repeat="image in mission.images" index="$index">
-                            <img ng-src="data:image/png;base64,{{image.imageBase64}}">
-                            <div class="carousel-caption">
-                            </div>
-                        </uib-slide>
-                    </uib-carousel>
-                </div>
-            </div>
-
-
-
-        </div>
-
-    </uib-accordion>
-
-</div>
 </div>
 <!--</body>
 </html>-->
-
-

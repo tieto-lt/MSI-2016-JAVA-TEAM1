@@ -2,6 +2,8 @@ package lt.tieto.msi2016.mission.controller;
 
 
 import lt.tieto.msi2016.mission.model.MissionResultUI;
+import lt.tieto.msi2016.mission.model.operator.MissionImage;
+import lt.tieto.msi2016.mission.model.operator.MissionNavigationData;
 import lt.tieto.msi2016.mission.model.operator.MissionResult;
 import lt.tieto.msi2016.mission.service.MissionResultsService;
 import lt.tieto.msi2016.utils.controller.BaseController;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,15 +28,6 @@ public class MissionResultsController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/missionsUI")
     public List<MissionResultUI> all() throws IOException {
-       /* MissionResultUI a = new MissionResultUI();
-        MissionResultUI ab = new MissionResultUI();
-        a.setMissionName("name");
-        ab.setMissionName("Mission name");
-        List<MissionResultUI> list = new ArrayList<>();
-        list.add(a);
-        list.add(a);
-        list.add(a);
-        list.add(ab);*/
-       return service.all();
+      return service.all();
     }
 }
