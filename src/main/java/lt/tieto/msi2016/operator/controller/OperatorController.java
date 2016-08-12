@@ -23,7 +23,7 @@ public class OperatorController {
     @RequestMapping(method = RequestMethod.POST, path = "/api/token")
     public TokenModel generateToken() {
         TokenModel token = new TokenModel();
-        token.setToken(service.generateToken());
+        token.setToken(service.updateOperatorVerificationToken());
         return token;
     }
 

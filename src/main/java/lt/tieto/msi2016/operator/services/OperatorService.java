@@ -51,31 +51,30 @@ public class OperatorService {
         return !images.isEmpty();
     }
 
+    public OperatorModel createOperatorVerificationStatus(Long userId){
+        OperatorModel operator = new OperatorModel();
+        operator.setStatus(OperatorStatus.Status.NOTVERIFIED);
+        operator.setUserId(userId);
+        operator.setToken(generateToken());
+        repository.create(mapToOperatorDb(operator));
+        return operator;
+    }
 
+    public OperatorDb deleteOperatorVerificationStatus(Long userId){
+        OperatorDb operatorDb = repository.operatorByUserID(userId);
+        repository.delete(operatorDb.getId());
+        return operatorDb;
+    }
 
+    public String updateOperatorVerificationToken(){
+        OperatorDb operatorDb = repository.operatorByUserID(securityService.getCurrentUser().getId());
+        operatorDb.setToken(generateToken());
+        repository.update(operatorDb);
+        return operatorDb.getToken();
+    }
 
     public String generateToken(){
-        String token = UUID.randomUUID().toString().replaceAll("-", "");
-
-        Long id = securityService.getCurrentUser().getId();
-        OperatorModel operator = new OperatorModel();
-        operator.setUserId(id);
-        operator.setToken(token);
-        operator.setStatus(OperatorStatus.Status.NOTVERIFIED);
-
-       OperatorDb operatorDb = repository.operatorByUserID(id);
-        if (operatorDb == null){
-            repository.create(mapToOperatorDb(operator));
-        } else if (operatorDb.getStatus()== OperatorStatus.Status.NOTVERIFIED){
-            operator.setId(operatorDb.getId());
-            repository.update(mapToOperatorDb(operator));
-        } else if (operatorDb.getStatus()== OperatorStatus.Status.VERIFIED){
-            operator.setId(operatorDb.getId());
-            operator.setStatus(OperatorStatus.Status.VERIFIED);
-            repository.update(mapToOperatorDb(operator));
-        }
-
-        return token;
+        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
     public OperatorStatus.Status getOperatorStatus(){
