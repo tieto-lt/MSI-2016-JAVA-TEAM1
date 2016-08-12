@@ -13,12 +13,12 @@
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.missionName.$invalid && !orderForm.missionName.$pristine }">
                             <label>Mission name</label>
-                            <input placeholder="Mission name" type="text" name="missionName" class="form-control" ng-model="$ctrl.order.missionName"ng-pattern="/^([a-zA-Z0-9 ]){5,30}$/" required>
+                            <input placeholder="Mission name" type="text" name="missionName" class="form-control" ng-model="$ctrl.order.missionName"  ng-minlength="5" ng-maxlength="30"required>
                             <p ng-show="orderForm.missionName.$invalid && !orderForm.missionName.$pristine" class="help-block">Mission name must consist from 5 to 30 characters.</p>
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.fullName.$invalid && !orderForm.fullName.$pristine}">
                             <label>Full name</label>
-                            <input placeholder="Full name" type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName"ng-pattern="/^([a-zA-Z ]){1,255}$/" required>
+                            <input placeholder="Full name" type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName" ng-minlength="1" required>
                             <p ng-show="orderForm.fullName.$invalid && !orderForm.fullName.$pristine" class="help-block">Name is not valid. Your name must consist at least from 1 character.</p>
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.email.$invalid && !orderForm.email.$pristine }">
