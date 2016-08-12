@@ -14,14 +14,30 @@
                 <li><a ng-show="$ctrl.isCustomer()" ui-sref="root.orderComponent">Orders</a></li>
                 <li><a ng-show="$ctrl.isOperator()" ui-sref="root.token">Verification</a></li>
                 <li><a ng-show="$ctrl.isOperator()" ui-sref="root.missions">Missions</a></li>
-                <li><a ng-click="$ctrl.logout()" href="#" ng-show="$ctrl.isLogoutVisible()">Logout</a></li><li ng-show="$ctrl.isOperator() && $ctrl.isOperatorVerified" class="pull-right msi-status msi-verified">
-                <span class="glyphicon glyphicon-ok"></span>
-                <span>Verified</span>
-                <li ng-show="$ctrl.isOperator() && !$ctrl.isOperatorVerified" class="pull-right msi-status msi-unverified">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span>Unverified</span>
-                </li>
+
+                <ul class="nav nav-pills navbar-right">
+                    <p class="navbar-text" ng-show="$ctrl.isLoggedIn()">
+                         <span class="glyphicon glyphicon-user"></span>Welcome, <span ng-bind="$ctrl.whatUsername"></span>!
+                    </p>
+                    <li><a ng-show="!$ctrl.isLoggedIn()" ui-sref="root.registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a ng-show="!$ctrl.isLoggedIn()" ui-sref="root.login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+
+                    <li ng-show="$ctrl.isOperator() && $ctrl.isOperatorVerified" class="msi-status msi-verified">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span>Verified</span>
+                    <li ng-show="$ctrl.isOperator() && !$ctrl.isOperatorVerified" class="msi-status msi-unverified">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <span>Unverified</span>
+                    </li>
+                    <li><a ng-click="$ctrl.logout()" href="#" ng-show="$ctrl.isLogoutVisible()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+                </ul>
+
+
             </ul>
+
+
         </div>
     </nav>
 </div>
