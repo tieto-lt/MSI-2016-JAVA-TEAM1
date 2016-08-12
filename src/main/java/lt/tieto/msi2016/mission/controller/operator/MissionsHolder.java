@@ -15,7 +15,7 @@ public class MissionsHolder {
 
     static {
         mockMissions.add(mission("0-simple", command("takeoff"), command("hover", 2000),  command("land")));
-        mockMissions.add(mission("1-verification-mission", command("takeoff"), command("hover", 2000), command("takePicture"), command("forward", 3),  command("hover", 1000), command("takePicture"),  command("hover", 1000),  command("land")));
+        mockMissions.add(mission("1-verification-mission", command("takeoff"), command("hover", 2000), command("takePicture"), command("cw", 180),  command("hover", 1000), command("takePicture"),  command("hover", 1000),  command("land")));
         mockMissions.add(mission("2-pictures-mission", command("takeoff"), command("hover", 2000), command("takePicture"), command("cw", 90), command("hover", 2000), command("takePicture"), command("cw", 90), command("hover", 2000), command("takePicture"), command("cw", 90), command("hover", 2000), command("takePicture"), command("cw", 90), command("hover", 2000), command("land")));
         /*mockMissions.add(mission("2-picture", command("wait", 1000), command("takePicture"), command("wait", 1000)));
         mockMissions.add(mission("2-picture", command("wait", 1000), command("takePicture"), command("wait", 1000)));
