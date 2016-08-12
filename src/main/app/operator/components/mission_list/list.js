@@ -47,7 +47,7 @@ function Controller($scope, MissionService) {
 }
 
 Controller.$inject = ['$scope','MissionService'];
-require('./list.css');
+require('./list.scss');
 module.component('missionList', {
     controller: Controller,
     templateUrl: require('./list.html')
