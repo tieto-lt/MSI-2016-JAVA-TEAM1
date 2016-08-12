@@ -1,5 +1,3 @@
-
-
 <div>
 
     <nav class="navbar navbar-default">
@@ -16,23 +14,19 @@
                 <li><a ng-show="$ctrl.isCustomer() && $ctrl.isLoggedIn()" ui-sref="root.orderComponent">Orders</a></li>
                 <li><a ng-show="$ctrl.isOperator() && $ctrl.isLoggedIn()" ui-sref="root.token">Verification</a></li>
                 <li><a ng-show="$ctrl.isOperator() && $ctrl.isLoggedIn()" ui-sref="root.missions">Missions</a></li>
-                <li></li>
-                <li><a><logout></logout></a></li>
+                <li><a ng-click="$ctrl.logout()" href="#" ng-show="$ctrl.isLogoutVisible()">Logout</a></li>
                 <li ng-show="$ctrl.isOperator() && $ctrl.isOperatorVerified && $ctrl.isLoggedIn()" class="pull-right msi-status msi-verified">
-                    <span class="glyphicon glyphicon-ok">  </span>
+                    <span class="glyphicon glyphicon-ok"></span>
                     <span>Verified</span>
-                </li>
                 <li ng-show="$ctrl.isOperator() && !$ctrl.isOperatorVerified && $ctrl.isLoggedIn()" class="pull-right msi-status msi-unverified">
                     <span class="glyphicon glyphicon-remove"></span>
-                    <span>Not verified</span>
+                    <span>Unverified</span>
                 </li>
             </ul>
         </div>
     </nav>
 </div>
 <div class="container">
-        <div class="msi-content" ui-view ng-cloak></div>
+    <div class="msi-content" ui-view ng-cloak></div>
 
 </div>
-
-
