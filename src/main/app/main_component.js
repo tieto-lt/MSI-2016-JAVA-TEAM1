@@ -9,6 +9,8 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
     vm.isOperator = isOperator;
     vm.isAdmin = isAdmin;
     vm.isLoggedIn = isLoggedIn;
+    vm.isLogoutVisible = isLogoutVisible;
+    vm.logout = logout;
 
     vm.isOperatorVerified = false;
 
@@ -46,6 +48,15 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
          return Session.isSessionActive();
     }
 
+    function isLogoutVisible() {
+            return Session.isSessionActive();
+        }
+
+    function logout() {
+            Session.invalidate();
+            AuthService.logout();
+            $state.go('root.login');
+    }
     function checkOperator() {
         if (isLoggedIn() && isOperator()) {
             VerificationService.getStatus().then(
