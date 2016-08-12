@@ -10,9 +10,9 @@ function Controller($scope, MissionService) {
     $scope.oneAtATime = true;
 
 
-      vm.myInterval = 3000;
-      vm.noWrapSlides = false;
-      vm.activeSlide = 0;
+    vm.myInterval = 3000;
+    vm.noWrapSlides = false;
+    vm.activeSlide = 0;
 
     vm.$onInit = function() {
             _loadList();

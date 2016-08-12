@@ -1,9 +1,15 @@
-form { margin: 0px 10px; }
+form { margin: 0px 10px;
 
+}
 
 .msi-order-form {
     max-width: 360px;
     margin: auto;
+
+    .alert{
+        width:340px;
+
+    }
 }
 
 h2 {
