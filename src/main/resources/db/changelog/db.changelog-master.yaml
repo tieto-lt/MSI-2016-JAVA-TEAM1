@@ -345,7 +345,24 @@ databaseChangeLog:
               tableName: operator_verification
 
   - changeSet:
-      id: 13
+        id: 13
+        author: Darius
+        changes:
+          - insert:
+              columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: token
+                  value: 'af01102310d44b18903734ab103b1aaf'
+              - column:
+                  name: status
+                  value: 'NOTVERIFIED'
+              tableName: operator_verification
+
+  - changeSet:
+      id: 14
       author: Elvinas
       changes:
         - createTable:
@@ -384,7 +401,7 @@ databaseChangeLog:
                   type: varchar(45)
 
   - changeSet:
-      id: 14
+      id: 15
       author: Mark
       changes:
         - createTable:
