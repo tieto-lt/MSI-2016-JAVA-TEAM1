@@ -1,12 +1,16 @@
 package lt.tieto.msi2016.order.service;
 
+import lt.tieto.msi2016.item.model.Item;
+import lt.tieto.msi2016.item.repository.model.ItemDb;
 import lt.tieto.msi2016.order.model.Order;
 import lt.tieto.msi2016.order.repository.OrderRepository;
 import lt.tieto.msi2016.order.repository.model.OrderDb;
+import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import lt.tieto.msi2016.utils.service.SecurityService;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderService {
@@ -23,6 +27,18 @@ public class OrderService {
 
         return mapToOrders(repository.create(mapToOrdersDb(order, userId)));
 
+    }
+
+    @Transactional
+    public Order updateOrderStatus(Long id, OrderDb.OrderState orderState) {
+        OrderDb orderDb = repository.findOne(id);
+        if (orderDb != null) {
+            orderDb.setOrderState(orderState);
+            OrderDb updated = repository.update(orderDb);
+            return mapToOrders(updated);
+        } else {
+            throw new DataNotFoundException("There is no order with id = " + id);
+        }
     }
 
 
