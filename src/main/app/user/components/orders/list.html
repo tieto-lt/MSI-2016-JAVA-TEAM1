@@ -1,6 +1,4 @@
-<!--<!dYoctype html>
-<html>
-<body>-->
+
 <div>
     <div>
         <script type="text/ng-template" id="group-template.html">
@@ -20,27 +18,51 @@
         <div class="alert alert-info" ng-show="$ctrl.message"  align="center">
             <strong>You have not run any missions yet!</strong>
         </div>
-        <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
+
+        <div uib-accordion-group class="panel-default"  >
+            <uib-accordion-heading>
+
+                <div  class="list_header">
+                    <ul>
+                        <li>ID</li>
+                        <li>Name</li>
+                        <li>Date</li>
+                        <li>Status</li>
+
+                    </ul>
+                </div>
+
+            </uib-accordion-heading>
+        </div>
+        <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions | orderBy:'missionApplicationDate'">
+
+
             <div uib-accordion-group class="panel-default" is-open="status.open">
-                <uib-accordion-heading >{{mission.missionName}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+
+
+
+                <uib-accordion-heading >
+
+                    <div  class="list_header">
+                        <ul>
+                            <li>{{mission.id}}</li>
+                            <li>{{mission.missionName}}</li>
+                            <li>{{mission.missionApplicationDate}}</li>
+                            <li>{{mission.missionStatus}}</li>
+
+                        </ul>
+
+
+                    </div>
+
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+
+
+
+
                 </uib-accordion-heading>
 
-                <p>Drone's coordinates at the beginning:</p>
-                <p>x: {{mission.startNavigationData.x}}</p>
-                <p>y: {{mission.startNavigationData.y}}</p>
-                <p>z: {{mission.startNavigationData.z}}</p>
 
-                <p>Drone's coordinates at the end:</p>
-                <p>x: {{mission.finishNavigationData.x}}</p>
-                <p>y: {{mission.finishNavigationData.y}}</p>
-                <p>z: {{mission.finishNavigationData.z}}</p>
-
-                <p>Battery status: </p>
-                <div class="progress" style="width: 640px">
-                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{mission.batteryStatus}}%;">
-                        {{mission.batteryStatus}}%
-                    </div>
-                </div>
                 <div id="slides_control">
                     <div>
                         <uib-carousel active="$ctrl.activeSlide">
@@ -61,5 +83,3 @@
 
     </div>
 </div>
-<!--</body>
-</html>-->

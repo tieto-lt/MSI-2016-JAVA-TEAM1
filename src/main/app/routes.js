@@ -102,7 +102,17 @@ module.config(function($stateProvider, $urlRouterProvider) {
                roles: ["ROLE_CUSTOMER"]
              }
     })
+     .state('root.customerOrders', {
+                 url:"/customer/orders",
+                 template:"<customer-orders></customer-orders>",
+                 data: {
+                   roles: ["ROLE_CUSTOMER"]
+                 }
+        })
 });
+
+
+
 
 module.run(['$transitions', 'Session', '$state', function($transitions, Session, $state) {
 
