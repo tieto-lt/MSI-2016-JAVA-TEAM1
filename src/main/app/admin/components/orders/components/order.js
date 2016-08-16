@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller($state,$stateParams,OrderService) {
+function Controller($scope,$stateParams,OrderService) {
 
 
     var vm =this;
@@ -8,10 +8,21 @@ function Controller($state,$stateParams,OrderService) {
     vm.getAllOrders = getAllOrders;
     vm.acceptOrder = acceptOrder;
     vm.declineOrder = declineOrder;
-
+    vm.allStatus = ["All","Pending", "Accepted"];
      vm.$onInit = function(){
         getAllOrders();
     }
+
+      $scope.sortType     = undefined; // set the default sort type
+      $scope.sortReverse  = false;  // set the default sort order
+
+      // create the list of sushi rolls
+      $scope.sushi = [
+        { name: 'Cali Roll', fish: 'Crab', tastiness: 2 },
+        { name: 'Philly', fish: 'Tuna', tastiness: 4 },
+        { name: 'Tiger', fish: 'Eel', tastiness: 7 },
+        { name: 'Rainbow', fish: 'Variety', tastiness: 6 }
+      ];
 
     function getAllOrders(){
         OrderService.getAllOrders().then(
@@ -49,7 +60,7 @@ function Controller($state,$stateParams,OrderService) {
     }
 }
 
-Controller.$inject = ['$state','$stateParams','OrderService'];
+Controller.$inject = ['$scope','$stateParams','OrderService'];
 
 require('./order.css');
 module.component('adminOrders', {
