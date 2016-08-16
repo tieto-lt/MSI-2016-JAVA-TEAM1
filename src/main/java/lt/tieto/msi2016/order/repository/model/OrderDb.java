@@ -18,7 +18,7 @@ public class OrderDb extends DbModel {
     private OrderState orderState;
 
     public enum OrderState {
-        Accepted, Declined, Pending, InProgress, Completed, Error
+        Pending, Accepted, Declined, InProgress, Completed, Failed, Published
     }
 
 
