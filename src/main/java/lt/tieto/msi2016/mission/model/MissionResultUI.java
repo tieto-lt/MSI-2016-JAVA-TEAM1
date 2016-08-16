@@ -9,6 +9,8 @@ import java.util.List;
 public class MissionResultUI {
 
     private Long id;
+    private Long missionId;
+    private Long orderId;
     private MissionNavigationData startNavigationData;
     private MissionNavigationData finishNavigationData;
     private List<MissionImage> images;
@@ -21,6 +23,22 @@ public class MissionResultUI {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getMissionId() {
+        return missionId;
+    }
+
+    public void setMissionId(Long missionId) {
+        this.missionId = missionId;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public MissionNavigationData getStartNavigationData() {
