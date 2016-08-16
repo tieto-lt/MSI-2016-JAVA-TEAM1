@@ -1,22 +1,27 @@
 package lt.tieto.msi2016.order.model;
 
+import lt.tieto.msi2016.order.repository.model.OrderDb;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 public class Order {
 
+    private Long id;
     private String missionName;
     private String fullName;
     private String email;
     private String phone;
     private String details;
+    private OrderDb.OrderState orderState;
+    private DateTime submissionDate;
 
-
-    public String getFullName() {
-        return fullName;
+    public Long getId() {
+        return id;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getMissionName() {
@@ -25,6 +30,14 @@ public class Order {
 
     public void setMissionName(String missionName) {
         this.missionName = missionName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -51,14 +64,33 @@ public class Order {
         this.details = details;
     }
 
+    public OrderDb.OrderState getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(OrderDb.OrderState orderState) {
+        this.orderState = orderState;
+    }
+
+    public DateTime getSubmissionDate() {
+        return submissionDate;
+    }
+
+    public void setSubmissionDate(DateTime submissionDate) {
+        this.submissionDate = submissionDate;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .append("id", id)
                 .append("missionName", missionName)
                 .append("fullName", fullName)
                 .append("email", email)
                 .append("phone", phone)
                 .append("details", details)
+                .append("orderState", orderState.toString())
+                .append("submissionDate", DateTimeFormat.forPattern("yyyy-MM-dd").print(submissionDate))
                 .toString();
     }
 }
