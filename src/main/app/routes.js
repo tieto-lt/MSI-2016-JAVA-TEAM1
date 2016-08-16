@@ -85,7 +85,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
                 url:  "/operator/missions",
                 template:"<mission-list></mission-list",
                 data: {
-                    isPublic: true
+                    roles: ["ROLE_OPERATOR"]
                 }
          })
     .state('root.token', {
