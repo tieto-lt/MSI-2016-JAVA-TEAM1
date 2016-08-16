@@ -23,7 +23,7 @@ function Controller($scope, MissionService) {
         MissionService.getAllMissionsResults().then(
             function (response) {
                 vm.missions = response.data;
-                console.log(vm.missions);
+                console.log(vm.missions.length);
                 if(vm.missions.length == 0){
                 vm.message = true;
                 console.log(vm.message);
