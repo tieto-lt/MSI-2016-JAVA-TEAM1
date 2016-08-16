@@ -29,23 +29,6 @@ function Controller($scope, MissionService) {
                 console.log(vm.message);
                 }
 
-                vm.missions.forEach(function (mission) {
-
-                    mission.startNavigationData.x = mission.startNavigationData.x || 0;
-                    mission.startNavigationData.y = mission.startNavigationData.y || 0;
-                    mission.startNavigationData.z = mission.startNavigationData.z || 0;
-
-                    mission.finishNavigationData.x = mission.finishNavigationData.x || 0;
-                    mission.finishNavigationData.y = mission.finishNavigationData.y || 0;
-                    mission.finishNavigationData.z = mission.finishNavigationData.z || 0;
-
-                    mission.startNavigationData.x = Math.round( mission.startNavigationData.x*100)/100;
-                    mission.startNavigationData.y = Math.round( mission.startNavigationData.y*100)/100;
-                    mission.startNavigationData.z = Math.round( mission.startNavigationData.z*100)/100;
-                    mission.finishNavigationData.x = Math.round( mission.finishNavigationData.x*100)/100;
-                    mission.finishNavigationData.y = Math.round( mission.finishNavigationData.y*100)/100;
-                    mission.finishNavigationData.z = Math.round( mission.startNavigationData.z*100)/100;
-                });
                 $scope.status = false;
             },
             function (err) {
