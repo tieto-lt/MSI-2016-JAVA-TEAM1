@@ -18,6 +18,7 @@ public class OrderController extends BaseController {
     @Autowired
     private OrderService service;
 
+    @Secured(Roles.ADMIN)
     @RequestMapping(method = RequestMethod.GET, path = "/api/order")
     public List<Order> all() {
         return service.all();
@@ -40,5 +41,16 @@ public class OrderController extends BaseController {
         return service.updateOrderStatus(id, OrderDb.OrderState.Declined);
     }
 
+    @Secured(Roles.OPERATOR)
+    @RequestMapping(method = RequestMethod.PUT, path = "/api/order/publish/{id}")
+    public Order publishOrder(@PathVariable Long id) {
+        return service.updateOrderStatus(id, OrderDb.OrderState.Published);
+    }
+
+    @Secured(Roles.OPERATOR)
+    @RequestMapping(method = RequestMethod.PUT, path = "/api/order/redo/{id}")
+    public Order redoOrder(@PathVariable Long id) {
+        return service.updateOrderStatus(id, OrderDb.OrderState.Accepted);
+    }
 
 }

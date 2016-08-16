@@ -9,6 +9,11 @@ function Controller($scope, MissionService) {
     vm.message = false;
     $scope.oneAtATime = true;
 
+    vm.publish = publish;
+    vm.redo = redo;
+
+    vm.error = '';
+    vm.success = '';
 
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
@@ -57,6 +62,41 @@ function Controller($scope, MissionService) {
        isFirstOpen: true,
        isFirstDisabled: false
      };
+
+
+    function publish(index) {
+        MissionService.publish(vm.missions[index].orderId).then(
+            function () {
+                console.log('mission results successfully published');
+                vm.success = "mission results successfully published";
+           },
+           function (err) {
+               if (err.staus != 500) {
+                   vm.error = err.data.message;
+               }
+               else {
+                   vm.error = err.statusText;
+               }
+               _loadList();
+           });
+    }
+
+    function redo(index) {
+            MissionService.redo(vm.missions[index].orderId).then(
+                function () {
+                    console.log('mission status changed to accepted');
+                    vm.success = "mission status changed to accepted";
+               },
+               function (err) {
+                   if (err.staus != 500) {
+                       vm.error = err.data.message;
+                   }
+                   else {
+                       vm.error = err.statusText;
+                   }
+                   _loadList();
+               });
+        }
 }
 
 Controller.$inject = ['$scope','MissionService'];

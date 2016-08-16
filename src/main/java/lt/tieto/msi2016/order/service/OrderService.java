@@ -72,7 +72,7 @@ public class OrderService {
         db.setFullName(api.getFullName());
         db.setPhone(api.getPhone());
         db.setEmail(api.getEmail());
-        db.setSubmissionDate(api.getSubmissionDate());
+        db.setSubmissionDate(DateTime.now());
         db.setDetails(api.getDetails());
         db.setOrderState(OrderDb.OrderState.Pending);
         return db;
