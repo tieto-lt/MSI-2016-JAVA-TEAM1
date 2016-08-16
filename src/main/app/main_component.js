@@ -11,15 +11,17 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
     vm.isLoggedIn = isLoggedIn;
     vm.isLogoutVisible = isLogoutVisible;
     vm.logout = logout;
+    //vm.whatUsername = whatUsername;
 
     vm.isOperatorVerified = false;
 
 
     vm.$onInit = function() {
+       whatUsername();
        $interval(checkOperator, 5000);
-
        $rootScope.$on('userLoggedIn', function() {
-            checkOperator();;
+            whatUsername();
+            checkOperator();
        });
     };
 
@@ -43,6 +45,12 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
           role = role && role[0];
           return "ROLE_OPERATOR" == role
      }
+
+    function whatUsername() {
+          vm.whatUsername = Session.getUsername();
+           console.log(vm.whatUsername);
+           return vm.whatUsername;
+    }
 
     function isLoggedIn() {
          return Session.isSessionActive();

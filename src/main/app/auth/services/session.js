@@ -9,6 +9,7 @@ function Service ($cookies, jwtHelper, $http) {
     this.isSessionActive = isSessionActive;
     this.getRole = getRole;
     this.initHttp = initHttp;
+    this.getUsername = getUsername;
 
     function initHttp() {
       if (isSessionActive()) {
