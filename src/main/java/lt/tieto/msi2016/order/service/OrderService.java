@@ -38,6 +38,15 @@ public class OrderService {
         return repository.findAll().stream().map(OrderService::mapToOrders).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<Order> allUserOrders() {
+        Long userId = securityService.getCurrentUser().getId();
+
+        return repository.findAll().stream().map(OrderService::mapToOrders).collect(Collectors.toList());
+    }
+
+
+
     @Transactional
     public Order updateOrderStatus(Long id, OrderDb.OrderState orderState) {
         OrderDb orderDb = repository.findOne(id);

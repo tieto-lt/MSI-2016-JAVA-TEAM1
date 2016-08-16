@@ -1,9 +1,9 @@
 var module = require('main_module');
 
-function Controller($scope, MissionService) {
+function Controller($scope, OrdersService) {
 
     var vm = this;
-    vm.missions = {};
+    vm.orders = {};
     vm.information = {};
     vm.results = {};
     vm.message = false;
@@ -20,11 +20,11 @@ function Controller($scope, MissionService) {
         };
 
     function _loadList() {
-        MissionService.getAllMissionsResults().then(
+        OrdersService.getAllOrders().then(
             function (response) {
-                vm.missions = response.data;
-                console.log(vm.missions.length);
-                if(vm.missions.length == 0){
+                vm.orders = response.data;
+                console.log(vm.orders.length);
+                if(vm.orders.length == 0){
                 vm.message = true;
                 console.log(vm.message);
                 }
@@ -42,7 +42,7 @@ function Controller($scope, MissionService) {
      };
 }
 
-Controller.$inject = ['$scope','MissionService'];
+Controller.$inject = ['$scope','OrdersService'];
 require('./list.scss');
 module.component('customerOrders', {
     controller: Controller,
