@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 
 
 
-public class OrdersDb extends DbModel {
+public class OrderDb extends DbModel {
 
     private Long createdBy;
     private String missionName;

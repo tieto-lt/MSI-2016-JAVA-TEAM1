@@ -15,7 +15,7 @@ import java.util.List;
 
 @Secured(Roles.ADMIN)
 @RestController
-public class RolesController extends BaseController {
+public class RoleController extends BaseController {
 
     @Autowired
     RoleService service;

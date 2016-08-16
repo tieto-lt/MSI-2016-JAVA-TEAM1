@@ -1,15 +1,15 @@
 package lt.tieto.msi2016.operator.repository.model;
 
-import lt.tieto.msi2016.operator.OperatorStatus;
+import lt.tieto.msi2016.operator.OperatorVerificationStatus;
 import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class OperatorDb extends DbModel {
+public class OperatorVerificationDb extends DbModel {
 
     private Long id;
     private String token;
     private Long userId;
-    private OperatorStatus.Status status;
+    private OperatorVerificationStatus.Status status;
 
     @Override
     public boolean isNew() {
@@ -42,11 +42,11 @@ public class OperatorDb extends DbModel {
         this.userId = userId;
     }
 
-    public OperatorStatus.Status getStatus() {
+    public OperatorVerificationStatus.Status getStatus() {
         return status;
     }
 
-    public void setStatus(OperatorStatus.Status status) {
+    public void setStatus(OperatorVerificationStatus.Status status) {
         this.status = status;
     }
 

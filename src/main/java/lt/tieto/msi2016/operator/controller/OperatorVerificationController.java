@@ -1,35 +1,33 @@
 package lt.tieto.msi2016.operator.controller;
 
-import lt.tieto.msi2016.operator.OperatorStatus;
-import lt.tieto.msi2016.operator.model.TokenModel;
+import lt.tieto.msi2016.operator.OperatorVerificationStatus;
+import lt.tieto.msi2016.operator.model.OperatorVerificationToken;
 import lt.tieto.msi2016.roles.Roles;
-import lt.tieto.msi2016.operator.model.OperatorModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import lt.tieto.msi2016.operator.services.OperatorService;
+import lt.tieto.msi2016.operator.services.OperatorVerificationService;
 
 
 @RestController
-public class OperatorController {
+public class OperatorVerificationController {
 
     @Autowired
-    private OperatorService service;
+    private OperatorVerificationService service;
 
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.POST, path = "/api/token")
-    public TokenModel generateToken() {
-        TokenModel token = new TokenModel();
+    public OperatorVerificationToken generateToken() {
+        OperatorVerificationToken token = new OperatorVerificationToken();
         token.setToken(service.updateOperatorVerificationToken());
         return token;
     }
 
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.GET, path = "/api/operator")
-    public OperatorStatus.Status getOperatorStatus() {
+    public OperatorVerificationStatus.Status getOperatorStatus() {
         return service.getOperatorStatus();
     }
 }

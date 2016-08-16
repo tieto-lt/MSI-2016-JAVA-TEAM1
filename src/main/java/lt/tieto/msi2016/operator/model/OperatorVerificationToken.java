@@ -1,7 +1,7 @@
 package lt.tieto.msi2016.operator.model;
 
 
-public class TokenModel {
+public class OperatorVerificationToken {
 
     private String token;
 

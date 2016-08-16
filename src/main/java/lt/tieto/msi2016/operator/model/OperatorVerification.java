@@ -1,14 +1,14 @@
 package lt.tieto.msi2016.operator.model;
 
-import lt.tieto.msi2016.operator.OperatorStatus;
+import lt.tieto.msi2016.operator.OperatorVerificationStatus;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class OperatorModel {
+public class OperatorVerification {
 
     private Long id;
     private String token;
     private Long userId;
-    private OperatorStatus.Status status;
+    private OperatorVerificationStatus.Status status;
 
     public Long getId() {
         return id;
@@ -34,11 +34,11 @@ public class OperatorModel {
         this.userId = userId;
     }
 
-    public OperatorStatus.Status getStatus() {
+    public OperatorVerificationStatus.Status getStatus() {
         return status;
     }
 
-    public void setStatus(OperatorStatus.Status status) {
+    public void setStatus(OperatorVerificationStatus.Status status) {
         this.status = status;
     }
 

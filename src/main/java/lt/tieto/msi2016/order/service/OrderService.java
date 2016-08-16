@@ -1,24 +1,23 @@
 package lt.tieto.msi2016.order.service;
 
-import lt.tieto.msi2016.order.model.OrderModel;
-import lt.tieto.msi2016.order.repository.OrdersRepository;
-import lt.tieto.msi2016.order.repository.model.OrdersDb;
+import lt.tieto.msi2016.order.model.Order;
+import lt.tieto.msi2016.order.repository.OrderRepository;
+import lt.tieto.msi2016.order.repository.model.OrderDb;
 import lt.tieto.msi2016.utils.service.SecurityService;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
 
     @Autowired
-    private OrdersRepository repository;
+    private OrderRepository repository;
 
     @Autowired
     private SecurityService securityService;
 
-    public OrderModel createOrder(OrderModel order) {
+    public Order createOrder(Order order) {
 
         Long userId = securityService.getCurrentUser().getId();
 
@@ -27,8 +26,8 @@ public class OrderService {
     }
 
 
-    private static OrderModel mapToOrders(OrdersDb db) {
-        OrderModel api = new OrderModel();
+    private static Order mapToOrders(OrderDb db) {
+        Order api = new Order();
         api.setMissionName(db.getMissionName());
         api.setFullName(db.getFullName());
         api.setPhone(db.getPhone());
@@ -37,8 +36,8 @@ public class OrderService {
         return api;
     }
 
-    private static OrdersDb mapToOrdersDb(Long id, OrderModel api, Long userId) {
-        OrdersDb db = new OrdersDb();
+    private static OrderDb mapToOrdersDb(Long id, Order api, Long userId) {
+        OrderDb db = new OrderDb();
         db.setId(id);
         db.setCreatedBy(userId);
         db.setMissionName(api.getMissionName());
@@ -47,11 +46,11 @@ public class OrderService {
         db.setEmail(api.getEmail());
         db.setSubmissionDate(DateTime.now());
         db.setDetails(api.getDetails());
-        db.setOrderState(OrdersDb.OrderState.Pending);
+        db.setOrderState(OrderDb.OrderState.Pending);
         return db;
     }
 
-    private static OrdersDb mapToOrdersDb(OrderModel api, Long userId) {
+    private static OrderDb mapToOrdersDb(Order api, Long userId) {
         return mapToOrdersDb(null, api, userId);
     }
 }

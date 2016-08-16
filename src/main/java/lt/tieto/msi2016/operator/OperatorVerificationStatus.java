@@ -1,6 +1,6 @@
 package lt.tieto.msi2016.operator;
 
 
-public class OperatorStatus {
+public class OperatorVerificationStatus {
     public enum Status{VERIFIED, NOTVERIFIED}
 }

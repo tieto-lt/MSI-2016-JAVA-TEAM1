@@ -2,7 +2,7 @@ package lt.tieto.msi2016.order.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class OrderModel {
+public class Order {
 
     private String missionName;
     private String fullName;
