@@ -13,6 +13,7 @@
                 <li><a ng-show="$ctrl.isOperator()" ui-sref="root.operator">Operator</a></li>
                 <li><a ng-show="$ctrl.isCustomer()" ui-sref="root.orderComponent">Orders</a></li>
                 <li><a ng-show="$ctrl.isOperator()" ui-sref="root.token">Verification</a></li>
+                <li><a ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref="root.orders">Orders</a></li>
                 <li><a ng-show="$ctrl.isOperator()" ui-sref="root.missions">Missions</a></li>
 
                 <ul class="nav nav-pills navbar-right">

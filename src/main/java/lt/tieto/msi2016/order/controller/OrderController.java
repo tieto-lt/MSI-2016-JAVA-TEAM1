@@ -19,9 +19,7 @@ public class OrderController extends BaseController {
     private OrderService service;
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/order")
-    public List<Order> all() {
-        return service.all();
-    }
+    public List<Order> all() {return service.all();}
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/order")
     public Order createOrder(@RequestBody Order order) {

@@ -1,0 +1,27 @@
+<div >
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat = "order in $ctrl.orders | orderBy : '-status'">
+            <td>{{order.id}}</td>
+            <td>{{order.submissionDate | date :"yyyy.dd.mm"}}</td>
+            <td>{{order.fullName}}</td>
+            <td>{{order.email}}</td>
+            <td>{{order.phone}}</td>
+            <td>{{order.orderState}}</td>
+            <td><button type="button" class="btn btn-success" ng-click="$ctrl.acceptOrder()">accept</button></td>
+            <td><button type="button" class="btn btn-danger" ng-click="$ctrl.declineOrder()">decline</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
