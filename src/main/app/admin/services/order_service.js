@@ -8,11 +8,11 @@ function Service ($http) {
     }
 
     this.acceptOrder = function(id){
-        return $http.put('/api/order/accept/{id}', id);
+        return $http.put('/api/order/accept/' + id);
     }
 
     this.declineOrder= function(id){
-        return $http.put('/api/order/decline/{id}',id);
+        return $http.put('/api/order/decline/' + id);
     }
 }
 

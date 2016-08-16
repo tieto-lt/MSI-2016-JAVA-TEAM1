@@ -4,9 +4,7 @@ function Controller($state,$stateParams,OrderService) {
 
 
     var vm =this;
-    vm.orderId = $stateParams.id;
     vm.orders = [];
-    vm.date = [];
     vm.getAllOrders = getAllOrders;
     vm.acceptOrder = acceptOrder;
     vm.declineOrder = declineOrder;
@@ -27,11 +25,10 @@ function Controller($state,$stateParams,OrderService) {
         );
     }
 
-    function acceptOrder(){
-    //console.log(vm.orderId);
-        OrderService.acceptOrder(vm.orderId).then(
+    function acceptOrder(index){
+        OrderService.acceptOrder(vm.orders[index].id).then(
             function(response){
-                console.log("Order accepted");
+                getAllOrders();
             },
             function(err){
                 console.log('Error',err);
@@ -39,10 +36,11 @@ function Controller($state,$stateParams,OrderService) {
         );
     }
 
-    function declineOrder(){
-        OrderService.declineOrder(vm.orderId).then(
+    function declineOrder(index){
+        OrderService.declineOrder(vm.orders[index].id).then(
             function(response){
                 console.log("Order declined");
+                getAllOrders();
             },
             function(err){
                 console.log('Error',err);

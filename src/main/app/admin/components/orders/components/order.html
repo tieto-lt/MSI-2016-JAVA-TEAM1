@@ -18,8 +18,8 @@
             <td>{{order.email}}</td>
             <td>{{order.phone}}</td>
             <td>{{order.orderState}}</td>
-            <td><button type="button" class="btn btn-success" ng-click="$ctrl.acceptOrder()">accept</button></td>
-            <td><button type="button" class="btn btn-danger" ng-click="$ctrl.declineOrder()">decline</button></td>
+            <td><button type="button" class="btn btn-success" ng-click="$ctrl.acceptOrder($index)">accept</button></td>
+            <td><button type="button" class="btn btn-danger" ng-click="$ctrl.declineOrder($index)">decline</button></td>
         </tr>
         </tbody>
     </table>
