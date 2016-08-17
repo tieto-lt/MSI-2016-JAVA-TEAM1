@@ -21,7 +21,6 @@ function Controller(UserService) {
      };
 
      function updateUserInformation(){
-        console.log(vm.user);
         UserService.updateUserInformation(vm.user).then(
             function (){
                 console.log("Successful");
