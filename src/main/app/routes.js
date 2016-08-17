@@ -95,6 +95,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
                 roles: ["ROLE_OPERATOR"]
               }
      })
+     .state('root.orders', {
+                        url: "/admin/orders",
+                        template:"<admin-orders></admin-orders>",
+                        data: {
+                            isPublic: true
+                        }
+     })
     .state('root.orderComponent', {
              url:"/customer/order",
              template:"<order-component></order-component>",

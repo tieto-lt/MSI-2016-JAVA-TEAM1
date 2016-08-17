@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,8 @@ public class MissionResultsService {
         List<MissionNavigationData> navigationData = objectMapper.readValue(db.getNavigationData(), new TypeReference<List<MissionNavigationData>>() {});
         MissionResultUI api = new MissionResultUI();
         api.setId(db.getId());
+        //api.setMissionId(db.getMissionId());
+        api.setOrderId(db.getOrderId());
         api.setStartNavigationData(navigationData != null ? navigationData.get(0) : null);
         api.setFinishNavigationData(navigationData != null ? navigationData.get(navigationData.size() - 1) : null);
         api.setImages(objectMapper.readValue(db.getImages(), new TypeReference<List<MissionImage>>() {}));

@@ -1,0 +1,60 @@
+<div >
+    <table table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td>
+                <a href="#/admin/orders" ng-click="$ctrl.sortType = 'id'; sortReverse = !sortReverse">
+                    ID
+                    <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#/admin/orders" ng-click="sortType = 'submissionDate'; sortReverse = !sortReverse">
+                    Date
+                    <span ng-show="sortType == 'submissionDate' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'submissionDate' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#/admin/orders" ng-click="sortType = 'fullName'; sortReverse = !sortReverse">
+                    Name
+                    <span ng-show="sortType == 'fullName' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'ullName' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                Email
+            </td>
+            <td>
+                Phone
+            </td>
+            <td>
+                <a href="#/admin/orders" ng-click="sortType = 'orderStates'; sortReverse = !sortReverse">
+                    Status
+                    <span ng-show="sortType == 'orderState' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'orderState' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat = "order in $ctrl.orders | orderBy:sortType:sortReverse">
+            <select>
+                <option ng-repeat="status in $ctrl.allStatus">{{status}}</option>
+            </select>
+            <td>{{order.id}}</td>
+            <td>{{order.submissionDate | date :"yyyy.dd.mm"}}</td>
+            <td>{{order.fullName}}</td>
+            <td>{{order.email}}</td>
+            <td>{{order.phone}}</td>
+            <td>{{order.orderState}}</td>
+            <td><button type="button" class="btn btn-success" ng-click="$ctrl.acceptOrder($index)">accept</button></td>
+            <td><button type="button" class="btn btn-danger" ng-click="$ctrl.declineOrder($index)">decline</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
