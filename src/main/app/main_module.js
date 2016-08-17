@@ -7,6 +7,7 @@ require('angular-jwt');
 require('angular-ui-bootstrap');
 
 
+
 require("bootstrap/dist/css/bootstrap.css");
 
 var _module = angular.module('AngularSpringRestDemo', ['ui.router', 'ngMessages', 'ngCookies', 'angular-jwt', 'ui.bootstrap']);
