@@ -110,7 +110,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
              }
     })
      .state('root.customerOrders', {
-                 url:"/customer/order",
+                 url:"/customer/orders",
                  template:"<customer-orders></customer-orders>",
                  data: {
                    roles: ["ROLE_CUSTOMER"]

@@ -9,6 +9,8 @@ function Controller($scope, OrdersService) {
     vm.message = false;
     $scope.oneAtATime = true;
 
+    vm.drop = drop;
+
 
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
@@ -24,6 +26,7 @@ function Controller($scope, OrdersService) {
             function (response) {
                 vm.orders = response.data;
                 console.log(vm.orders.length);
+                console.log(vm.orders);
                 if(vm.orders.length == 0){
                 vm.message = true;
                 console.log(vm.message);
@@ -40,6 +43,20 @@ function Controller($scope, OrdersService) {
        isFirstOpen: true,
        isFirstDisabled: false
      };
+
+
+     function drop(index){
+       /* OrdersService*/
+
+
+
+     /*toggleOpen(index);*/
+     }
+         $scope.test = function(text) {
+           alert(text);
+         }
+
+
 }
 
 Controller.$inject = ['$scope','OrdersService'];

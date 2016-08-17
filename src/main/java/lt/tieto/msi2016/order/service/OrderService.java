@@ -35,14 +35,20 @@ public class OrderService {
 
     @Transactional(readOnly = true)
     public List<Order> all() {
-        return repository.findAll().stream().map(OrderService::mapToOrders).collect(Collectors.toList());
+        return repository.findAll().stream()
+                .map(OrderService::mapToOrders)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<Order> allUserOrders() {
+    public List<Order> allOrdersOfCustomer() {
         Long userId = securityService.getCurrentUser().getId();
+        List <OrderDb> ordersOfCustomerDb = repository.getOrderByUserId(userId);
+        List <Order> ordersOfCustomer = ordersOfCustomerDb.stream()
+                .map(OrderService::mapToOrders)
+                .collect(Collectors.toList());
 
-        return repository.findAll().stream().map(OrderService::mapToOrders).collect(Collectors.toList());
+        return  ordersOfCustomer;
     }
 
 

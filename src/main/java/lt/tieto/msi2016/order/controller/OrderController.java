@@ -51,4 +51,9 @@ public class OrderController extends BaseController {
         return service.updateOrderStatus(id, OrderDb.OrderState.Accepted);
     }
 
+
+    @Secured(Roles.CUSTOMER)
+    @RequestMapping(method = RequestMethod.GET, path = "/api/customer/orders")
+    public List<Order> allUserOrders() {return service.allOrdersOfCustomer();}
+
 }
