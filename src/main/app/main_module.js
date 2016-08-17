@@ -5,7 +5,7 @@ require('angular-messages');
 require('angular-cookies');
 require('angular-jwt');
 require('angular-ui-bootstrap');
-//require('bootstrap-ui-bootstrap');
+
 
 require("bootstrap/dist/css/bootstrap.css");
 
