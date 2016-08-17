@@ -16,12 +16,12 @@
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.fullName.$invalid && !orderForm.fullName.$pristine}">
                             <label>Full name</label>
-                            <input placeholder="Full name" type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName" ng-minlength="1" required>
-                            <p ng-show="orderForm.fullName.$invalid && !orderForm.fullName.$pristine" class="help-block">Name is not valid. Your name must consist at least from 1 character.</p>
+                            <input placeholder="Full name" type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName" ng-minlength="1" ng-maxlength = "60" required>
+                            <p ng-show="orderForm.fullName.$invalid && !orderForm.fullName.$pristine" class="help-block">Mission name must consist from 1 to 60 characters.</p>
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.email.$invalid && !orderForm.email.$pristine }">
                             <label>Email</label>
-                            <input placeholder="Email"type="email" name="email" class="form-control" ng-model="$ctrl.order.email" required>
+                            <input placeholder="Email"type="email" name="email" class="form-control" ng-model="$ctrl.order.email" ng-maxlength="60" required>
                             <p ng-show="orderForm.email.$invalid && !orderForm.email.$pristine" class="help-block">Enter a valid email.</p>
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.phone.$invalid && !orderForm.phone.$pattern}">
@@ -32,7 +32,7 @@
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
                             <label>Details</label>
                             <textarea placeholder="Details" type="text" name="details" class="form-control" ng-model="$ctrl.order.details"ng-maxlength="255"></textarea>
-                            <p ng-show="orderForm.details.$error.maxlength" class="help-block">Too many characters. Your details must consist at least from 1 character.</p>
+                            <p ng-show="orderForm.details.$error.maxlength" class="help-block">Your details must not exceed 255 characters.</p>
                         </div>
                         <div  class="form-group">
                             <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-info btn-block" ng-disabled="orderForm.$invalid">Place your order</button>

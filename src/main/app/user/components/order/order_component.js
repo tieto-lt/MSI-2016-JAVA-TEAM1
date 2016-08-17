@@ -34,9 +34,11 @@ function Controller(UserService) {
             function(response) {
              console.log(vm.order);
              vm.message = true;
+             vm.error = false;
             },
             function (err) {
              vm.error = true;
+             vm.message = false;
             }
         );
     }
