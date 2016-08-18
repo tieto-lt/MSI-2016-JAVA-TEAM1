@@ -390,7 +390,7 @@ databaseChangeLog:
                   name: details
                   type: clob
               - column:
-                  name: order_status
+                  name: status
                   type: varchar(45)
               - column:
                   name: commands

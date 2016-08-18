@@ -50,7 +50,7 @@ public class MissionController {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
             LOG.info("reserve missions");
             LOG.info(operatorToken);
-            orderService.updateOrderStatus(Long.valueOf(missionId.split("-")[0]), OrderDb.OrderStatus.InProgress);
+            orderService.updateStatus(Long.valueOf(missionId.split("-")[0]), OrderDb.Status.InProgress);
             return orderService.getMissionByMissionId(missionId);
         } else {
             throw new UnauthorizedUserException("Operator token is not valid");

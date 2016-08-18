@@ -17,7 +17,7 @@ import java.util.List;
 @Repository
 public class OrderRepository extends BaseRepository<OrderDb> {
 
-    public static final String SELECT_BY_STATUS = "SELECT * FROM orders where order_status = ?";
+    public static final String SELECT_BY_STATUS = "SELECT * FROM orders where status = ?";
     @Autowired
     private JdbcTemplate template;
 
@@ -28,7 +28,7 @@ public class OrderRepository extends BaseRepository<OrderDb> {
         order.setMissionId(rs.getString("mission_id"));
         order.setSubmissionDate(new DateTime(rs.getTimestamp("submission_date")));
         order.setDetails(rs.getString("details"));
-        order.setOrderStatus(OrderDb.OrderStatus.valueOf(rs.getString("order_status")));
+        order.setStatus(OrderDb.Status.valueOf(rs.getString("status")));
         order.setCommands(rs.getString("commands"));
         order.setFullName(rs.getString("full_name"));
         order.setEmail(rs.getString("email"));
@@ -42,7 +42,7 @@ public class OrderRepository extends BaseRepository<OrderDb> {
             "mission_id", orderDb.getMissionId(),
             "submission_date", new Timestamp(orderDb.getSubmissionDate().getMillis()),
             "details", orderDb.getDetails(),
-            "order_status", orderDb.getOrderStatus().toString(),
+            "status", orderDb.getStatus().toString(),
             "commands", orderDb.getCommands(),
             "full_name", orderDb.getFullName(),
             "email", orderDb.getEmail(),
@@ -53,7 +53,7 @@ public class OrderRepository extends BaseRepository<OrderDb> {
         super(ROW_MAPPER, ROW_UNMAPPER, "orders", "id");
     }
 
-    public List<OrderDb> getOrdersByStatus(OrderDb.OrderStatus status) {
+    public List<OrderDb> getOrdersByStatus(OrderDb.Status status) {
         return template.query(SELECT_BY_STATUS, new Object[]{status.toString()}, ROW_MAPPER);
     }
 }

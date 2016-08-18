@@ -15,15 +15,15 @@ public class OrderDb extends DbModel {
     private String missionId;
     private DateTime submissionDate;
     private String details;
-    private OrderStatus orderStatus;
+    private Status status;
     private String commands;
     private String fullName;
     private String email;
     private String phone;
 
 
-    public enum OrderStatus {
-        Pending, Accepted, Declined, InProgress, Completed, Failed, Published
+    public enum Status {
+        Pending, Accepted, Declined, InProgress, Executed, Failed, Completed
     }
 
     public Long getSubmittedBy() {
@@ -58,12 +58,12 @@ public class OrderDb extends DbModel {
         this.details = details;
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getCommands() {
@@ -106,7 +106,7 @@ public class OrderDb extends DbModel {
                 .append("missionId", missionId)
                 .append("submissionDate", DateTimeFormat.forPattern("yyyy-MM-dd").print(submissionDate))
                 .append("details", details)
-                .append("orderStatus", orderStatus.toString())
+                .append("status", status.toString())
                 .append("commands", commands)
                 .append("fullName", fullName)
                 .append("email", email)

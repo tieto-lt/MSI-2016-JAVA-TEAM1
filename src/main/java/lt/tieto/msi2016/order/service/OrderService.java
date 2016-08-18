@@ -50,10 +50,10 @@ public class OrderService {
     }
 
     @Transactional
-    public Order updateOrderStatus(Long id, OrderDb.OrderStatus orderStatus) {
+    public Order updateStatus(Long id, OrderDb.Status status) {
         OrderDb orderDb = repository.findOne(id);
         if (orderDb != null) {
-            orderDb.setOrderStatus(orderStatus);
+            orderDb.setStatus(status);
             OrderDb updated = repository.update(orderDb);
             return mapToOrders(updated);
         } else {
@@ -71,7 +71,7 @@ public class OrderService {
     }
 
     private List<OrderDb> getAllAcceptedOrders() {
-        return repository.getOrdersByStatus(OrderDb.OrderStatus.Accepted);
+        return repository.getOrdersByStatus(OrderDb.Status.Accepted);
     }
 
 
@@ -83,7 +83,7 @@ public class OrderService {
         api.setPhone(db.getPhone());
         api.setEmail(db.getEmail());
         api.setDetails(db.getDetails());
-        api.setOrderStatus(db.getOrderStatus());
+        api.setStatus(db.getStatus());
         api.setSubmissionDate(db.getSubmissionDate());
         return api;
     }
@@ -95,7 +95,7 @@ public class OrderService {
         db.setMissionId(api.getMissionName()); // on order creation append order id to this ({order_id}-{mission_name})
         db.setSubmissionDate(DateTime.now());
         db.setDetails(api.getDetails());
-        db.setOrderStatus(OrderDb.OrderStatus.Pending);
+        db.setStatus(OrderDb.Status.Pending);
         //db.setCommands();
         db.setFullName(api.getFullName());
         db.setEmail(api.getEmail());
