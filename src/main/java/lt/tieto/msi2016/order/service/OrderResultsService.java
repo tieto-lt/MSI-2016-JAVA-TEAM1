@@ -1,11 +1,12 @@
 package lt.tieto.msi2016.order.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lt.tieto.msi2016.order.model.OrderResults;
 import lt.tieto.msi2016.mission.model.MissionImage;
 import lt.tieto.msi2016.mission.model.MissionNavigationData;
 import lt.tieto.msi2016.mission.model.MissionResult;
+import lt.tieto.msi2016.order.model.OrderResults;
 import lt.tieto.msi2016.order.repository.OrderResultsRepository;
 import lt.tieto.msi2016.order.repository.model.OrderResultsDb;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +46,17 @@ public class OrderResultsService {
         return resultList;
     }
 
+    @Transactional(readOnly = true)
+    public List<OrderResults> getUserMissionResults(Long id) throws IOException {
+        List<OrderResults> resultList = new ArrayList();
+        for (OrderResultsDb orderResultsDb : repository.getUserMissionResults(id)) {
+            resultList.add(mapToOrderResults(orderResultsDb));
+        }
+        return resultList;
+    }
+
+
+
     @Transactional
     public OrderResults saveMissionResult(MissionResult missionResult, Long executedBy) throws IOException {
 
@@ -67,7 +78,7 @@ public class OrderResultsService {
         return api;
     }
 
-    private OrderResultsDb mapToOrderResultsDb(MissionResult api, Long executedBy) throws IOException {
+    private OrderResultsDb mapToOrderResultsDb(MissionResult api, Long executedBy) throws JsonProcessingException {
         OrderResultsDb db = new OrderResultsDb();
         db.setExecutedBy(executedBy);
         db.setOrderId(Long.valueOf(api.getMissionId().split("-")[0]));
