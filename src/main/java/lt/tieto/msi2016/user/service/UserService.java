@@ -1,9 +1,5 @@
 package lt.tieto.msi2016.user.service;
 
-import lt.tieto.msi2016.item.model.Item;
-import lt.tieto.msi2016.item.repository.ItemRepository;
-import lt.tieto.msi2016.item.repository.model.ItemDb;
-import lt.tieto.msi2016.item.service.ItemService;
 import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.roles.model.Role;
 import lt.tieto.msi2016.roles.service.RoleService;

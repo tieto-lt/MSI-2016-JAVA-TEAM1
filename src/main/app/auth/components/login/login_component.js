@@ -30,7 +30,7 @@ function Controller($rootScope, $state, AuthService, Session) {
                 } else if  (ROLE_OPERATOR == role) {
                     $state.go('root.operator');
                 } else if  (ROLE_CUSTOMER == role) {
-                    $state.go('root.customerFirst');
+                    $state.go('root.customerOrders');
                 }
                 $rootScope.$emit('userLoggedIn', {});
             },

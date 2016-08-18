@@ -2,13 +2,13 @@ package lt.tieto.msi2016.operator.controller;
 
 import lt.tieto.msi2016.operator.OperatorVerificationStatus;
 import lt.tieto.msi2016.operator.model.OperatorVerificationToken;
+import lt.tieto.msi2016.operator.services.OperatorVerificationService;
 import lt.tieto.msi2016.roles.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import lt.tieto.msi2016.operator.services.OperatorVerificationService;
 
 
 @RestController

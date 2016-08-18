@@ -17,9 +17,13 @@ import java.util.List;
 @Repository
 public class OrderRepository extends BaseRepository<OrderDb> {
 
-    public static final String SELECT_BY_STATUS = "SELECT * FROM orders where status = ?";
+
     @Autowired
     private JdbcTemplate template;
+    public static final String SELECT_ORDER_USER_ID = "SELECT * FROM orders where submitted_by = ?";
+    public static final String SELECT_BY_STATUS = "SELECT * FROM orders where status = ?";
+
+
 
     private static final RowMapper<OrderDb> ROW_MAPPER = (rs, rowNum) -> {
         OrderDb order = new OrderDb();
@@ -51,6 +55,12 @@ public class OrderRepository extends BaseRepository<OrderDb> {
 
     public OrderRepository() {
         super(ROW_MAPPER, ROW_UNMAPPER, "orders", "id");
+    }
+
+    public List <OrderDb> getOrderByUserId (Long user_id){
+        List <OrderDb>  ordersOfCustomer =template.query(SELECT_ORDER_USER_ID, new Object[] {user_id}, ROW_MAPPER);
+        return ordersOfCustomer;
+
     }
 
     public List<OrderDb> getOrdersByStatus(OrderDb.Status status) {

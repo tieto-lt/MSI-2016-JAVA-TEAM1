@@ -6,9 +6,11 @@ import lt.tieto.msi2016.user.service.UserService;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import lt.tieto.msi2016.utils.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.solr.SolrProperties;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 

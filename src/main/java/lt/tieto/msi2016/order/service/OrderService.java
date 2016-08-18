@@ -52,6 +52,21 @@ public class OrderService {
         return resultList;
     }
 
+    @Transactional(readOnly = true)
+    public List<Order> allOrdersOfCustomer() {
+        Long userId = securityService.getCurrentUser().getId();
+        List <OrderDb> ordersOfCustomerDb = repository.getOrderByUserId(userId);
+        List <Order> ordersOfCustomer = ordersOfCustomerDb.stream()
+                .map(this::mapToOrders)
+                .collect(Collectors.toList());
+        return  ordersOfCustomer;
+    }
+
+
+
+
+
+
     @Transactional
     public Order updateStatus(Long id, OrderDb.Status status) throws IOException {
         OrderDb orderDb = repository.findOne(id);
@@ -117,6 +132,9 @@ public class OrderService {
             throw new DataNotFoundException("Order with id " + orderId + " not found");
         }
     }
+
+
+
 
     private Mission mapToMission(OrderDb db) throws IOException {
         Mission mission = new Mission();

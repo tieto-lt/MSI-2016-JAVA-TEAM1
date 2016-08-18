@@ -1,10 +1,10 @@
 
 <div>
     <div>
-        <script type="text/ng-template" id="group-template.html">
+        <!--<script type="text/ng-template" id="group-template.html">
             <div class="panel-heading">
                 <h4 class="panel-title" style="color:#fa39c3">
-                    <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+                    <a href tabindex="0" class="accordion-toggle" ng-click="$ctrl.drop($index)" uib-accordion-transclude="heading">
           <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
             {{heading}}
           </span>
@@ -14,30 +14,31 @@
             <div class="panel-collapse collapse" uib-collapse="!isOpen">
                 <div class="panel-body" style="text-align: right" ng-transclude></div>
             </div>
-        </script>
+        </script>-->
         <div class="alert alert-info" ng-show="$ctrl.message"  align="center">
-            <strong>You have not run any missions yet!</strong>
+            <strong>You have not submitted any orders yet!</strong>
         </div>
 
-        <div uib-accordion-group class="panel-default"  >
-            <uib-accordion-heading>
+        <uib-accordion close-others="oneAtATime" >
 
-                <div  class="list_header">
-                    <ul>
-                        <li>ID</li>
-                        <li>Name</li>
-                        <li>Date</li>
-                        <li>Status</li>
+            <div uib-accordion-group class="panel-default"  >
+                <uib-accordion-heading>
 
-                    </ul>
-                </div>
+                    <div  class="list_header">
+                        <ul >
+                            <li>ID</li>
+                            <li>Name</li>
+                            <li>Submission Date</li>
+                            <li>Status</li>
 
-            </uib-accordion-heading>
-        </div>
-        <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions | orderBy:'missionApplicationDate'">
+                        </ul>
+                    </div>
+
+                </uib-accordion-heading>
+            </div>
 
 
-            <div uib-accordion-group class="panel-default" is-open="status.open">
+            <div uib-accordion-group class="panel-default"   ng-click="ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders "  is-disabled="order.status != 'Completed' ">
 
 
 
@@ -45,22 +46,27 @@
 
                     <div  class="list_header">
                         <ul>
-                            <li>{{mission.id}}</li>
-                            <li>{{mission.missionName}}</li>
-                            <li>{{mission.missionApplicationDate}}</li>
-                            <li>{{mission.missionStatus}}</li>
+                            <li>{{order.id}}</li>
+                            <li>{{order.missionName}}</li>
+                            <li>{{order.submissionDate | date:'yyyy.MM.dd'}}</li>
+                            <li>{{order.status}}</li>
 
                         </ul>
-
-
                     </div>
-
-                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-
-
-
-
+                    <i class="pull-right glyphicon"     ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </uib-accordion-heading>
+
+                <div ng-class="status.open" >
+
+                        function
+                </div>
+
+
+
+
+
+
+
 
 
                 <div id="slides_control">
@@ -81,5 +87,9 @@
 
         </uib-accordion>
 
+        <button type="button" class="btn btn-default btn-sm" ng-click="test()">Toggle last panel</button>
+
     </div>
+
+
 </div>
