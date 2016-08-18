@@ -1,4 +1,6 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var webpack = require("webpack");
+
 module.exports = {
      entry: './src/main/app/app.js',
      output: {
@@ -19,6 +21,10 @@ module.exports = {
      plugins: [
          new ExtractTextPlugin("styles.bundle.css", {
             allChunks: true
+         }),
+         new webpack.ProvidePlugin({
+             $: "jquery",
+             jQuery: "jquery"
          })
      ],
      resolve: {
