@@ -6,6 +6,7 @@ import lt.tieto.msi2016.user.service.UserService;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import lt.tieto.msi2016.utils.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.solr.SolrProperties;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,7 @@ public class UserController  extends BaseController {
     private SecurityService securityService;
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/user")
-    public User createUser(@RequestBody @Valid User user)
-    {
+    public User createUser(@RequestBody @Valid User user) {
         service.createUser(user);
         return user;
     }
@@ -31,5 +31,11 @@ public class UserController  extends BaseController {
     @RequestMapping(method = RequestMethod.GET, path = "/api/user/current")
     public User getUserData() {
         return securityService.getCurrentUser();
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/api/user/information")
+    public User updateInformation(@RequestBody @Valid User user) {
+       // service.updateUserInformation(user);
+        return service.updateUserInformation(user);
     }
 }

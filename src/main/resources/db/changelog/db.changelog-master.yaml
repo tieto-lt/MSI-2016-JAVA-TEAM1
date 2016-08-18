@@ -376,20 +376,13 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: mission_name
-                  type: nvarchar(60)
-              - column:
-                  name: created_by
+                  name: submitted_by
                   type: integer
               - column:
-                  name: full_name
-                  type: nvarchar(60)
-              - column:
-                  name: phone
-                  type: nvarchar(60)
-              - column:
-                  name: email
-                  type: nvarchar(60)
+                  name: mission_id
+                  type: nvarchar(70)
+                  constraints:
+                    nullable: false
               - column:
                   name: submission_date
                   type: timestamp
@@ -397,15 +390,45 @@ databaseChangeLog:
                   name: details
                   type: clob
               - column:
-                  name: order_state
+                  name: status
                   type: varchar(45)
+              - column:
+                  name: commands
+                  type: clob
+              - column:
+                  name: full_name
+                  type: nvarchar(60)
+              - column:
+                  name: email
+                  type: nvarchar(60)
+              - column:
+                  name: phone
+                  type: nvarchar(60)
+        - addForeignKeyConstraint:
+            baseColumnNames: submitted_by
+            baseTableName: orders
+            constraintName: fk_submitted_by
+            referencedColumnNames: id
+            referencedTableName: users
+        - createIndex:
+            columns:
+              - column:
+                  name: id
+            indexName: idx_orders_pk_id
+            tableName: orders
+        - addAutoIncrement:
+              columnDataType: int
+              columnName: id
+              incrementBy: 1
+              startWith: 1
+              tableName: orders
 
   - changeSet:
       id: 15
       author: Mark
       changes:
         - createTable:
-            tableName: mission_results
+            tableName: order_results
             columns:
               - column:
                   name: id
@@ -415,14 +438,16 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: mission_id
+                  name: executed_by
                   type: integer
               - column:
                   name: order_id
                   type: integer
               - column:
-                  name: executed_by
-                  type: integer
+                  name: mission_name
+                  type: nvarchar(60)
+                  constraints:
+                    nullable: false
               - column:
                   name: execution_date
                   type: timestamp
@@ -430,45 +455,36 @@ databaseChangeLog:
                   name: battery_status
                   type: numeric
               - column:
-                  name: video_base64
+                  name: images
                   type: clob
               - column:
-                  name: images
+                  name: video_base64
                   type: clob
               - column:
                   name: navigation_data
                   type: clob
-              - column:
-                  name: mission_state
-                  type: varchar(45)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: mission_name
-                  type: nvarchar(60)
-
         - addForeignKeyConstraint:
             baseColumnNames: order_id
-            baseTableName: mission_results
+            baseTableName: order_results
             constraintName: fk_order_id
             referencedColumnNames: id
             referencedTableName: orders
         - addForeignKeyConstraint:
             baseColumnNames: executed_by
-            baseTableName: mission_results
-            constraintName: fk_executed_by_mission
+            baseTableName: order_results
+            constraintName: fk_executed_by
             referencedColumnNames: id
             referencedTableName: users
         - createIndex:
             columns:
               - column:
                   name: id
-            indexName: idx_status_username
-            tableName: mission_results
+            indexName: idx_pk_order_results
+            tableName: order_results
         - addAutoIncrement:
               columnDataType: int
               columnName: id
               incrementBy: 1
               startWith: 1
-              tableName: mission_results
+              tableName: order_results
 

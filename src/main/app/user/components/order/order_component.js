@@ -6,7 +6,7 @@ function Controller(UserService) {
   vm.order = {};
   vm.user = {};
   vm.createOrder = createOrder;
-
+  vm.checkIfEqual = checkIfEqual;
 
   vm.$onInit = function() {
           _loadOrderDetails();
@@ -17,6 +17,7 @@ function Controller(UserService) {
             function (response) {
                 vm.user = response.data;
                 _setOrder();
+                vm.previousOrder = {};
             },
             function (err) {
                 console.log('Error', err);
@@ -30,15 +31,29 @@ function Controller(UserService) {
     }
 
     function createOrder(){
-        UserService.createOrder(vm.order).then(
-            function(response) {
-             console.log(vm.order);
-             vm.message = true;
-            },
-            function (err) {
-             vm.error = true;
-            }
-        );
+          if(!checkIfEqual()){
+             UserService.createOrder(vm.order).then(
+                function(response) {
+                   vm.message = !vm.error;
+                   vm.previousOrder.fullName = vm.order.fullName;
+                   vm.previousOrder.phone = vm.order.phone;
+                   vm.previousOrder.email = vm.order.email;
+                   vm.previousOrder.details = vm.order.details;
+                   vm.previousOrder.missionName = vm.order.missionName;
+
+                 },
+                 function (err) {
+                   vm.error = !vm.message;
+                 });
+         }
+    }
+
+    function checkIfEqual(){
+        return ((vm.previousOrder.fullName == vm.order.fullName) &&
+                (vm.previousOrder.phone == vm.order.phone) &&
+                (vm.previousOrder.email == vm.order.email) &&
+                (vm.previousOrder.details == vm.order.details) &&
+                (vm.previousOrder.missionName == vm.order.missionName));
     }
 
 }

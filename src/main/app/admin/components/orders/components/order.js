@@ -5,30 +5,36 @@ function Controller($scope,$stateParams,OrderService) {
 
     var vm =this;
     vm.orders = [];
+    vm.sortBy = sortBy;
     vm.getAllOrders = getAllOrders;
     vm.acceptOrder = acceptOrder;
     vm.declineOrder = declineOrder;
-    vm.allStatus = ["All","Pending", "Accepted"];
+    vm.sortType = 'submissionDate';
+    vm.selected = undefined;
+
+    vm.sortReverse = true;
      vm.$onInit = function(){
         getAllOrders();
     }
 
-      $scope.sortType     = undefined; // set the default sort type
-      $scope.sortReverse  = false;  // set the default sort order
+      function sortBy(type){
 
-      // create the list of sushi rolls
-      $scope.sushi = [
-        { name: 'Cali Roll', fish: 'Crab', tastiness: 2 },
-        { name: 'Philly', fish: 'Tuna', tastiness: 4 },
-        { name: 'Tiger', fish: 'Eel', tastiness: 7 },
-        { name: 'Rainbow', fish: 'Variety', tastiness: 6 }
-      ];
+             if(vm.sortReverse){
+                vm.sortReverse = false;
+             }
+             else{
+                 vm.sortReverse = true;
+             }
+
+             vm.sortType = type;
+             console.log(vm.sortType);
+             console.log(vm.sortReverse);
+      }
 
     function getAllOrders(){
         OrderService.getAllOrders().then(
             function(response){
                 vm.orders = response.data;
-
             },
             function(err){
                 console.log('Error',err);
@@ -37,9 +43,10 @@ function Controller($scope,$stateParams,OrderService) {
     }
 
     function acceptOrder(index){
-        OrderService.acceptOrder(vm.orders[index].id).then(
+        OrderService.acceptOrder(index).then(
             function(response){
                 getAllOrders();
+                console.log("Order accepted");
             },
             function(err){
                 console.log('Error',err);
@@ -48,7 +55,7 @@ function Controller($scope,$stateParams,OrderService) {
     }
 
     function declineOrder(index){
-        OrderService.declineOrder(vm.orders[index].id).then(
+        OrderService.declineOrder(index).then(
             function(response){
                 console.log("Order declined");
                 getAllOrders();

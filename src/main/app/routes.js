@@ -96,11 +96,18 @@ module.config(function($stateProvider, $urlRouterProvider) {
               }
      })
      .state('root.orders', {
-                        url: "/admin/orders",
-                        template:"<admin-orders></admin-orders>",
-                        data: {
-                            isPublic: true
-                        }
+              url: "/admin/orders",
+              template:"<admin-orders></admin-orders>",
+              data: {
+                 roles: ["ROLE_ADMIN"]
+              }
+     })
+     .state('root.information', {
+               url: "/customer/information",
+               template:"<customer-information></customer-information>",
+               data: {
+               roles: ["ROLE_CUSTOMER"]
+               }
      })
     .state('root.orderComponent', {
              url:"/customer/order",
