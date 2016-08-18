@@ -2,13 +2,15 @@
   padding-top: 80px;
   padding-bottom: 40px;
   background-color: #eee;
-
-
 }
 .navbar .navbar-nav {
   display: inline-block;
   float: none;
   vertical-align: top;
+
+  li:active {
+  
+  }
 }
 
 .navbar .navbar-collapse {
@@ -26,3 +28,4 @@
         background: rgba(255,0,0, 0.9);
     }
 }
+

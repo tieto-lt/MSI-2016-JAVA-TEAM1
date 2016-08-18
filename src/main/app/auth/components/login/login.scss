@@ -40,14 +40,25 @@
 
   form { margin: 0px 10px; }
 }
- .alert {
-     padding: 10px;
+
+ .login-alert {
      margin-bottom: 10px;
      max-width: 310px;
-
   }
 
-  .panel {
-     max-width: 600px;
+.divider {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
 
+  hr {
+    margin: 7px 0px;
+    width: 35%;
+  }
+}
+
+  .login-panel {
+     max-width: 390px;
+     margin-top: 10px;
+     margin: auto;
   }
