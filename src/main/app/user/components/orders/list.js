@@ -5,9 +5,10 @@ function Controller($scope, OrdersService) {
     var vm = this;
     vm.orders = {};
     vm.information = {};
-    vm.results = {};
+    vm.result = {};
     vm.message = false;
     $scope.oneAtATime = true;
+    vm.getResults= getResults;
     /*order_id;*/
 
     /*vm.drop = drop;*/
@@ -49,20 +50,22 @@ function Controller($scope, OrdersService) {
 
 
 
-        function getResults (customerId) {
-
-            OrdersService.getOrderResults(customerId).then(
+    function getResults (customerId) {
+        OrdersService.getOrderResults(customerId).then(
             function(response){
-            vm.results=response.data;
-                if(vm.results.length ==0){
-                    console.log("okey")
+            vm.result=response.data[0];
+            console.log(vm.result);
+                if(vm.result == null){
+                    console.log("null");
                 }
             }
-            )
+        )
 
-           alert(text);
-         }
+     }
 
+        $scope.test = function(text) {
+          alert(text);
+        }
 
 }
 
