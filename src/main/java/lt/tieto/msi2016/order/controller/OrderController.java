@@ -32,25 +32,25 @@ public class OrderController extends BaseController {
     @Secured(Roles.ADMIN)
     @RequestMapping(method = RequestMethod.PUT, path = "/api/order/accept/{id}")
     public Order acceptOrder(@PathVariable Long id) {
-        return service.updateOrderStatus(id, OrderDb.OrderState.Accepted);
+        return service.updateOrderStatus(id, OrderDb.OrderStatus.Accepted);
     }
 
     @Secured(Roles.ADMIN)
     @RequestMapping(method = RequestMethod.PUT, path = "/api/order/decline/{id}")
     public Order declineOrder(@PathVariable Long id) {
-        return service.updateOrderStatus(id, OrderDb.OrderState.Declined);
+        return service.updateOrderStatus(id, OrderDb.OrderStatus.Declined);
     }
 
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.PUT, path = "/api/order/publish/{id}")
     public Order publishOrder(@PathVariable Long id) {
-        return service.updateOrderStatus(id, OrderDb.OrderState.Published);
+        return service.updateOrderStatus(id, OrderDb.OrderStatus.Published);
     }
 
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.PUT, path = "/api/order/redo/{id}")
     public Order redoOrder(@PathVariable Long id) {
-        return service.updateOrderStatus(id, OrderDb.OrderState.Accepted);
+        return service.updateOrderStatus(id, OrderDb.OrderStatus.Accepted);
     }
 
 }

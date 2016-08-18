@@ -1,65 +1,45 @@
 package lt.tieto.msi2016.order.repository.model;
 
+import lt.tieto.msi2016.mission.model.MissionCommand;
 import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
+import java.util.List;
 
 
 public class OrderDb extends DbModel {
 
-    private Long createdBy;
-    private String missionName;
-    private String fullName;
-    private String phone;
-    private String email;
+    private Long submittedBy;
+    private String missionId;
     private DateTime submissionDate;
     private String details;
-    private OrderState orderState;
+    private OrderStatus orderStatus;
+    private String commands;
+    private String fullName;
+    private String email;
+    private String phone;
 
-    public enum OrderState {
+
+    public enum OrderStatus {
         Pending, Accepted, Declined, InProgress, Completed, Failed, Published
     }
 
-
-    public Long getCreatedBy() {
-        return createdBy;
+    public Long getSubmittedBy() {
+        return submittedBy;
     }
 
-    public void setCreatedBy(Long createdBy) {
-        this.createdBy = createdBy;
+    public void setSubmittedBy(Long submittedBy) {
+        this.submittedBy = submittedBy;
     }
 
-    public String getMissionName() {
-        return missionName;
+    public String getMissionId() {
+        return missionId;
     }
 
-    public void setMissionName(String missionName) {
-        this.missionName = missionName;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMissionId(String missionId) {
+        this.missionId = missionId;
     }
 
     public DateTime getSubmissionDate() {
@@ -78,25 +58,59 @@ public class OrderDb extends DbModel {
         this.details = details;
     }
 
-    public OrderState getOrderState() {
-        return orderState;
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOrderState(OrderState orderState) {
-        this.orderState = orderState;
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getCommands() {
+        return commands;
+    }
+
+    public void setCommands(String commands) {
+        this.commands = commands;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("createdBy", createdBy)
-                .append("missionName", missionName)
-                .append("fullName", fullName)
-                .append("phone", phone)
-                .append("email", email)
-                .append("submissionDate", submissionDate)
+                .append("id", getId())
+                .append("submittedBy", submittedBy)
+                .append("missionId", missionId)
+                .append("submissionDate", DateTimeFormat.forPattern("yyyy-MM-dd").print(submissionDate))
                 .append("details", details)
-                .append("orderState", orderState)
+                .append("orderStatus", orderStatus.toString())
+                .append("commands", commands)
+                .append("fullName", fullName)
+                .append("email", email)
+                .append("phone", phone)
                 .toString();
     }
 }

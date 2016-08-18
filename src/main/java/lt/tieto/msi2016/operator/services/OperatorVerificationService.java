@@ -1,7 +1,7 @@
 package lt.tieto.msi2016.operator.services;
 
-import lt.tieto.msi2016.mission.model.operator.MissionImage;
-import lt.tieto.msi2016.mission.model.operator.MissionResult;
+import lt.tieto.msi2016.mission.model.MissionImage;
+import lt.tieto.msi2016.mission.model.MissionResult;
 import lt.tieto.msi2016.operator.OperatorVerificationStatus;
 import lt.tieto.msi2016.operator.model.OperatorVerification;
 import lt.tieto.msi2016.operator.repository.OperatorVerificationRepository;
@@ -9,6 +9,7 @@ import lt.tieto.msi2016.operator.repository.model.OperatorVerificationDb;
 import lt.tieto.msi2016.utils.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,12 +32,17 @@ public class OperatorVerificationService {
         return null;
     }
 
+    @Transactional
+    public OperatorVerificationDb getOperatorByToken(String token) {
+        return repository.getOperatorByToken(token);
+    }
+
     public Boolean isOperatorValidByToken(String token){
-        return repository.operatorByToken(token) != null;
+        return repository.getOperatorByToken(token) != null;
     }
 
     private OperatorVerification updateOperatorStatus(String token , OperatorVerificationStatus.Status status) {
-        OperatorVerificationDb model  = repository.operatorByToken(token);
+        OperatorVerificationDb model  = repository.getOperatorByToken(token);
         if (model != null) {
             model.setStatus(status);
 
@@ -61,13 +67,13 @@ public class OperatorVerificationService {
     }
 
     public OperatorVerificationDb deleteOperatorVerificationStatus(Long userId){
-        OperatorVerificationDb operatorVerificationDb = repository.operatorByUserID(userId);
+        OperatorVerificationDb operatorVerificationDb = repository.getOperatorByUserID(userId);
         repository.delete(operatorVerificationDb.getId());
         return operatorVerificationDb;
     }
 
     public String updateOperatorVerificationToken(){
-        OperatorVerificationDb operatorVerificationDb = repository.operatorByUserID(securityService.getCurrentUser().getId());
+        OperatorVerificationDb operatorVerificationDb = repository.getOperatorByUserID(securityService.getCurrentUser().getId());
         operatorVerificationDb.setToken(generateToken());
         repository.update(operatorVerificationDb);
         return operatorVerificationDb.getToken();
@@ -79,7 +85,7 @@ public class OperatorVerificationService {
 
     public OperatorVerificationStatus.Status getOperatorStatus(){
         Long id = securityService.getCurrentUser().getId();
-        OperatorVerificationDb operatorVerificationDb = repository.operatorByUserID(id);
+        OperatorVerificationDb operatorVerificationDb = repository.getOperatorByUserID(id);
         return operatorVerificationDb.getStatus();
     }
 

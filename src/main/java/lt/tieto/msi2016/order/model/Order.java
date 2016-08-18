@@ -13,7 +13,7 @@ public class Order {
     private String email;
     private String phone;
     private String details;
-    private OrderDb.OrderState orderState;
+    private OrderDb.OrderStatus orderStatus;
     private DateTime submissionDate;
 
     public Long getId() {
@@ -64,12 +64,12 @@ public class Order {
         this.details = details;
     }
 
-    public OrderDb.OrderState getOrderState() {
-        return orderState;
+    public OrderDb.OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOrderState(OrderDb.OrderState orderState) {
-        this.orderState = orderState;
+    public void setOrderStatus(OrderDb.OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public DateTime getSubmissionDate() {
@@ -89,7 +89,7 @@ public class Order {
                 .append("email", email)
                 .append("phone", phone)
                 .append("details", details)
-                .append("orderState", orderState.toString())
+                .append("orderStatus", orderStatus.toString())
                 .append("submissionDate", DateTimeFormat.forPattern("yyyy-MM-dd").print(submissionDate))
                 .toString();
     }
