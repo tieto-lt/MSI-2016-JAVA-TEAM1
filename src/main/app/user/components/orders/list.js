@@ -1,17 +1,13 @@
 var module = require('main_module');
 
-function Controller($scope, OrdersService) {
+function Controller($scope, MissionService) {
 
     var vm = this;
-    vm.orders = {};
+    vm.missions = {};
     vm.information = {};
-    vm.result = {};
+    vm.results = {};
     vm.message = false;
     $scope.oneAtATime = true;
-    vm.getResults= getResults;
-    /*order_id;*/
-
-    /*vm.drop = drop;*/
 
 
     vm.myInterval = 3000;
@@ -24,14 +20,11 @@ function Controller($scope, OrdersService) {
         };
 
     function _loadList() {
-        console.log("labas")
-        OrdersService.getAllOrders().then(
-
+        MissionService.getAllMissionsResults().then(
             function (response) {
-                vm.orders = response.data;
-                console.log(vm.orders.length);
-                console.log(vm.orders);
-                if(vm.orders.length == 0){
+                vm.missions = response.data;
+                console.log(vm.missions.length);
+                if(vm.missions.length == 0){
                 vm.message = true;
                 console.log(vm.message);
                 }
@@ -47,29 +40,9 @@ function Controller($scope, OrdersService) {
        isFirstOpen: true,
        isFirstDisabled: false
      };
-
-
-
-    function getResults (customerId) {
-        OrdersService.getOrderResults(customerId).then(
-            function(response){
-            vm.result=response.data[0];
-            console.log(vm.result);
-                if(vm.result == null){
-                    console.log("null");
-                }
-            }
-        )
-
-     }
-
-        $scope.test = function(text) {
-          alert(text);
-        }
-
 }
 
-Controller.$inject = ['$scope','OrdersService'];
+Controller.$inject = ['$scope','MissionService'];
 require('./list.scss');
 module.component('customerOrders', {
     controller: Controller,
