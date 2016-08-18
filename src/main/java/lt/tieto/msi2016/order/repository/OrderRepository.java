@@ -57,7 +57,7 @@ public class OrderRepository extends BaseRepository<OrderDb> {
         super(ROW_MAPPER, ROW_UNMAPPER, "orders", "id");
     }
 
-    public List <OrderDb> getOrderByUserId (Long user_id){
+    public List <OrderDb> getOrdersByUserId (Long user_id){
         List <OrderDb>  ordersOfCustomer =template.query(SELECT_ORDER_USER_ID, new Object[] {user_id}, ROW_MAPPER);
         return ordersOfCustomer;
 

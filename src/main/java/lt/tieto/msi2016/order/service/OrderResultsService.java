@@ -47,9 +47,9 @@ public class OrderResultsService {
     }
 
     @Transactional(readOnly = true)
-    public List<OrderResults> getUserMissionResults(Long id) throws IOException {
+    public List<OrderResults> getOrderResultsByOrderId(Long id) throws IOException {
         List<OrderResults> resultList = new ArrayList();
-        for (OrderResultsDb orderResultsDb : repository.getUserMissionResults(id)) {
+        for (OrderResultsDb orderResultsDb : repository.getOrderResultsByOrderId(id)) {
             resultList.add(mapToOrderResults(orderResultsDb));
         }
         return resultList;

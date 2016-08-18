@@ -8,7 +8,7 @@ function Controller($scope, OrdersService) {
     vm.results = {};
     vm.message = false;
     $scope.oneAtATime = true;
-    order_id;
+    /*order_id;*/
 
     /*vm.drop = drop;*/
 

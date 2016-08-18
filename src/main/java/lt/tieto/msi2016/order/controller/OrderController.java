@@ -18,53 +18,55 @@ import java.util.List;
 public class OrderController extends BaseController {
 
     @Autowired
-    private OrderService service;
+    private OrderService orderService;
 
     @Autowired
-    private OrderResultsService service2;
+    private OrderResultsService orderResultsService;
 
     @Secured(Roles.ADMIN)
     @RequestMapping(method = RequestMethod.GET, path = "/api/order")
-    public List<Order> all() throws IOException {return service.all();}
+    public List<Order> all() throws IOException {return orderService.all();}
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/order")
     public Order createOrder(@RequestBody Order order) throws IOException {
-        return service.createOrder(order);
+        return orderService.createOrder(order);
     }
 
     @Secured(Roles.ADMIN)
     @RequestMapping(method = RequestMethod.PUT, path = "/api/order/accept/{id}")
     public Order acceptOrder(@PathVariable Long id) throws IOException {
-        return service.updateStatus(id, OrderDb.Status.Accepted);
+        return orderService.updateStatus(id, OrderDb.Status.Accepted);
     }
 
     @Secured(Roles.ADMIN)
     @RequestMapping(method = RequestMethod.PUT, path = "/api/order/decline/{id}")
     public Order declineOrder(@PathVariable Long id) throws IOException {
-        return service.updateStatus(id, OrderDb.Status.Declined);
+        return orderService.updateStatus(id, OrderDb.Status.Declined);
     }
 
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.PUT, path = "/api/order/publish/{id}")
     public Order publishOrder(@PathVariable Long id) throws IOException {
-        return service.updateStatus(id, OrderDb.Status.Completed);
+        return orderService.updateStatus(id, OrderDb.Status.Completed);
     }
 
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.PUT, path = "/api/order/redo/{id}")
     public Order redoOrder(@PathVariable Long id) throws IOException {
-        return service.updateStatus(id, OrderDb.Status.Accepted);
+        return orderService.updateStatus(id, OrderDb.Status.Accepted);
     }
 
 
     @Secured(Roles.CUSTOMER)
     @RequestMapping(method = RequestMethod.GET, path = "/api/customer/orders")
-    public List<Order> allUserOrders() {return service.allOrdersOfCustomer();}
+    public List<Order> getAllUserOrders() throws IOException {
+        return orderService.getAllUserOrders();
+    }
 
     @Secured(Roles.CUSTOMER)
     @RequestMapping(method = RequestMethod.GET, path = "/api/customer/orders/{id}")
-    public List<OrderResults> getUserMissionResults(@PathVariable Long id) throws IOException {
-        return service2.getUserMissionResults(id);
+    public List<OrderResults> getOrderResultsByOrderId(@PathVariable Long id) throws IOException {
+        return orderResultsService.getOrderResultsByOrderId(id);
     }
 
 }
