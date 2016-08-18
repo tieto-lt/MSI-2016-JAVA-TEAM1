@@ -1,0 +1,40 @@
+
+<div class="msi-order-form">
+    <div>
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <form name="orderForm"  novalidate>
+                        <div class="form-group">
+                            <h3>Update account information</h3>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.name.$invalid && !orderForm.name.$pristine}">
+                            <label>Full name</label>
+                            <input placeholder="Full name" type="text" name="name" class="form-control" ng-model="$ctrl.user.name" ng-minlength="1" ng-maxlength ="60" required>
+                            <p ng-show="orderForm.name.$invalid && !orderForm.name.$pristine" class="help-block">Name is not valid. Your name must consist at least from 1 to 60 characters.</p>
+
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.email.$invalid && !orderForm.email.$pristine }">
+                            <label>Email</label>
+                            <input placeholder="Email"type="email" name="email" class="form-control" ng-model="$ctrl.user.email" required>
+                            <p ng-show="orderForm.email.$invalid && !orderForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.phone.$invalid && !orderForm.phone.$pattern}">
+                            <label>Phone </label>
+                            <input  placeholder="+370" ng-pattern="/^(\+(370+|3705)) *(\d{8})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.user.phone" required >
+                            <p ng-show="orderForm.phone.$error.pattern" class="help-block">Enter a valid phone number.</p>
+                        </div>
+                        <div  class="form-group">
+                            <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.updateUserInformation()" class="btn btn-info btn-block" ng-disabled="orderForm.$invalid">Update</button>
+                            <p></p>
+                            <div class="alert alert-success" ng-show="$ctrl.message" align="center"><strong>Updated successfully!</strong></div>
+                            <div class="alert alert-danger" ng-show="$ctrl.error" align="center"><strong>Something went wrong</strong></div>
+                        </div>
+                        <hr>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
