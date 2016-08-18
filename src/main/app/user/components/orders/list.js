@@ -8,8 +8,9 @@ function Controller($scope, OrdersService) {
     vm.results = {};
     vm.message = false;
     $scope.oneAtATime = true;
+    order_id;
 
-    vm.drop = drop;
+    /*vm.drop = drop;*/
 
 
     vm.myInterval = 3000;
@@ -22,7 +23,9 @@ function Controller($scope, OrdersService) {
         };
 
     function _loadList() {
+        console.log("labas")
         OrdersService.getAllOrders().then(
+
             function (response) {
                 vm.orders = response.data;
                 console.log(vm.orders.length);
@@ -46,7 +49,17 @@ function Controller($scope, OrdersService) {
 
 
 
-         $scope.test = function(text) {
+        function getResults (customerId) {
+
+            OrdersService.getOrderResults(customerId).then(
+            function(response){
+            vm.results=response.data;
+                if(vm.results.length ==0){
+                    console.log("okey")
+                }
+            }
+            )
+
            alert(text);
          }
 

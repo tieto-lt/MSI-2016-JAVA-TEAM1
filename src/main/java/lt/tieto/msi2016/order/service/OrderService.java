@@ -54,11 +54,13 @@ public class OrderService {
         Long userId = securityService.getCurrentUser().getId();
         List <OrderDb> ordersOfCustomerDb = repository.getOrderByUserId(userId);
         List <Order> ordersOfCustomer = ordersOfCustomerDb.stream()
-                .map(OrderService::mapToOrders)
+                .map(this::mapToOrders)
                 .collect(Collectors.toList());
-
         return  ordersOfCustomer;
     }
+
+
+
 
 
 
@@ -126,6 +128,9 @@ public class OrderService {
             throw new DataNotFoundException("Order with id " + orderId + " not found");
         }
     }
+
+
+
 
     private Mission mapToMission(OrderDb db) throws IOException {
         Mission mission = new Mission();

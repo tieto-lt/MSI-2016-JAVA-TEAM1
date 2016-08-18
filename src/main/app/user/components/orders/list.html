@@ -38,7 +38,7 @@
             </div>
 
 
-            <div uib-accordion-group class="panel-default"   ng-click="test()" ng-repeat="order in $ctrl.orders "  is-disabled="order.orderState != 'Published' ">
+            <div uib-accordion-group class="panel-default"   ng-click="ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders "  is-disabled="order.status != 'Completed' ">
 
 
 
@@ -48,8 +48,8 @@
                         <ul>
                             <li>{{order.id}}</li>
                             <li>{{order.missionName}}</li>
-                            <li>{{order.submissionDate}}</li>
-                            <li>{{order.orderState}}</li>
+                            <li>{{order.submissionDate | date:'yyyy.MM.dd'}}</li>
+                            <li>{{order.status}}</li>
 
                         </ul>
                     </div>
