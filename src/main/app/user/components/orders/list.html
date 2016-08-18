@@ -38,7 +38,7 @@
             </div>
 
 
-            <div uib-accordion-group class="panel-default"  ng-click="test()" is-open="status.open"  ng-repeat="order in $ctrl.orders ">
+            <div uib-accordion-group class="panel-default"   ng-click="test()" ng-repeat="order in $ctrl.orders "  is-disabled="order.orderState != 'Published' ">
 
 
 
@@ -53,7 +53,7 @@
 
                         </ul>
                     </div>
-                    <i class="pull-right glyphicon"   ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                    <i class="pull-right glyphicon"     ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </uib-accordion-heading>
 
                 <div ng-class="status.open" >

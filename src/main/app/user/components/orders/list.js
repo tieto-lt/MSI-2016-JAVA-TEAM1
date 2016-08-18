@@ -45,13 +45,7 @@ function Controller($scope, OrdersService) {
      };
 
 
-     function drop(index){
-       /* OrdersService*/
 
-
-
-     /*toggleOpen(index);*/
-     }
          $scope.test = function(text) {
            alert(text);
          }
