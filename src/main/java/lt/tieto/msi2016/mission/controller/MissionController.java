@@ -1,13 +1,15 @@
-package lt.tieto.msi2016.mission.controller.operator;
+package lt.tieto.msi2016.mission.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lt.tieto.msi2016.mission.model.operator.Mission;
-import lt.tieto.msi2016.mission.model.operator.MissionResult;
-import lt.tieto.msi2016.mission.model.operator.Missions;
+import lt.tieto.msi2016.mission.model.Mission;
+import lt.tieto.msi2016.mission.model.MissionResult;
+import lt.tieto.msi2016.mission.model.Missions;
 
-import lt.tieto.msi2016.mission.service.MissionResultsService;
+import lt.tieto.msi2016.order.repository.model.OrderDb;
+import lt.tieto.msi2016.order.service.OrderResultsService;
 
 import lt.tieto.msi2016.operator.services.OperatorVerificationService;
+import lt.tieto.msi2016.order.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +24,21 @@ public class MissionController {
     @Autowired
     ObjectMapper mapper;
     @Autowired
-    private MissionResultsService missionResultsService;
+    private OrderResultsService orderResultsService;
     @Autowired
     private OperatorVerificationService operatorVerificationService;
+    @Autowired
+    private OrderService orderService;
 
 
     private static Logger LOG = LoggerFactory.getLogger(MissionController.class);
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/missions", params = "operatorToken")
-    public Missions getMissions(@RequestParam String operatorToken) {
+    public Missions getMissions(@RequestParam String operatorToken) throws IOException {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
             System.out.println("Getting missions " + operatorToken);
             Missions missions = new Missions();
-            missions.setMissions(MissionsHolder.getMissions());
+            missions.setMissions(orderService.getAllMissions());
             return missions;
         } else {
             throw new UnauthorizedUserException("Operator token is not valid");
@@ -42,11 +46,12 @@ public class MissionController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/api/missions/{missionId}/reserve", params = "operatorToken")
-    public Mission reserveMission(@PathVariable String missionId, @RequestParam String operatorToken) {
+    public Mission reserveMission(@PathVariable String missionId, @RequestParam String operatorToken) throws IOException  {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
             LOG.info("reserve missions");
             LOG.info(operatorToken);
-            return MissionsHolder.removeMission(missionId).get();
+            orderService.updateStatus(Long.valueOf(missionId.split("-")[0]), OrderDb.Status.InProgress);
+            return orderService.getMissionByMissionId(missionId);
         } else {
             throw new UnauthorizedUserException("Operator token is not valid");
         }
@@ -59,7 +64,7 @@ public class MissionController {
             @RequestParam String operatorToken) throws IOException {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
             LOG.info("Completing mission {} {}", missionId, missionResult);
-            missionResultsService.saveMissionResult(missionResult);
+            orderResultsService.saveMissionResult(missionResult, operatorVerificationService.getOperatorByToken(operatorToken).getId());
             operatorVerificationService.verifyAndUpdateStatus(missionResult, operatorToken);
         } else {
             throw new UnauthorizedUserException("Operator token is not valid");

@@ -1,7 +1,7 @@
-package lt.tieto.msi2016.mission.controller.operator;
+package lt.tieto.msi2016.mission.controller;
 
-import lt.tieto.msi2016.mission.model.operator.Mission;
-import lt.tieto.msi2016.mission.model.operator.MissionCommand;
+import lt.tieto.msi2016.mission.model.Mission;
+import lt.tieto.msi2016.mission.model.MissionCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
