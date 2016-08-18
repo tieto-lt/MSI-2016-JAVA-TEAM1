@@ -7,6 +7,14 @@ function Controller(UserService) {
   vm.user = {};
   vm.createOrder = createOrder;
   vm.checkIfEqual = checkIfEqual;
+  vm.showMessage = showMessage;
+
+  vm.object = undefined;
+
+  vm.all = [
+    {selected: false, color: "black", name: "1 object"},
+    {selected: false, color: "black", name: "2 object"},
+  ];
 
   vm.$onInit = function() {
           _loadOrderDetails();
@@ -56,6 +64,17 @@ function Controller(UserService) {
                 (vm.previousOrder.missionName == vm.order.missionName));
     }
 
+   function showMessage(index){
+       vm.all[index].selected = !vm.all[index].selected;
+       if(vm.all[index].selected) {
+            vm.all[index].color = 'red';
+            vm.object  = vm.all[index].name;
+
+       } else {
+            vm.all[index].color = 'black';
+            vm.object = undefined;
+       }
+   }
 }
 Controller.$inject = ['UserService'];
 require('./order_component.scss');
