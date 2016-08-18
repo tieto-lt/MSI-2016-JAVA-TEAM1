@@ -1,27 +1,11 @@
 
 <div>
     <div>
-        <!--<script type="text/ng-template" id="group-template.html">
-            <div class="panel-heading">
-                <h4 class="panel-title" style="color:#fa39c3">
-                    <a href tabindex="0" class="accordion-toggle" ng-click="$ctrl.drop($index)" uib-accordion-transclude="heading">
-          <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
-            {{heading}}
-          </span>
-                    </a>
-                </h4>
-            </div>
-            <div class="panel-collapse collapse" uib-collapse="!isOpen">
-                <div class="panel-body" style="text-align: right" ng-transclude></div>
-            </div>
-        </script>-->
         <div class="alert alert-info" ng-show="$ctrl.message"  align="center">
             <strong>You have not submitted any orders yet!</strong>
         </div>
-
         <uib-accordion close-others="oneAtATime" >
-
-            <div uib-accordion-group class="panel-default"  >
+            <div uib-accordion-group class="panel-default"  is-disabled="true" >
                 <uib-accordion-heading>
 
                     <div  class="list_header">
@@ -36,12 +20,7 @@
 
                 </uib-accordion-heading>
             </div>
-
-
-            <div uib-accordion-group class="panel-default"   ng-click="ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders "  is-disabled="order.status != 'Completed' ">
-
-
-
+            <div uib-accordion-group class="panel-default"  is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders "  is-disabled="order.status != 'Completed' ">
                 <uib-accordion-heading >
 
                     <div  class="list_header">
@@ -53,43 +32,23 @@
 
                         </ul>
                     </div>
-                    <i class="pull-right glyphicon"     ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+
                 </uib-accordion-heading>
 
-                <div ng-class="status.open" >
-
-                        function
-                </div>
-
-
-
-
-
-
-
-
-
-                <div id="slides_control">
-                    <div>
-                        <uib-carousel active="$ctrl.activeSlide">
-                            <uib-slide ng-repeat="image in mission.images" index="$index">
-                                <img ng-src="data:image/png;base64,{{image.imageBase64}}">
-                                <div class="carousel-caption">
-                                </div>
-                            </uib-slide>
-                        </uib-carousel>
+                    <div id="slides_control">
+                        <div>
+                            <uib-carousel active="$ctrl.activeSlide">
+                                <uib-slide ng-repeat="image in $ctrl.result.images" index="$index">
+                                    <img ng-src="data:image/png;base64,{{image.imageBase64}}">
+                                    <div class="carousel-caption">
+                                    </div>
+                                </uib-slide>
+                            </uib-carousel>
+                        </div>
                     </div>
-                </div>
-
-
 
             </div>
-
         </uib-accordion>
-
-        <button type="button" class="btn btn-default btn-sm" ng-click="test()">Toggle last panel</button>
-
     </div>
-
-
 </div>

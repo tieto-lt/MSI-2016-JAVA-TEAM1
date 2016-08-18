@@ -7,7 +7,7 @@ function Service ($http) {
     };
 
     this.getOrderResults = function (id){
-            return $http.get('/api/customer/orders/'+ id,{});
+            return $http.get('/api/customer/orders/'+ id);
         }
 
 }

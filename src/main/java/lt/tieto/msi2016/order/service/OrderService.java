@@ -96,7 +96,7 @@ public class OrderService {
     private Order mapToOrders(OrderDb db) throws IOException {
         Order api = new Order();
         api.setId(db.getId());
-        api.setMissionName(db.getMissionId().split("-")[0]);
+        api.setMissionName(db.getMissionId().split("-")[1]);
         api.setFullName(db.getFullName());
         api.setPhone(db.getPhone());
         api.setEmail(db.getEmail());
