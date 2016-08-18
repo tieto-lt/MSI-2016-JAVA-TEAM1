@@ -1,9 +1,11 @@
 package lt.tieto.msi2016.order.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.tieto.msi2016.mission.model.Mission;
 import lt.tieto.msi2016.mission.model.MissionCommand;
+import lt.tieto.msi2016.mission.model.MissionImage;
 import lt.tieto.msi2016.order.model.Order;
 import lt.tieto.msi2016.order.model.OrderResults;
 import lt.tieto.msi2016.order.repository.OrderRepository;
@@ -32,16 +34,17 @@ public class OrderService {
     @Autowired
     private SecurityService securityService;
 
-    public Order createOrder(Order order) {
-
+    @Transactional
+    public Order createOrder(Order order) throws IOException {
         Long userId = securityService.getCurrentUser().getId();
-
-        return mapToOrders(repository.create(mapToOrdersDb(order, userId)));
+        OrderDb orderDb = repository.create(mapToOrdersDb(order, userId));
+        orderDb.setMissionId(orderDb.getId() + "-" + order.getMissionName());
+        return mapToOrders(repository.update(orderDb));
 
     }
 
     @Transactional(readOnly = true)
-    public List<Order> all() {
+    public List<Order> all() throws IOException {
         List<Order> resultList = new ArrayList();
         for (OrderDb orderDb : repository.findAll()) {
             resultList.add(mapToOrders(orderDb));
@@ -50,7 +53,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order updateStatus(Long id, OrderDb.Status status) {
+    public Order updateStatus(Long id, OrderDb.Status status) throws IOException {
         OrderDb orderDb = repository.findOne(id);
         if (orderDb != null) {
             orderDb.setStatus(status);
@@ -75,7 +78,7 @@ public class OrderService {
     }
 
 
-    private Order mapToOrders(OrderDb db) {
+    private Order mapToOrders(OrderDb db) throws IOException {
         Order api = new Order();
         api.setId(db.getId());
         api.setMissionName(db.getMissionId().split("-")[0]);
@@ -85,10 +88,11 @@ public class OrderService {
         api.setDetails(db.getDetails());
         api.setStatus(db.getStatus());
         api.setSubmissionDate(db.getSubmissionDate());
+        api.setMissionCommands(objectMapper.readValue(db.getCommands(), new TypeReference<List<MissionCommand>>() {}));
         return api;
     }
 
-    private OrderDb mapToOrdersDb(Long id, Order api, Long userId) {
+    private OrderDb mapToOrdersDb(Long id, Order api, Long userId) throws JsonProcessingException {
         OrderDb db = new OrderDb();
         db.setId(id);
         db.setSubmittedBy(userId);
@@ -96,7 +100,7 @@ public class OrderService {
         db.setSubmissionDate(DateTime.now());
         db.setDetails(api.getDetails());
         db.setStatus(OrderDb.Status.Pending);
-        //db.setCommands();
+        db.setCommands(objectMapper.writeValueAsString(api.getMissionCommands()));
         db.setFullName(api.getFullName());
         db.setEmail(api.getEmail());
         db.setPhone(api.getPhone());
@@ -122,7 +126,7 @@ public class OrderService {
         return mission;
     }
 
-    private OrderDb mapToOrdersDb(Order api, Long userId) {
+    private OrderDb mapToOrdersDb(Order api, Long userId) throws JsonProcessingException {
         return mapToOrdersDb(null, api, userId);
     }
 }

@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.order.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.tieto.msi2016.order.model.OrderResults;
@@ -67,7 +68,7 @@ public class OrderResultsService {
         return api;
     }
 
-    private OrderResultsDb mapToOrderResultsDb(MissionResult api, Long executedBy) throws IOException {
+    private OrderResultsDb mapToOrderResultsDb(MissionResult api, Long executedBy) throws JsonProcessingException {
         OrderResultsDb db = new OrderResultsDb();
         db.setExecutedBy(executedBy);
         db.setOrderId(Long.valueOf(api.getMissionId().split("-")[0]));

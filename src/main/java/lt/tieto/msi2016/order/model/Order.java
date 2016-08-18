@@ -1,9 +1,13 @@
 package lt.tieto.msi2016.order.model;
 
+import lt.tieto.msi2016.mission.controller.MissionsHolder;
+import lt.tieto.msi2016.mission.model.MissionCommand;
 import lt.tieto.msi2016.order.repository.model.OrderDb;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+
+import java.util.List;
 
 public class Order {
 
@@ -15,6 +19,7 @@ public class Order {
     private String details;
     private OrderDb.Status status;
     private DateTime submissionDate;
+    private List<MissionCommand> missionCommands;
 
     public Long getId() {
         return id;
@@ -78,6 +83,14 @@ public class Order {
 
     public void setSubmissionDate(DateTime submissionDate) {
         this.submissionDate = submissionDate;
+    }
+
+    public List<MissionCommand> getMissionCommands() {
+        return MissionsHolder.getMissions().get(0).getCommands();
+    }
+
+    public void setMissionCommands(List<MissionCommand> missionCommands) {
+        this.missionCommands = missionCommands;
     }
 
     @Override

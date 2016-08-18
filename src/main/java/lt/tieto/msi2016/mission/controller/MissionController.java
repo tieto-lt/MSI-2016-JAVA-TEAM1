@@ -65,6 +65,7 @@ public class MissionController {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
             LOG.info("Completing mission {} {}", missionId, missionResult);
             orderResultsService.saveMissionResult(missionResult, operatorVerificationService.getOperatorByToken(operatorToken).getId());
+            orderService.updateStatus(Long.valueOf(missionId.split("-")[0]), OrderDb.Status.Executed);
             operatorVerificationService.verifyAndUpdateStatus(missionResult, operatorToken);
         } else {
             throw new UnauthorizedUserException("Operator token is not valid");

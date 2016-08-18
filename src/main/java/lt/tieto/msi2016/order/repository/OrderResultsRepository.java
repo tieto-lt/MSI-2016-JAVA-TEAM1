@@ -40,6 +40,6 @@ public class OrderResultsRepository extends BaseRepository<OrderResultsDb> {
     );
 
     public OrderResultsRepository() {
-        super(ROW_MAPPER, ROW_UNMAPPER, "orders_results", "id");
+        super(ROW_MAPPER, ROW_UNMAPPER, "order_results", "id");
     }
 }
