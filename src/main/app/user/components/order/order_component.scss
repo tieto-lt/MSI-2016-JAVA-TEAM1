@@ -1,32 +1,67 @@
-form { margin: 0px 10px;
+
+
+.login_box1 {
+    display: inline-block;
+    margin-right: 2px;
+    width: 50%;
+    height: 510px;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #888888;
+    vertical-align: top;
+    padding: 10px;
+
+    h2 {
+      margin-top: 2px;
+      margin-bottom: 10px;
+      }
+
+
 }
 
-.msi-order-form {
-    max-width: 360px;
-    margin: auto;
-    .alert{
-        width:340px;
+.login_box2 {
+    display: inline-block;
+    width: 45%;
+    height: 250px;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #888888;
+    vertical-align: top;
+
+    svg {
+        width: 500px;
+        height: 245px;
     }
-
-    .panel-body{
-             display: inline-block;
-        }
 }
+
+form { margin: 0px 10px; }
 
 h2 {
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.msi-registration-form {
+    max-width: 360px;
+    margin: auto;
+
+    .alert{
+    width:340px;
+     }
 }
 
 .divider {
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 
   hr {
     margin: 7px 0px;
     width: 35%;
   }
+
 }
 
 .left { float: left; }

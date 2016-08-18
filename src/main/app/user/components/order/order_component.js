@@ -8,12 +8,15 @@ function Controller(UserService) {
   vm.createOrder = createOrder;
   vm.checkIfEqual = checkIfEqual;
   vm.showMessage = showMessage;
+  vm.selectedObject = [];
 
   vm.object = undefined;
-
   vm.all = [
+    {selected: false, color: "black", name: "Starting point"},
     {selected: false, color: "black", name: "1 object"},
     {selected: false, color: "black", name: "2 object"},
+    {selected: false, color: "black", name: "3 object"},
+    {selected: false, color: "black", name: "4 object"}
   ];
 
   vm.$onInit = function() {
@@ -69,11 +72,16 @@ function Controller(UserService) {
        if(vm.all[index].selected) {
             vm.all[index].color = 'red';
             vm.object  = vm.all[index].name;
+           vm.selectedObject[index] = vm.object;
+           console.log(vm.selectedObject);
 
        } else {
             vm.all[index].color = 'black';
-            vm.object = undefined;
+            vm.object = 'Canceled';
+            vm.selectedObject[index] = vm.object;
+            console.log(vm.selectedObject);
        }
+
    }
 }
 Controller.$inject = ['UserService'];
