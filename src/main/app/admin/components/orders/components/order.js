@@ -12,9 +12,6 @@ function Controller($scope,$stateParams,OrderService) {
     vm.sortType = 'submissionDate';
     vm.selected = undefined;
 
-    vm.names = ["moon", "iii", "kai"];
-
-    vm.allStatus = ["All","Pending", "Accepted"];
     vm.sortReverse = true;
      vm.$onInit = function(){
         getAllOrders();
@@ -33,12 +30,6 @@ function Controller($scope,$stateParams,OrderService) {
              console.log(vm.sortType);
              console.log(vm.sortReverse);
       }
-      $scope.sushi = [
-        { name: 'Cali Roll', fish: 'Crab', tastiness: 2 },
-        { name: 'Philly', fish: 'Tuna', tastiness: 4 },
-        { name: 'Tiger', fish: 'Eel', tastiness: 7 },
-        { name: 'Rainbow', fish: 'Variety', tastiness: 6 }
-      ];
 
     function getAllOrders(){
         OrderService.getAllOrders().then(

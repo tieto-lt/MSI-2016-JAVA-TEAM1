@@ -1,13 +1,13 @@
-package lt.tieto.msi2016.mission.service;
+package lt.tieto.msi2016.order.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lt.tieto.msi2016.mission.model.MissionResultUI;
-import lt.tieto.msi2016.mission.model.operator.MissionImage;
-import lt.tieto.msi2016.mission.model.operator.MissionNavigationData;
-import lt.tieto.msi2016.mission.model.operator.MissionResult;
-import lt.tieto.msi2016.mission.repository.MissionResultsRepository;
-import lt.tieto.msi2016.mission.repository.model.MissionResultsDb;
+import lt.tieto.msi2016.order.model.OrderResults;
+import lt.tieto.msi2016.mission.model.MissionImage;
+import lt.tieto.msi2016.mission.model.MissionNavigationData;
+import lt.tieto.msi2016.mission.model.MissionResult;
+import lt.tieto.msi2016.order.repository.OrderResultsRepository;
+import lt.tieto.msi2016.order.repository.model.OrderResultsDb;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,44 +20,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MissionResultsService {
+public class OrderResultsService {
 
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
-    private MissionResultsRepository repository;
+    private OrderResultsRepository repository;
 
     @Transactional(readOnly = true)
-    public MissionResultUI get(Long id) throws IOException {
-        MissionResultsDb missionResultsDb = repository.findOne(id);
-        if (missionResultsDb != null) {
-            return mapToMissionResultUI(missionResultsDb);
+    public OrderResults get(Long id) throws IOException {
+        OrderResultsDb orderResultsDb = repository.findOne(id);
+        if (orderResultsDb != null) {
+            return mapToOrderResults(orderResultsDb);
         } else {
             throw new DataNotFoundException("Mission results with id " + id + " not found");
         }
     }
 
     @Transactional(readOnly = true)
-    public List<MissionResultUI> all() throws IOException {
-        List<MissionResultUI> resultList = new ArrayList();
-        for (MissionResultsDb missionResultsDb : repository.findAll()) {
-            resultList.add(mapToMissionResultUI(missionResultsDb));
+    public List<OrderResults> all() throws IOException {
+        List<OrderResults> resultList = new ArrayList();
+        for (OrderResultsDb orderResultsDb : repository.findAll()) {
+            resultList.add(mapToOrderResults(orderResultsDb));
         }
         return resultList;
     }
 
     @Transactional
-    public MissionResultUI saveMissionResult(MissionResult missionResult) throws IOException {
+    public OrderResults saveMissionResult(MissionResult missionResult, Long executedBy) throws IOException {
 
-        return mapToMissionResultUI(repository.create(mapToMissionResultsDb(missionResult)));
+        return mapToOrderResults(repository.create(mapToOrderResultsDb(missionResult, executedBy)));
 
     }
 
-    private MissionResultUI mapToMissionResultUI(MissionResultsDb db) throws IOException {
+    private OrderResults mapToOrderResults(OrderResultsDb db) throws IOException {
         List<MissionNavigationData> navigationData = objectMapper.readValue(db.getNavigationData(), new TypeReference<List<MissionNavigationData>>() {});
-        MissionResultUI api = new MissionResultUI();
+        OrderResults api = new OrderResults();
         api.setId(db.getId());
-        //api.setMissionId(db.getMissionId());
+        api.setMissionId(db.getOrderId()); // our missionId is {order_id}-{mission_name}
         api.setOrderId(db.getOrderId());
         api.setStartNavigationData(navigationData != null ? navigationData.get(0) : null);
         api.setFinishNavigationData(navigationData != null ? navigationData.get(navigationData.size() - 1) : null);
@@ -67,18 +67,16 @@ public class MissionResultsService {
         return api;
     }
 
-    private MissionResultsDb mapToMissionResultsDb(MissionResult api) throws IOException {
-        MissionResultsDb db = new MissionResultsDb();
-        db.setMissionId(null); // only for test missions
-        //db.setOrderId();
-        //db.setExecutedBy();
-        db.setExecutionDate(new DateTime());
+    private OrderResultsDb mapToOrderResultsDb(MissionResult api, Long executedBy) throws IOException {
+        OrderResultsDb db = new OrderResultsDb();
+        db.setExecutedBy(executedBy);
+        db.setOrderId(Long.valueOf(api.getMissionId().split("-")[0]));
+        db.setMissionName(api.getMissionId().split("-")[1]);
+        db.setExecutionDate(DateTime.now());
         db.setBatteryStatus(api.getNavigationData().get(api.getNavigationData().size() - 1).battery);
-        db.setVideoBase64(api.getVideoBase64());
         db.setImages(objectMapper.writeValueAsString(api.getImages()));
+        //db.setVideoBase64();
         db.setNavigationData(objectMapper.writeValueAsString(api.getNavigationData()));
-        db.setMissionState(MissionResultsDb.MissionState.Completed);
-        db.setMissionName(api.getMissionId());
         return db;
     }
 }

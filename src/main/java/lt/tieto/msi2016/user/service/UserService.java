@@ -74,6 +74,12 @@ public class UserService {
         return mapToUser(user);
     }
 
+    //*************************************************************
+    public User updateUserInformation(User user){
+        UserDb updatedUser = repository.update(mapToUserDb(user.getId(),user));
+        return mapToUser(updatedUser);
+    }
+    //************************************************************
     private static User mapToUser(UserDb db) {
         User api = new User();
         api.setId(db.getId());
@@ -82,6 +88,7 @@ public class UserService {
         api.setName(db.getName());
         api.setEmail(db.getEmail());
         api.setPhone(db.getPhone());
+        api.setPassword(db.getPassword());
         return api;
     }
 

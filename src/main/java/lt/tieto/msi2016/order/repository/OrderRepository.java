@@ -1,46 +1,59 @@
 package lt.tieto.msi2016.order.repository;
 
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
+import lt.tieto.msi2016.mission.model.MissionCommand;
 import lt.tieto.msi2016.order.repository.model.OrderDb;
+import lt.tieto.msi2016.user.repository.model.UserDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Repository
 public class OrderRepository extends BaseRepository<OrderDb> {
 
+    public static final String SELECT_BY_STATUS = "SELECT * FROM orders where status = ?";
+    @Autowired
+    private JdbcTemplate template;
+
     private static final RowMapper<OrderDb> ROW_MAPPER = (rs, rowNum) -> {
         OrderDb order = new OrderDb();
         order.setId(rs.getLong("id"));
-        order.setCreatedBy(rs.getLong("created_by"));
-        order.setMissionName(rs.getString("mission_name"));
-        order.setFullName(rs.getString("full_name"));
-        order.setPhone(rs.getString("phone"));
-        order.setEmail(rs.getString("email"));
+        order.setSubmittedBy(rs.getLong("submitted_by"));
+        order.setMissionId(rs.getString("mission_id"));
         order.setSubmissionDate(new DateTime(rs.getTimestamp("submission_date")));
         order.setDetails(rs.getString("details"));
-        order.setOrderState(OrderDb.OrderState.valueOf(rs.getString("order_state")));
-
+        order.setStatus(OrderDb.Status.valueOf(rs.getString("status")));
+        order.setCommands(rs.getString("commands"));
+        order.setFullName(rs.getString("full_name"));
+        order.setEmail(rs.getString("email"));
+        order.setPhone(rs.getString("phone"));
         return order;
     };
 
     private static final RowUnmapper<OrderDb> ROW_UNMAPPER = orderDb -> mapOf(
             "id", orderDb.getId(),
-            "created_by", orderDb.getCreatedBy(),
-            "mission_name", orderDb.getMissionName(),
-            "full_name", orderDb.getFullName(),
-            "phone", orderDb.getPhone(),
-            "email", orderDb.getEmail(),
+            "submitted_by", orderDb.getSubmittedBy(),
+            "mission_id", orderDb.getMissionId(),
             "submission_date", new Timestamp(orderDb.getSubmissionDate().getMillis()),
             "details", orderDb.getDetails(),
-            "order_state", orderDb.getOrderState().toString()
-
+            "status", orderDb.getStatus().toString(),
+            "commands", orderDb.getCommands(),
+            "full_name", orderDb.getFullName(),
+            "email", orderDb.getEmail(),
+            "phone", orderDb.getPhone()
     );
 
     public OrderRepository() {
         super(ROW_MAPPER, ROW_UNMAPPER, "orders", "id");
+    }
+
+    public List<OrderDb> getOrdersByStatus(OrderDb.Status status) {
+        return template.query(SELECT_BY_STATUS, new Object[]{status.toString()}, ROW_MAPPER);
     }
 }

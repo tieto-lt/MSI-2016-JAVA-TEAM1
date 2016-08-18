@@ -1,12 +1,12 @@
-package lt.tieto.msi2016.mission.model;
+package lt.tieto.msi2016.order.model;
 
-import lt.tieto.msi2016.mission.model.operator.MissionImage;
-import lt.tieto.msi2016.mission.model.operator.MissionNavigationData;
+import lt.tieto.msi2016.mission.model.MissionImage;
+import lt.tieto.msi2016.mission.model.MissionNavigationData;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class MissionResultUI {
+public class OrderResults {
 
     private Long id;
     private Long missionId;

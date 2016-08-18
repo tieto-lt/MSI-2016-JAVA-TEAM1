@@ -1,4 +1,4 @@
-package lt.tieto.msi2016.mission.model.operator;
+package lt.tieto.msi2016.mission.model;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ public class Mission {
 
     private String missionId;
     private Long submittedBy;
-    private MissionState state;
     private List<MissionCommand> commands;
 
     public String getMissionId() {
@@ -23,14 +22,6 @@ public class Mission {
 
     public void setSubmittedBy(Long submittedBy) {
         this.submittedBy = submittedBy;
-    }
-
-    public MissionState getState() {
-        return state;
-    }
-
-    public void setState(MissionState state) {
-        this.state = state;
     }
 
     public List<MissionCommand> getCommands() {

@@ -3,7 +3,6 @@ var module = require('main_module');
 function Service ($http) {
 
     this.create = function(user) {
-        console.log(user);
         return $http.post('/api/user', user);
     };
 
@@ -13,7 +12,11 @@ function Service ($http) {
 
     this.createOrder = function(order) {
         return $http.post('/api/order', order);
-    }
+    };
+
+    this.updateUserInformation = function(user){
+        return $http.post('/api/user/information',user);
+    };
 
 }
 

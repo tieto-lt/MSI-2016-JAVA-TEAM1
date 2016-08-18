@@ -48,7 +48,7 @@ public class OperatorVerificationRepository extends BaseRepository <OperatorVeri
         super(ROW_MAPPER, ROW_UNMAPPER, "operator_verification", "id");
     }
 
-    public OperatorVerificationDb operatorByToken(String token) {
+    public OperatorVerificationDb getOperatorByToken(String token) {
         List<OperatorVerificationDb> list = template.query(SELECT_OPERATOR_TOKEN, new Object[]{token}, ROW_MAPPER);
         if (!list.isEmpty()) {
             return list.get(0);
@@ -56,7 +56,7 @@ public class OperatorVerificationRepository extends BaseRepository <OperatorVeri
         return null;
     }
 
-    public OperatorVerificationDb operatorByUserID(Long user_id) {
+    public OperatorVerificationDb getOperatorByUserID(Long user_id) {
         List <OperatorVerificationDb> selectedOperators = template.query(SELECT_OPERATOR_USER_ID, new Object[] {user_id} , ROW_MAPPER);
         if(!selectedOperators.isEmpty()){
             return selectedOperators.get(0);

@@ -1,11 +1,14 @@
 package lt.tieto.msi2016.order.service;
 
-import lt.tieto.msi2016.item.model.Item;
-import lt.tieto.msi2016.item.repository.model.ItemDb;
-import lt.tieto.msi2016.item.service.ItemService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lt.tieto.msi2016.mission.model.Mission;
+import lt.tieto.msi2016.mission.model.MissionCommand;
 import lt.tieto.msi2016.order.model.Order;
+import lt.tieto.msi2016.order.model.OrderResults;
 import lt.tieto.msi2016.order.repository.OrderRepository;
 import lt.tieto.msi2016.order.repository.model.OrderDb;
+import lt.tieto.msi2016.order.repository.model.OrderResultsDb;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import lt.tieto.msi2016.utils.service.SecurityService;
 import org.joda.time.DateTime;
@@ -13,12 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
 
+    @Autowired
+    private ObjectMapper objectMapper;
     @Autowired
     private OrderRepository repository;
 
@@ -35,14 +42,18 @@ public class OrderService {
 
     @Transactional(readOnly = true)
     public List<Order> all() {
-        return repository.findAll().stream().map(OrderService::mapToOrders).collect(Collectors.toList());
+        List<Order> resultList = new ArrayList();
+        for (OrderDb orderDb : repository.findAll()) {
+            resultList.add(mapToOrders(orderDb));
+        }
+        return resultList;
     }
 
     @Transactional
-    public Order updateOrderStatus(Long id, OrderDb.OrderState orderState) {
+    public Order updateStatus(Long id, OrderDb.Status status) {
         OrderDb orderDb = repository.findOne(id);
         if (orderDb != null) {
-            orderDb.setOrderState(orderState);
+            orderDb.setStatus(status);
             OrderDb updated = repository.update(orderDb);
             return mapToOrders(updated);
         } else {
@@ -50,35 +61,68 @@ public class OrderService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public List<Mission> getAllMissions() throws IOException {
+        List<Mission> resultList = new ArrayList();
+        for (OrderDb orderDb : getAllAcceptedOrders()) {
+            resultList.add(mapToMission(orderDb));
+        }
+        return resultList;
+    }
 
-    private static Order mapToOrders(OrderDb db) {
+    private List<OrderDb> getAllAcceptedOrders() {
+        return repository.getOrdersByStatus(OrderDb.Status.Accepted);
+    }
+
+
+    private Order mapToOrders(OrderDb db) {
         Order api = new Order();
         api.setId(db.getId());
-        api.setMissionName(db.getMissionName());
+        api.setMissionName(db.getMissionId().split("-")[0]);
         api.setFullName(db.getFullName());
         api.setPhone(db.getPhone());
         api.setEmail(db.getEmail());
         api.setDetails(db.getDetails());
-        api.setOrderState(db.getOrderState());
+        api.setStatus(db.getStatus());
         api.setSubmissionDate(db.getSubmissionDate());
         return api;
     }
 
-    private static OrderDb mapToOrdersDb(Long id, Order api, Long userId) {
+    private OrderDb mapToOrdersDb(Long id, Order api, Long userId) {
         OrderDb db = new OrderDb();
         db.setId(id);
-        db.setCreatedBy(userId);
-        db.setMissionName(api.getMissionName());
-        db.setFullName(api.getFullName());
-        db.setPhone(api.getPhone());
-        db.setEmail(api.getEmail());
+        db.setSubmittedBy(userId);
+        db.setMissionId(api.getMissionName()); // on order creation append order id to this ({order_id}-{mission_name})
         db.setSubmissionDate(DateTime.now());
         db.setDetails(api.getDetails());
-        db.setOrderState(OrderDb.OrderState.Pending);
+        db.setStatus(OrderDb.Status.Pending);
+        //db.setCommands();
+        db.setFullName(api.getFullName());
+        db.setEmail(api.getEmail());
+        db.setPhone(api.getPhone());
         return db;
     }
 
-    private static OrderDb mapToOrdersDb(Order api, Long userId) {
+    @Transactional(readOnly = true)
+    public Mission getMissionByMissionId(String missionId) throws IOException {
+        Long orderId = Long.valueOf(missionId.split("-")[0]);
+        OrderDb orderDb = repository.findOne(orderId);
+        if (orderDb != null) {
+            return mapToMission(orderDb);
+        } else {
+            throw new DataNotFoundException("Order with id " + orderId + " not found");
+        }
+    }
+
+    private Mission mapToMission(OrderDb db) throws IOException {
+        Mission mission = new Mission();
+        mission.setMissionId(db.getMissionId());
+        mission.setSubmittedBy(db.getSubmittedBy());
+        mission.setCommands(objectMapper.readValue(db.getCommands(), new TypeReference<List<MissionCommand>>() {}));
+        return mission;
+    }
+
+    private OrderDb mapToOrdersDb(Order api, Long userId) {
         return mapToOrdersDb(null, api, userId);
     }
 }
