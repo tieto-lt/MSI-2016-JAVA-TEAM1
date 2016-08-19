@@ -14,7 +14,6 @@ function Service ($http) {
     this.declineOrder= function(id){
         return $http.put('/api/order/decline/' + id);
     }
-
 }
 
 Service.$inject = ['$http'];
