@@ -12,6 +12,7 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
     vm.isLogoutVisible = isLogoutVisible;
     vm.logout = logout;
     //vm.whatUsername = whatUsername;
+    vm.getCurrentState = getCurrentState;
 
     vm.isOperatorVerified = false;
 
@@ -65,6 +66,11 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
             AuthService.logout();
             $state.go('root.login');
     }
+
+    function getCurrentState() {
+            return $state.current.name;
+    }
+
     function checkOperator() {
         if (isLoggedIn() && isOperator()) {
             VerificationService.getStatus().then(

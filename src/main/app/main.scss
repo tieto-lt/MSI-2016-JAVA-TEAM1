@@ -2,15 +2,12 @@
   padding-top: 80px;
   padding-bottom: 40px;
   background-color: #eee;
-
-
 }
-
-
 .navbar .navbar-nav {
   display: inline-block;
   float: none;
   vertical-align: top;
+
 }
 
 .navbar .navbar-collapse {
@@ -18,13 +15,14 @@
 }
 
 .msi-status {
-    padding: 15px;
+    padding: 21px;
 
     &.msi-verified {
-        background: rgba(173, 222, 151, 0.5);
+        background: rgba(173, 222, 151, 1);
     }
 
     &.msi-unverified {
-        background: rgba(222, 151, 151, 0.83);
+        background: rgba(255,0,0, 0.9);
     }
 }
+

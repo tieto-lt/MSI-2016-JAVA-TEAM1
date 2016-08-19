@@ -1,12 +1,14 @@
 var module = require('main_module');
 
-function Controller(UserService) {
+function Controller(UserService, $state) {
 
  var vm = this;
    vm.user = {};
    vm.updateUserInformation = updateUserInformation;
    vm.doPasswordNotMatch = doPasswordNotMatch;
    vm.password = undefined;
+   vm.getCurrentState = getCurrentState;
+
 
    vm.$onInit = function() {
            _loadOrderDetails();
@@ -23,10 +25,11 @@ function Controller(UserService) {
      };
 
      function updateUserInformation(){
+
         UserService.updateUserInformation(vm.user).then(
             function (){
                 vm.message = true;
-                vm.user.password = vm.password;
+                console.log(vm.user.password);
             },
             function (err){
                 console.log('Error', err);
@@ -36,9 +39,15 @@ function Controller(UserService) {
 
       function doPasswordNotMatch() {
             return vm.password != vm.passwordRepeat;
-     }
+     };
+
+      function getCurrentState() {
+            console.log($state.current.name);
+            return $state.current.name;
+       }
+
 }
-Controller.$inject = ['UserService'];
+Controller.$inject = ['UserService', '$state'];
 require('./information.css');
 module.component('customerInformation', {
     controller: Controller,
