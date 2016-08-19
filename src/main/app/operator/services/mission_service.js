@@ -11,7 +11,7 @@ function Service ($http) {
     };
 
     this.redo = function(orderId) {
-       return $http.put("/api/order/redo/" + orderId,{});
+       return $http.put("/api/order/redo/" + id,{});
     };
 }
 Service.$inject = ['$http'];

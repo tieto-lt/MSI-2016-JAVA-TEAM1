@@ -82,10 +82,11 @@ function Controller($scope, MissionService) {
     }
 
     function redo(index) {
-            MissionService.redo(vm.missions[index].orderId).then(
-                function () {
+            MissionService.redo(vm.missions[index].id).then(
+               function () {
                     console.log('mission status changed to accepted');
                     vm.success = "mission status changed to accepted";
+                    _loadList();
                },
                function (err) {
                    if (err.staus != 500) {

@@ -90,4 +90,12 @@ public class OrderResultsService {
         db.setNavigationData(objectMapper.writeValueAsString(api.getNavigationData()));
         return db;
     }
+
+    @Transactional
+    public void remove(Long id) {
+        if (!repository.exists(id)) {
+            throw new DataNotFoundException("Item with id " + id + " doesn't exist");
+        }
+        repository.delete(id);
+    }
 }

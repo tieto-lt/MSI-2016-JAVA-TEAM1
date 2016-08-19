@@ -87,6 +87,10 @@ public class OperatorVerificationService {
         return repository.getOperatorVerificationByToken(token).getStatus();
     }
 
+    public OperatorVerificationStatus.Status getOperatorStatusByCurrentUser(){
+        return repository.getOperatorByUserID(securityService.getCurrentUser().getId()).getStatus();
+    }
+
 
     private static OperatorVerification mapToOperator(OperatorVerificationDb db) {
         OperatorVerification api = new OperatorVerification();
