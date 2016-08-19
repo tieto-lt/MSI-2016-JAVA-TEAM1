@@ -7,6 +7,9 @@ function Controller(UserService) {
    vm.updateUserInformation = updateUserInformation;
    vm.doPasswordNotMatch = doPasswordNotMatch;
    vm.password = undefined;
+   vm.changePassword = changePassword;
+
+   vm.passwords = {};
 
    vm.$onInit = function() {
            _loadOrderDetails();
@@ -16,6 +19,7 @@ function Controller(UserService) {
          UserService.get().then(
              function (response) {
                  vm.user = response.data;
+                 vm.passwords.oldPassword = response.data.password;
              },
              function (err) {
                  console.log('Error', err);
@@ -23,7 +27,6 @@ function Controller(UserService) {
      };
 
      function updateUserInformation(){
-        vm.user.password = vm.password;
         UserService.updateUserInformation(vm.user).then(
             function (){
                 vm.message = true;
@@ -34,9 +37,24 @@ function Controller(UserService) {
             });
      };
 
-      function doPasswordNotMatch() {
-            return vm.password != vm.passwordRepeat;
+     function changePassword(){
+            console.log(vm.passwords.enteredPassword);
+            console.log(vm.passwords.OldPassword);
+            console.log(vm.passwords.newPassword);
+        UserService.changePassword(vm.passwords).then(
+            function(){
+                console.log("Success");
+                vm.message1 = true;
+            },
+            function (err){
+                 vm.error1 = true;
+            });
      }
+
+      function doPasswordNotMatch() {
+            return vm.passwords.newPassword != vm.passwordRepeat;
+     }
+
 }
 Controller.$inject = ['UserService'];
 require('./information.css');
@@ -45,7 +63,7 @@ module.component('customerInformation', {
     templateUrl: require('./information.html')
 });
 
-require('./password.css');
+require('./password.scss');
 module.component('customerPassword', {
     controller: Controller,
     templateUrl: require('./password.html')

@@ -3,9 +3,11 @@ package lt.tieto.msi2016.user.service;
 import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.roles.model.Role;
 import lt.tieto.msi2016.roles.service.RoleService;
+import lt.tieto.msi2016.user.model.Password;
 import lt.tieto.msi2016.user.model.User;
 import lt.tieto.msi2016.user.repository.UserRepository;
 import lt.tieto.msi2016.user.repository.model.UserDb;
+import lt.tieto.msi2016.utils.exception.BusinessException;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import lt.tieto.msi2016.utils.exception.ValidationException;
 import lt.tieto.msi2016.utils.service.SecurityService;
@@ -71,9 +73,20 @@ public class UserService {
     }
 
     public User updateUserInformation(User user){
-        user.setPassword(encoder.encode(user.getPassword()));
+        //user.setPassword(encoder.encode(user.getPassword()));
         UserDb updatedUser = repository.update(mapToUserDb(user.getId(),user));
         return mapToUser(updatedUser);
+    }
+
+    public Password changeUserPassword(Password password){
+        User user = securityService.getCurrentUser();
+        if(encoder.matches(password.getEnteredPassword(),password.getOldPassword())){
+            user.setPassword(encoder.encode(password.getNewPassword()));
+            updateUserInformation(user);
+        }else{
+            throw new BusinessException("Incorrect password");
+        }
+        return password;
     }
     private static User mapToUser(UserDb db) {
         User api = new User();

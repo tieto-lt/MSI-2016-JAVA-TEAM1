@@ -116,7 +116,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
                roles: ["ROLE_CUSTOMER"]
              }
     })
-    state('root.password', {
+    .state('root.password', {
               url:"/user/password",
               template:"<customer-password></customer-password>",
               data: {
