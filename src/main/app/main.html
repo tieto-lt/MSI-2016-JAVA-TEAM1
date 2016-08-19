@@ -19,9 +19,9 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-               <!--<p class="navbar-text" ng-show="$ctrl.isLoggedIn()">
-                    <span class="glyphicon glyphicon-user"></span>Welcome, <span ng-bind="$ctrl.whatUsername"></span>!
-               </p>-->
+            <p class="navbar-text" ng-show="$ctrl.isLoggedIn()">
+                <span class="glyphicon glyphicon-user"></span> Welcome, <span ng-bind="$ctrl.whatUsername"></span>!
+            </p>
             <li ng-class="{active: $ctrl.getCurrentState() == 'root.registration'}"><a ng-show="!$ctrl.isLoggedIn()" ui-sref="root.registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li ng-class="{active: $ctrl.getCurrentState() == 'root.login'}"><a ng-show="!$ctrl.isLoggedIn()" ui-sref="root.login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li ng-show="$ctrl.isOperator() && $ctrl.isOperatorVerified" class="msi-status msi-verified">
@@ -32,7 +32,6 @@
                 <span>Unverified</span>
             </li>
             <li><a ng-click="$ctrl.logout()" href="#" ng-show="$ctrl.isLogoutVisible()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-
 
 
             </ul>
