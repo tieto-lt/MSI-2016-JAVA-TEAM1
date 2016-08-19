@@ -28,7 +28,7 @@ public class OperatorVerificationController {
     @Secured(Roles.OPERATOR)
     @RequestMapping(method = RequestMethod.GET, path = "/api/operator")
     public OperatorVerificationStatus.Status getOperatorStatus() {
-        return service.getOperatorStatus();
+        return service.getOperatorStatusByCurrentUser();
     }
 }
 

@@ -49,7 +49,7 @@ function Controller($state,VerificationService) {
 }
 Controller.$inject = ['$state','VerificationService'];
 
-require('./operator_verification.css');
+require('./operator_verification.scss');
 module.component('operatorVerification', {
 controller: Controller,
 templateUrl: require('./operator_verification.html')

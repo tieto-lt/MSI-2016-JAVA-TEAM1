@@ -3,6 +3,8 @@ package lt.tieto.msi2016.order.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lt.tieto.msi2016.item.model.Item;
+import lt.tieto.msi2016.item.repository.model.ItemDb;
 import lt.tieto.msi2016.mission.model.Mission;
 import lt.tieto.msi2016.mission.model.MissionCommand;
 import lt.tieto.msi2016.mission.model.MissionImage;
@@ -33,6 +35,16 @@ public class OrderService {
 
     @Autowired
     private SecurityService securityService;
+
+    @Transactional(readOnly = true)
+    public Order get(Long id) throws IOException {
+        OrderDb orderDb = repository.findOne(id);
+        if (orderDb != null) {
+            return mapToOrders(orderDb);
+        } else {
+            throw new DataNotFoundException("Item with id " + id + " not found");
+        }
+    }
 
     @Transactional
     public Order createOrder(Order order) throws IOException {

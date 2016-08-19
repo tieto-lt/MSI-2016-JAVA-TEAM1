@@ -7,10 +7,17 @@ require('angular-jwt');
 require('angular-animate');
 require('angular-ui-bootstrap');
 
+
+require('jquery');
+require("bootstrap-material-design");
+
 //require("angular-ui-bootstrap/dist/ui-bootstrap-tpls");
 
 require("bootstrap/dist/css/bootstrap.css");
+require("bootstrap-material-design/dist/css/bootstrap-material-design.css");
+require("bootstrap-material-design/dist/css/ripples.css");
 
+$.material.init()
 var _module = angular.module('AngularSpringRestDemo', ['ui.router', 'ngMessages', 'ngCookies', 'angular-jwt', 'ngAnimate', 'ui.bootstrap']);
 
 module.exports = _module;
