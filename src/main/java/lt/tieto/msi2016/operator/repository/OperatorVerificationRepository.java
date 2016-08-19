@@ -48,7 +48,7 @@ public class OperatorVerificationRepository extends BaseRepository <OperatorVeri
         super(ROW_MAPPER, ROW_UNMAPPER, "operator_verification", "id");
     }
 
-    public OperatorVerificationDb getOperatorByToken(String token) {
+    public OperatorVerificationDb getOperatorVerificationByToken(String token) {
         List<OperatorVerificationDb> list = template.query(SELECT_OPERATOR_TOKEN, new Object[]{token}, ROW_MAPPER);
         if (!list.isEmpty()) {
             return list.get(0);
