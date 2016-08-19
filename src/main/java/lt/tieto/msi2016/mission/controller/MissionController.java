@@ -5,6 +5,7 @@ import lt.tieto.msi2016.mission.model.Mission;
 import lt.tieto.msi2016.mission.model.MissionResult;
 import lt.tieto.msi2016.mission.model.Missions;
 
+import lt.tieto.msi2016.operator.OperatorVerificationStatus;
 import lt.tieto.msi2016.order.repository.model.OrderDb;
 import lt.tieto.msi2016.order.service.OrderResultsService;
 
@@ -36,9 +37,14 @@ public class MissionController {
     @RequestMapping(method = RequestMethod.GET, value = "/api/missions", params = "operatorToken")
     public Missions getMissions(@RequestParam String operatorToken) throws IOException {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
-            System.out.println("Getting missions " + operatorToken);
+            System.out.println("Getting missions");
             Missions missions = new Missions();
-            missions.setMissions(orderService.getAllMissions());
+            if (OperatorVerificationStatus.Status.VERIFIED == operatorVerificationService.getOperatorStatus(operatorToken)) {
+                missions.setMissions(orderService.getAllMissions());
+            } else {
+                // only test mission for not verified operators
+                missions.setMissions(MissionsHolder.getVerificationMission());
+            }
             return missions;
         } else {
             throw new UnauthorizedUserException("Operator token is not valid");
@@ -49,9 +55,12 @@ public class MissionController {
     public Mission reserveMission(@PathVariable String missionId, @RequestParam String operatorToken) throws IOException  {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
             LOG.info("reserve missions");
-            LOG.info(operatorToken);
-            orderService.updateStatus(Long.valueOf(missionId.split("-")[0]), OrderDb.Status.InProgress);
-            return orderService.getMissionByMissionId(missionId);
+            if (OperatorVerificationStatus.Status.VERIFIED == operatorVerificationService.getOperatorStatus(operatorToken)) {
+                orderService.updateStatus(Long.valueOf(missionId.split("-")[0]), OrderDb.Status.InProgress);
+                return orderService.getMissionByMissionId(missionId);
+            } else {
+                return MissionsHolder.getVerificationMission().get(0);
+            }
         } else {
             throw new UnauthorizedUserException("Operator token is not valid");
         }
@@ -64,9 +73,12 @@ public class MissionController {
             @RequestParam String operatorToken) throws IOException {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
             LOG.info("Completing mission {} {}", missionId, missionResult);
-            orderResultsService.saveMissionResult(missionResult, operatorVerificationService.getOperatorByToken(operatorToken).getId());
-            orderService.updateStatus(Long.valueOf(missionId.split("-")[0]), OrderDb.Status.Executed);
-            operatorVerificationService.verifyAndUpdateStatus(missionResult, operatorToken);
+            if (OperatorVerificationStatus.Status.VERIFIED == operatorVerificationService.getOperatorStatus(operatorToken)) {
+                orderResultsService.saveMissionResult(missionResult, operatorVerificationService.getOperatorByToken(operatorToken).getId());
+                orderService.updateStatus(Long.valueOf(missionId.split("-")[0]), OrderDb.Status.Executed);
+            } else {
+                operatorVerificationService.verifyAndUpdateStatus(missionResult, operatorToken);
+            }
         } else {
             throw new UnauthorizedUserException("Operator token is not valid");
         }

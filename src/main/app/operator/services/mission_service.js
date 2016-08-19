@@ -10,8 +10,8 @@ function Service ($http) {
        return $http.put("/api/order/publish/" + orderId,{});
     };
 
-    this.redo = function(orderId) {
-       return $http.put("/api/order/redo/" + orderId,{});
+    this.redo = function(id) {
+       return $http.put("/api/order/redo/" + id,{});
     };
 }
 Service.$inject = ['$http'];

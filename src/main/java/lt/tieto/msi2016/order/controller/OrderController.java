@@ -9,6 +9,7 @@ import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -50,10 +51,13 @@ public class OrderController extends BaseController {
         return orderService.updateStatus(id, OrderDb.Status.Completed);
     }
 
+    @Transactional
     @Secured(Roles.OPERATOR)
-    @RequestMapping(method = RequestMethod.PUT, path = "/api/order/redo/{id}")
-    public Order redoOrder(@PathVariable Long id) throws IOException {
-        return orderService.updateStatus(id, OrderDb.Status.Accepted);
+    @RequestMapping(method = RequestMethod.PUT, path = "/api/order/redo/{orderResultId}")
+    public Order redoOrder(@PathVariable Long orderResultId) throws IOException {
+        OrderResults orderResults = orderResultsService.get(orderResultId);
+        orderResultsService.remove(orderResults.getId());
+        return orderService.updateStatus(orderResults.getOrderId(), OrderDb.Status.Accepted);
     }
 
 
