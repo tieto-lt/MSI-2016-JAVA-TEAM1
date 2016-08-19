@@ -72,6 +72,7 @@ public class UserService {
 
     //*************************************************************
     public User updateUserInformation(User user){
+        user.setPassword(encoder.encode(user.getPassword()));
         UserDb updatedUser = repository.update(mapToUserDb(user.getId(),user));
         return mapToUser(updatedUser);
     }
