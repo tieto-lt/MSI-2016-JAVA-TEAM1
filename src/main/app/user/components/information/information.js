@@ -23,10 +23,10 @@ function Controller(UserService) {
      };
 
      function updateUserInformation(){
+        vm.user.password = vm.password;
         UserService.updateUserInformation(vm.user).then(
             function (){
                 vm.message = true;
-                vm.user.password = vm.password;
             },
             function (err){
                 console.log('Error', err);
