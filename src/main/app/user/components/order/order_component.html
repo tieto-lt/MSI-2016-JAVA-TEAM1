@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
                             <label>Details</label>
-                            <textarea placeholder="Details" type="text" name="details" class="form-control" ng-model="$ctrl.order.details"ng-maxlength="255"></textarea>
+                            <textarea placeholder="Details" type="text" name="details" class="form-control" ng-model="$ctrl.order.details" ng-maxlength="255"></textarea>
                             <p ng-show="orderForm.details.$error.maxlength" class="help-block">Details must not exceed 255 characters.</p>
                         </div>
                         <div  class="form-group">
