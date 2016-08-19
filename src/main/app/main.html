@@ -7,24 +7,29 @@
                 <a ng-show="$ctrl.isLoggedIn()" class="navbar-brand">JAVAINIAI</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerFirst ">Customer</a></li>
-                <li><a ng-show="$ctrl.isAdmin()" ui-sref="root.adminRole">Roles</a></li>
-                <li><a ng-show="$ctrl.isOperator()" ui-sref="root.operator">Operator</a></li>
-                <li><a ng-show="$ctrl.isCustomer()" ui-sref="root.orderComponent">New Order</a></li>
-                <li><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerOrders">Orders</a></li>
-                <li><a ng-show="$ctrl.isOperator()" ui-sref="root.token">Verification</a></li>
-                <li><a ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref="root.orders">Orders</a></li>
-                <li><a ng-show="$ctrl.isOperator()" ui-sref="root.missions">Missions</a></li>
-                <li><a ng-show="$ctrl.isCustomer()" ui-sref="root.information">Account information</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.customerFirst'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerFirst ">Customer</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.adminRole'}"><a ng-show="$ctrl.isAdmin()" ui-sref="root.adminRole">Roles</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.operator'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.operator">Operator</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.orderComponent'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.orderComponent">New Order</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.customerOrders'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerOrders">Orders</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.token'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.token">Verification</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.orders'}"><a ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref="root.orders">Orders</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.missions'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.missions">Missions</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.information'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.information">Account information</a></li>
 
 
-                <ul class="nav nav-pills navbar-right">
+                <ul class="nav navbar-nav navbar-right">
                     <p class="navbar-text" ng-show="$ctrl.isLoggedIn()">
                          <span class="glyphicon glyphicon-user"></span>Welcome, <span ng-bind="$ctrl.whatUsername"></span>!
                     </p>
                     <li><a ng-show="!$ctrl.isLoggedIn()" ui-sref="root.registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a ng-show="!$ctrl.isLoggedIn()" ui-sref="root.login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
+
+
+
+
+                </ul>
+
             <ul class="nav navbar-nav navbar-right">
             <!--    <p class="navbar-text" ng-show="$ctrl.isLoggedIn()">
                     <span class="glyphicon glyphicon-user"></span>Welcome, <span ng-bind="$ctrl.whatUsername"></span>!
@@ -40,7 +45,6 @@
                     <span class="glyphicon glyphicon-remove"></span>
                     <span>Unverified</span>
                 </li>
-                <li><a ng-click="$ctrl.logout()" href="#" ng-show="$ctrl.isLogoutVisible()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
             </ul>
 
