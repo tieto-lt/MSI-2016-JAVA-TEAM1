@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller($scope, OrdersService) {
+function Controller($scope,OrdersService) {
 
     var vm = this;
     vm.orders = {};
@@ -66,6 +66,8 @@ function Controller($scope, OrdersService) {
         $scope.test = function(text) {
           alert(text);
         }
+
+       /* $scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');*/
 
 }
 
