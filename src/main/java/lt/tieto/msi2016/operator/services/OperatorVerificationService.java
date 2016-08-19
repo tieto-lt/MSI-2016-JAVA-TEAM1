@@ -34,15 +34,15 @@ public class OperatorVerificationService {
 
     @Transactional
     public OperatorVerificationDb getOperatorByToken(String token) {
-        return repository.getOperatorByToken(token);
+        return repository.getOperatorVerificationByToken(token);
     }
 
     public Boolean isOperatorValidByToken(String token){
-        return repository.getOperatorByToken(token) != null;
+        return repository.getOperatorVerificationByToken(token) != null;
     }
 
     private OperatorVerification updateOperatorStatus(String token , OperatorVerificationStatus.Status status) {
-        OperatorVerificationDb model  = repository.getOperatorByToken(token);
+        OperatorVerificationDb model  = repository.getOperatorVerificationByToken(token);
         if (model != null) {
             model.setStatus(status);
 
@@ -83,11 +83,10 @@ public class OperatorVerificationService {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
-    public OperatorVerificationStatus.Status getOperatorStatus(){
-        Long id = securityService.getCurrentUser().getId();
-        OperatorVerificationDb operatorVerificationDb = repository.getOperatorByUserID(id);
-        return operatorVerificationDb.getStatus();
+    public OperatorVerificationStatus.Status getOperatorStatus(String token){
+        return repository.getOperatorVerificationByToken(token).getStatus();
     }
+
 
     private static OperatorVerification mapToOperator(OperatorVerificationDb db) {
         OperatorVerification api = new OperatorVerification();
