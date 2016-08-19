@@ -117,18 +117,18 @@ module.config(function($stateProvider, $urlRouterProvider) {
              }
     })
     .state('root.password', {
-             url:"/user/password",
-             template:"<customer-password></customer-password>",
-             data: {
-                roles: ["ROLE_CUSTOMER"]
-             }
+              url:"/user/password",
+              template:"<customer-password></customer-password>",
+              data: {
+                 roles: ["ROLE_CUSTOMER"]
+              }
     })
      .state('root.customerOrders', {
-             url:"/customer/orders",
-             template:"<customer-orders></customer-orders>",
-             data: {
-                roles: ["ROLE_CUSTOMER"]
-             }
+                 url:"/customer/orders",
+                 template:"<customer-orders></customer-orders>",
+                 data: {
+                   roles: ["ROLE_CUSTOMER"]
+                 }
         })
 });
 

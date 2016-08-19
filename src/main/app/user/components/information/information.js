@@ -44,7 +44,8 @@ module.component('customerInformation', {
     controller: Controller,
     templateUrl: require('./information.html')
 });
-require('./password.css');
+
+require('./password.scss');
 module.component('customerPassword', {
     controller: Controller,
     templateUrl: require('./password.html')
