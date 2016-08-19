@@ -10,7 +10,7 @@ function Service ($http) {
        return $http.put("/api/order/publish/" + orderId,{});
     };
 
-    this.redo = function(orderId) {
+    this.redo = function(id) {
        return $http.put("/api/order/redo/" + id,{});
     };
 }
