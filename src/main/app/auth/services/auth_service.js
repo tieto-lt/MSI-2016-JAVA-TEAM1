@@ -8,6 +8,7 @@ function Service ($http, $httpParamSerializer, $cookies, $state, Session) {
 
     function login(username, password) {
         var data = { grant_type:"password", username: username, password: password, client_id: "web-ui" };
+
         var encoded = btoa("web-ui:");
         var req = {
             method: 'POST',

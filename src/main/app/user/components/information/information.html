@@ -7,7 +7,7 @@
                     <li>
                         <a ui-sref="root.information">Information </a>
                     </li>
-                    <li><a ui-sref="root.customerPassword">Change Password</a></li>
+                    <li><a ui-sref="root.password">Change Password</a></li>
                 </ul>
                 <div class="panel-body">
                     <form name="orderForm"  novalidate>
@@ -23,7 +23,6 @@
                             <label>Full name</label>
                             <input placeholder="Full name" type="text" name="name" class="form-control" ng-model="$ctrl.user.name" ng-minlength="1" ng-maxlength ="60" required>
                             <p ng-show="orderForm.name.$invalid && !orderForm.name.$pristine" class="help-block">Name is not valid. Your name must consist at least from 1 to 60 characters.</p>
-
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.email.$invalid && !orderForm.email.$pristine }">
                             <label>Email</label>
