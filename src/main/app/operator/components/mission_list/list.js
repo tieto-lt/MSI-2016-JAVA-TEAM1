@@ -77,6 +77,7 @@ function Controller($scope, MissionService) {
                else {
                    vm.error = err.statusText;
                }
+               _loadList();
            });
     }
 
@@ -93,6 +94,7 @@ function Controller($scope, MissionService) {
                    else {
                        vm.error = err.statusText;
                    }
+                   _loadList();
                });
         }
 }
