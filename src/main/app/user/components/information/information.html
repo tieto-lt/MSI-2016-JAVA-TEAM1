@@ -16,6 +16,11 @@
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.name.$invalid && !orderForm.name.$pristine}">
                             <label>Full name</label>
+                            <input placeholder="Full name" type="text" name="name" class="form-control" ng-model="$ctrl.user.name">
+
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : orderForm.name.$invalid && !orderForm.name.$pristine}">
+                            <label>Full name</label>
                             <input placeholder="Full name" type="text" name="name" class="form-control" ng-model="$ctrl.user.name" ng-minlength="1" ng-maxlength ="60" required>
                             <p ng-show="orderForm.name.$invalid && !orderForm.name.$pristine" class="help-block">Name is not valid. Your name must consist at least from 1 to 60 characters.</p>
 
