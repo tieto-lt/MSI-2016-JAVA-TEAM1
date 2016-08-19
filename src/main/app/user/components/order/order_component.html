@@ -1,13 +1,10 @@
-
 <div class="msi-order-form">
-    <div>
         <div class="row">
             <div class="panel panel-primary">
                 <div class="panel-body">
                     <form name="orderForm" ng-submit="submitForm()" novalidate>
                         <div class="form-group">
-                            <h2>Create new order</h1>
-                            </h2>
+                            <h2>Create new order</h2>
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.missionName.$invalid && !orderForm.missionName.$pristine }">
                             <label>Mission name</label>

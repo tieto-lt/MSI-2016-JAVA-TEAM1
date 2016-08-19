@@ -53,13 +53,13 @@ public class OrderService {
     }
 
     @Transactional(readOnly = true)
-    public List<Order> allOrdersOfCustomer() {
+    public List<Order> getAllUserOrders() throws IOException {
+        List<Order> resultList = new ArrayList<>();
         Long userId = securityService.getCurrentUser().getId();
-        List <OrderDb> ordersOfCustomerDb = repository.getOrderByUserId(userId);
-        List <Order> ordersOfCustomer = ordersOfCustomerDb.stream()
-                .map(this::mapToOrders)
-                .collect(Collectors.toList());
-        return  ordersOfCustomer;
+        for (OrderDb orderDb: repository.getOrdersByUserId(userId)) {
+            resultList.add(mapToOrders(orderDb));
+        }
+        return  resultList;
     }
 
 
@@ -96,7 +96,7 @@ public class OrderService {
     private Order mapToOrders(OrderDb db) throws IOException {
         Order api = new Order();
         api.setId(db.getId());
-        api.setMissionName(db.getMissionId().split("-")[0]);
+        api.setMissionName(db.getMissionId().split("-")[1]);
         api.setFullName(db.getFullName());
         api.setPhone(db.getPhone());
         api.setEmail(db.getEmail());
