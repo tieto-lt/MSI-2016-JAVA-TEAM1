@@ -38,13 +38,11 @@ public class UserController  extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/user/information")
     public User updateInformation(@RequestBody @Valid User user) {
-       // service.updateUserInformation(user);
         return service.updateUserInformation(user);
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/api/user/password")
+    @RequestMapping(method = RequestMethod.POST, path = "/api/customer/password")
     public Password changeUserPassword(@RequestBody @Valid Password password) {
-        // service.updateUserInformation(user);
         return service.changeUserPassword(password);
     }
 }
