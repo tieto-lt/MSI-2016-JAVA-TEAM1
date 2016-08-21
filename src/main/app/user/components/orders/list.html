@@ -17,7 +17,6 @@
 
                         </ul>
                     </div>
-
                 </uib-accordion-heading>
             </div>
             <div uib-accordion-group class="panel-default"  is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders "  is-disabled="order.status != 'Completed' ">
@@ -29,7 +28,6 @@
                             <li>{{order.missionName}}</li>
                             <li>{{order.submissionDate | date:'yyyy.MM.dd'}}</li>
                             <li>{{order.status}}</li>
-
                         </ul>
                     </div>
                     <i class="pull-right glyphicon"   ng-class="{'glyphicon-chevron-up ' : status.open, 'glyphicon-chevron-down': !status.open}"></i>
@@ -60,9 +58,6 @@
                             <td>Details: </td>
                             <td>{{order.details}}</td>
                         </tr>
-
-
-
                     </table>
                 </div>
 

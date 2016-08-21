@@ -63,7 +63,7 @@ function Controller(UserService, $state) {
 
 }
 Controller.$inject = ['UserService', '$state'];
-require('./information.css');
+require('./information.scss');
 module.component('customerInformation', {
     controller: Controller,
     templateUrl: require('./information.html')
