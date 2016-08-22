@@ -17,7 +17,6 @@
 
                         </ul>
                     </div>
-
                 </uib-accordion-heading>
             </div>
             <div uib-accordion-group class="panel-default"  is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders "  is-disabled="order.status != 'Completed' ">
@@ -29,12 +28,38 @@
                             <li>{{order.missionName}}</li>
                             <li>{{order.submissionDate | date:'yyyy.MM.dd'}}</li>
                             <li>{{order.status}}</li>
-
                         </ul>
                     </div>
-                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                    <i class="pull-right glyphicon"   ng-class="{'glyphicon-chevron-up ' : status.open, 'glyphicon-chevron-down': !status.open}"></i>
 
                 </uib-accordion-heading>
+
+
+                <div  class="customer_details">
+                    <table>
+                        <tr>
+                            <td>Customer Info</td>
+                            <td> </td>
+                        </tr>
+
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{order.fullName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email: </td>
+                            <td>{{order.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone: </td>
+                            <td>{{order.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>Details: </td>
+                            <td>{{order.details}}</td>
+                        </tr>
+                    </table>
+                </div>
 
                     <div id="slides_control">
                         <div>
@@ -50,5 +75,11 @@
 
             </div>
         </uib-accordion>
+
     </div>
+
+    <!--<a href="#" uib-tooltip-html="htmlTooltip">scope variable</a>
+    <button uib-popover="hint!" popover-trigger="'mouseenter'" type="button" class="btn btn-default">hintas</button>
+    <button uib-popover="I appeared " popover-trigger="'focus'" type="button" class="btn btn-default">Mouseenter</button>
+    <button uib-popover="hint!" popover-trigger="'mouseenter'" type="button" class="btn btn-default">hintas</button>-->
 </div>

@@ -2,6 +2,7 @@ var module = require('main_module');
 
 function Service ($http) {
 
+
     this.create = function(user) {
         return $http.post('/api/user', user);
     };
@@ -16,6 +17,10 @@ function Service ($http) {
 
     this.updateUserInformation = function(user){
         return $http.post('/api/user/information',user);
+    };
+
+    this.changePassword = function(password){
+        return $http.post('/api/customer/password',password);
     };
 
 }

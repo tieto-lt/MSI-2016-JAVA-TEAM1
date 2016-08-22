@@ -74,11 +74,6 @@ public class OrderService {
         return  resultList;
     }
 
-
-
-
-
-
     @Transactional
     public Order updateStatus(Long id, OrderDb.Status status) throws IOException {
         OrderDb orderDb = repository.findOne(id);

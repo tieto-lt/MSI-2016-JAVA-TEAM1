@@ -1,6 +1,7 @@
 package lt.tieto.msi2016.user.controller;
 
 import lt.tieto.msi2016.roles.Roles;
+import lt.tieto.msi2016.user.model.Password;
 import lt.tieto.msi2016.user.model.User;
 import lt.tieto.msi2016.user.service.UserService;
 import lt.tieto.msi2016.utils.controller.BaseController;
@@ -37,7 +38,11 @@ public class UserController  extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/user/information")
     public User updateInformation(@RequestBody @Valid User user) {
-       // service.updateUserInformation(user);
         return service.updateUserInformation(user);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/api/customer/password")
+    public Password changeUserPassword(@RequestBody @Valid Password password) {
+        return service.changeUserPassword(password);
     }
 }

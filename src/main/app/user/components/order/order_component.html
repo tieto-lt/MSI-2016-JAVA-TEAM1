@@ -1,10 +1,47 @@
-
-<div class="msi-order-form">
-    <div>
-        <div class="row">
-            <div class="panel panel-primary">
+<div class="row">
+    <div class="panel panel-primary">
                 <div class="panel-body">
                     <form name="orderForm" ng-submit="submitForm()" novalidate>
+                        <div class="login_box2">
+                            <svg width="320" height="320">
+                                <rect id = "myRect" ng-click="$ctrl.showMessage('0')" x="250" y="10" rx=10 ry=10 width="{{$ctrl.all[0].size}}" height="{{$ctrl.all[0].size}}"
+                                      style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:{{$ctrl.all[0].width}};" />
+                                <text x="220" y="70" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[0].text}}">Object nr.4</text>
+                                <rect ng-click="$ctrl.showMessage('1')" x="170" y="140" rx="10" ry="10" width="{{$ctrl.all[1].size}}" height="{{$ctrl.all[1].size}}"
+                                      style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:{{$ctrl.all[1].width}};" />
+                                <text x="150" y="200" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[1].text}}">Object nr.1</text>
+                                <rect ng-click="$ctrl.showMessage('2')" x="30" y="90" rx="10" ry="10" width="{{$ctrl.all[2].size}}" height="{{$ctrl.all[2].size}}"
+                                      style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:{{$ctrl.all[2].width}};" />
+                                <text x="10" y="150" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[2].text}}">Object nr.2</text>
+                                <rect ng-click="$ctrl.showMessage('3')" x="10" y="5" rx="10" ry="10" width="{{$ctrl.all[3].size}}" height="{{$ctrl.all[3].size}}"
+                                      style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:{{$ctrl.all[3].width}};" />
+                                <text x="0" y="65" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[3].text}}">Object nr.3</text>
+                                <rect ng-click="$ctrl.showMessage('4')" x="25" y="240" rx="10" ry="10" width="{{$ctrl.all[4].size}}" height="{{$ctrl.all[4].size}}"
+                                      style="fill:{{$ctrl.all[4].color}};stroke:#676767;stroke-width:{{$ctrl.all[4].width}};" />
+                                <text x="0" y="300" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[4].text}}">Starting point</text>
+                            </svg>
+
+                            <table class = "table">
+                                <thead>
+                                <tr>
+                                    <th>Object</th>
+                                    <th>Camera</th>
+                                    <th ></th>
+                                </tr>
+                                </thead>
+
+                            <tr align="right" ng-repeat = "data in $ctrl.selectedObject track by $index">
+                                    <td>{{data.name}}</td>
+                                    <td><select>
+                                        <option value="FrontCamera">Front</option>
+                                        <option value="BottomCamera">Bottom</option>
+                                    </select></td>
+                                    <td><button ng-show="data.selected" class="btn btn-default btn-sm"  ng-click="$ctrl.remove(data.id)">
+                                     <span class="glyphicon glyphicon-remove"></span>Remove</button></td>
+                            </tr>
+                            </table>
+                        </div>
+
                         <div class="form-group">
                             <h2>Create new order</h1>
                             </h2>
@@ -31,7 +68,7 @@
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
                             <label>Details</label>
-                            <textarea placeholder="Details" type="text" name="details" class="form-control" ng-model="$ctrl.order.details"ng-maxlength="255"></textarea>
+                            <textarea placeholder="Details" type="text" name="details" class="form-control" ng-model="$ctrl.order.details" ng-maxlength="255"></textarea>
                             <p ng-show="orderForm.details.$error.maxlength" class="help-block">Details must not exceed 255 characters.</p>
                         </div>
                         <div  class="form-group">
@@ -40,11 +77,9 @@
                             <div class="alert alert-success" ng-show="$ctrl.message" align="center"><strong>Order created successfully!</strong></div>
                             <div class="alert alert-danger" ng-show="$ctrl.error" align="center"><strong>Something went wrong</strong></div>
                         </div>
-                        <hr>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

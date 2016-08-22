@@ -18,10 +18,11 @@
             <td>
                 <select ng-model="selected">
                     <option value="Accepted">Accepted</option>
-                    <option value="InProgress">In progress</option>
+                    <option value="In progress">In progress</option>
                     <option value="Completed">Completed</option>
                     <option value="Declined">Declined</option>
                     <option value="Pending">Pending</option>
+                    <option value="Executed">Executed</option>
                     <option value="">All</option>
                 </select>
             </td>
@@ -36,8 +37,8 @@
             <td>{{order.email}}</td>
             <td>{{order.phone}}</td>
             <td>{{order.status}}</td>
-            <td><button type="button" class="btn btn-success" ng-click="$ctrl.acceptOrder(order.id)">accept</button></td>
-            <td><button type="button" class="btn btn-danger" ng-click="$ctrl.declineOrder(order.id)">decline</button></td>
+            <td><button ng-show="order.status == 'Pending' || order.status == 'Declined' || order.status == 'Accepted' " ng-disabled = "order.status == 'Accepted' " type="button" class="btn btn-success" ng-click="$ctrl.acceptOrder(order.id)">accept</button></td>
+            <td><button ng-show="order.status == 'Pending' || order.status == 'Accepted' || order.status == 'Declined' " ng-disabled = "order.status == 'Declined' " type="button" class="btn btn-danger" ng-click="$ctrl.declineOrder(order.id)">decline</button></td>
         </tr>
         </tbody>
     </table>
