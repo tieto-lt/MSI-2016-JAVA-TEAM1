@@ -3,6 +3,9 @@
 <body>-->
 <div>
     <div>
+
+
+
         <script type="text/ng-template" id="group-template.html">
             <div class="panel-heading">
                 <h4 class="panel-title" style="color:#fa39c3">
@@ -42,15 +45,13 @@
                     </div>
                 </div>
                 <div id="slides_control">
-                    <div>
-                        <uib-carousel active="$ctrl.activeSlide">
-                            <uib-slide ng-repeat="image in mission.images" index="$index">
+                        <div uib-carousel active="$ctrl.activeSlide" no-wrap="noWrapSlides">
+                            <div uib-slide ng-repeat="image in mission.images track by $index" index="$index">
                                 <img ng-src="data:image/png;base64,{{image.imageBase64}}">
                                 <div class="carousel-caption">
                                 </div>
-                            </uib-slide>
-                        </uib-carousel>
-                    </div>
+                            </div>
+                        </div>
                 </div>
                 <hr>
                 <button class="btn btn-warning" ng-click="$ctrl.publish($index)">Publish</button>

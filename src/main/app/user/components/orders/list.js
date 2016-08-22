@@ -13,6 +13,7 @@ function Controller($scope,OrdersService) {
 
     /*vm.drop = drop;*/
 
+    /*Carousel variables*/
 
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
