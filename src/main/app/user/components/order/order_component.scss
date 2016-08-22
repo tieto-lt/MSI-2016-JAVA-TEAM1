@@ -8,14 +8,17 @@
     border-radius: 5px;
     box-shadow: 5px 5px 5px #888888;
     padding: 10px;
+    margin-right: 20px;
 
 }
 .login_box2 {
-         height: 340px;
+         height: 430px;
+         width: 310px;
          border: 6px solid #009688;
          padding: 10px;
          box-shadow: 5px 5px 5px #888888;
          margin-top: 10px;
+         margin-right: 20px;
 
 }
 form { margin: 0px 10px;
@@ -30,5 +33,10 @@ form { margin: 0px 10px;
 }
 .glyphicon-remove{
  color : red;
+}
+input[type="checkbox"] {
+   //display:none;
+   color:blue;
+
 }
 

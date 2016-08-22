@@ -47,9 +47,10 @@
                             </div>
                         </div>
                 </div>
-                <hr>
-                <button class="btn btn-warning" ng-click="$ctrl.publish($index)">Publish</button>
-                <button class="btn btn-danger" ng-click="$ctrl.redo($index)">Redo</button>
+                <div>
+                    <button class="btn btn-warning" ng-click="$ctrl.publish($index)" ng-hide="$ctrl.button">Publish</button>
+                    <button class="btn btn-danger" ng-click="$ctrl.redo($index)" ng-hide="$ctrl.button">Redo</button>
+                </div>
                 <div class="alert alert-danger" role="alert" ng-show="$ctrl.error">
                     {{$ctrl.error}}
                 </div>
@@ -59,8 +60,8 @@
             </div>
 
         </uib-accordion>
-
     </div>
 </div>
+
 <!--</body>
 </html>-->
