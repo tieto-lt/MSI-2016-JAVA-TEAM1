@@ -9,14 +9,14 @@ function Controller($scope,$stateParams,OrderService) {
     vm.getAllOrders = getAllOrders;
     vm.acceptOrder = acceptOrder;
     vm.declineOrder = declineOrder;
-    vm.sortType = 'status';
     vm.selected = undefined;
 
     vm.checkStatus = checkStatus;
 
     vm.sortReverse = true;
-     vm.$onInit = function(){
+    vm.$onInit = function(){
         getAllOrders();
+        vm.sortType = 'status';
     }
 
       function sortBy(type){
