@@ -9,7 +9,7 @@
 
                     <div class="form-group label-floating" ng-class="{ 'has-error' : userForm.username.$invalid && userForm.username.$dirty &&
                         userForm.username.$error.minlength && userForm.username.$error.pattern}">
-                        <label for="username" class="control-label">User name <span style="color:red;">*</span></label>
+                        <label for="username" class="control-label">Username <span style="color:red;">*</span></label>
                         <input ng-pattern="/^\S*$/" type="text" name="username" class="form-control" ng-model="$ctrl.user.username"  ng-minlength="5" id="username" required>
                         <small><p  style="color:red" ng-show="userForm.username.$error.minlength && !userForm.username.$pristine">Username is too short.</p></small>
                         <small><p  style="color:red" ng-show="userForm.username.$error.pattern && !userForm.username.$pristine">Please enter a valid user name. No spaces are allowed </p></small>
