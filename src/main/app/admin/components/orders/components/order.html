@@ -30,7 +30,7 @@
         </thead>
         <tbody>
 
-        <tr ng-repeat = "order in $ctrl.orders | orderBy : $ctrl.sortType : $ctrl.sortReverse | filter : selected ">
+        <tr ng-repeat = "order in $ctrl.orders | orderBy : $ctrl.sortType : $ctrl.sortReverse | filter : {status:selected} ">
             <td>{{order.id}}</td>
             <td>{{order.submissionDate | date:'yyyy.MM.dd'}}</td>
             <td>{{order.fullName}}</td>

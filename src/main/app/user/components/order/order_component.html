@@ -4,7 +4,7 @@
             <div class="form-group">
                 <h2>Create new order</h1>
                 </h2>
-            </div>
+            <form name = "orderForm" >
             <div class="form-group" ng-class="{ 'has-error' : orderForm.missionName.$invalid && !orderForm.missionName.$pristine }">
                 <label>Mission name</label>
                 <input placeholder="Mission name" type="text" name="missionName" class="form-control" ng-model="$ctrl.order.missionName"  ng-minlength="5" ng-maxlength="30"required>
@@ -36,7 +36,10 @@
                 <div class="alert alert-success" ng-show="$ctrl.message" align="center"><strong>Order created successfully!</strong></div>
                 <div class="alert alert-danger" ng-show="$ctrl.error" align="center"><strong>Something went wrong</strong></div>
             </div>
+            </form>
         </div>
+    </div>
+
         <div class="col-sm-9 col-md-6" style="background-color:white; height:750px">
             <div class="login_box2">
             <svg width="310" height="320">
@@ -56,23 +59,24 @@
                       style="fill:{{$ctrl.all[4].color}};stroke:#676767;stroke-width:{{$ctrl.all[4].width}};" />
                 <text x="0" y="300" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[4].text}}">Starting point</text>
             </svg>
-
             <table class = "table">
                 <thead>
                 <tr>
-                    <th>Object</th>
+                    <th >Object</th>
                     <th>Camera</th>
                     <th ></th>
                 </tr>
                 </thead>
 
-                <tr align="right" ng-repeat = "data in $ctrl.selectedObject track by $index">
+                <tr ng-repeat = "data in $ctrl.selectedObject track by $index">
                     <td>{{data.name}}</td>
-                    <td><select>
+                    <td>
+                        <select>
                         <option value="FrontCamera">Front</option>
                         <option value="BottomCamera">Bottom</option>
-                    </select></td>
-                    <td><button ng-show="data.selected" class="btn btn-default btn-sm"  ng-click="$ctrl.remove(data.id)">
+                    </select>
+                    </td>
+                    <td><button style="margin-top:auto" ng-show="data.selected" class="btn btn-default btn-sm"  ng-click="$ctrl.remove(data.id)">
                         <span class="glyphicon glyphicon-remove"></span>Remove</button></td>
                 </tr>
             </table>

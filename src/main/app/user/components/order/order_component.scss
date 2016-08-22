@@ -1,9 +1,4 @@
-.table{
 
-    td{
-      padding:5px;
-    }
-}
 .login_box1 {
     display: inline-block;
     margin-right: 2px;
@@ -13,6 +8,7 @@
     border-radius: 5px;
     box-shadow: 5px 5px 5px #888888;
     padding: 10px;
+
 }
 .login_box2 {
          height: 340px;
@@ -23,6 +19,9 @@
 
 }
 form { margin: 0px 10px;
+    .alert {
+            width : 300px;
+        }
 }
 
 .panel-body {

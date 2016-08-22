@@ -26,3 +26,13 @@
     }
 }
 
+*:focus,
+*:active,
+a:active,
+a:focus,
+input:focus,
+input:active {
+
+    outline:none;
+    outline: 0;
+}
