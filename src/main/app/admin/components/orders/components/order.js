@@ -9,7 +9,7 @@ function Controller($scope,$stateParams,OrderService) {
     vm.getAllOrders = getAllOrders;
     vm.acceptOrder = acceptOrder;
     vm.declineOrder = declineOrder;
-    vm.sortType = 'submissionDate';
+    vm.sortType = 'status';
     vm.selected = undefined;
 
     vm.checkStatus = checkStatus;

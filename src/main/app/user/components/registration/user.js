@@ -1,6 +1,7 @@
 var module = require('main_module');
 
 function Controller($state, $scope, UserService, Session, AuthService) {
+    $.material.init()
     var vm = this;
 
     vm.user = {};

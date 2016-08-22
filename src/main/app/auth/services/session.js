@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Service ($cookies, jwtHelper, $http) {
+function Service ($cookies, jwtHelper) {
 
     this.getSession = getSession;
     this.storeToken = storeToken;
@@ -8,14 +8,7 @@ function Service ($cookies, jwtHelper, $http) {
     this.invalidate = invalidate;
     this.isSessionActive = isSessionActive;
     this.getRole = getRole;
-    this.initHttp = initHttp;
     this.getUsername = getUsername;
-
-    function initHttp() {
-      if (isSessionActive()) {
-        $http.defaults.headers.common.Authorization= 'Bearer ' + getToken();
-      }
-    }
 
     function storeToken(token) {
         $cookies.put("access_token", token);
@@ -61,5 +54,5 @@ function Service ($cookies, jwtHelper, $http) {
     }
 }
 
-Service.$inject = ['$cookies', 'jwtHelper', '$http'];
+Service.$inject = ['$cookies', 'jwtHelper'];
 module.service('Session', Service);

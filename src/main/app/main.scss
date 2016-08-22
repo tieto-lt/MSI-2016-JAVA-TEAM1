@@ -2,11 +2,6 @@
   padding-top: 80px;
   padding-bottom: 40px;
   background-color: #eee;
-  .required label:after {
-      color: #e32;
-      content: ' *';
-      display:inline;
-  }
 }
 .navbar .navbar-nav {
   display: inline-block;
@@ -17,11 +12,6 @@
 
 .navbar .navbar-collapse {
   text-align: center;
-  .required label:after {
-      color: #e32;
-      content: ' *';
-      display:inline;
-  }
 }
 
 .msi-status {
@@ -34,15 +24,4 @@
     &.msi-unverified {
         background: rgba(255,0,0, 0.9);
     }
-    .required label:after {
-        color: #e32;
-        content: ' *';
-        display:inline;
-    }
-}
-
-.required label:after {
-    color: #e32;
-    content: ' *';
-    display:inline;
 }
