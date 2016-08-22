@@ -18,6 +18,7 @@ function Controller($scope, MissionService) {
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
     vm.activeSlide = 0;
+    vm.success = undefined;
 
     vm.$onInit = function() {
             _loadList();
@@ -56,6 +57,8 @@ function Controller($scope, MissionService) {
             function (err) {
                 console.log('Error',err);
             });
+
+            //console.log(vm.missions);
      }
      $scope.status = {
        isCustomHeaderOpen: false,
@@ -65,27 +68,10 @@ function Controller($scope, MissionService) {
 
 
     function publish(index) {
-        MissionService.publish(vm.missions[index].orderId).then(
-            function () {
-                console.log('mission results successfully published');
-                vm.success = "mission results successfully published";
-           },
-           function (err) {
-               if (err.staus != 500) {
-                   vm.error = err.data.message;
-               }
-               else {
-                   vm.error = err.statusText;
-               }
-           });
-    }
-
-    function redo(index) {
-            MissionService.redo(vm.missions[index].id).then(
-               function () {
-                    console.log('mission status changed to accepted');
-                    vm.success = "mission status changed to accepted";
-                    _loadList();
+            MissionService.publish(vm.missions[index].orderId).then(
+                function () {
+                    console.log('mission results successfully published');
+                    vm.success = "mission results successfully published";
                },
                function (err) {
                    if (err.staus != 500) {
@@ -96,6 +82,23 @@ function Controller($scope, MissionService) {
                    }
                });
         }
+
+        function redo(index) {
+                MissionService.redo(vm.missions[index].id).then(
+                   function () {
+                        console.log('mission status changed to accepted');
+                        vm.success = "mission status changed to accepted";
+                        _loadList();
+                   },
+                   function (err) {
+                       if (err.staus != 500) {
+                           vm.error = err.data.message;
+                       }
+                       else {
+                           vm.error = err.statusText;
+                       }
+                   });
+            }
 }
 
 Controller.$inject = ['$scope','MissionService'];
