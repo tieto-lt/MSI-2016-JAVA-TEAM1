@@ -1,6 +1,7 @@
 var module = require('main_module');
 
 function Controller(UserService) {
+  $.material.init()
 
   var vm = this;
   vm.order = {};
