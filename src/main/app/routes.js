@@ -1,7 +1,10 @@
 var angular = require('angular');
 var module = angular.module('AngularSpringRestDemo');
 
-module.config(function($stateProvider, $urlRouterProvider) {
+module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+
+
+  $httpProvider.interceptors.push('sessionInvalidationInterceptor');
 
   // For any unmatched url, redirect to /
   $urlRouterProvider.otherwise("/");
@@ -133,11 +136,40 @@ module.config(function($stateProvider, $urlRouterProvider) {
 });
 
 
+module.factory('sessionInvalidationInterceptor', ['Session', '$state', function(Session, $state) {
+      return {
+          request: function(config) {
+            if (Session.getToken() && !Session.isSessionActive()){
+                console.log('invalidating');
+                Session.invalidate();
+                if (config.headers.Authorization) {
+                    delete config.headers.Authorization;
+                }
+                $state.go('root.login');
+            }
+            console.log(config);
+            return config;
+          },
+          responseError: function(config){
+              if(config.status == 401){
+                  Session.invalidate();
+                  if (config.headers.Authorization) {
+                      delete config.headers.Authorization;
+                  }
+                  $state.go('root.login');
+              }
+              return config;
+          }
+      }
+}]);
 
 
-module.run(['$transitions', 'Session', '$state', function($transitions, Session, $state) {
 
-  Session.initHttp();
+module.run(['$transitions', 'Session', '$state', '$http', function($transitions, Session, $state, $http) {
+
+  if (Session.isSessionActive()) {
+     $http.defaults.headers.common.Authorization= 'Bearer ' + Session.getToken();
+  }
 
   // check public pages
   $transitions.onStart(
