@@ -1,5 +1,7 @@
 
 <div>
+
+
     <div>
         <div class="alert alert-info" ng-show="$ctrl.message"  align="center">
             <strong>You have not submitted any orders yet!</strong>
@@ -20,7 +22,7 @@
 
                 </uib-accordion-heading>
             </div>
-            <div uib-accordion-group class="panel-default"  is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders "  is-disabled="order.status != 'Completed' ">
+            <div uib-accordion-group class="panel-default" is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders "  is-disabled="order.status != 'Completed' ">
                 <uib-accordion-heading >
 
                     <div  class="list_header">
@@ -32,7 +34,7 @@
 
                         </ul>
                     </div>
-                    <i class="pull-right glyphicon"   ng-class="{'glyphicon-chevron-up ' : status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                    <i class="pull-right glyphicon"  uib-popover="Show / Hide Results" popover-trigger="'mouseenter'"  ng-class="{'glyphicon-chevron-up ' : status.open, 'glyphicon-chevron-down': !status.open}"></i>
 
                 </uib-accordion-heading>
 
@@ -67,15 +69,13 @@
                 </div>
 
                     <div id="slides_control">
-                        <div>
-                            <uib-carousel active="$ctrl.activeSlide">
-                                <uib-slide ng-repeat="image in $ctrl.result.images" index="$index">
+                            <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">
+                                <div uib-slide ng-repeat="image in $ctrl.result.images track by $index" index="$index">
                                     <img ng-src="data:image/png;base64,{{image.imageBase64}}">
-                                    <div class="carousel-caption">
-                                    </div>
-                                </uib-slide>
-                            </uib-carousel>
-                        </div>
+
+                                </div>
+
+                            </div>
                     </div>
 
             </div>
@@ -83,8 +83,8 @@
 
     </div>
 
-    <!--<a href="#" uib-tooltip-html="htmlTooltip">scope variable</a>
+    <a href="#" uib-tooltip-html="htmlTooltip">scope variable</a>
     <button uib-popover="hint!" popover-trigger="'mouseenter'" type="button" class="btn btn-default">hintas</button>
     <button uib-popover="I appeared " popover-trigger="'focus'" type="button" class="btn btn-default">Mouseenter</button>
-    <button uib-popover="hint!" popover-trigger="'mouseenter'" type="button" class="btn btn-default">hintas</button>-->
+    <button uib-popover="hint!" popover-trigger="'mouseenter'" type="button" class="btn btn-default">hintas</button>
 </div>
