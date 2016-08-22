@@ -1,7 +1,4 @@
-
 <div>
-
-
     <div>
         <div class="alert alert-info" ng-show="$ctrl.message"  align="center">
             <strong>You have not submitted any orders yet!</strong>
@@ -37,6 +34,7 @@
                 </uib-accordion-heading>
 
 
+                <div  class="customer_details">
                     <table>
                         <tr>
                             <td>Customer Info</td>
@@ -63,14 +61,8 @@
                             <td>Details: </td>
                             <td>{{order.details}}</td>
                         </tr>
-
-
                     </table>
                 </div>
-
-
-
-
                     <div id="slides_control">
                             <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">
                                 <div uib-slide ng-repeat="image in $ctrl.result.images track by $index" index="$index">
@@ -85,6 +77,7 @@
         </uib-accordion>
 
     </div>
+
 
     <a href="#" uib-tooltip-html="htmlTooltip">scope variable</a>
     <button uib-popover="hint!" popover-trigger="'mouseenter'" type="button" class="btn btn-default">hintas</button>
