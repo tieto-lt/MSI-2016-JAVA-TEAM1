@@ -9,15 +9,14 @@ function Controller($scope,OrdersService) {
     vm.message = false;
     $scope.oneAtATime = true;
     vm.getResults= getResults;
-    /*order_id;*/
 
-    /*vm.drop = drop;*/
-
-    /*Carousel variables*/
+     /*Carousel variables*/
 
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
     vm.activeSlide = 0;
+
+
 
     vm.$onInit = function() {
             _loadList();
