@@ -20,7 +20,7 @@ function Service ($http) {
     };
 
     this.changePassword = function(password){
-        return $http.post('/api/user/password',password);
+        return $http.post('/api/customer/password',password);
     };
 
 }
