@@ -12,14 +12,14 @@ function Controller(UserService) {
   vm.remove = remove;
 
   vm.selectedObject = [];
-  vm.size = 35;
+  vm.size = 45;
   vm.object = undefined;
   vm.all = [
-    {id :0, selected: false, color: "#928f8f", name: "4 object", size: 35, text:"#171313", width: 5},
-    {id :1, selected: false, color: "#928f8f", name: "1 object", size: 35, text:"#171313", width: 5},
-    {id :2, selected: false, color: "#928f8f", name: "2 object", size: 35, text:"#171313", width: 5},
-    {id :3, selected: false, color: "#928f8f", name: "3 object", size: 35, text:"#171313", width: 5},
-    {id :4, selected: false, color: "#928f8f", name: "Start", size: 35, text:"#171313", width: 5}
+    {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5},
+    {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5},
+    {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5},
+    {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5},
+    {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5}
   ];
 
   vm.$onInit = function() {
