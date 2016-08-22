@@ -1,8 +1,6 @@
 var module = require('main_module');
 
 function Controller(UserService) {
-  $.material.init()
-
   var vm = this;
   vm.order = {};
   vm.user = {};
@@ -118,9 +116,6 @@ function Controller(UserService) {
         }
         return 0;
    }
-
-
-
 }
 Controller.$inject = ['UserService'];
 require('./order_component.scss');

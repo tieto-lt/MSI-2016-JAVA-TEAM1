@@ -136,7 +136,7 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 });
 
 
-module.factory('sessionInvalidationInterceptor', ['Session', '$state', function(Session, $state) {
+module.factory('sessionInvalidationInterceptor', ['Session', '$state', '$q', function(Session, $state, $q) {
       return {
           request: function(config) {
             if (Session.getToken() && !Session.isSessionActive()){
@@ -150,15 +150,12 @@ module.factory('sessionInvalidationInterceptor', ['Session', '$state', function(
             console.log(config);
             return config;
           },
-          responseError: function(config){
-              if(config.status == 401){
+          responseError: function(rejection){
+              if(rejection.status == 401){
                   Session.invalidate();
-                  if (config.headers.Authorization) {
-                      delete config.headers.Authorization;
-                  }
                   $state.go('root.login');
               }
-              return config;
+              return $q.reject(rejection);
           }
       }
 }]);
