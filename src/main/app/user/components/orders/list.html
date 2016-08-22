@@ -37,7 +37,6 @@
                 </uib-accordion-heading>
 
 
-                <div  class="customer_details">
                     <table>
                         <tr>
                             <td>Customer Info</td>
@@ -57,11 +56,20 @@
                             <td>{{order.phone}}</td>
                         </tr>
                         <tr>
+                            <td>Execution date: </td>
+                            <td>{{$ctrl.result.executionDate | date:'yyyy.MM.dd'}}</td>
+                        </tr>
+                        <tr>
                             <td>Details: </td>
                             <td>{{order.details}}</td>
                         </tr>
+
+
                     </table>
                 </div>
+
+
+
 
                     <div id="slides_control">
                             <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">

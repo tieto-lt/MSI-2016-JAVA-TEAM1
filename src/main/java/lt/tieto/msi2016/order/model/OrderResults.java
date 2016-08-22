@@ -2,6 +2,7 @@ package lt.tieto.msi2016.order.model;
 
 import lt.tieto.msi2016.mission.model.MissionImage;
 import lt.tieto.msi2016.mission.model.MissionNavigationData;
+import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,6 +17,16 @@ public class OrderResults {
     private List<MissionImage> images;
     private BigDecimal batteryStatus;
     private String missionName;
+    private DateTime executionDate;
+
+
+    public DateTime getExecutionDate() {
+        return executionDate;
+    }
+
+    public void setExecutionDate(DateTime executionDate) {
+        this.executionDate = executionDate;
+    }
 
     public Long getId() {
         return id;
