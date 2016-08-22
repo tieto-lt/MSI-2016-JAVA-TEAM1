@@ -26,7 +26,9 @@ public class OrderController extends BaseController {
 
     @Secured(Roles.ADMIN)
     @RequestMapping(method = RequestMethod.GET, path = "/api/order")
-    public List<Order> all() throws IOException {return orderService.all();}
+    public List<Order> all() throws IOException {
+        return orderService.all();
+    }
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/order")
     public Order createOrder(@RequestBody Order order) throws IOException {

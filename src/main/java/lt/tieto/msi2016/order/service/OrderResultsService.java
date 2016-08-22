@@ -75,6 +75,8 @@ public class OrderResultsService {
         api.setImages(objectMapper.readValue(db.getImages(), new TypeReference<List<MissionImage>>() {}));
         api.setBatteryStatus(navigationData != null ? navigationData.get(navigationData.size() - 1).getBattery() : null);
         api.setMissionName(db.getMissionName());
+        api.setExecutionDate(db.getExecutionDate());
+
         return api;
     }
 
@@ -88,6 +90,7 @@ public class OrderResultsService {
         db.setImages(objectMapper.writeValueAsString(api.getImages()));
         //db.setVideoBase64();
         db.setNavigationData(objectMapper.writeValueAsString(api.getNavigationData()));
+
         return db;
     }
 

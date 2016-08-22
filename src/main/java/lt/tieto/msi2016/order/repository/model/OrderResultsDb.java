@@ -24,6 +24,7 @@ public class OrderResultsDb extends DbModel {
     private String videoBase64;
     private String navigationData;
 
+
     public Long getExecutedBy() {
         return executedBy;
     }

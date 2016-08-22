@@ -19,6 +19,7 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
 
     vm.$onInit = function() {
        whatUsername();
+       checkOperator();
        $interval(checkOperator, 5000);
        $rootScope.$on('userLoggedIn', function() {
             whatUsername();

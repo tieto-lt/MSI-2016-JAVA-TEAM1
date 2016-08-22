@@ -58,7 +58,7 @@ public class OrderService {
     @Transactional(readOnly = true)
     public List<Order> all() throws IOException {
         List<Order> resultList = new ArrayList();
-        for (OrderDb orderDb : repository.findAll()) {
+        for (OrderDb orderDb : repository.getOrdersSortedByStatus()) {
             resultList.add(mapToOrders(orderDb));
         }
         return resultList;

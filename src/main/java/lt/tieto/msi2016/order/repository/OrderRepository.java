@@ -22,7 +22,7 @@ public class OrderRepository extends BaseRepository<OrderDb> {
     private JdbcTemplate template;
     public static final String SELECT_ORDER_USER_ID = "SELECT * FROM orders where submitted_by = ?";
     public static final String SELECT_BY_STATUS = "SELECT * FROM orders where status = ?";
-
+    public static final String SELECT_SORTED_ORDERS = "SELECT * FROM orders ORDER BY FIELD(status, 'Pending') desc";
 
 
     private static final RowMapper<OrderDb> ROW_MAPPER = (rs, rowNum) -> {
@@ -65,5 +65,9 @@ public class OrderRepository extends BaseRepository<OrderDb> {
 
     public List<OrderDb> getOrdersByStatus(OrderDb.Status status) {
         return template.query(SELECT_BY_STATUS, new Object[]{status.toString()}, ROW_MAPPER);
+    }
+
+    public List<OrderDb> getOrdersSortedByStatus() {
+        return template.query(SELECT_SORTED_ORDERS, new Object[]{}, ROW_MAPPER);
     }
 }

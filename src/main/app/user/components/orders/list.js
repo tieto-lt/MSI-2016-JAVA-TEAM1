@@ -13,6 +13,7 @@ function Controller($scope,OrdersService) {
 
     /*vm.drop = drop;*/
 
+    /*Carousel variables*/
 
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
@@ -25,6 +26,7 @@ function Controller($scope,OrdersService) {
 
     function _loadList() {
         console.log("labas")
+
         OrdersService.getAllOrders().then(
 
             function (response) {
@@ -53,8 +55,9 @@ function Controller($scope,OrdersService) {
     function getResults (customerId) {
         OrdersService.getOrderResults(customerId).then(
             function(response){
-            vm.result=response.data[0];
-            console.log(vm.result);
+                vm.result=response.data[0];
+                console.log(vm.result.executionDate);
+                console.log(vm.result);
                 if(vm.result == null){
                     console.log("null");
                 }
