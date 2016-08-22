@@ -13,16 +13,13 @@
 
 
 .list_header{
-    display:inline-block; outline:none;
+    display:inline-block;
 
 
 
 }
 
 
-div:focus {
-    outline:none;
-}
 
 
 .list_header ul{
@@ -30,7 +27,7 @@ div:focus {
 
     list-style-type: none;
     padding: 0px;
-     outline:none;
+
 
 
 }
