@@ -28,7 +28,7 @@ public class OrderResultsController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/missionsUI")
     public List<OrderResults> all() throws IOException {
-        OrderResults order = new OrderResults();
+      /*  OrderResults order = new OrderResults();
         order.setBatteryStatus(new BigDecimal("60"));
         order.setExecutionDate(new DateTime("50"));
         order.setFinishNavigationData(new MissionNavigationData());
@@ -42,7 +42,7 @@ public class OrderResultsController extends BaseController {
 
         List list = new ArrayList<OrderResults>();
         list.add(order);
-        return list;
-        //return service.all();
+        return list;*/
+        return service.all();
     }
 }
