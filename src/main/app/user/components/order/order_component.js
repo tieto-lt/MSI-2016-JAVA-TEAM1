@@ -11,17 +11,19 @@ function Controller(UserService) {
   vm.showMessage = showMessage;
   vm.find = find;
   vm.remove = remove;
-
   vm.selectedObject = [];
+
+
   vm.size = 45;
-  vm.object = undefined;
   vm.all = [
-    {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5},
-    {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5},
-    {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5},
-    {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5},
-    {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5}
+    {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, camera: "front"},
+    {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, camera: "front"},
+    {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, camera: "front"},
+    {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, camera: "front"},
+    {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, camera: "front"}
   ];
+
+  vm.obj = [];
 
   vm.$onInit = function() {
           _loadOrderDetails();
@@ -46,6 +48,11 @@ function Controller(UserService) {
     }
 
     function createOrder(){
+       for( i = 0; i < vm.selectedObject.length; i++){
+           vm.obj[i] = {name: vm.selectedObject[i].name, cameraPosition : vm.selectedObject[i].camera};
+       }
+       vm.order.objects = vm.obj;
+       console.log(vm.order);
           if(!checkIfEqual()){
              UserService.createOrder(vm.order).then(
                 function(response) {
@@ -71,30 +78,38 @@ function Controller(UserService) {
                 (vm.previousOrder.missionName == vm.order.missionName));
     }
 
-   function showMessage(index){
-        vm.all[index].selected = !vm.all[index].selected;
-        if(vm.all[index].selected){
-            vm.all[index].color = '#009688';
-            vm.all[index].text = '#026f65';
-            vm.all[index].width = vm.all[index].width + 3;
-            vm.selectedObject[vm.selectedObject.length] = vm.all[index];
-            vm.all[index].size = vm.all[index].size + 7;
-        }
-        else{
-            vm.all[index].selected = !vm.all[index].selected;
-            remove(index);
-        }
-        console.log(vm.selectedObject);
-   }
+  function showMessage(index){
+          vm.all[index].selected = !vm.all[index].selected;
+          if(vm.all[index].selected){
+              vm.all[index].color = '#009688';
+              vm.all[index].text = '#026f65';
+              vm.all[index].width = vm.all[index].width + 3;
+              vm.selectedObject[vm.selectedObject.length] = vm.all[index];
+              vm.all[index].size = vm.all[index].size + 7;
+          }
+          else{
+              vm.all[index].selected = !vm.all[index].selected;
+              remove(index);
+          }
+     }
 
-   function remove(index){
-        vm.all[index].selected = !vm.all[index].selected;
-        vm.all[index].color = '#928f8f';
-        vm.all[index].text = '#171313';
-        vm.all[index].width = vm.all[index].width - 3;
-        vm.all[index].size = vm.all[index].size - 7;
-        vm.selectedObject.splice(find(index),1);
-   }
+     function remove(index){
+          vm.all[index].selected = !vm.all[index].selected;
+          vm.all[index].color = '#928f8f';
+          vm.all[index].text = '#171313';
+          vm.all[index].width = vm.all[index].width - 3;
+          vm.all[index].size = vm.all[index].size - 7;
+          vm.selectedObject.splice(find(index),1);
+
+     }
+     function find (index){
+          for( i = 0; i< vm.all.length; i++){
+              if(vm.all[index].id == vm.selectedObject[i].id){
+                  return i;
+              }
+          }
+          return 0;
+     }
    function find (index){
         for( i = 0; i< vm.all.length; i++){
             if(vm.all[index].id == vm.selectedObject[i].id){
@@ -103,6 +118,8 @@ function Controller(UserService) {
         }
         return 0;
    }
+
+
 
 }
 Controller.$inject = ['UserService'];

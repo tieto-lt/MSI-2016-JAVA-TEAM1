@@ -45,10 +45,10 @@ function Controller(UserService, $state) {
         UserService.changePassword(vm.passwords).then(
             function(){
                 console.log("Success");
-                vm.message1 = true;
+                vm.msg = true;
             },
             function (err){
-                 vm.error1 = true;
+                vm.err = true;
             });
      }
 
@@ -57,7 +57,6 @@ function Controller(UserService, $state) {
      }
 
       function getCurrentState() {
-            console.log($state.current.name);
             return $state.current.name;
        }
 
