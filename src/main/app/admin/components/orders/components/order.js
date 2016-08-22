@@ -12,6 +12,8 @@ function Controller($scope,$stateParams,OrderService) {
     vm.sortType = 'submissionDate';
     vm.selected = undefined;
 
+    vm.checkStatus = checkStatus;
+
     vm.sortReverse = true;
      vm.$onInit = function(){
         getAllOrders();
@@ -35,6 +37,11 @@ function Controller($scope,$stateParams,OrderService) {
         OrderService.getAllOrders().then(
             function(response){
                 vm.orders = response.data;
+                vm.orders.forEach(function (order){
+                    if("InProgress" == order.status){
+                        order.status = "In progress";
+                    }
+                });
             },
             function(err){
                 console.log('Error',err);
@@ -64,6 +71,19 @@ function Controller($scope,$stateParams,OrderService) {
                 console.log('Error',err);
             }
         );
+    }
+
+    function checkStatus(order){
+        if(order.status == "Completed"){
+            return true;
+        }
+        if(order.status =="Executed"){
+            return true;
+        }
+        if(order.status == "Declined"){
+            return true;
+        }
+        return false;
     }
 }
 

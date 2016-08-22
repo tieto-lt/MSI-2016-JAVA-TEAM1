@@ -1,33 +1,35 @@
-form { margin: 0px 10px;
+.table{
 
-}
-
-.msi-order-form {
-    max-width: 360px;
-    margin: auto;
-
-    .alert{
-        width:340px;
-
+    td{
+      padding:5px;
     }
 }
+.login_box1 {
+    display: inline-block;
+    margin-right: 2px;
+    width: 120%;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #888888;
+    padding: 10px;
+}
+.login_box2 {
+         height: 340px;
+         border: 6px solid #009688;
+         padding: 10px;
+         box-shadow: 5px 5px 5px #888888;
+         margin-top: 10px;
 
-h2 {
-  margin-top: 2px;
-  margin-bottom: 2px;
+}
+form { margin: 0px 10px;
 }
 
-.divider {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 5px;
-
-  hr {
-    margin: 7px 0px;
-    width: 35%;
-  }
+.panel-body {
+    padding: 15px;
+    width: 380px;
+}
+.glyphicon-remove{
+ color : red;
 }
 
-.left { float: left; }
-
-.right { float: right; }
