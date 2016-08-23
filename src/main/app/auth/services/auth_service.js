@@ -31,6 +31,7 @@ function Service ($http, $httpParamSerializer, $cookies, $state, Session) {
         return $http.delete('/api/logout')
             .then(function() {
                 Session.invalidate();
+                $state.go('root.home');
             });
     }
 

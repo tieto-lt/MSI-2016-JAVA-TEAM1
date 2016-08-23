@@ -77,6 +77,7 @@ public class OrderResultsService {
         api.setMissionName(db.getMissionName());
         api.setExecutionDate(db.getExecutionDate());
 
+
         return api;
     }
 
@@ -88,7 +89,7 @@ public class OrderResultsService {
         db.setExecutionDate(DateTime.now());
         db.setBatteryStatus(api.getNavigationData().get(api.getNavigationData().size() - 1).battery);
         db.setImages(objectMapper.writeValueAsString(api.getImages()));
-        //db.setVideoBase64();
+        db.setVideoBase64(api.getVideoBase64());
         db.setNavigationData(objectMapper.writeValueAsString(api.getNavigationData()));
 
         return db;

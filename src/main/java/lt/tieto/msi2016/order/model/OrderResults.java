@@ -18,7 +18,15 @@ public class OrderResults {
     private BigDecimal batteryStatus;
     private String missionName;
     private DateTime executionDate;
+    private String videoBase64;
 
+    public String getVideoBase64() {
+        return videoBase64;
+    }
+
+    public void setVideoBase64(String videoBase64) {
+        this.videoBase64 = videoBase64;
+    }
 
     public DateTime getExecutionDate() {
         return executionDate;

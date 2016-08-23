@@ -6,5 +6,5 @@ require('user');
 require('operator');
 require('admin');
 require('auth');
-
+require('home');
 angular.bootstrap(document, ['AngularSpringRestDemo']);
