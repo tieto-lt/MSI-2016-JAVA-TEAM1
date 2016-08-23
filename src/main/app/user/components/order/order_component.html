@@ -34,7 +34,7 @@
                     <span class="text-muted"><em><span style="color:red;">*</span>Indicates required field</em></span>
                 </div>
             <div  class="form-group">
-                <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-lg btn-block btn-raised btn-primary" ng-disabled="orderForm.$invalid">Place your order</button>
+                <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-lg btn-block btn-raised btn-primary" ng-disabled="orderForm.$invalid ">Place your order</button>
                 <p></p>
                 <div class="alert alert-success" ng-show="$ctrl.message" align="center"><strong>Order created successfully!</strong></div>
                 <div class="alert alert-danger" ng-show="$ctrl.error" align="center"><strong>Something went wrong</strong></div>
@@ -88,10 +88,9 @@
                 <tr ng-repeat = "data in $ctrl.selectedObject track by $index">
                     <td>{{data.name}}</td>
                     <td>
-                        <select ng-model="$data.camera">
-                            <option value="FrontCamera">Front</option>
-                            <option value="BottomCamera">Bottom</option>
-                            {{$data.camera}}
+                        <select ng-model="data.cameraPosition">
+                            <option>front</option>
+                            <option>bottom</option>
                         </select>
                     </td>
                     <td><button style="margin-top:auto" ng-show="data.selected" class="btn btn-default btn-sm"  ng-click="$ctrl.remove(data.id)">

@@ -15,6 +15,9 @@ function Service ($http) {
         return $http.put('/api/order/decline/' + id);
     }
 
+    this.getUser = function(){
+
+    }
 }
 
 Service.$inject = ['$http'];
