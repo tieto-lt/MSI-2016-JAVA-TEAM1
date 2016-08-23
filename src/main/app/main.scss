@@ -25,3 +25,15 @@
         background: rgba(255,0,0, 0.9);
     }
 }
+
+
+*:focus,
+*:active,
+a:active,
+a:focus,
+input:focus,
+input:active {
+
+    outline:none;
+    outline: 0;
+}

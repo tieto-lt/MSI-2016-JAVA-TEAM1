@@ -1,12 +1,9 @@
 package lt.tieto.msi2016.order.repository.model;
 
-import lt.tieto.msi2016.mission.model.MissionCommand;
 import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-
-import java.util.List;
 
 
 public class OrderDb extends DbModel {
@@ -20,12 +17,22 @@ public class OrderDb extends DbModel {
     private String fullName;
     private String email;
     private String phone;
+    private String mapItems;
+
 
 
     public enum Status {
         Pending, Accepted, Declined, InProgress, Executed, Failed, Completed
     }
 
+
+    public String getMapItems() {
+        return mapItems;
+    }
+
+    public void setMapItems(String mapItems) {
+        this.mapItems = mapItems;
+    }
     public Long getSubmittedBy() {
         return submittedBy;
     }
