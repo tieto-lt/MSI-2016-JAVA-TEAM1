@@ -29,9 +29,9 @@
                     <i class="pull-right glyphicon" uib-popover="Show/Hide Resluts" popover-trigger="'mouseenter'" uib-popover="Show / Hide Results" popover-trigger="'mouseenter'"  ng-class="{'glyphicon-chevron-up ' : status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </uib-accordion-heading>
                 <div  class="customer_details"  style="width: 650px;border: 0px">
-                    <h2  align="center">Customer info</h2>
+                    <h2  align="center"><strong>Customer's info</strong></h2>
                     <hr>
-                    <h4>Personal information:</h4>
+                    <h4 align="center"><strong>Personal information</strong></h4>
                     <table>
                         <tr>
                             <td>Name:</td>
@@ -55,6 +55,7 @@
                         </tr>
                     </table>
                     <hr>
+                    <h3 align="center"><strong>Map</strong></h3>
                     <div>
                         <div class="container-fluid">
                             <div class="row" style="width: 660px;">
@@ -98,6 +99,7 @@
                                             <td align="center">{{data.cameraPosition}}</td>
                                         </tr>
                                     </table>
+
                                 </div>
                             </div>
                         </div>
@@ -111,6 +113,15 @@
                                 </div>
                             </div>
                     </div>
+                <h3 align="center"><strong>Video</strong></h3>
+                <div class="myVideo" align="center">
+                <video width="420" height="250" controls>
+                    <source src="test.mp4" type="video/mp4">
+                </video>
+                </div>
+                <div align="center">
+                    <button align="center"class="btn btn-raised btn-primary"><a href="test.mp4" style="color:white" download>Download video</a></button>
+                </div>
                 </div>
         </uib-accordion>
     </div>
