@@ -35,7 +35,7 @@ public class UserController  extends BaseController {
     public User getUserData() {
         return securityService.getCurrentUser();
     }
-    
+
     @RequestMapping(method = RequestMethod.POST, path = "/api/user/information")
     public User updateInformation(@RequestBody @Valid User user) {
         return service.updateUserInformation(user);

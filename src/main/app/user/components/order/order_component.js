@@ -11,8 +11,8 @@ function Controller(UserService) {
   vm.remove = remove;
   vm.selectedObject = [];
   vm.options = ["FRONT", "BOTTOM"];
+  vm.order.video = false;
   $.material.init()
-
 
 
   vm.size = 45;
@@ -29,7 +29,6 @@ function Controller(UserService) {
   vm.$onInit = function() {
           _loadOrderDetails();
   };
-
     function _loadOrderDetails() {
         UserService.get().then(
             function (response) {
@@ -54,7 +53,7 @@ function Controller(UserService) {
           }
           vm.order.mapItems = vm.obj;
           if(!checkIfEqual()){
-          console.log(vm.order);
+           console.log(vm.order);
            UserService.createOrder(vm.order).then(
                 function(response) {
                    vm.message = !vm.error;

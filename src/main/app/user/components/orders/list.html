@@ -4,7 +4,7 @@
             <strong>You have not submitted any orders yet!</strong>
         </div>
         <uib-accordion close-others="oneAtATime" >
-            <div uib-accordion-group class="panel-default"   style="width: 680px" is-disabled="true" >
+            <div uib-accordion-group class="panel-default"   style="width: 680px; border:0px" is-disabled="true" >
                 <uib-accordion-heading>
                     <div  class="list_header">
                         <ul >
@@ -16,10 +16,8 @@
                     </div>
                 </uib-accordion-heading>
             </div>
-            <div uib-accordion-group class="panel-default" style="width: 680px" is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders " >
+            <div uib-accordion-group class="panel-default" style="width: 680px;  border:0px" is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders " >
                 <uib-accordion-heading >
-
-
                     <div  class="list_header">
                         <ul>
                             <li>{{order.id}}</li>
@@ -28,15 +26,13 @@
                             <li>{{order.status}}</li>
                         </ul>
                     </div>
-
                     <i class="pull-right glyphicon" uib-popover="Show/Hide Resluts" popover-trigger="'mouseenter'" uib-popover="Show / Hide Results" popover-trigger="'mouseenter'"  ng-class="{'glyphicon-chevron-up ' : status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </uib-accordion-heading>
-                <div  class="customer_details"  style="width: 680px">
+                <div  class="customer_details"  style="width: 650px;border: 0px">
+                    <h2  align="center">Customer info</h2>
+                    <hr>
+                    <h4>Personal information:</h4>
                     <table>
-                        <tr>
-                            <td>Customer Info</td>
-                            <td> </td>
-                        </tr>
                         <tr>
                             <td>Name:</td>
                             <td>{{order.fullName}}</td>
@@ -58,10 +54,11 @@
                             <td>{{order.details}}</td>
                         </tr>
                     </table>
+                    <hr>
                     <div>
                         <div class="container-fluid">
                             <div class="row" style="width: 660px;">
-                                <div class="col-lg-6"  style="background-color:white; height 200px; padding-left: 0px;">
+                                <div class="col-lg-6"  style="background-color:white; padding-left: 0px;">
                                     <div class="login_box2">
                                     <svg width="310" height="420">
                                         <circle cx="130" cy="135" r="10" stroke="#928f8f"stroke-width="3" fill="#009688" />
@@ -86,7 +83,7 @@
                                               style="fill:{{$ctrl.all[4].color}};stroke:#676767;stroke-width:5" />
                                         <text x="60" y="365" font-family="sans-serif" font-size="15px" >Object nr.4</text>
                                     </svg>
-                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6"  style="background-color:white; height:200px" >
                                     <table class = "table" align="center" width="300">
@@ -106,6 +103,7 @@
                         </div>
                     </div>
                 </div>
+                <hr>
                     <div id="slides_control">
                             <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">
                                 <div uib-slide ng-repeat="image in $ctrl.result.images track by $index" index="$index">
