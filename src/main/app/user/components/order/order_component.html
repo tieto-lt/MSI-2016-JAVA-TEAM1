@@ -1,37 +1,37 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-6" style="background-color:white; height:830px">
-            <div class="form-group">
+            <div class="form-group" >
                 <h2>Create new order</h1>
                 </h2>
             <form name = "orderForm" >
             <div class="form-group" ng-class="{ 'has-error' : orderForm.missionName.$invalid && !orderForm.missionName.$pristine }">
                 <label>Mission name<span style="color:red;">*</span></label>
-                <input placeholder="Mission name" type="text" name="missionName" class="form-control" ng-model="$ctrl.order.missionName"  ng-minlength="5" ng-maxlength="30"required>
-                <p ng-show="orderForm.missionName.$invalid && !orderForm.missionName.$pristine" class="help-block">Mission name must consist from 5 to 30 characters.</p>
+                <input type="text" name="missionName" class="form-control" ng-model="$ctrl.order.missionName"  ng-minlength="5" ng-maxlength="30"required>
+                <small><p ng-show="orderForm.missionName.$invalid && !orderForm.missionName.$pristine" style="color:red">Mission name must consist from 5 to 30 characters.</p></small>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : orderForm.fullName.$invalid && !orderForm.fullName.$pristine}">
                 <label>Full name<span style="color:red;">*</span></label>
-                <input placeholder="Full name" type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName" ng-minlength="1" ng-maxlength = "60" required>
-                <p ng-show="orderForm.fullName.$invalid && !orderForm.fullName.$pristine" class="help-block">Mission name must consist from 1 to 60 characters.</p>
+                <input type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName" ng-minlength="1" ng-maxlength = "60" required>
+                <small><p ng-show="orderForm.fullName.$invalid && !orderForm.fullName.$pristine" style="color:red">Mission name must consist from 1 to 60 characters.</p></small>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : orderForm.email.$invalid && !orderForm.email.$pristine }">
                 <label>Email<span style="color:red;">*</span></label>
-                <input placeholder="Email"type="email" name="email" class="form-control" ng-model="$ctrl.order.email" ng-maxlength="60" required>
-                <p ng-show="orderForm.email.$invalid && !orderForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                <input type="email" name="email" class="form-control" ng-model="$ctrl.order.email" ng-maxlength="60" required>
+                <small><p ng-show="orderForm.email.$invalid && !orderForm.email.$pristine" style="color:red">Enter a valid email.</p></small>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : orderForm.phone.$invalid && !orderForm.phone.$pattern}">
                 <label>Phone<span style="color:red;">*</span></label>
                 <input  placeholder="+370" ng-pattern="/^(\+(370+|3705)) *(\d{8})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.order.phone" required >
-                <p ng-show="orderForm.phone.$error.pattern" class="help-block">Enter a valid phone number.</p>
+                <small><p ng-show="orderForm.phone.$error.pattern" style="color:red">Enter a valid phone number.</p></small>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
                 <label>Details</label>
-                <textarea placeholder="Details" type="text" name="details" class="form-control" ng-model="$ctrl.order.details" ng-maxlength="255"></textarea>
-                <p ng-show="orderForm.details.$error.maxlength" class="help-block">Details must not exceed 255 characters.</p>
+                <textarea type="text" name="details" class="form-control" ng-model="$ctrl.order.details" ng-maxlength="255"></textarea>
+                <p ng-show="orderForm.details.$error.maxlength" style="color:red">Details must not exceed 255 characters.</p>
             </div>
                 <div class="form-group">
-                    <span class="text-muted"><em><span style="color:red;">*</span> Indicates required field</em></span>
+                    <span class="text-muted"><em><span style="color:red;">*</span>Indicates required field</em></span>
                 </div>
             <div  class="form-group">
                 <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-lg btn-block btn-raised btn-primary" ng-disabled="orderForm.$invalid">Place your order</button>
@@ -69,6 +69,13 @@
                       style="fill:{{$ctrl.all[4].color}};stroke:#676767;stroke-width:{{$ctrl.all[4].width}};" />
                 <text x="60" y="365" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[4].text}}">Object nr.4</text>
             </svg>
+                <div class="form-group" style="margin-top: 0;">
+                    <div class="checkbox" align="center">
+                        <label>
+                            <input type="checkbox"> Video
+                        </label>
+                    </div>
+                </div>
             <table class = "table">
                 <thead>
                 <tr>
@@ -77,13 +84,13 @@
                     <th ></th>
                 </tr>
                 </thead>
-
                 <tr ng-repeat = "data in $ctrl.selectedObject track by $index">
                     <td>{{data.name}}</td>
                     <td>
-                        <select>
+                        <select ng-model="$data.camera">
                         <option value="FrontCamera">Front</option>
                         <option value="BottomCamera">Bottom</option>
+                            {{$data.camera}}
                     </select>
                     </td>
                     <td><button style="margin-top:auto" ng-show="data.selected" class="btn btn-default btn-sm"  ng-click="$ctrl.remove(data.id)">
