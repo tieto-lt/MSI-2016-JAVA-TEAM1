@@ -10,15 +10,18 @@ function Controller(UserService) {
   vm.find = find;
   vm.remove = remove;
   vm.selectedObject = [];
+  vm.options = ["FRONT", "BOTTOM"];
+  $.material.init()
+
 
 
   vm.size = 45;
   vm.all = [
-    {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, cameraPosition: "front"},
-    {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, cameraPosition: "front"},
-    {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, cameraPosition: "front"},
-    {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, cameraPosition: "front"},
-    {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, cameraPosition: "front"}
+    {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"}
   ];
 
   vm.obj = [];
@@ -46,13 +49,13 @@ function Controller(UserService) {
     }
 
     function createOrder(){
-       for( i = 0; i < vm.selectedObject.length; i++){
-           vm.obj[i] = {name: vm.selectedObject[i].name, cameraPosition : vm.selectedObject[i].cameraPosition};
-       }
-       vm.order.objects = vm.obj;
-       console.log(vm.order);
+          for( i = 0; i < vm.selectedObject.length; i++){
+            vm.obj[i] = {name: vm.selectedObject[i].name, cameraPosition : vm.selectedObject[i].cameraPosition};
+          }
+          vm.order.mapItems = vm.obj;
           if(!checkIfEqual()){
-             UserService.createOrder(vm.order).then(
+          console.log(vm.order);
+           UserService.createOrder(vm.order).then(
                 function(response) {
                    vm.message = !vm.error;
                    vm.previousOrder.fullName = vm.order.fullName;
@@ -60,7 +63,6 @@ function Controller(UserService) {
                    vm.previousOrder.email = vm.order.email;
                    vm.previousOrder.details = vm.order.details;
                    vm.previousOrder.missionName = vm.order.missionName;
-
                  },
                  function (err) {
                    vm.error = !vm.message;
@@ -108,7 +110,7 @@ function Controller(UserService) {
           }
           return 0;
      }
-   function find (index){
+    function find (index){
         for( i = 0; i< vm.all.length; i++){
             if(vm.all[index].id == vm.selectedObject[i].id){
                 return i;

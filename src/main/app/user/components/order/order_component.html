@@ -34,7 +34,7 @@
                     <span class="text-muted"><em><span style="color:red;">*</span>Indicates required field</em></span>
                 </div>
             <div  class="form-group">
-                <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-lg btn-block btn-raised btn-primary" ng-disabled="orderForm.$invalid">Place your order</button>
+                <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-lg btn-block btn-raised btn-primary" ng-disabled="orderForm.$invalid ">Place your order</button>
                 <p></p>
                 <div class="alert alert-success" ng-show="$ctrl.message" align="center"><strong>Order created successfully!</strong></div>
                 <div class="alert alert-danger" ng-show="$ctrl.error" align="center"><strong>Something went wrong</strong></div>
@@ -45,8 +45,7 @@
 
         <div class="col-sm-9 col-md-6" style="background-color:white; height:830px">
             <div class="login_box2">
-            <svg width="310" height="420">
-
+            <svg width="320" height="420">
                 <circle cx="130" cy="135" r="10" stroke="#928f8f"stroke-width="3" fill="#009688" />
 
                 <rect id = "myRect" ng-click="$ctrl.showMessage('0')" x="145" y="215" rx=10 ry=10 width="{{$ctrl.all[0].size}}" height="{{$ctrl.all[0].size}}"
@@ -69,6 +68,8 @@
                       style="fill:{{$ctrl.all[4].color}};stroke:#676767;stroke-width:{{$ctrl.all[4].width}};" />
                 <text x="60" y="365" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[4].text}}">Object nr.4</text>
             </svg>
+            </div>
+            <div class ="myTable">
                 <div class="form-group" style="margin-top: 0;">
                     <div class="checkbox" align="center">
                         <label>
@@ -87,17 +88,17 @@
                 <tr ng-repeat = "data in $ctrl.selectedObject track by $index">
                     <td>{{data.name}}</td>
                     <td>
-                        <select ng-model="$data.camera">
-                        <option value="FrontCamera">Front</option>
-                        <option value="BottomCamera">Bottom</option>
-                            {{$data.camera}}
-                    </select>
+                        <select ng-model="data.cameraPosition">
+                            <option value="FRONT">front</option>
+                            <option value="BOTTOM">bottom</option>
+                        </select>
                     </td>
                     <td><button style="margin-top:auto" ng-show="data.selected" class="btn btn-default btn-sm"  ng-click="$ctrl.remove(data.id)">
                         <span class="glyphicon glyphicon-remove"></span>Remove</button></td>
                 </tr>
             </table>
-        </div>
+            </div>
+             </div>
         </div>
     </div>
 </div>

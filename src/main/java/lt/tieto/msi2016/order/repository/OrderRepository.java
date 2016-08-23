@@ -37,6 +37,7 @@ public class OrderRepository extends BaseRepository<OrderDb> {
         order.setFullName(rs.getString("full_name"));
         order.setEmail(rs.getString("email"));
         order.setPhone(rs.getString("phone"));
+        order.setMapItems(rs.getString("map_items"));
         return order;
     };
 
@@ -50,7 +51,8 @@ public class OrderRepository extends BaseRepository<OrderDb> {
             "commands", orderDb.getCommands(),
             "full_name", orderDb.getFullName(),
             "email", orderDb.getEmail(),
-            "phone", orderDb.getPhone()
+            "phone", orderDb.getPhone(),
+            "map_items", orderDb.getMapItems()
     );
 
     public OrderRepository() {
@@ -60,7 +62,6 @@ public class OrderRepository extends BaseRepository<OrderDb> {
     public List <OrderDb> getOrdersByUserId (Long user_id){
         List <OrderDb>  ordersOfCustomer =template.query(SELECT_ORDER_USER_ID, new Object[] {user_id}, ROW_MAPPER);
         return ordersOfCustomer;
-
     }
 
     public List<OrderDb> getOrdersByStatus(OrderDb.Status status) {

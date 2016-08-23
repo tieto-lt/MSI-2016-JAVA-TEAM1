@@ -46,9 +46,11 @@ function Controller(UserService, $state) {
             function(){
                 console.log("Success");
                 vm.msg = true;
+                vm.err = false;
             },
             function (err){
                 vm.err = true;
+                vm.msg = false;
             });
      }
 
