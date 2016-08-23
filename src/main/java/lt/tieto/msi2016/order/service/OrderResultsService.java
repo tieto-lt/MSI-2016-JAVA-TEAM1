@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -24,6 +25,10 @@ public class OrderResultsService {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private VideoConverterConnector videoConverterConnector;
+
     @Autowired
     private OrderResultsRepository repository;
 
@@ -53,6 +58,14 @@ public class OrderResultsService {
             resultList.add(mapToOrderResults(orderResultsDb));
         }
         return resultList;
+    }
+
+    @Transactional(readOnly = true)
+    public byte[] getOrderVideo(Long id) {
+        OrderResultsDb orderResultsDb = repository.findOne(id);
+        String base64Video = orderResultsDb.getVideoBase64();
+        byte[] decoded = Base64.getDecoder().decode(base64Video);
+        return videoConverterConnector.convertVideo(decoded);
     }
 
 
