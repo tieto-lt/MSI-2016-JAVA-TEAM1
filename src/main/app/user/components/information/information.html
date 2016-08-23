@@ -1,11 +1,13 @@
 <div class="msi-order-form">
         <div class="row">
-            <div class="panel panel-primary">
+            <div class="panel panel-primary" >
                 <ul class="nav nav-tabs">
-                    <li>
+                    <li ng-class="{'active-tab': $ctrl.getCurrentState() == 'root.information'}">
                         <a ui-sref="root.information">Information </a>
                     </li>
-                    <li><a ui-sref="root.password">Change Password</a></li>
+                    <li ng-class="{'active-tab': $ctrl.getCurrentState() == 'root.password'}">
+                        <a ui-sref="root.password">Change Password</a>
+                    </li>
                 </ul>
                 <div class="panel-body">
                     <form name="orderForm"  novalidate>

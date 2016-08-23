@@ -14,7 +14,7 @@
                 <div class="panel-body" style="text-align: right" ng-transclude></div>
             </div>
         </script>
-        <div class="alert alert-info" ng-show="$ctrl.message"  align="center">
+        <div class="alert alert-info alert-mission-list" ng-show="$ctrl.message"  align="center">
             <strong>You have not run any missions yet!</strong>
         </div>
         <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
@@ -51,10 +51,10 @@
                     <button class="btn btn-warning" ng-click="$ctrl.publish($index)" ng-hide="$ctrl.button">Publish</button>
                     <button class="btn btn-danger" ng-click="$ctrl.redo($index)" ng-hide="$ctrl.button">Redo</button>
                 </div>
-                <div class="alert alert-danger" role="alert" ng-show="$ctrl.error">
+                <div class="alert alert-danger alert-mission-list" role="alert" ng-show="$ctrl.error">
                     {{$ctrl.error}}
                 </div>
-                <div class="alert alert-success" role="alert" ng-show="$ctrl.success">
+                <div class="alert alert-success alert-mission-list" role="alert" ng-show="$ctrl.success">
                     {{$ctrl.success}}
                 </div>
             </div>
