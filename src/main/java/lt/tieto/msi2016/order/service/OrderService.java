@@ -113,7 +113,9 @@ public class OrderService {
         api.setStatus(db.getStatus());
         api.setSubmissionDate(db.getSubmissionDate());
         api.setMissionCommands(objectMapper.readValue(db.getCommands(), new TypeReference<List<MissionCommand>>() {}));
-        api.setMapItems(objectMapper.readValue(db.getMapItems(), new TypeReference<List<MapItems>>(){}));
+        if (db.getMapItems() != null) {
+            api.setMapItems(objectMapper.readValue(db.getMapItems(), new TypeReference<List<MapItems>>(){}));
+        }
         return api;
     }
 
