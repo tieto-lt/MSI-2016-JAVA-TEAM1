@@ -139,15 +139,17 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 module.factory('sessionInvalidationInterceptor', ['Session', '$state', '$q', function(Session, $state, $q) {
       return {
           request: function(config) {
-            if (Session.getToken() && !Session.isSessionActive()){
-                console.log('invalidating');
-                Session.invalidate();
-                if (config.headers.Authorization) {
-                    delete config.headers.Authorization;
+            if (Session.getToken()){
+                if (Session.isSessionActive()) {
+                    config.headers.Authorization = 'Bearer ' + Session.getToken();
+                } else {
+                    Session.invalidate();
+                    if (config.headers.Authorization) {
+                        delete config.headers.Authorization;
+                    }
+                    $state.go('root.login');
                 }
-                $state.go('root.login');
             }
-            console.log(config);
             return config;
           },
           responseError: function(rejection){
@@ -163,10 +165,6 @@ module.factory('sessionInvalidationInterceptor', ['Session', '$state', '$q', fun
 
 
 module.run(['$transitions', 'Session', '$state', '$http', function($transitions, Session, $state, $http) {
-
-  if (Session.isSessionActive()) {
-     $http.defaults.headers.common.Authorization= 'Bearer ' + Session.getToken();
-  }
 
   // check public pages
   $transitions.onStart(
