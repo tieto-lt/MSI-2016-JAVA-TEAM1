@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.order.service;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +9,7 @@ import lt.tieto.msi2016.item.repository.model.ItemDb;
 import lt.tieto.msi2016.mission.model.Mission;
 import lt.tieto.msi2016.mission.model.MissionCommand;
 import lt.tieto.msi2016.mission.model.MissionImage;
+import lt.tieto.msi2016.order.model.MapItems;
 import lt.tieto.msi2016.order.model.Order;
 import lt.tieto.msi2016.order.model.OrderResults;
 import lt.tieto.msi2016.order.repository.OrderRepository;
@@ -111,6 +113,7 @@ public class OrderService {
         api.setStatus(db.getStatus());
         api.setSubmissionDate(db.getSubmissionDate());
         api.setMissionCommands(objectMapper.readValue(db.getCommands(), new TypeReference<List<MissionCommand>>() {}));
+        api.setMapItems(objectMapper.readValue(db.getMapItems(), new TypeReference<List<MapItems>>(){}));
         return api;
     }
 
@@ -123,6 +126,7 @@ public class OrderService {
         db.setDetails(api.getDetails());
         db.setStatus(OrderDb.Status.Pending);
         db.setCommands(objectMapper.writeValueAsString(api.getMissionCommands()));
+        db.setMapItems(objectMapper.writeValueAsString(api.getMapItems()));
         db.setFullName(api.getFullName());
         db.setEmail(api.getEmail());
         db.setPhone(api.getPhone());

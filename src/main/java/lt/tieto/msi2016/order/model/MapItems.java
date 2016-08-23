@@ -9,7 +9,7 @@ public class MapItems {
     private CameraPosition cameraPosition;
 
     public enum CameraPosition{
-        VERTICAL, HORIZONTAL
+        FRONT, BOTTOM
     }
 
     public String getName() {
