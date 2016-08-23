@@ -42,7 +42,7 @@ public class RoleService {
         if (repository.exists(id)) {
             if (Roles.OPERATOR.equals(role.getAuthority())){
                 operatorVerificationService.createOperatorVerificationStatus(role.getUserId());
-            } else {
+            } else if (Roles.OPERATOR.equals(get(id).getAuthority())) {
                 operatorVerificationService.deleteOperatorVerificationStatus(role.getUserId());
             }
             return updateRole(id, role);
