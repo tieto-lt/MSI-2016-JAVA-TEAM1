@@ -22,14 +22,12 @@ function Controller($scope, MissionService) {
 
     vm.$onInit = function() {
             _loadList();
-
         };
 
     function _loadList() {
         MissionService.getAllMissionsResults().then(
             function (response) {
                 vm.missions = response.data;
-                console.log(vm.missions.length);
                 if(vm.missions.length == 0){
                 vm.message = true;
                 console.log(vm.message);
@@ -57,8 +55,6 @@ function Controller($scope, MissionService) {
             function (err) {
                 console.log('Error',err);
             });
-
-            //console.log(vm.missions);
      }
      $scope.status = {
        isCustomHeaderOpen: false,

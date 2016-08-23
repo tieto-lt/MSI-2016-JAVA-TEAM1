@@ -13,20 +13,15 @@ function Controller($scope,OrdersService) {
     vm.fakeOrder = [];
     vm.selected = [];
     vm.list = [];
-    /*order_id;*/
 
-    /*vm.drop = drop;*/
-
-    /*Carousel variables*/
-
-   /* vm.allObjects = [
+    vm.all = [
         {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, camera: "front"},
         {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, camera: "front"},
         {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, camera: "front"},
         {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, camera: "front"},
         {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, camera: "front"}
       ];
-*/
+
     vm.fakeOrder = [
         {name : "Start",    cameraPosition : "front"},
         {name : "1 object", cameraPosition : "front"},
@@ -46,14 +41,10 @@ function Controller($scope,OrdersService) {
 
     function _loadList() {
         OrdersService.getAllOrders().then(
-
             function (response) {
                 vm.orders = response.data;
-                console.log(vm.orders.length);
-                console.log(vm.orders);
                 if(vm.orders.length == 0){
                 vm.message = true;
-                console.log(vm.message);
                 }
 
                 $scope.status = false;
@@ -78,7 +69,6 @@ function Controller($scope,OrdersService) {
             }
         )
         setSelectedObjects(vm.fakeOrder);
-        //console.log(vm.selected);
      }
 
         $scope.test = function(text) {
@@ -86,33 +76,18 @@ function Controller($scope,OrdersService) {
         }
 
      function setSelectedObjects(array){
-        console.log(array);
-        for( i = 0; i<array.length; i++){
-            if(array[i].name == "1 object" || array[i].name == "2 object" || array[i].name == "3 object" || array[i].name == "4 object" || array[i].name == "Start"){
-                vm.selected[vm.selected.length] = { name : array[i].name, cameraPosition : array[i].cameraPosition, color:"#009688"};
-            }
-            else{
-                vm.selected[vm.selected.length] = { name : "", cameraPosition : "", color:"#928f8f"};
+        for(i = 0; i < vm.all.length; i++){
+            for( j = 0; j< array.length; j++){
+                if(array[j].name == vm.all[i].name){
+                    vm.all[i].name = array[j].name;
+                    vm.all[i].cameraPosition = array[j].cameraPosition;
+                    vm.all[i].color = "#009688";
+                    break;
+                }
             }
         }
-        //console.log(vm.selected);
     }
-
 }
-
-/*for( i = 0; i<vm.array.length; i++){
-            if(vm.array[i].name == "1 object" ||
-               vm.array[i].name == "2 object" ||
-               vm.array[i].name == "3 object" ||
-               vm.array[i].name == "4 object"
-               vm.array[i].name == "Start"){
-
-              // vm.selected[vm.selected.length] = {name : vm.array[i].name, cameraPosition : vm.array[i].cameraPosition, color:"red"};
-            }
-            else{
-             //  vm.selected[vm.selected.length] = {name : "", cameraPosition : "", color:"black"};
-            }
-        }*/
 
 Controller.$inject = ['$scope','OrdersService'];
 require('./list.scss');

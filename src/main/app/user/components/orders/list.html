@@ -19,6 +19,7 @@
             <div uib-accordion-group class="panel-default" style="width: 680px" is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders "  is-disabled="order.status != 'Completed' ">
                 <uib-accordion-heading >
 
+
                     <div  class="list_header">
                         <ul>
                             <li>{{order.id}}</li>
@@ -60,35 +61,34 @@
                     <div>
                         <div class="container-fluid">
                             <div class="row" style="width: 660px;">
-                                <div class="col-lg-6"  style="background-color:white; height:900px">
+                                <div class="col-lg-6"  style="background-color:white; height 200px; padding-left: 0px;">
                                     <div class="login_box2">
                                     <svg width="310" height="420">
-
                                         <circle cx="130" cy="135" r="10" stroke="#928f8f"stroke-width="3" fill="#009688" />
 
-                                        <rect  x="145" y="215" rx=10 ry=10 width="35" height="35"
-                                              style="fill:{{$ctrl.selected[0].color}};stroke:#676767;" />
+                                        <rect  x="180" y="215" rx=10 ry=10 width="35" height="35"
+                                              style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:5" />
                                         <text x="130" y="200" font-family="sans-serif" font-size="15px">Starting point</text>
 
                                         <rect  x="215" y="70" rx="10" ry="10" width="35" height="35"
-                                              style="fill:{{$ctrl.selected[1].color}};stroke:#676767;" />
+                                              style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:5" />
                                         <text x="200" y="150" font-family="sans-serif" font-size="15px" >Object nr.1</text>
 
-                                        <rect  x="5" y="140" rx="10" ry="10" width="35" height="35"
-                                              style="fill:{{$ctrl.selected[2].color}};stroke:#676767;" />
-                                        <text x="0" y="220" font-family="sans-serif" font-size="15px">Object nr.4</text>
+                                        <rect  x="20" y="140" rx="10" ry="10" width="35" height="35"
+                                              style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:5" />
+                                        <text x="0" y="220" font-family="sans-serif" font-size="15px">Object nr.2</text>
 
-                                        <rect  x="5" y="5" rx="10" ry="10" width="35" height="35"
-                                              style="fill:{{$ctrl.selected[3].color}};stroke:#676767;" />
+                                        <rect  x="20" y="5" rx="10" ry="10" width="35" height="35"
+                                              style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:5" />
                                         <text x="0" y="85" font-family="sans-serif" font-size="15px" >Object nr.3</text>
 
                                         <rect x="80" y="285" rx="10" ry="10"width="35" height="35"
-                                              style="fill:{{$ctrl.selected[4].color}};stroke:#676767;" />
-                                        <text x="60" y="365" font-family="sans-serif" font-size="15px" >Object nr.2</text>
+                                              style="fill:{{$ctrl.all[4].color}};stroke:#676767;stroke-width:5" />
+                                        <text x="60" y="365" font-family="sans-serif" font-size="15px" >Object nr.4</text>
                                     </svg>
                                         </div>
                                 </div>
-                                <div class="col-lg-6"  style="background-color:white; height:900px" >
+                                <div class="col-lg-6"  style="background-color:white; height:200px" >
                                     <table class = "table" align="center" width="300">
                                         <thead>
                                         <tr>

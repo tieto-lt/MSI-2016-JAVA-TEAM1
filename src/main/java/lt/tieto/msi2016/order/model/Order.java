@@ -20,6 +20,7 @@ public class Order {
     private OrderDb.Status status;
     private DateTime submissionDate;
     private List<MissionCommand> missionCommands;
+    private List<MapItems> mapItems;
 
     public Long getId() {
         return id;
@@ -27,6 +28,14 @@ public class Order {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<MapItems> getMapItems() {
+        return mapItems;
+    }
+
+    public void setMapItems(List<MapItems> mapItems) {
+        this.mapItems = mapItems;
     }
 
     public String getMissionName() {
