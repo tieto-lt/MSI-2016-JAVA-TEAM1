@@ -60,7 +60,6 @@ public class OrderRepository extends BaseRepository<OrderDb> {
     public List <OrderDb> getOrdersByUserId (Long user_id){
         List <OrderDb>  ordersOfCustomer =template.query(SELECT_ORDER_USER_ID, new Object[] {user_id}, ROW_MAPPER);
         return ordersOfCustomer;
-
     }
 
     public List<OrderDb> getOrdersByStatus(OrderDb.Status status) {

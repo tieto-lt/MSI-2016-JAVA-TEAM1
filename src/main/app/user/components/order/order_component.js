@@ -10,7 +10,9 @@ function Controller(UserService) {
   vm.find = find;
   vm.remove = remove;
   vm.selectedObject = [];
+  vm.options = ["front", "bottom"];
   $.material.init()
+
 
 
   vm.size = 45;
@@ -47,13 +49,13 @@ function Controller(UserService) {
     }
 
     function createOrder(){
-       for( i = 0; i < vm.selectedObject.length; i++){
-           vm.obj[i] = {name: vm.selectedObject[i].name, cameraPosition : vm.selectedObject[i].cameraPosition};
-       }
-       vm.order.objects = vm.obj;
-       console.log(vm.order);
+          for( i = 0; i < vm.selectedObject.length; i++){
+            vm.obj[i] = {name: vm.selectedObject[i].name, cameraPosition : vm.selectedObject[i].cameraPosition};
+          }
+          vm.order.objects = vm.obj;
           if(!checkIfEqual()){
-             UserService.createOrder(vm.order).then(
+          console.log(vm.order);
+           UserService.createOrder(vm.order).then(
                 function(response) {
                    vm.message = !vm.error;
                    vm.previousOrder.fullName = vm.order.fullName;
@@ -61,7 +63,6 @@ function Controller(UserService) {
                    vm.previousOrder.email = vm.order.email;
                    vm.previousOrder.details = vm.order.details;
                    vm.previousOrder.missionName = vm.order.missionName;
-
                  },
                  function (err) {
                    vm.error = !vm.message;
@@ -109,7 +110,7 @@ function Controller(UserService) {
           }
           return 0;
      }
-   function find (index){
+    function find (index){
         for( i = 0; i< vm.all.length; i++){
             if(vm.all[index].id == vm.selectedObject[i].id){
                 return i;
