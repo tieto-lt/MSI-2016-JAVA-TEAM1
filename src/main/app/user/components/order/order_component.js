@@ -10,18 +10,18 @@ function Controller(UserService) {
   vm.find = find;
   vm.remove = remove;
   vm.selectedObject = [];
-  vm.options = ["front", "bottom"];
+  vm.options = ["FRONT", "BOTTOM"];
   $.material.init()
 
 
 
   vm.size = 45;
   vm.all = [
-    {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, cameraPosition: "front"},
-    {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, cameraPosition: "front"},
-    {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, cameraPosition: "front"},
-    {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, cameraPosition: "front"},
-    {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, cameraPosition: "front"}
+    {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"}
   ];
 
   vm.obj = [];
@@ -52,7 +52,7 @@ function Controller(UserService) {
           for( i = 0; i < vm.selectedObject.length; i++){
             vm.obj[i] = {name: vm.selectedObject[i].name, cameraPosition : vm.selectedObject[i].cameraPosition};
           }
-          vm.order.objects = vm.obj;
+          vm.order.mapItems = vm.obj;
           if(!checkIfEqual()){
           console.log(vm.order);
            UserService.createOrder(vm.order).then(

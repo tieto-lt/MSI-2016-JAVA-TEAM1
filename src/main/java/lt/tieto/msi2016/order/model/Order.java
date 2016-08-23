@@ -21,6 +21,7 @@ public class Order {
     private DateTime submissionDate;
     private List<MissionCommand> missionCommands;
     private List<MapItems> mapItems;
+    private String username;
 
     public Long getId() {
         return id;
@@ -102,6 +103,14 @@ public class Order {
         this.missionCommands = missionCommands;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -113,6 +122,7 @@ public class Order {
                 .append("details", details)
                 .append("status", status.toString())
                 .append("submissionDate", DateTimeFormat.forPattern("yyyy-MM-dd").print(submissionDate))
+                .append("username", username)
                 .toString();
     }
 }

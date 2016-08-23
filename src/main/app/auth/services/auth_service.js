@@ -21,16 +21,16 @@ function Service ($http, $httpParamSerializer, $cookies, $state, Session) {
         };
         return $http(req).then(
             function(data) {
-                $http.defaults.headers.common.Authorization= 'Bearer ' + data.data.access_token;
-                $cookies.put("access_token", data.data.access_token);
+                Session.storeToken(data.data.access_token);
                 return data;
+
             });
     }
 
     function logout() {
         return $http.delete('/api/logout')
             .then(function() {
-                $http.defaults.headers.common.Authorization = undefined;
+                Session.invalidate();
             });
     }
 

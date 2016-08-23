@@ -15,6 +15,7 @@ import lt.tieto.msi2016.order.model.OrderResults;
 import lt.tieto.msi2016.order.repository.OrderRepository;
 import lt.tieto.msi2016.order.repository.model.OrderDb;
 import lt.tieto.msi2016.order.repository.model.OrderResultsDb;
+import lt.tieto.msi2016.user.service.UserService;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import lt.tieto.msi2016.utils.service.SecurityService;
 import org.joda.time.DateTime;
@@ -34,9 +35,10 @@ public class OrderService {
     private ObjectMapper objectMapper;
     @Autowired
     private OrderRepository repository;
-
     @Autowired
     private SecurityService securityService;
+    @Autowired
+    private UserService userService;
 
     @Transactional(readOnly = true)
     public Order get(Long id) throws IOException {
@@ -116,6 +118,7 @@ public class OrderService {
         if (db.getMapItems() != null) {
             api.setMapItems(objectMapper.readValue(db.getMapItems(), new TypeReference<List<MapItems>>(){}));
         }
+        api.setUsername(userService.get(db.getSubmittedBy()).getUsername());
         return api;
     }
 

@@ -29,7 +29,6 @@ function Service ($cookies, jwtHelper) {
 
     function isSessionActive() {
         var token = getToken();
-
         return token && !jwtHelper.isTokenExpired(token);
     }
 
