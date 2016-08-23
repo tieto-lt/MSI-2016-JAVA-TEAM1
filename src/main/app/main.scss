@@ -7,6 +7,11 @@
   display: inline-block;
   float: none;
   vertical-align: top;
+}
+
+.msi-navbar-padding{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
 
 }
 
@@ -36,4 +41,12 @@ input:active {
 
     outline:none;
     outline: 0;
+}
+
+
+.msi-content {
+    body {
+        padding-top: 70px;
+    }
+
 }

@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller(UserService) {
+function Controller(UserService, $state) {
   var vm = this;
   vm.order = {};
   vm.user = {};
@@ -62,6 +62,7 @@ function Controller(UserService) {
                    vm.previousOrder.email = vm.order.email;
                    vm.previousOrder.details = vm.order.details;
                    vm.previousOrder.missionName = vm.order.missionName;
+                   $state.go('root.customerOrders');
                  },
                  function (err) {
                    vm.error = !vm.message;
@@ -118,7 +119,7 @@ function Controller(UserService) {
         return 0;
    }
 }
-Controller.$inject = ['UserService'];
+Controller.$inject = ['UserService', '$state'];
 require('./order_component.scss');
 module.component('orderComponent', {
     controller: Controller,
