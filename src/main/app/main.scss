@@ -7,11 +7,12 @@
   display: inline-block;
   float: none;
   vertical-align: top;
-
 }
+
 .msi-navbar-padding{
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+
 }
 
 .navbar .navbar-collapse {
@@ -42,3 +43,10 @@ input:active {
     outline: 0;
 }
 
+
+.msi-content {
+    body {
+        padding-top: 70px;
+    }
+
+}
