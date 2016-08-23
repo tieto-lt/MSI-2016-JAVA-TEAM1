@@ -16,9 +16,10 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     })
     .state('root.home', {
       url: '/',
-      template: "<login></login>",
+      /*template: "<home-first></home-first>",*/
+      template: "<login></login",
       data: {
-        isPublic: true
+        /*isPublic: true*/
       }
     })
     .state('root.login', {

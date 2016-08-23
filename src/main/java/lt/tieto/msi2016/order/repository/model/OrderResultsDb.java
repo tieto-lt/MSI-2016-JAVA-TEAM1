@@ -99,7 +99,7 @@ public class OrderResultsDb extends DbModel {
                 .append("executionDate", DateTimeFormat.forPattern("yyyy-MM-dd").print(executionDate))
                 .append("batteryStatus", batteryStatus)
                 .append("images", images)
-                .append("videoBase64", videoBase64)
+                .append("video_Base64", videoBase64)
                 .append("navigationData", navigationData)
                 .toString();
     }
