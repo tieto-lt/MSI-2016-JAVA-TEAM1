@@ -10,6 +10,7 @@ function Controller(UserService) {
   vm.find = find;
   vm.remove = remove;
   vm.selectedObject = [];
+  $.material.init()
 
 
   vm.size = 45;
