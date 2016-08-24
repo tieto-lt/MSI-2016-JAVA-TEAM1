@@ -12,16 +12,16 @@ function Controller(UserService, $state) {
   vm.selectedObject = [];
   vm.options = ["FRONT", "BOTTOM"];
   vm.order.video = false;
+  vm.check = check;
   $.material.init()
 
 
   vm.size = 45;
   vm.all = [
-    {id :0, selected: false, color: "#928f8f", name: "START",    size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :1, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :2, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :3, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :4, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"}
+    {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :1, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :2, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :3, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"}
   ];
 
   vm.obj = [];
@@ -118,6 +118,16 @@ function Controller(UserService, $state) {
         }
         return 0;
    }
+
+   function check(){
+        if(vm.selectedObject.length<2){
+            console.log("true");
+            return true;
+        }
+        console.log("false");
+        return false;
+   }
+
 }
 Controller.$inject = ['UserService', '$state'];
 require('./order_component.scss');

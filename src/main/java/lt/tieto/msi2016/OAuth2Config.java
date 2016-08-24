@@ -76,6 +76,7 @@ public class OAuth2Config implements AuthorizationServerConfigurer, ResourceServ
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
+
         // @formatter:on
     }
 

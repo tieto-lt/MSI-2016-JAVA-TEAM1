@@ -4,16 +4,18 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a ng-hide="$ctrl.isLoggedIn()" class="navbar-brand"  ui-sref="root.home">JAVAINIAI</a>
-                <a ng-show="$ctrl.isLoggedIn()" class="navbar-brand">JAVAINIAI</a>
+                <a ng-show="$ctrl.isLoggedIn()" class="navbar-brand" ui-sref="root.home">JAVAINIAI</a>
             </div>
             <ul class="nav navbar-nav">
-                <li ng-class="{active: $ctrl.getCurrentState() == 'root.customerFirst'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerFirst ">Customer</a></li>
-                <li ng-class="{active: $ctrl.getCurrentState() == 'root.adminRole'}"><a ng-show="$ctrl.isAdmin()" ui-sref="root.adminRole">Roles</a></li>
-                <li ng-class="{active: $ctrl.getCurrentState() == 'root.operator'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.operator">Operator</a></li>
-                <li ng-class="{active: $ctrl.getCurrentState() == 'root.orderComponent'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.orderComponent">New Order</a></li>
-                <li ng-class="{active: $ctrl.getCurrentState() == 'root.customerOrders'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerOrders">Orders</a></li>
-                <li ng-class="{active: $ctrl.getCurrentState() == 'root.token'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.token">Verification</a></li>
+                <!--<li ng-class="{active: $ctrl.getCurrentState() == 'root.customerFirst'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerFirst ">Customer</a></li>-->
                 <li ng-class="{active: $ctrl.getCurrentState() == 'root.orders'}"><a ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref="root.orders">Orders</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.adminRole'}"><a ng-show="$ctrl.isAdmin()" ui-sref="root.adminRole">Roles</a></li>
+<!--
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.operator'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.operator">Operator</a></li>
+-->
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.customerOrders'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerOrders">Orders</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.orderComponent'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.orderComponent">New Order</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.token'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.token">Verification</a></li>
                 <li ng-class="{active: $ctrl.getCurrentState() == 'root.missions'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.missions">Missions</a></li>
                 <li ng-class="{active: ($ctrl.getCurrentState() == 'root.information') || ($ctrl.getCurrentState() == 'root.password')}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.information">Account Information</a></li>
             </ul>

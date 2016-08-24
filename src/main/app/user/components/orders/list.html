@@ -3,12 +3,13 @@
         <div class="alert-order-list alert alert-info" ng-show="$ctrl.message"  align="center">
             <strong>You have not submitted any orders yet!</strong>
         </div>
+        <a class="btn btn-lg btn-raised btn-primary" ui-sref="root.orderComponent"> Place a new order </a>
         <uib-accordion close-others="oneAtATime" >
-            <div uib-accordion-group class="panel-default"   style="width: 680px; border:0px" is-disabled="true" >
+            <div uib-accordion-group class="panel-default" style="width: 680px; border:0px" is-disabled="true" >
                 <uib-accordion-heading>
                     <div  class="list_header">
                         <ul >
-                            <li>ID</li>
+                            <li>No.</li>
                             <li>Name</li>
                             <li>Submission Date</li>
                             <li>Status</li>
@@ -20,7 +21,7 @@
                 <uib-accordion-heading >
                     <div  class="list_header">
                         <ul>
-                            <li>{{order.id}}</li>
+                            <li>{{$index+1}}</li>
                             <li>{{order.missionName}}</li>
                             <li>{{order.submissionDate | date:'yyyy.MM.dd'}}</li>
                             <li>{{order.status}}</li>
@@ -32,6 +33,10 @@
                     <h2 align="center" style="background: #149286;color: white;margin:0px" >Personal information</h2>
                     <div class="Info" style="background: #eee;padding:20px">
                     <table align="center">
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{order.fullName}}</td>
+                        </tr>
                         <tr>
                             <td>Name:</td>
                             <td>{{order.fullName}}</td>
@@ -64,23 +69,23 @@
                                         <circle cx="130" cy="135" r="10" stroke="#928f8f"stroke-width="3" fill="#009688" />
 
                                         <rect  x="180" y="215" rx=10 ry=10 width="35" height="35"
-                                              style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:5" />
+                                              style="fill:#009688;stroke:#676767;stroke-width:5" />
                                         <text x="130" y="200" font-family="sans-serif" font-size="15px">START</text>
 
                                         <rect  x="215" y="70" rx="10" ry="10" width="35" height="35"
-                                              style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:5" />
+                                              style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:5" />
                                         <text x="200" y="150" font-family="sans-serif" font-size="15px" >CASTLE</text>
 
                                         <rect  x="20" y="140" rx="10" ry="10" width="35" height="35"
-                                              style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:5" />
+                                              style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:5" />
                                         <text x="0" y="220" font-family="sans-serif" font-size="15px">HOUSE</text>
 
                                         <rect  x="20" y="5" rx="10" ry="10" width="35" height="35"
-                                              style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:5" />
+                                              style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:5" />
                                         <text x="0" y="85" font-family="sans-serif" font-size="15px" >GARDEN</text>
 
                                         <rect x="80" y="285" rx="10" ry="10"width="35" height="35"
-                                              style="fill:{{$ctrl.all[4].color}};stroke:#676767;stroke-width:5" />
+                                              style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:5" />
                                         <text x="60" y="365" font-family="sans-serif" font-size="15px" >LAKE</text>
                                     </svg>
                                     </div>
@@ -94,9 +99,9 @@
                                             <th align="center">Camera</th>
                                         </tr>
                                         </thead>
-                                        <tr ng-repeat = "data in $ctrl.fakeOrder">
-                                            <td align="center">{{data.name}}</td>
-                                            <td align="center">{{data.cameraPosition}}</td>
+                                        <tr ng-repeat = "item in order.mapItems">
+                                            <td align="center">{{item.name}}</td>
+                                            <td align="center">{{item.cameraPosition}}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -105,7 +110,9 @@
                         </div>
                     </div>
                     </div>
-                <h2  align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
+
+
+                <h2 align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
                 <h3 align="center"></h3>
                     <div id="slides_control">
                             <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">
@@ -116,12 +123,14 @@
                     </div>
                 <h3 align="center"></h3>
                 <div >
-                <video width="640" height="365" controls>
-                    <source src="test.mp4" type="video/mp4">
+                <video width="640" height="365"
+                       http-src="{{$ctrl.videoUrl}}"
+                       type="video/mp4"
+                       controls>
                 </video>
                 </div>
                 <div align="center">
-                    <button align="center"class="btn btn-raised btn-primary"><a href="test.mp4" style="color:white" download>Download video</a></button>
+                    <button align="center"class="btn btn-raised btn-primary"><a href="{{$ctrl.videoUrl}}" style="color:white" download>Download video</a></button>
                 </div>
                 </div>
         </uib-accordion>
