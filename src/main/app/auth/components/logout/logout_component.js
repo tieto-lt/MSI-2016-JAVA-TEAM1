@@ -12,7 +12,6 @@ function Controller($state, Session, AuthService) {
     }
 
     function logout() {
-        Session.invalidate();
         AuthService.logout();
         $state.go('root.login');
     }

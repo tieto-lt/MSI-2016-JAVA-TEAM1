@@ -13,9 +13,6 @@ function Service ($http) {
     this.redo = function(id) {
        return $http.put("/api/order/redo/" + id,{});
     };
-
-
-    //*************************
 }
 Service.$inject = ['$http'];
 module.service('MissionService', Service);

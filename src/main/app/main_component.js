@@ -63,7 +63,6 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
         }
 
     function logout() {
-            Session.invalidate();
             AuthService.logout();
             $state.go('root.login');
     }

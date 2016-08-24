@@ -4,7 +4,7 @@
             <strong>You have not submitted any orders yet!</strong>
         </div>
         <uib-accordion close-others="oneAtATime" >
-            <div uib-accordion-group class="panel-default"   style="width: 680px" is-disabled="true" >
+            <div uib-accordion-group class="panel-default"   style="width: 680px; border:0px" is-disabled="true" >
                 <uib-accordion-heading>
                     <div  class="list_header">
                         <ul >
@@ -16,10 +16,8 @@
                     </div>
                 </uib-accordion-heading>
             </div>
-            <div uib-accordion-group class="panel-default" style="width: 680px" is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders " >
+            <div uib-accordion-group class="panel-default" style="width: 680px;  border:0px" is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders " >
                 <uib-accordion-heading >
-
-
                     <div  class="list_header">
                         <ul>
                             <li>{{order.id}}</li>
@@ -28,15 +26,12 @@
                             <li>{{order.status}}</li>
                         </ul>
                     </div>
-
                     <i class="pull-right glyphicon" uib-popover="Show/Hide Resluts" popover-trigger="'mouseenter'" uib-popover="Show / Hide Results" popover-trigger="'mouseenter'"  ng-class="{'glyphicon-chevron-up ' : status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </uib-accordion-heading>
-                <div  class="customer_details"  style="width: 680px">
-                    <table>
-                        <tr>
-                            <td>Customer Info</td>
-                            <td> </td>
-                        </tr>
+                <div  class="customer_details"  style="width: 650px;border: 0px">
+                    <h2 align="center" style="background: #149286;color: white;margin:0px" >Personal information</h2>
+                    <div class="Info" style="background: #eee;padding:20px">
+                    <table align="center">
                         <tr>
                             <td>Name:</td>
                             <td>{{order.fullName}}</td>
@@ -58,12 +53,14 @@
                             <td>{{order.details}}</td>
                         </tr>
                     </table>
+                    </div>
+                    <h2 align="center" style="background: #149286;color: white; margin:0px">Map</h2>
                     <div>
                         <div class="container-fluid">
-                            <div class="row" style="width: 660px;">
-                                <div class="col-lg-6"  style="background-color:white; height 200px; padding-left: 0px;">
-                                    <div class="login_box2">
-                                    <svg width="310" height="420">
+                            <div class="row" style="width: 650px; height: 490px;background:#eee">
+                                <div class="col-lg-6"  style="background:#eee">
+                                    <div class="login_box3">
+                                        <svg width="298" height="418"  style="background-color:white">
                                         <circle cx="130" cy="135" r="10" stroke="#928f8f"stroke-width="3" fill="#009688" />
 
                                         <rect  x="180" y="215" rx=10 ry=10 width="35" height="35"
@@ -86,10 +83,11 @@
                                               style="fill:{{$ctrl.all[4].color}};stroke:#676767;stroke-width:5" />
                                         <text x="60" y="365" font-family="sans-serif" font-size="15px" >Object nr.4</text>
                                     </svg>
-                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6"  style="background-color:white; height:200px" >
-                                    <table class = "table" align="center" width="300">
+                                <div class="myTable1">
+                                <div class="col-lg-6"  style="background-color:#eee; height:200px" >
+                                    <table class = "table" align="center" width="300" style="background:white;margin-top: 30px">
                                         <thead>
                                         <tr>
                                             <th align="center">Object</th>
@@ -102,10 +100,13 @@
                                         </tr>
                                     </table>
                                 </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
+                <h2  align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
+                <h3 align="center"></h3>
                     <div id="slides_control">
                             <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">
                                 <div uib-slide ng-repeat="image in $ctrl.result.images track by $index" index="$index">
@@ -113,6 +114,15 @@
                                 </div>
                             </div>
                     </div>
+                <h3 align="center"></h3>
+                <div >
+                <video width="640" height="365" controls>
+                    <source src="test.mp4" type="video/mp4">
+                </video>
+                </div>
+                <div align="center">
+                    <button align="center"class="btn btn-raised btn-primary"><a href="test.mp4" style="color:white" download>Download video</a></button>
+                </div>
                 </div>
         </uib-accordion>
     </div>
