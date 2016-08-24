@@ -64,8 +64,12 @@ public class OrderResultsService {
     public byte[] getOrderVideo(Long id) {
         OrderResultsDb orderResultsDb = repository.findOne(id);
         String base64Video = orderResultsDb.getVideoBase64();
-        byte[] decoded = Base64.getDecoder().decode(base64Video);
-        return videoConverterConnector.convertVideo(decoded);
+        if (base64Video != null) {
+            byte[] decoded = Base64.getDecoder().decode(base64Video);
+            return videoConverterConnector.convertVideo(decoded);
+        } else {
+            return null;
+        }
     }
 
 
