@@ -120,7 +120,7 @@ function Controller(UserService, $state) {
    }
 
    function check(){
-        if(vm.selectedObject.length<2){
+        if(vm.selectedObject.length<1){
             console.log("true");
             return true;
         }

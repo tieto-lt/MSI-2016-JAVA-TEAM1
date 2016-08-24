@@ -72,9 +72,8 @@ public class OrderService {
         for (MapItems mapItem : mapItems){
             missionCommands.add(new MissionCommand("go", getPositionByObjectAndCameraPosition(mapItem)));
         }
-        if (!mapItems.isEmpty()){
-            missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))));
-        }
+        // go to start
+        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))));
 
         return missionCommands;
     }
