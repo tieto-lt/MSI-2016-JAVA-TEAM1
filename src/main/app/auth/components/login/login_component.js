@@ -26,9 +26,9 @@ function Controller($rootScope, $state, AuthService, Session) {
                 var role = Session.getRole();
                 role = role && role[0];
                 if (ROLE_ADMIN == role) {
-                    $state.go('root.admin');
+                    $state.go('root.orders');
                 } else if  (ROLE_OPERATOR == role) {
-                    $state.go('root.operator');
+                    $state.go('root.missions');
                 } else if  (ROLE_CUSTOMER == role) {
                     $state.go('root.customerOrders');
                 }

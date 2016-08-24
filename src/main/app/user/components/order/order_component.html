@@ -6,13 +6,13 @@
                 </h2>
             <form name = "orderForm" >
             <div class="form-group" ng-class="{ 'has-error' : orderForm.missionName.$invalid && !orderForm.missionName.$pristine }">
-                <label>Mission name<span style="color:red;">*</span></label>
-                <input type="text" name="missionName" class="form-control" ng-model="$ctrl.order.missionName"  ng-minlength="5" ng-maxlength="30"required>
+                <label for="missionName1">Mission name<span style="color:red;">*</span></label>
+                <input id="missionName1" type="text" name="missionName" class="form-control" ng-model="$ctrl.order.missionName"  ng-minlength="5" ng-maxlength="30" required>
                 <small><p ng-show="orderForm.missionName.$invalid && !orderForm.missionName.$pristine" style="color:red">Mission name must consist from 5 to 30 characters.</p></small>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : orderForm.fullName.$invalid && !orderForm.fullName.$pristine}">
-                <label>Full name<span style="color:red;">*</span></label>
-                <input type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName" ng-minlength="1" ng-maxlength = "60" required>
+                <label for="fullname1">Full name<span style="color:red;">*</span></label>
+                <input id="fullname1" type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName" ng-minlength="1" ng-maxlength = "60" required>
                 <small><p ng-show="orderForm.fullName.$invalid && !orderForm.fullName.$pristine" style="color:red">Mission name must consist from 1 to 60 characters.</p></small>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : orderForm.email.$invalid && !orderForm.email.$pristine }">
@@ -25,9 +25,9 @@
                 <input  placeholder="+370" ng-pattern="/^(\+(370+|3705)) *(\d{8})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.order.phone" required >
                 <small><p ng-show="orderForm.phone.$error.pattern" style="color:red">Enter a valid phone number.</p></small>
             </div>
-            <div class="form-group" ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
-                <label>Details</label>
-                <textarea type="text" name="details" class="form-control" ng-model="$ctrl.order.details" ng-maxlength="255"></textarea>
+            <div class="form-group " ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
+                <label for="details1">Details</label>
+                <textarea type="text" id="details1" name="details" class="form-control" ng-model="$ctrl.order.details" ng-maxlength="255"></textarea>
                 <p ng-show="orderForm.details.$error.maxlength" style="color:red">Details must not exceed 255 characters.</p>
             </div>
                 <div class="form-group">
