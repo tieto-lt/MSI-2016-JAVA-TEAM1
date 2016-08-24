@@ -15,11 +15,11 @@ function Controller($scope,OrdersService) {
     vm.list = [];
 
     vm.all = [
-        {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, camera: "front"}
+        {id :0, selected: false, color: "#928f8f", name: "START",    size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :1, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :2, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :3, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :4, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, camera: "front"}
       ];
 
     vm.fakeOrder = [

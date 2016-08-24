@@ -19,7 +19,15 @@ public class MissionsHolder {
     static {
         verificationMission.add(mission("0-verification", command("takeoff"), command("hover", 2000), command("takePicture"), command("hover", 1000), command("land")));
         //mockMissions.add(mission("hover", command("zero"), command("takeoff"), command("hover", 60 * 1000), command("land")));
-        mockMissions.add(mission("skriskIantra", command("zero"), command("takeoff"), command("altitude", 1.2), command("go", new Position(BigDecimal.valueOf(0.2), BigDecimal.valueOf(-0.4), BigDecimal.valueOf(0), BigDecimal.valueOf(0))), command("hover", 2000), command("switchVerticalCamera"), command("takePicture"), command("land")));
+        mockMissions.add(mission("11-allPoints", command("zero"), command("takeoff"), command("altitude", 1.5),
+                command("go", new Position(BigDecimal.valueOf(-1), BigDecimal.valueOf(-1), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))), command("hover", 2000), command("switchVerticalCamera"), command("takePicture"),
+                command("go", new Position(BigDecimal.valueOf(1), BigDecimal.valueOf(-2), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))), command("hover", 2000), command("switchVerticalCamera"), command("takePicture"),
+                command("go", new Position(BigDecimal.valueOf(2), BigDecimal.valueOf(1), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))), command("hover", 2000), command("switchVerticalCamera"), command("takePicture"),
+                command("go", new Position(BigDecimal.valueOf(3), BigDecimal.valueOf(-2), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))), command("hover", 2000), command("switchVerticalCamera"), command("takePicture"),
+                command("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))), command("hover", 2000), command("switchVerticalCamera"), command("takePicture"),
+                command("land")));
+        //mockMissions.add(mission("2-du", command("zero"), command("takeoff"), command("altitude", 1.2), command("go", new Position(BigDecimal.valueOf(2), BigDecimal.valueOf(-2), BigDecimal.valueOf(1.2), BigDecimal.valueOf(0))), command("hover", 2000), command("switchVerticalCamera"), command("takePicture"), command("land")));
+        mockMissions.add(mission("1-vienas", command("zero"), command("takeoff"), command("altitude", 1.2), command("go", new Position(BigDecimal.valueOf(1), BigDecimal.valueOf(-1), BigDecimal.valueOf(1.2), BigDecimal.valueOf(0))), command("hover", 2000), command("switchVerticalCamera"), command("takePicture"), command("land")));
         mockMissions.add(mission("2-pictures-mission", command("takeoff"), command("hover", 2000), command("takePicture"), command("cw", 90), command("hover", 2000), command("takePicture"), command("cw", 90), command("hover", 2000), command("takePicture"), command("cw", 90), command("hover", 2000), command("takePicture"), command("cw", 90), command("hover", 2000), command("land")));
         /*mockMissions.add(mission("2-picture", command("wait", 1000), command("takePicture"), command("wait", 1000)));
         mockMissions.add(mission("2-picture", command("wait", 1000), command("takePicture"), command("wait", 1000)));
