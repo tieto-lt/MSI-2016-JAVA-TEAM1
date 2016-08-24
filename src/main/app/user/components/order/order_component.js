@@ -11,17 +11,17 @@ function Controller(UserService, $state) {
   vm.remove = remove;
   vm.selectedObject = [];
   vm.options = ["FRONT", "BOTTOM"];
+  vm.order.video = false;
+  vm.check = check;
   $.material.init()
-
 
 
   vm.size = 45;
   vm.all = [
-    {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"}
+    {id :0, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :1, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :2, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :3, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"}
   ];
 
   vm.obj = [];
@@ -29,7 +29,6 @@ function Controller(UserService, $state) {
   vm.$onInit = function() {
           _loadOrderDetails();
   };
-
     function _loadOrderDetails() {
         UserService.get().then(
             function (response) {
@@ -54,7 +53,7 @@ function Controller(UserService, $state) {
           }
           vm.order.mapItems = vm.obj;
           if(!checkIfEqual()){
-          console.log(vm.order);
+           console.log(vm.order);
            UserService.createOrder(vm.order).then(
                 function(response) {
                    vm.message = !vm.error;
@@ -119,6 +118,16 @@ function Controller(UserService, $state) {
         }
         return 0;
    }
+
+   function check(){
+        if(vm.selectedObject.length<2){
+            console.log("true");
+            return true;
+        }
+        console.log("false");
+        return false;
+   }
+
 }
 Controller.$inject = ['UserService', '$state'];
 require('./order_component.scss');

@@ -15,7 +15,7 @@ import java.util.List;
 public class UserRepository extends BaseRepository<UserDb> {
 
     public static final String SELECT_BY_USERNAME = "SELECT * FROM users where username = ?";
-    public static final String SELECT_BY_ID = "SELECT * FROM users where id = ?";
+
     @Autowired
     private JdbcTemplate template;
 
@@ -47,14 +47,6 @@ public class UserRepository extends BaseRepository<UserDb> {
 
     public UserDb getUserByUsername(String username) {
         List<UserDb> users = template.query(SELECT_BY_USERNAME, new Object[]{username}, ROW_MAPPER);
-        if (users.isEmpty()) {
-            return null;
-        }
-        return users.get(0);
-    }
-
-    public UserDb getUserByID(Long id) {
-        List<UserDb> users = template.query(SELECT_BY_USERNAME, new Object[]{id}, ROW_MAPPER);
         if (users.isEmpty()) {
             return null;
         }

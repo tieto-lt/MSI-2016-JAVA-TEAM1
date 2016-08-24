@@ -5,30 +5,22 @@ function Controller($scope,OrdersService) {
     var vm = this;
     vm.orders = {};
     vm.information = {};
-    vm.result = {};
+    vm.result = [];
     vm.message = false;
     $scope.oneAtATime = true;
     vm.getResults= getResults;
-    vm.setSelectedObjects = setSelectedObjects;
     vm.fakeOrder = [];
     vm.selected = [];
     vm.list = [];
+    vm.videoUrl = undefined;
 
+   // vm.getObjects = getObjects;
     vm.all = [
-        {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, camera: "front"}
+        {id :0, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :1, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :2, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :3, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, camera: "front"}
       ];
-
-    vm.fakeOrder = [
-        {name : "Start",    cameraPosition : "front"},
-        {name : "1 object", cameraPosition : "front"},
-        {name : "4 object", cameraPosition : "front"}
-    ];
-
-
 
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
@@ -59,34 +51,39 @@ function Controller($scope,OrdersService) {
        isFirstDisabled: false
      };
 
-    function getResults (customerId) {
-        OrdersService.getOrderResults(customerId).then(
+    function getResults (orderId) {
+        OrdersService.getOrderResults(orderId).then(
             function(response){
-                vm.result=response.data[0];
-                if(vm.result == null){
-                    console.log("null");
+               vm.result=response.data[0];
+               if(vm.result == null){
+                   console.log("null");
+               }
+               vm.videoUrl = "/api/missionsUI/video/" + vm.result.id;
+            }
+        );
+        for(i=0; i<vm.orders.length;i++){
+            if(vm.orders[i].id == orderId){
+                //console.log(vm.orders[i].mapItems);
+
+                for(j=0; j<vm.orders[i].mapItems.length; j++){
+                   //console.log(vm.orders[i].mapItems[j].name);
+                   for(a = 0; a<4; a++){
+                        if(vm.orders[i].mapItems[j].name == vm.all[a].name){
+                            vm.all[a].color = "#009688";
+                        }
+                   }
                 }
             }
-        )
-        setSelectedObjects(vm.fakeOrder);
+        }
      }
+
 
         $scope.test = function(text) {
           alert(text);
         }
 
-     function setSelectedObjects(array){
-        for(i = 0; i < vm.all.length; i++){
-            for( j = 0; j< array.length; j++){
-                if(array[j].name == vm.all[i].name){
-                    vm.all[i].name = array[j].name;
-                    vm.all[i].cameraPosition = array[j].cameraPosition;
-                    vm.all[i].color = "#009688";
-                    break;
-                }
-            }
-        }
-    }
+
+
 }
 
 Controller.$inject = ['$scope','OrdersService'];

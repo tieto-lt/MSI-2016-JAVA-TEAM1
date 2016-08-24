@@ -6,13 +6,13 @@
                 </h2>
             <form name = "orderForm" >
             <div class="form-group" ng-class="{ 'has-error' : orderForm.missionName.$invalid && !orderForm.missionName.$pristine }">
-                <label>Mission name<span style="color:red;">*</span></label>
-                <input type="text" name="missionName" class="form-control" ng-model="$ctrl.order.missionName"  ng-minlength="5" ng-maxlength="30"required>
+                <label for="missionName1">Mission name<span style="color:red;">*</span></label>
+                <input id="missionName1" type="text" name="missionName" class="form-control" ng-model="$ctrl.order.missionName"  ng-minlength="5" ng-maxlength="30" required>
                 <small><p ng-show="orderForm.missionName.$invalid && !orderForm.missionName.$pristine" style="color:red">Mission name must consist from 5 to 30 characters.</p></small>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : orderForm.fullName.$invalid && !orderForm.fullName.$pristine}">
-                <label>Full name<span style="color:red;">*</span></label>
-                <input type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName" ng-minlength="1" ng-maxlength = "60" required>
+                <label for="fullname1">Full name<span style="color:red;">*</span></label>
+                <input id="fullname1" type="text" name="fullName" class="form-control" ng-model="$ctrl.order.fullName" ng-minlength="1" ng-maxlength = "60" required>
                 <small><p ng-show="orderForm.fullName.$invalid && !orderForm.fullName.$pristine" style="color:red">Mission name must consist from 1 to 60 characters.</p></small>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : orderForm.email.$invalid && !orderForm.email.$pristine }">
@@ -25,16 +25,16 @@
                 <input  placeholder="+370" ng-pattern="/^(\+(370+|3705)) *(\d{8})$/"type="text" name="phone" class="form-control" ng-model="$ctrl.order.phone" required >
                 <small><p ng-show="orderForm.phone.$error.pattern" style="color:red">Enter a valid phone number.</p></small>
             </div>
-            <div class="form-group" ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
-                <label>Details</label>
-                <textarea type="text" name="details" class="form-control" ng-model="$ctrl.order.details" ng-maxlength="255"></textarea>
+            <div class="form-group " ng-class="{ 'has-error' : orderForm.details.$invalid && !orderForm.details.$pristine && !orderForm.details.$pattern }">
+                <label for="details1">Details</label>
+                <textarea type="text" id="details1" name="details" class="form-control" ng-model="$ctrl.order.details" ng-maxlength="255"></textarea>
                 <p ng-show="orderForm.details.$error.maxlength" style="color:red">Details must not exceed 255 characters.</p>
             </div>
                 <div class="form-group">
                     <span class="text-muted"><em><span style="color:red;">*</span>Indicates required field</em></span>
                 </div>
             <div  class="form-group">
-                <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-lg btn-block btn-raised btn-primary" ng-disabled="orderForm.$invalid ">Place your order</button>
+                <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-lg btn-block btn-raised btn-primary" ng-disabled="orderForm.$invalid || $ctrl.check()">Place your order</button>
                 <p></p>
                 <div class="alert alert-success" ng-show="$ctrl.message" align="center"><strong>Order created successfully!</strong></div>
                 <div class="alert alert-danger" ng-show="$ctrl.error" align="center"><strong>Something went wrong</strong></div>
@@ -45,56 +45,53 @@
 
         <div class="col-sm-9 col-md-6" style="background-color:white; height:830px">
             <div class="login_box2">
-            <svg width="320" height="420">
-                <circle cx="130" cy="135" r="10" stroke="#928f8f"stroke-width="3" fill="#009688" />
+                <svg width="320" height="420">
+                    <text x="130" y="200" font-family="sans-serif" font-size="15px">Starting point</text>
+                    <rect ng-click="$ctrl.showMessage('0')" x="215" y="70" rx="10" ry="10" width="{{$ctrl.all[0].size}}" height="{{$ctrl.all[0].size}}"
+                          style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:{{$ctrl.all[0].width}};" />
+                    <text x="200" y="150" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[0].text}}">Object nr.1</text>
 
-                <rect id = "myRect" ng-click="$ctrl.showMessage('0')" x="145" y="215" rx=10 ry=10 width="{{$ctrl.all[0].size}}" height="{{$ctrl.all[0].size}}"
-                      style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:{{$ctrl.all[0].width}};" />
-                <text x="130" y="200" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[0].text}}">Starting point</text>
+                    <rect ng-click="$ctrl.showMessage('1')" x="5" y="140" rx="10" ry="10" width="{{$ctrl.all[1].size}}" height="{{$ctrl.all[1].size}}"
+                          style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:{{$ctrl.all[1].width}};" />
+                    <text x="0" y="220" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[1].text}}">Object nr.2</text>
 
-                <rect ng-click="$ctrl.showMessage('1')" x="215" y="70" rx="10" ry="10" width="{{$ctrl.all[1].size}}" height="{{$ctrl.all[1].size}}"
-                      style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:{{$ctrl.all[1].width}};" />
-                <text x="200" y="150" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[1].text}}">Object nr.1</text>
+                    <rect ng-click="$ctrl.showMessage('2')" x="5" y="5" rx="10" ry="10" width="{{$ctrl.all[2].size}}" height="{{$ctrl.all[2].size}}"
+                          style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:{{$ctrl.all[2].width}};" />
+                    <text x="0" y="85" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[2].text}}">Object nr.3</text>
 
-                <rect ng-click="$ctrl.showMessage('2')" x="5" y="140" rx="10" ry="10" width="{{$ctrl.all[2].size}}" height="{{$ctrl.all[2].size}}"
-                      style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:{{$ctrl.all[2].width}};" />
-                <text x="0" y="220" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[2].text}}">Object nr.2</text>
+                    <rect ng-click="$ctrl.showMessage('3')" x="80" y="285" rx="10" ry="10" width="{{$ctrl.all[3].size}}" height="{{$ctrl.all[3].size}}"
+                          style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:{{$ctrl.all[3].width}};" />
+                    <text x="60" y="365" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[3].text}}">Object nr.4</text>
+                    <svg><img style="bottom:491px; right:234px" width="100" height="100"src="flag.svg" class="svg"/></svg>
+                </svg>
 
-                <rect ng-click="$ctrl.showMessage('3')" x="5" y="5" rx="10" ry="10" width="{{$ctrl.all[3].size}}" height="{{$ctrl.all[3].size}}"
-                      style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:{{$ctrl.all[3].width}};" />
-                <text x="0" y="85" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[3].text}}">Object nr.3</text>
-
-                <rect ng-click="$ctrl.showMessage('4')" x="80" y="285" rx="10" ry="10" width="{{$ctrl.all[4].size}}" height="{{$ctrl.all[4].size}}"
-                      style="fill:{{$ctrl.all[4].color}};stroke:#676767;stroke-width:{{$ctrl.all[4].width}};" />
-                <text x="60" y="365" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[4].text}}">Object nr.4</text>
-            </svg>
-            </div>
             <div class ="myTable">
                 <div class="form-group" style="margin-top: 0;">
                     <div class="checkbox" align="center">
                         <label>
-                            <input type="checkbox"> Video
+                            <input type="checkbox" ng-model="$ctrl.order.video"> Video
                         </label>
                     </div>
                 </div>
             <table class = "table">
                 <thead>
                 <tr>
-                    <th >Object</th>
-                    <th>Camera</th>
+
+                    <th>Object</th>
+                    <th> Camera</th>
                     <th ></th>
                 </tr>
                 </thead>
                 <tr ng-repeat = "data in $ctrl.selectedObject track by $index">
-                    <td>{{data.name}}</td>
+                    <td style="margin-top:auto">{{data.name}}</td>
                     <td>
                         <select ng-model="data.cameraPosition">
                             <option value="FRONT">front</option>
                             <option value="BOTTOM">bottom</option>
                         </select>
                     </td>
-                    <td><button style="margin-top:auto" ng-show="data.selected" class="btn btn-default btn-sm"  ng-click="$ctrl.remove(data.id)">
-                        <span class="glyphicon glyphicon-remove"></span>Remove</button></td>
+                    <td><button style="margin-top:auto" ng-show="data.selected" class="btn btn-raised btn-primary"  ng-click="$ctrl.remove(data.id)">
+                        <span class="glyphicon glyphicon-remove"></span>  Remove</button></td>
                 </tr>
             </table>
             </div>

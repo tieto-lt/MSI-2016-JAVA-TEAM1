@@ -1,7 +1,7 @@
 var module = require('main_module');
 
 function Controller(UserService, $state) {
-
+$.material.input()
  var vm = this;
    vm.user = {};
    vm.updateUserInformation = updateUserInformation;

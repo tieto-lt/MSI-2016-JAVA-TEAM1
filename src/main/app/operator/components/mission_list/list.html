@@ -21,7 +21,7 @@
             <div uib-accordion-group class="panel-default" is-open="status.open">
                 <uib-accordion-heading >{{mission.missionName}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </uib-accordion-heading>
-
+                <p>Full name: {{mission.username}}</p>
                 <p>Drone's coordinates at the beginning:</p>
                 <p>x: {{mission.startNavigationData.x}}</p>
                 <p>y: {{mission.startNavigationData.y}}</p>

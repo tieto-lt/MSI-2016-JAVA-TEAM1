@@ -50,6 +50,8 @@ function Controller($scope, MissionService) {
                     mission.finishNavigationData.y = Math.round( mission.finishNavigationData.y*100)/100;
                     mission.finishNavigationData.z = Math.round( mission.startNavigationData.z*100)/100;
                 });
+
+
                 $scope.status = false;
             },
             function (err) {
