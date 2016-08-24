@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a ng-hide="$ctrl.isLoggedIn()" class="navbar-brand"  ui-sref="root.home">JAVAINIAI</a>
-                <a ng-show="$ctrl.isLoggedIn()" class="navbar-brand">JAVAINIAI</a>
+                <a ng-show="$ctrl.isLoggedIn()" class="navbar-brand" ui-sref="root.home">JAVAINIAI</a>
             </div>
             <ul class="nav navbar-nav">
                 <!--<li ng-class="{active: $ctrl.getCurrentState() == 'root.customerFirst'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerFirst ">Customer</a></li>-->
