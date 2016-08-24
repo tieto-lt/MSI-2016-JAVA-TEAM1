@@ -8,10 +8,7 @@ import lt.tieto.msi2016.utils.controller.BaseController;
 import lt.tieto.msi2016.utils.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -45,4 +42,10 @@ public class UserController  extends BaseController {
     public Password changeUserPassword(@RequestBody @Valid Password password) {
         return service.changeUserPassword(password);
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/api/customer/balance/{id}")
+    public Long getBalance(@PathVariable Long id){
+        return new Long("500");
+    }
+
 }

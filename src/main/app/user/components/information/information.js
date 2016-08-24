@@ -16,6 +16,7 @@ $.material.input()
    };
 
      function _loadOrderDetails() {
+
          UserService.get().then(
              function (response) {
                  vm.user = response.data;

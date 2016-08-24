@@ -1,10 +1,11 @@
 var module = require('main_module');
 
-function Controller($rootScope, $state, $interval, Session, AuthService, VerificationService) {
+function Controller($rootScope, $state, $interval, Session, AuthService, VerificationService,UserService) {
 
     var vm = this;
 
     vm.isLogoutVisible = isLogoutVisible;
+    vm.balance = undefined;
     vm.isCustomer = isCustomer;
     vm.isOperator = isOperator;
     vm.isAdmin = isAdmin;
@@ -13,6 +14,7 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
     vm.logout = logout;
     //vm.whatUsername = whatUsername;
     vm.getCurrentState = getCurrentState;
+    vm.getBalance = getBalance;
 
     vm.isOperatorVerified = false;
 
@@ -84,9 +86,38 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
         }
     }
 
+    function getBalance(){
+        UserService.get().then(
+            function(response){
+               // console.log(response.data.id);
+                UserService.getBalance(response.data.id).then(
+                    function(response){
+                        console.log(response.data);
+                        vm.balance = response.data;
+                    },
+                    function(err){
+                        console.log("err");
+                    }
+                );
+            },
+            function(err){
+                console.log("error");
+            }
+        );
+    }
+
+    /*function UpdateBalance(id){
+        UserService.updateBalance(id).then(
+            function(response){
+                vm.balance = response.data;
+            },
+            function(err){
+            }
+        );
+    }*/
 }
 
-Controller.$inject = ['$rootScope', '$state', '$interval', 'Session', 'AuthService', 'VerificationService'];
+Controller.$inject = ['$rootScope', '$state', '$interval', 'Session', 'AuthService', 'VerificationService','UserService'];
 
 
 var templateUrl = require('./main.html');

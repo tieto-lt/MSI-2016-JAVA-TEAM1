@@ -48,6 +48,19 @@ function Controller(UserService, $state) {
     }
 
     function createOrder(){
+          UserService.getBalance(vm.user.id).then(
+            function(response){
+                if(response.data< vm.selectedObject * 5){
+                    return;
+                }
+            },
+            function(err){
+
+            });
+          if(vm.selectedObject.length * 5 < 500){
+                vm.money = true;
+                return;
+          }
           for( i = 0; i < vm.selectedObject.length; i++){
             vm.obj[i] = {name: vm.selectedObject[i].name, cameraPosition : vm.selectedObject[i].cameraPosition};
           }
