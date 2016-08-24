@@ -46,7 +46,6 @@ public class OrderResultsController extends BaseController {
         return service.all();
     }
 
-
     @RequestMapping(method = RequestMethod.GET, path = "/api/missionsUI/video/{id}", produces = "video/mp4")
     public HttpEntity<byte[]> getMissionVideo(@PathVariable Long id) throws IOException {
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -54,6 +53,5 @@ public class OrderResultsController extends BaseController {
         byte[] video = service.getOrderVideo(id);
         return new HttpEntity<>(video, httpHeaders);
     }
-
 
 }

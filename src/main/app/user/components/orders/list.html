@@ -4,7 +4,7 @@
             <strong>You have not submitted any orders yet!</strong>
         </div>
         <uib-accordion close-others="oneAtATime" >
-            <div uib-accordion-group class="panel-default"   style="width: 680px; border:0px" is-disabled="true" >
+            <div uib-accordion-group class="panel-default" style="width: 680px; border:0px" is-disabled="true" >
                 <uib-accordion-heading>
                     <div  class="list_header">
                         <ul >
@@ -32,6 +32,10 @@
                     <h2 align="center" style="background: #149286;color: white;margin:0px" >Personal information</h2>
                     <div class="Info" style="background: #eee;padding:20px">
                     <table align="center">
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{order.fullName}}</td>
+                        </tr>
                         <tr>
                             <td>Name:</td>
                             <td>{{order.fullName}}</td>
@@ -94,9 +98,9 @@
                                             <th align="center">Camera</th>
                                         </tr>
                                         </thead>
-                                        <tr ng-repeat = "data in $ctrl.fakeOrder">
-                                            <td align="center">{{data.name}}</td>
-                                            <td align="center">{{data.cameraPosition}}</td>
+                                        <tr ng-repeat = "item in order.mapItems">
+                                            <td align="center">{{item.name}}</td>
+                                            <td align="center">{{item.cameraPosition}}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -105,7 +109,9 @@
                         </div>
                     </div>
                     </div>
-                <h2  align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
+
+
+                <h2 align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
                 <h3 align="center"></h3>
                     <div id="slides_control">
                             <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">
@@ -116,8 +122,10 @@
                     </div>
                 <h3 align="center"></h3>
                 <div >
-                <video width="640" height="365" controls>
-                    <source src="test.mp4" type="video/mp4">
+                <video width="640" height="365"
+                       http-src="{{$ctrl.videoUrl}}"
+                       type="video/mp4"
+                       controls>
                 </video>
                 </div>
                 <div align="center">

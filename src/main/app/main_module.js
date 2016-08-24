@@ -6,6 +6,7 @@ require('angular-cookies');
 require('angular-jwt');
 require('angular-animate');
 require('angular-ui-bootstrap');
+require('angular-img-http-src');
 
 
 require('jquery');
@@ -18,6 +19,13 @@ require("bootstrap-material-design/dist/css/bootstrap-material-design.css");
 require("bootstrap-material-design/dist/css/ripples.css");
 
 $.material.init()
-var _module = angular.module('AngularSpringRestDemo', ['ui.router', 'ngMessages', 'ngCookies', 'angular-jwt', 'ngAnimate', 'ui.bootstrap']);
+var _module = angular.module('AngularSpringRestDemo', [
+    'ui.router',
+    'ngMessages',
+    'ngCookies',
+    'angular-jwt',
+    'ngAnimate',
+    'ui.bootstrap',
+    'angular.img']);
 
 module.exports = _module;

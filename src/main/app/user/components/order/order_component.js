@@ -12,6 +12,7 @@ function Controller(UserService, $state) {
   vm.selectedObject = [];
   vm.options = ["FRONT", "BOTTOM"];
   vm.order.video = false;
+  vm.check = check;
   $.material.init()
 
 
@@ -28,6 +29,7 @@ function Controller(UserService, $state) {
 
   vm.$onInit = function() {
           _loadOrderDetails();
+          vm.selectedObject[0] = {name:"Start", cameraPosition :"-"};
   };
     function _loadOrderDetails() {
         UserService.get().then(
@@ -118,6 +120,16 @@ function Controller(UserService, $state) {
         }
         return 0;
    }
+
+   function check(){
+        if(vm.selectedObject.length<2){
+            console.log("true");
+            return true;
+        }
+        console.log("false");
+        return false;
+   }
+
 }
 Controller.$inject = ['UserService', '$state'];
 require('./order_component.scss');
