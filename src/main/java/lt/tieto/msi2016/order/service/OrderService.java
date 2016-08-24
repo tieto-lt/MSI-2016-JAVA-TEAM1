@@ -69,11 +69,16 @@ public class OrderService {
         missionCommands.add(new MissionCommand("takeoff"));
         missionCommands.add(new MissionCommand("altitude", 1.5));
 
+        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))));
         for (MapItems mapItem : mapItems){
             missionCommands.add(new MissionCommand("go", getPositionByObjectAndCameraPosition(mapItem)));
+            missionCommands.add(new MissionCommand("switchVerticalCamera"));
+            missionCommands.add(new MissionCommand("hover", 2000));
+            missionCommands.add(new MissionCommand("takePicture"));
         }
         // go to start
         missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))));
+        missionCommands.add(new MissionCommand("land"));
 
         return missionCommands;
     }
