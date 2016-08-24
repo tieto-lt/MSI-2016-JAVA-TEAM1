@@ -16,11 +16,10 @@ function Controller($scope,OrdersService) {
 
    // vm.getObjects = getObjects;
     vm.all = [
-        {id :0, selected: false, color: "#928f8f", name: "Start",    size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :1, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :2, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :3, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :4, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, camera: "front"}
+        {id :0, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :1, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :2, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, camera: "front"},
+        {id :3, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, camera: "front"}
       ];
 
     vm.myInterval = 3000;
@@ -68,7 +67,7 @@ function Controller($scope,OrdersService) {
 
                 for(j=0; j<vm.orders[i].mapItems.length; j++){
                    //console.log(vm.orders[i].mapItems[j].name);
-                   for(a = 0; a<5; a++){
+                   for(a = 0; a<4; a++){
                         if(vm.orders[i].mapItems[j].name == vm.all[a].name){
                             vm.all[a].color = "#009688";
                         }
