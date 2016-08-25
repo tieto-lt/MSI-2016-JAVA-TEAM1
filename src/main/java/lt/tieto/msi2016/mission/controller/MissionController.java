@@ -37,7 +37,7 @@ public class MissionController {
     @RequestMapping(method = RequestMethod.GET, value = "/api/missions", params = "operatorToken")
     public Missions getMissions(@RequestParam String operatorToken) throws IOException {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
-            System.out.println("Getting missions");
+            //System.out.println("Getting missions");
             Missions missions = new Missions();
             if (OperatorVerificationStatus.Status.VERIFIED == operatorVerificationService.getOperatorStatus(operatorToken)) {
                 missions.setMissions(orderService.getAllMissions());

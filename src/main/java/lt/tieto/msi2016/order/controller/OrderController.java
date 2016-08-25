@@ -76,9 +76,15 @@ public class OrderController extends BaseController {
     }
 
     @Secured(Roles.OPERATOR)
-    @RequestMapping(method = RequestMethod.GET, path = "/api/missionsUIByOperator")
-    public List<OrderResults> getOrderResultsByOrderIdForOPerator() throws IOException {
-        return orderResultsService.getOrderResultsByOPeratorID();
+    @RequestMapping(method = RequestMethod.GET, path = "/api/missionsByName/{name}")
+    public List<OrderResults> getOrderResultsByOrderIdForOPerator(@PathVariable String name) throws IOException {
+        return orderResultsService.getOrderResultsByOPeratorID(name);
+    }
+
+    @Secured(Roles.OPERATOR)
+    @RequestMapping(method = RequestMethod.GET, path = "/api/order/names")
+    public  List<String> getMissionNamesByOperator() throws IOException {
+        return orderResultsService.getMissionNamesByOperator();
     }
 
 

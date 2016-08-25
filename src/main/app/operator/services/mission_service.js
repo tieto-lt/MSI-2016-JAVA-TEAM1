@@ -6,8 +6,8 @@ function Service ($http) {
        return $http.get("/api/missionsUI",{});
     };
 
-     this.getAllMissionsResultsByOperatorID = function() {
-           return $http.get("/api/missionsUIByOperator",{});
+     this.getMissionsResultsByName = function(name) {
+           return $http.get("/api/missionsByName/"+name,{});
         };
 
     this.publish = function(orderId) {
@@ -17,6 +17,10 @@ function Service ($http) {
     this.redo = function(id) {
        return $http.put("/api/order/redo/" + id,{});
     };
+
+    this.getMissionNames = function() {
+               return $http.get("/api/order/names",{});
+            };
 }
 Service.$inject = ['$http'];
 module.service('MissionService', Service);

@@ -67,14 +67,24 @@ public class OrderResultsService {
 
 
     @Transactional(readOnly = true)
-    public List<OrderResults> getOrderResultsByOPeratorID() throws IOException {
+    public List<OrderResults> getOrderResultsByOPeratorID(String name) throws IOException {
         List<OrderResults> resultList = new ArrayList();
         Long userId = securityService.getCurrentUser().getId();
-        for (OrderResultsDb orderResultsDb : repository.getOrderResultsByOperatorId(userId)) {
+        for (OrderResultsDb orderResultsDb : repository.getOrderResultsByOperatorId(name)) {
             resultList.add(mapToOrderResults(orderResultsDb));
         }
         return resultList;
     }
+
+
+    @Transactional(readOnly = true)
+    public  List<String> getMissionNamesByOperator() throws IOException {
+        List<OrderResults> resultList = new ArrayList();
+        Long userId = securityService.getCurrentUser().getId();
+        List<String> missionNames=repository.getMissionNamesByOperator(userId);
+        return missionNames;
+    }
+
 
 
 

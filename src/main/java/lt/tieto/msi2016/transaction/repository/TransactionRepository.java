@@ -6,13 +6,16 @@ import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
 /**
  * Created by it11 on 16.8.24.
  */
+@Repository
 public class TransactionRepository extends BaseRepository<TransactionDb>{
 
 
@@ -26,7 +29,7 @@ public class TransactionRepository extends BaseRepository<TransactionDb>{
       TransactionDb transactionDb = new TransactionDb();
         transactionDb.setId(rs.getLong("id"));
         transactionDb.setUserId(rs.getLong("user_id"));
-        transactionDb.setTransaction(rs.getFloat("transaction"));
+        transactionDb.setTransaction(rs.getBigDecimal("transaction"));
         return  transactionDb;
     };
 
@@ -42,13 +45,9 @@ public class TransactionRepository extends BaseRepository<TransactionDb>{
 
     public TransactionRepository () {super (ROW_MAPPER, DB_ROW_UNMAPPER,"transactions","id");}
 
-    public float getUserBalance (Long userId){
-        float balance=0;
+    public List<TransactionDb> getUserTransactions (Long userId){
         List<TransactionDb> transactions =template.query(SELECT_BALANCE_BY_USER_ID, new Object[]{userId}, ROW_MAPPER);
-
-        for (TransactionDb transaction: transactions) balance += transaction.getTransaction();
-
-        return balance;
+        return transactions;
     }
 
 
