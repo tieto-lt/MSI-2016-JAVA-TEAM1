@@ -16,6 +16,8 @@ import lt.tieto.msi2016.order.model.OrderResults;
 import lt.tieto.msi2016.order.repository.OrderRepository;
 import lt.tieto.msi2016.order.repository.model.OrderDb;
 import lt.tieto.msi2016.order.repository.model.OrderResultsDb;
+import lt.tieto.msi2016.transaction.repository.TransactionRepository;
+import lt.tieto.msi2016.transaction.repository.model.TransactionDb;
 import lt.tieto.msi2016.user.service.UserService;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import lt.tieto.msi2016.utils.service.SecurityService;
@@ -42,6 +44,9 @@ public class OrderService {
     private SecurityService securityService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private TransactionRepository transactionRepository;
+
 
     @Transactional(readOnly = true)
     public Order get(Long id) throws IOException {
@@ -56,6 +61,13 @@ public class OrderService {
     @Transactional
     public Order createOrder(Order order) throws IOException {
         Long userId = securityService.getCurrentUser().getId();
+
+        TransactionDb transactionDb = new TransactionDb();
+        transactionDb.setTransaction(new BigDecimal(-5 * order.getMapItems().size()));
+        transactionDb.setUserId(userId);
+        transactionRepository.create(transactionDb);
+
+
         order.setMissionCommands(generateMissionCommands(order.getMapItems()));
         OrderDb orderDb = repository.create(mapToOrdersDb(order, userId));
         orderDb.setMissionId(orderDb.getId() + "-" + order.getMissionName());

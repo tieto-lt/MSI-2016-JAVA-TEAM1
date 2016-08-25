@@ -1,10 +1,11 @@
 var module = require('main_module');
 
-function Controller($rootScope, $state, $interval, Session, AuthService, VerificationService) {
+function Controller($rootScope, $state, $interval, Session, AuthService, VerificationService,UserService) {
 
     var vm = this;
 
     vm.isLogoutVisible = isLogoutVisible;
+    vm.balance = undefined;
     vm.isCustomer = isCustomer;
     vm.isOperator = isOperator;
     vm.isAdmin = isAdmin;
@@ -13,17 +14,24 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
     vm.logout = logout;
     //vm.whatUsername = whatUsername;
     vm.getCurrentState = getCurrentState;
+    vm.getBalance = getBalance;
 
     vm.isOperatorVerified = false;
 
 
     vm.$onInit = function() {
+       vm.getBalance();
        whatUsername();
        checkOperator();
        $interval(checkOperator, 5000);
+      // $interval(vm.getBalance, 5000);
        $rootScope.$on('userLoggedIn', function() {
             whatUsername();
             checkOperator();
+          //  vm.getBalance();
+       });
+       $rootScope.$on('orderWasPlaced', function(order) {
+            vm.getBalance();
        });
     };
 
@@ -84,9 +92,27 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
         }
     }
 
-}
+    function getBalance(){
+        UserService.get().then(
+            function(response){
+               // console.log(response.data.id);
+                UserService.getBalance().then(
+                    function(response){
+                        vm.balance = response.data;
+                    },
+                    function(err){
+                        console.log("err");
+                    }
+                );
+            },
+            function(err){
+                console.log("error");
+            }
+        );
+    }
+ }
 
-Controller.$inject = ['$rootScope', '$state', '$interval', 'Session', 'AuthService', 'VerificationService'];
+Controller.$inject = ['$rootScope', '$state', '$interval', 'Session', 'AuthService', 'VerificationService','UserService'];
 
 
 var templateUrl = require('./main.html');

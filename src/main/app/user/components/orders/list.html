@@ -3,7 +3,9 @@
         <div class="alert-order-list alert alert-info" ng-show="$ctrl.message"  align="center">
             <strong>You have not submitted any orders yet!</strong>
         </div>
-        <a class="btn btn-lg btn-raised btn-primary" ui-sref="root.orderComponent"> Place a new order </a>
+        <a class="btn btn-lg btn-raised btn-primary" ui-sref="root.orderComponent">Place a new order</a>
+        <a class="btn btn-lg btn-raised btn-primary" ui-sref="root.customerDeposit">Add money</a>
+
         <uib-accordion close-others="oneAtATime" >
             <div uib-accordion-group class="panel-default" style="width: 680px; border:0px" is-disabled="true" >
                 <uib-accordion-heading>
@@ -116,14 +118,10 @@
                         </div>
                     </div>
                     </div>
-
-
+                <h2 align="center" ng-show="order.status!='Completed'" style="background: #149286;color: white;margin:0px">No outcomes yet</h2>
+                <div ng-hide="order.status!='Completed'">
                 <h2 align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
-
                 <h3 align="center"></h3>
-
-
-
                 <div style="height:300px">
 
                         <div id="slides_control">
@@ -132,12 +130,8 @@
                                     <img ng-src="data:image/png;base64,{{image.imageBase64}}">
                                 </div>
                             </div>
-
                     </div>
-
                 </div>
-
-
                 <h3 align="center"></h3>
                 <br>
                 <br>
@@ -153,7 +147,6 @@
                 </div>
                 <div align="center">
                     <button align="center"class="btn btn-raised btn-primary"><a href="{{$ctrl.videoUrls[order.id]}}" style="color:white" download>Download video</a></button>
-                </div>
                 </div>
         </uib-accordion>
     </div>

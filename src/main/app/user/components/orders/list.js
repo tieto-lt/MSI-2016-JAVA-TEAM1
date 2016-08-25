@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller($scope,OrdersService) {
+function Controller($scope, OrdersService) {
 
     var vm = this;
     vm.orders = {};
@@ -13,7 +13,6 @@ function Controller($scope,OrdersService) {
     vm.selected = [];
     vm.list = [];
     vm.videoUrls = {};
-
    // vm.getObjects = getObjects;
     vm.all = [
         {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, camera: "front"},
@@ -52,9 +51,11 @@ function Controller($scope,OrdersService) {
      };
 
     function getResults (orderId) {
+       if(vm.order.status=='Completed'){
         OrdersService.getOrderResults(orderId).then(
             function(response){
                vm.result=response.data[0];
+               console.log(vm.result);
                if(vm.result == null){
                    console.log("null");
                }
@@ -62,6 +63,7 @@ function Controller($scope,OrdersService) {
                vm.videoUrls[orderId] = "/api/missionsUI/video/" + vm.result.id;
             }
         );
+     }
         for(i=0; i<vm.orders.length;i++){
             if(vm.orders[i].id == orderId){
                 //console.log(vm.orders[i].mapItems);
@@ -77,6 +79,14 @@ function Controller($scope,OrdersService) {
             }
         }
      }
+
+//     function videoUrl(resultId) {
+//        if (resultId === vm.result.id) {
+//            return vm.videoUrl = "/api/missionsUI/video/" + vm.result.id;
+//        } else {
+//            return undefined;
+//        }
+//     }
 
 
         $scope.test = function(text) {

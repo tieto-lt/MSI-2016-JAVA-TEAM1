@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller(UserService, $state) {
+function Controller(UserService, $state, $rootScope) {
   var vm = this;
   vm.order = {};
   vm.user = {};
@@ -13,6 +13,9 @@ function Controller(UserService, $state) {
   vm.options = ["FRONT", "BOTTOM"];
   vm.order.video = false;
   vm.check = check;
+//  vm.acceptPayment = acceptPayment;
+//  vm.declinePayment = declinePayment;
+
   $.material.init()
 
 
@@ -48,27 +51,68 @@ function Controller(UserService, $state) {
     }
 
     function createOrder(){
-          for( i = 0; i < vm.selectedObject.length; i++){
-            vm.obj[i] = {name: vm.selectedObject[i].name, cameraPosition : vm.selectedObject[i].cameraPosition};
-          }
-          vm.order.mapItems = vm.obj;
-          if(!checkIfEqual()){
-           console.log(vm.order);
-           UserService.createOrder(vm.order).then(
-                function(response) {
-                   vm.message = !vm.error;
-                   vm.previousOrder.fullName = vm.order.fullName;
-                   vm.previousOrder.phone = vm.order.phone;
-                   vm.previousOrder.email = vm.order.email;
-                   vm.previousOrder.details = vm.order.details;
-                   vm.previousOrder.missionName = vm.order.missionName;
-                   $state.go('root.customerOrders');
-                 },
-                 function (err) {
-                   vm.error = !vm.message;
-                 });
-         }
+          UserService.getBalance().then(
+            function(response) {
+                console.log(response.data);
+                if(response.data < vm.selectedObject.length * 5 ){
+                    console.log("neuztenka");
+                    vm.money= true;
+                } else {
+                    for( i = 0; i < vm.selectedObject.length; i++) {
+                        vm.obj[i] = {name: vm.selectedObject[i].name, cameraPosition : vm.selectedObject[i].cameraPosition};
+                    }
+                    vm.order.mapItems = vm.obj;
+                    if(!checkIfEqual()) {
+                       console.log(vm.order);
+                       UserService.createOrder(vm.order).then(
+                            function(response) {
+                               vm.message = !vm.error;
+                               vm.previousOrder.fullName = vm.order.fullName;
+                               vm.previousOrder.phone = vm.order.phone;
+                               vm.previousOrder.email = vm.order.email;
+                               vm.previousOrder.details = vm.order.details;
+                               vm.previousOrder.missionName = vm.order.missionName;
+                               $state.go('root.customerOrders');
+                               $rootScope.$emit('orderWasPlaced', vm.order);
+                             },
+                             function (err) {
+                               vm.error = !vm.message;
+                             });
+                    }
+                }
+            },
+            function(err){
+
+          });
+
     }
+
+
+
+//    function acceptPayment(id){
+//        UserService.acceptPayment(id).then(
+//            function(response){
+//                console.log(response.data);
+//            },
+//            function(err){
+//                console.log("error");
+//            }
+//        });
+//    }
+//
+//    function declinePayment(id){
+//            UserService.declinePayment(id).then(
+//            function(response){
+//                console.log(response.data);
+//            },
+//            function(err){
+//                console.log("error");
+//            }
+//        });
+//    }
+
+
+
 
     function checkIfEqual(){
         return ((vm.previousOrder.fullName == vm.order.fullName) &&
@@ -129,7 +173,7 @@ function Controller(UserService, $state) {
    }
 
 }
-Controller.$inject = ['UserService', '$state'];
+Controller.$inject = ['UserService', '$state', '$rootScope'];
 require('./order_component.scss');
 module.component('orderComponent', {
     controller: Controller,

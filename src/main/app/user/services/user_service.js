@@ -23,6 +23,14 @@ function Service ($http) {
         return $http.post('/api/customer/password',password);
     };
 
+    this.getBalance = function(){
+        return $http.get('/api/customer/balance/');
+    };
+
+    this.getPayUrl = function(amount) {
+        return $http.get('/api/customer/deposit?amount=' + amount);
+    }
+
 }
 
 Service.$inject = ['$http'];
