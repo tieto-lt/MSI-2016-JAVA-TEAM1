@@ -1,13 +1,12 @@
 package lt.tieto.msi2016.transaction.model;
 
-/**
- * Created by it11 on 16.8.25.
- */
+import java.math.BigDecimal;
+
+
 public class Transaction {
     private Long id;
     private Long userId;
-    private float transaction;
-    private float balance;
+    private BigDecimal transaction;
 
     public Long getId() {
         return id;
@@ -25,19 +24,11 @@ public class Transaction {
         this.userId = userId;
     }
 
-    public float getBalance() {
-        return balance;
-    }
-
-    public void setBalance(float balance) {
-        this.balance = balance;
-    }
-
-    public float getTransaction() {
+    public BigDecimal getTransaction() {
         return transaction;
     }
 
-    public void setTransaction(float transaction) {
+    public void setTransaction(BigDecimal transaction) {
         this.transaction = transaction;
     }
 }

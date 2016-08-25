@@ -74,7 +74,7 @@ public class MissionController {
         if (operatorVerificationService.isOperatorValidByToken(operatorToken)) {
             LOG.info("Completing mission {} {}", missionId, missionResult);
             if (OperatorVerificationStatus.Status.VERIFIED == operatorVerificationService.getOperatorStatus(operatorToken)) {
-                orderResultsService.saveMissionResult(missionResult, operatorVerificationService.getOperatorByToken(operatorToken).getId());
+                orderResultsService.saveMissionResult(missionResult, operatorVerificationService.getOperatorByToken(operatorToken).getUserId());
                 orderService.updateStatus(Long.valueOf(missionId.split("-")[0]), OrderDb.Status.Executed);
             } else {
                 operatorVerificationService.verifyAndUpdateStatus(missionResult, operatorToken);

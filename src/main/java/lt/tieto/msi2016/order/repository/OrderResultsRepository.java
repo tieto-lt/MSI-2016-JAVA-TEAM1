@@ -20,6 +20,8 @@ public class OrderResultsRepository extends BaseRepository<OrderResultsDb> {
     @Autowired
     private JdbcTemplate template;
     public static final String SELECT_RESULTS__BY_ORDER_ID = "SELECT * FROM order_results where order_id = ?";
+    public static final String SELECT_RESULTS__BY_NAME = "SELECT * FROM order_results where mission_name = ?";
+    public static final String SELECT_MISSION_NAMES_BY_OPERATOR_ID = "SELECT mission_name FROM order_results where executed_by = ?";
 
 
 
@@ -59,8 +61,16 @@ public class OrderResultsRepository extends BaseRepository<OrderResultsDb> {
 
     }
 
+    public List<OrderResultsDb> getOrderResultsByOperatorId(String name){
+        List<OrderResultsDb>  resultList =template.query(SELECT_RESULTS__BY_NAME, new Object[] {name}, ROW_MAPPER);
+        return resultList;
 
+    }
 
+    public List<String> getMissionNamesByOperator(Long operator_id){
+        List<String> missionNames = template.queryForList(SELECT_MISSION_NAMES_BY_OPERATOR_ID, String.class, new Object[]{operator_id});
+        return missionNames;
 
+    }
 
 }

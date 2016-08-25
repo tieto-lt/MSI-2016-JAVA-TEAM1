@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid msi-order-component">
     <div class="row">
         <div class="col-sm-3 col-md-6" style="background-color:white; height:830px">
             <div class="form-group" >
@@ -50,22 +50,23 @@
         <div class="col-sm-9 col-md-6" style="background-color:white; height:830px">
             <div class="login_box2">
                 <svg width="320" height="420">
-                    <text x="130" y="200" font-family="sans-serif" font-size="15px">Starting point</text>
-                    <rect ng-click="$ctrl.showMessage('0')" x="215" y="70" rx="10" ry="10" width="{{$ctrl.all[0].size}}" height="{{$ctrl.all[0].size}}"
-                          style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:{{$ctrl.all[0].width}};" />
-                    <text x="200" y="150" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[0].text}}">CASTLE</text>
+                    <circle cx="130" cy="135" r="10" stroke="#928f8f"stroke-width="3" fill="#009688" />
+                    <text x="145" y="260" color="red" font-size="15px" font-weight="bold";>START</text>
+                    <rect ng-click="$ctrl.showMessage('0')" x="215" y="70" rx="10" ry="10"
+                          style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:{{$ctrl.all[0].width}}; height:{{$ctrl.all[0].size}}; width:{{$ctrl.all[0].size}}" />
+                    <text x="217" y="150" font-size="15px" fill="{{$ctrl.all[0].text}}">CASTLE</text>
 
-                    <rect ng-click="$ctrl.showMessage('1')" x="5" y="140" rx="10" ry="10" width="{{$ctrl.all[1].size}}" height="{{$ctrl.all[1].size}}"
-                          style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:{{$ctrl.all[1].width}};" />
-                    <text x="0" y="220" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[1].text}}">HOUSE</text>
+                    <rect ng-click="$ctrl.showMessage('1')" x="5" y="140" rx="10" ry="10"
+                          style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:{{$ctrl.all[1].width}};height:{{$ctrl.all[1].size}}; width:{{$ctrl.all[1].size}}" />
+                    <text x="7" y="220"  font-size="15px" fill="{{$ctrl.all[1].text}}">HOUSE</text>
 
-                    <rect ng-click="$ctrl.showMessage('2')" x="5" y="5" rx="10" ry="10" width="{{$ctrl.all[2].size}}" height="{{$ctrl.all[2].size}}"
-                          style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:{{$ctrl.all[2].width}};" />
-                    <text x="0" y="85" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[2].text}}">GARDEN</text>
+                    <rect ng-click="$ctrl.showMessage('2')" x="5" y="5" rx="10" ry="10"
+                          style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:{{$ctrl.all[2].width}};height:{{$ctrl.all[2].size}}; width:{{$ctrl.all[2].size}}" />
+                    <text x="5" y="85"  font-size="15px" fill="{{$ctrl.all[2].text}}">GARDEN</text>
 
-                    <rect ng-click="$ctrl.showMessage('3')" x="80" y="285" rx="10" ry="10" width="{{$ctrl.all[3].size}}" height="{{$ctrl.all[3].size}}"
-                          style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:{{$ctrl.all[3].width}};" />
-                    <text x="60" y="365" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[3].text}}">Object nr.4</text>
+                    <rect ng-click="$ctrl.showMessage('3')" x="80" y="285" rx="10" ry="10"
+                          style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:{{$ctrl.all[3].width}};height:{{$ctrl.all[3].size}}; width:{{$ctrl.all[3].size}}" />
+                    <text x="90" y="365"  font-size="15px" fill="{{$ctrl.all[3].text}}">LAKE</text>
                     <svg id="Capa_1"
                          x="130" y="180"
                          viewBox="0 0 612.001 612.001"
