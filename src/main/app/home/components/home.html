@@ -17,10 +17,10 @@
 
 
             <uib-accordion class="uib-accordion" close-others="oneAtATime">
-                <div uib-accordion-group  class="uib-accordion " heading="Login" >
+                <div uib-accordion-group  is-open="status.open"  ng-click="status.open1 = close-others" class="uib-accordion " heading="Login" >
                         <login></login>
                 </div>
-                <div uib-accordion-group  class="uib-accordion " heading="Registration" >
+                <div uib-accordion-group    is-open="status.open1" ng-click="status.open = close-others" class="uib-accordion " heading="Registration" >
                         <new-user></new-user>
                 </div>
             </uib-accordion>
