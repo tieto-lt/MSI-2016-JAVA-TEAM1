@@ -1,22 +1,16 @@
 <div>
-    <div>
         <script type="text/ng-template" id="group-template.html">
             <div class="panel-heading">
                 <h4 class="panel-title" style="color:#fa39c3">
                     <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
-          <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
-            {{heading}}
-          </span>
-                    </a>
+          <span uib-accordion-header ng-class="{'text-muted': isDisabled}">{{heading}}</span</a>
                 </h4>
-            </div>
             <div class="panel-collapse collapse" uib-collapse="!isOpen">
                 <div class="panel-body" style="text-align: right" ng-transclude></div>
             </div>
-        </script>
-        <div class="alert alert-info alert-mission-list" ng-show="$ctrl.message"  align="center">
-            <strong>You have not run any missions yet!</strong>
-        </div>
+                </div>
+            </script>
+        <div class="alert alert-info alert-mission-list" ng-show="$ctrl.message"  align="center"><strong>You have not run any missions yet!</strong></div>
         <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
             <div uib-accordion-group class="panel-default" is-open="status.open">
                 <uib-accordion-heading >{{mission.missionName}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
@@ -34,10 +28,7 @@
 
                 <p>Battery status: </p>
                 <div class="progress" style="width: 640px">
-                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{mission.batteryStatus}}%;">
-                        {{mission.batteryStatus}}%
-                    </div>
-                </div>
+                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{mission.batteryStatus}}%;">{{mission.batteryStatus}}%</div></div>
                 <div id="slides_control">
                         <div uib-carousel active="$ctrl.activeSlide" no-wrap="noWrapSlides">
                             <div uib-slide ng-repeat="image in mission.images track by $index" index="$index">
@@ -47,19 +38,14 @@
                             </div>
                         </div>
                 </div>
-                <div>
-                    <button class="btn btn-warning" ng-click="$ctrl.publish($index)" ng-hide="$ctrl.button">Publish</button>
-                    <button class="btn btn-danger" ng-click="$ctrl.redo($index)" ng-hide="$ctrl.button">Redo</button>
+                <div align="center" >
+                    <button  class="btn btn-warning" ng-click="$ctrl.publish($index)" ng-hide="$ctrl.button">Publish</button>
+                    <button  class="btn btn-danger" ng-click="$ctrl.redo($index)" ng-hide="$ctrl.button">Redo</button>
                 </div>
-                <div class="alert alert-danger alert-mission-list" role="alert" ng-show="$ctrl.error">
-                    {{$ctrl.error}}
+                <div align="center" style="margin-top:15px" class="alert alert-danger alert-mission-list" role="alert" ng-show="$ctrl.error">{{$ctrl.error}}</div>
+                <div align="center" style="margin-top:15px"class="alert alert-success alert-mission-list" role="alert" ng-show="$ctrl.success">{{$ctrl.success}}</div>
                 </div>
-                <div class="alert alert-success alert-mission-list" role="alert" ng-show="$ctrl.success">
-                    {{$ctrl.success}}
-                </div>
-            </div>
-
-        </uib-accordion>
+       </uib-accordion>
     </div>
 </div>
 

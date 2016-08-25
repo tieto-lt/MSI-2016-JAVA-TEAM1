@@ -127,17 +127,13 @@
                                 </div>
                             </div>
                     </div>
-
-
                 <div >
-                <video width="640" height="365"
-                       http-src="{{$ctrl.videoUrl}}"
-                       type="video/mp4"
-                       controls>
-                </video>
+                    <video width="640" height="365" style=" margin-top: 20px"
+                           http-src="$ctrl.videoUrl($ctrl.result.id)"
+                           type="video/mp4"
+                           controls>
+                    </video>
                 </div>
-
-
                 <div align="center">
                     <button align="center"class="btn btn-raised btn-primary"><a href="{{$ctrl.videoUrl}}" style="color:white" download>Download video</a></button>
                 </div>

@@ -12,6 +12,7 @@ function Controller($scope,OrdersService) {
     vm.fakeOrder = [];
     vm.selected = [];
     vm.list = [];
+//    vm.videoUrl = videoUrl;
     vm.videoUrl = undefined;
 
    // vm.getObjects = getObjects;
@@ -78,8 +79,15 @@ function Controller($scope,OrdersService) {
                 }
             }
         }
-
      }
+
+//     function videoUrl(resultId) {
+//        if (resultId === vm.result.id) {
+//            return vm.videoUrl = "/api/missionsUI/video/" + vm.result.id;
+//        } else {
+//            return undefined;
+//        }
+//     }
 
 
         $scope.test = function(text) {
