@@ -64,67 +64,109 @@ public class OrderService {
     }
 
     private List<MissionCommand> generateMissionCommands(List<MapItems> mapItems){
+        Double altitude = 1.5;
         List<MissionCommand> missionCommands = new ArrayList<>();
         missionCommands.add(new MissionCommand("zero"));
         missionCommands.add(new MissionCommand("takeoff"));
-        missionCommands.add(new MissionCommand("altitude", 1.5));
+        missionCommands.add(new MissionCommand("altitude", altitude));
+        missionCommands.add(new MissionCommand("hover", 1000));
 
-        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))));
+        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(altitude), BigDecimal.valueOf(0))));
+        missionCommands.add(new MissionCommand("hover", 1000));
         for (MapItems mapItem : mapItems){
-            missionCommands.add(new MissionCommand("go", getPositionByObjectAndCameraPosition(mapItem)));
-            missionCommands.add(new MissionCommand("switchVerticalCamera"));
+            Position objectPosition = getPositionByObject(mapItem, altitude);
+            missionCommands.add(new MissionCommand("go", objectPosition));
+            missionCommands.add(new MissionCommand("go", getPositionByCamera(mapItem, objectPosition.getX(), objectPosition.getY(), objectPosition.getZ())));
+            missionCommands.add(mapItem.getCameraPosition() == MapItems.CameraPosition.BOTTOM ? new MissionCommand("switchVerticalCamera") : new MissionCommand("switchHorizontalCamera"));
             missionCommands.add(new MissionCommand("hover", 2000));
             missionCommands.add(new MissionCommand("takePicture"));
+            missionCommands.add(new MissionCommand("go", objectPosition));
         }
         // go to start
-        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))));
+        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(altitude), BigDecimal.valueOf(0))));
         missionCommands.add(new MissionCommand("land"));
 
         return missionCommands;
     }
 
-    private Position getPositionByObjectAndCameraPosition(MapItems mapItem){
+    private Position getPositionByObject(MapItems mapItem, Double altitude){
         BigDecimal x;
         BigDecimal y;
         BigDecimal z;
-        BigDecimal yaw;
+        BigDecimal yaw = BigDecimal.valueOf(0);
 
 
         switch(mapItem.getName()) {
             case CASTLE:
-                x = BigDecimal.valueOf(2);
-                y = BigDecimal.valueOf(1);
-                z = BigDecimal.valueOf(1.5);
-                yaw = BigDecimal.valueOf(0);
+                if (mapItem.getCameraPosition() == MapItems.CameraPosition.BOTTOM) {
+                    x = BigDecimal.valueOf(2);
+                    y = BigDecimal.valueOf(1);
+                    z = BigDecimal.valueOf(altitude);
+                } else {
+                    x = BigDecimal.valueOf(2);
+                    y = BigDecimal.valueOf(0.5);
+                    z = BigDecimal.valueOf(altitude);
+                }
                 break;
             case GARDEN:
-                x = BigDecimal.valueOf(3);
-                y = BigDecimal.valueOf(-2);
-                z = BigDecimal.valueOf(1.5);
-                yaw = BigDecimal.valueOf(0);
+                if (mapItem.getCameraPosition() == MapItems.CameraPosition.BOTTOM) {
+                    x = BigDecimal.valueOf(3);
+                    y = BigDecimal.valueOf(-2);
+                    z = BigDecimal.valueOf(altitude);
+                } else {
+                    x = BigDecimal.valueOf(2.5);
+                    y = BigDecimal.valueOf(-2);
+                    z = BigDecimal.valueOf(altitude);
+                }
                 break;
             case HOUSE:
-                x = BigDecimal.valueOf(1);
-                y = BigDecimal.valueOf(-2);
-                z = BigDecimal.valueOf(1.5);
-                yaw = BigDecimal.valueOf(0);
+                if (mapItem.getCameraPosition() == MapItems.CameraPosition.BOTTOM) {
+                    x = BigDecimal.valueOf(1);
+                    y = BigDecimal.valueOf(-2);
+                    z = BigDecimal.valueOf(altitude);
+                } else {
+                    x = BigDecimal.valueOf(1);
+                    y = BigDecimal.valueOf(-1.5);
+                    z = BigDecimal.valueOf(altitude);
+                }
                 break;
             case LAKE:
-                x = BigDecimal.valueOf(-1);
-                y = BigDecimal.valueOf(-1);
-                z = BigDecimal.valueOf(1.5);
-                yaw = BigDecimal.valueOf(0);
-                break;
-            case START:
-                x = BigDecimal.valueOf(0);
-                y = BigDecimal.valueOf(0);
-                z = BigDecimal.valueOf(0);
-                yaw = BigDecimal.valueOf(0);
+                if (mapItem.getCameraPosition() == MapItems.CameraPosition.BOTTOM) {
+                    x = BigDecimal.valueOf(-1);
+                    y = BigDecimal.valueOf(-1);
+                    z = BigDecimal.valueOf(altitude);
+                } else {
+                    x = BigDecimal.valueOf(-1);
+                    y = BigDecimal.valueOf(-1);
+                    z = BigDecimal.valueOf(altitude);
+                }
                 break;
             default:
                 x = BigDecimal.valueOf(0);
                 y = BigDecimal.valueOf(0);
-                z = BigDecimal.valueOf(0);
+                z = BigDecimal.valueOf(altitude);
+                yaw = BigDecimal.valueOf(0);
+                break;
+        }
+        return new Position(x, y, z, yaw);
+    }
+
+    private Position getPositionByCamera(MapItems mapItem, BigDecimal x, BigDecimal y, BigDecimal z){
+        BigDecimal yaw;
+        switch(mapItem.getName()) {
+            case CASTLE:
+                yaw = (mapItem.getCameraPosition() == MapItems.CameraPosition.BOTTOM) ? BigDecimal.valueOf(0) : BigDecimal.valueOf(90);
+                break;
+            case GARDEN:
+                yaw = BigDecimal.valueOf(0);
+                break;
+            case HOUSE:
+                yaw = (mapItem.getCameraPosition() == MapItems.CameraPosition.BOTTOM) ? BigDecimal.valueOf(0) : BigDecimal.valueOf(-90);
+                break;
+            case LAKE:
+                yaw = (mapItem.getCameraPosition() == MapItems.CameraPosition.BOTTOM) ? BigDecimal.valueOf(0) : BigDecimal.valueOf(180);
+                break;
+            default:
                 yaw = BigDecimal.valueOf(0);
                 break;
         }
