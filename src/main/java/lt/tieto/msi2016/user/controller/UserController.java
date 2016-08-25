@@ -4,6 +4,7 @@ import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.user.model.Password;
 import lt.tieto.msi2016.user.model.PaymentUrl;
 import lt.tieto.msi2016.user.model.User;
+import lt.tieto.msi2016.user.service.PaymentService;
 import lt.tieto.msi2016.user.service.UserService;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import lt.tieto.msi2016.utils.service.SecurityService;
@@ -21,6 +22,9 @@ public class UserController  extends BaseController {
 
     @Autowired
     private SecurityService securityService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @RequestMapping(method = RequestMethod.POST, path = "/api/user")
     public User createUser(@RequestBody @Valid User user) {
@@ -54,7 +58,7 @@ public class UserController  extends BaseController {
     public PaymentUrl getPayUrl(@RequestParam("amount") Integer amount){
         System.out.println("getPayUrl amount received");
         PaymentUrl paymentUrl = new PaymentUrl();
-        paymentUrl.setUrl("http://paysera.com");
+        paymentUrl.setUrl(paymentService.getEncodedUrl());
         return paymentUrl;
     }
 
