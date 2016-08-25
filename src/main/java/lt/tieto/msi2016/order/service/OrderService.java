@@ -68,19 +68,23 @@ public class OrderService {
         List<MissionCommand> missionCommands = new ArrayList<>();
         missionCommands.add(new MissionCommand("zero"));
         missionCommands.add(new MissionCommand("takeoff"));
-        missionCommands.add(new MissionCommand("altitude", altitude));
-        missionCommands.add(new MissionCommand("hover", 1000));
+        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0.25), BigDecimal.valueOf(altitude), BigDecimal.valueOf(0))));
+        missionCommands.add(new MissionCommand("hover", 2000));
+        missionCommands.add(new MissionCommand("zero"));
+        missionCommands.add(new MissionCommand("hover", 2000));
 
-        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(altitude), BigDecimal.valueOf(0))));
-        missionCommands.add(new MissionCommand("hover", 1000));
         for (MapItems mapItem : mapItems){
             Position objectPosition = getPositionByObject(mapItem, altitude);
             missionCommands.add(new MissionCommand("go", objectPosition));
-            missionCommands.add(new MissionCommand("go", getPositionByCamera(mapItem, objectPosition.getX(), objectPosition.getY(), objectPosition.getZ())));
+            if (mapItem.getCameraPosition() == MapItems.CameraPosition.FRONT) {
+                missionCommands.add(new MissionCommand("go", getPositionByCamera(mapItem, objectPosition.getX(), objectPosition.getY(), objectPosition.getZ())));
+            }
             missionCommands.add(mapItem.getCameraPosition() == MapItems.CameraPosition.BOTTOM ? new MissionCommand("switchVerticalCamera") : new MissionCommand("switchHorizontalCamera"));
             missionCommands.add(new MissionCommand("hover", 2000));
             missionCommands.add(new MissionCommand("takePicture"));
-            missionCommands.add(new MissionCommand("go", objectPosition));
+            if (mapItem.getCameraPosition() == MapItems.CameraPosition.FRONT) {
+                missionCommands.add(new MissionCommand("go", objectPosition));
+            }
         }
         // go to start
         missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(altitude), BigDecimal.valueOf(0))));
