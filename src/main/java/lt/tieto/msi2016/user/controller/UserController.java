@@ -42,10 +42,21 @@ public class UserController  extends BaseController {
     public Password changeUserPassword(@RequestBody @Valid Password password) {
         return service.changeUserPassword(password);
     }
-
     @RequestMapping(method = RequestMethod.GET, path = "/api/customer/balance/{id}")
     public Long getBalance(@PathVariable Long id){
         return new Long("15");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/api/customer/payment/accept/{id}")
+    public Long acceptPayment(@PathVariable  Long id){
+        System.out.print("Accepted payment");
+        return new Long("15");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/api/customer/payment/reject/{id}")
+    public Long rejectPayment(@PathVariable  Long id){
+        System.out.print("Rejected payment");
+        return new Long("20");
     }
 
 }

@@ -13,6 +13,9 @@ function Controller(UserService, $state) {
   vm.options = ["FRONT", "BOTTOM"];
   vm.order.video = false;
   vm.check = check;
+//  vm.acceptPayment = acceptPayment;
+//  vm.declinePayment = declinePayment;
+
   $.material.init()
 
 
@@ -78,6 +81,31 @@ function Controller(UserService, $state) {
                  });
          }
     }
+
+//    function acceptPayment(id){
+//        UserService.acceptPayment(id).then(
+//            function(response){
+//                console.log(response.data);
+//            },
+//            function(err){
+//                console.log("error");
+//            }
+//        });
+//    }
+//
+//    function declinePayment(id){
+//            UserService.declinePayment(id).then(
+//            function(response){
+//                console.log(response.data);
+//            },
+//            function(err){
+//                console.log("error");
+//            }
+//        });
+//    }
+
+
+
 
     function checkIfEqual(){
         return ((vm.previousOrder.fullName == vm.order.fullName) &&

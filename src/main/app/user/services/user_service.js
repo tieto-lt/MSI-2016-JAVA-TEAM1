@@ -26,6 +26,14 @@ function Service ($http) {
     this.getBalance = function(id){
         return $http.get('/api/customer/balance/'+id);
     };
+
+//    this.acceptPayment = function(id){
+//        return $http.get('/api/customer/payment/accept/'+id);
+//    };
+//
+//    this.rejectPayment = function (id){
+//        return $http.get('/api/customer/payment/reject/'+id);
+//    };
 }
 
 Service.$inject = ['$http'];
