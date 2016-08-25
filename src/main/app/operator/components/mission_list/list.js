@@ -69,7 +69,8 @@ function Controller($scope, MissionService) {
             MissionService.publish(vm.missions[index].orderId).then(
                 function () {
                     console.log('mission results successfully published');
-                    vm.success = "mission results successfully published";
+                    vm.success = "Mission results successfully published";
+                    vm.clicked=true;
                },
                function (err) {
                    if (err.staus != 500) {
