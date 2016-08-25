@@ -1,5 +1,5 @@
 .msi-home-page {
-    background-color: rgba(0, 150, 136, 0.4);
+    background-color: rgba(0, 150, 136, 0);
 
     video#bgvid {
         position: fixed;
@@ -26,6 +26,10 @@
 
     .logo{
         height: auto;
+        background-color: rgba(0, 150, 136, 0.6);
+        width: 700px;
+        margin-left: auto;
+        margin-right: auto;
 
     }
 
@@ -83,13 +87,6 @@
 
     }
 
-    .msi-registration-form {
-
-       width:290px;
-
-
-
-    }
 
     .registerForm{
         width: 320px;
