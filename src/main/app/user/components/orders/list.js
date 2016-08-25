@@ -13,7 +13,6 @@ function Controller($scope,OrdersService) {
     vm.selected = [];
     vm.list = [];
     vm.videoUrls = {};
-
    // vm.getObjects = getObjects;
     vm.all = [
         {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, camera: "front"},
@@ -79,8 +78,15 @@ function Controller($scope,OrdersService) {
                 }
             }
         }
-
      }
+
+//     function videoUrl(resultId) {
+//        if (resultId === vm.result.id) {
+//            return vm.videoUrl = "/api/missionsUI/video/" + vm.result.id;
+//        } else {
+//            return undefined;
+//        }
+//     }
 
 
         $scope.test = function(text) {

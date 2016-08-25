@@ -96,8 +96,8 @@ function Controller($scope, MissionService) {
             MissionService.publish(vm.missions[index].orderId).then(
                 function () {
                     console.log('mission results successfully published');
-                    vm.success = "Mission results successfully published";
-                    vm.clicked=true;
+                    vm.success = "mission results successfully published";
+                    vm.button = true;
                },
                function (err) {
                    if (err.staus != 500) {
@@ -113,7 +113,8 @@ function Controller($scope, MissionService) {
                 MissionService.redo(vm.missions[index].id).then(
                    function () {
                         console.log('mission status changed to accepted');
-                        vm.success = "mission status changed to accepted";
+                        vm.success = "Mission status changed to accepted";
+                        vm.button = true;
                         _loadList();
                    },
                    function (err) {
