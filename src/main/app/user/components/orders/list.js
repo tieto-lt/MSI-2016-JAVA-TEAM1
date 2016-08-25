@@ -12,9 +12,7 @@ function Controller($scope,OrdersService) {
     vm.fakeOrder = [];
     vm.selected = [];
     vm.list = [];
-//    vm.videoUrl = videoUrl;
-    vm.videoUrl = undefined;
-
+    vm.videoUrls = {};
    // vm.getObjects = getObjects;
     vm.all = [
         {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, camera: "front"},
@@ -61,7 +59,8 @@ function Controller($scope,OrdersService) {
                if(vm.result == null){
                    console.log("null");
                }
-               vm.videoUrl = "/api/missionsUI/video/" + vm.result.id;
+               console.log(vm.result);
+               vm.videoUrls[orderId] = "/api/missionsUI/video/" + vm.result.id;
             }
         );
         }

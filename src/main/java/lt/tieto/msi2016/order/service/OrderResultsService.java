@@ -10,6 +10,7 @@ import lt.tieto.msi2016.order.model.OrderResults;
 import lt.tieto.msi2016.order.repository.OrderResultsRepository;
 import lt.tieto.msi2016.order.repository.model.OrderResultsDb;
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
+import lt.tieto.msi2016.utils.service.SecurityService;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class OrderResultsService {
 
     @Autowired
     private OrderResultsRepository repository;
+
+    @Autowired
+    private SecurityService securityService;
 
     @Transactional(readOnly = true)
     public OrderResults get(Long id) throws IOException {
@@ -59,6 +63,31 @@ public class OrderResultsService {
         }
         return resultList;
     }
+
+
+
+    @Transactional(readOnly = true)
+    public List<OrderResults> getOrderResultsByOPeratorID(String name) throws IOException {
+        List<OrderResults> resultList = new ArrayList();
+        Long userId = securityService.getCurrentUser().getId();
+        for (OrderResultsDb orderResultsDb : repository.getOrderResultsByOperatorId(name)) {
+            resultList.add(mapToOrderResults(orderResultsDb));
+        }
+        return resultList;
+    }
+
+
+    @Transactional(readOnly = true)
+    public  List<String> getMissionNamesByOperator() throws IOException {
+        List<OrderResults> resultList = new ArrayList();
+        Long userId = securityService.getCurrentUser().getId();
+        List<String> missionNames=repository.getMissionNamesByOperator(userId);
+        return missionNames;
+    }
+
+
+
+
 
     @Transactional(readOnly = true)
     public byte[] getOrderVideo(Long id) {

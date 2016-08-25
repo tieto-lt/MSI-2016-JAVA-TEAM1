@@ -8,28 +8,50 @@
             <div class="panel-collapse collapse" uib-collapse="!isOpen">
                 <div class="panel-body" style="text-align: right" ng-transclude></div>
             </div>
+<<<<<<< HEAD
                 </div>
             </script>
         <div class="alert alert-info alert-mission-list" ng-show="$ctrl.message"  align="center"><strong>You have not run any missions yet!</strong></div>
         <uib-accordion close-others="oneAtATime" ng-repeat="mission in $ctrl.missions ">
             <div uib-accordion-group class="panel-default" is-open="status.open">
                 <uib-accordion-heading >{{mission.missionName}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+=======
+        </script>
+        <div class="alert alert-info alert-mission-list" ng-show="$ctrl.message"  align="center">
+            <strong>You have not run any missions yet!</strong>
+        </div>
+        <uib-accordion close-others="oneAtATime" ng-repeat="name in $ctrl.missionNames ">
+            <div uib-accordion-group class="panel-default" is-open="status.open" ng-click="$ctrl.getResults(name)">
+                <uib-accordion-heading >{{name}}  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+>>>>>>> 34c651f81274c29fe62993edc5c1ae9a702f21dd
                 </uib-accordion-heading>
-                <p>Full name: {{mission.username}}</p>
-                <p>Drone's coordinates at the beginning:</p>
-                <p>x: {{mission.startNavigationData.x}}</p>
-                <p>y: {{mission.startNavigationData.y}}</p>
-                <p>z: {{mission.startNavigationData.z}}</p>
 
-                <p>Drone's coordinates at the end:</p>
-                <p>x: {{mission.finishNavigationData.x}}</p>
-                <p>y: {{mission.finishNavigationData.y}}</p>
-                <p>z: {{mission.finishNavigationData.z}}</p>
+                <div ng-repeat="mission in $ctrl.missions ">
+                    <p>Full name: {{mission.username}}</p>
+                    <p>Drone's coordinates at the beginning:</p>
+                    <p>x: {{mission.startNavigationData.x}}</p>
+                    <p>y: {{mission.startNavigationData.y}}</p>
+                    <p>z: {{mission.startNavigationData.z}}</p>
 
+<<<<<<< HEAD
                 <p>Battery status: </p>
                 <div class="progress" style="width: 640px">
                     <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{mission.batteryStatus}}%;">{{mission.batteryStatus}}%</div></div>
                 <div id="slides_control">
+=======
+                    <p>Drone's coordinates at the end:</p>
+                    <p>x: {{mission.finishNavigationData.x}}</p>
+                    <p>y: {{mission.finishNavigationData.y}}</p>
+                    <p>z: {{mission.finishNavigationData.z}}</p>
+
+                    <p>Battery status: </p>
+                    <div class="progress" style="width: 640px">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{mission.batteryStatus}}%;">
+                            {{mission.batteryStatus}}%
+                        </div>
+                    </div>
+                    <div id="slides_control">
+>>>>>>> 34c651f81274c29fe62993edc5c1ae9a702f21dd
                         <div uib-carousel active="$ctrl.activeSlide" no-wrap="noWrapSlides">
                             <div uib-slide ng-repeat="image in mission.images track by $index" index="$index">
                                 <img ng-src="data:image/png;base64,{{image.imageBase64}}">
@@ -37,7 +59,29 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div >
+                        <video width="640" height="365"
+                               http-src="{{$ctrl.videoUrls[name]}}"
+                               type="video/mp4"
+                               controls>
+                        </video>
+                    </div>
+
+
+                    <div>
+                        <button class="btn btn-warning" ng-click="$ctrl.publish($index)" ng-hide="$ctrl.button">Publish</button>
+                        <button class="btn btn-danger" ng-click="$ctrl.redo($index)" ng-hide="$ctrl.button">Redo</button>
+                    </div>
+                    <div class="alert alert-danger alert-mission-list" role="alert" ng-show="$ctrl.error">
+                        {{$ctrl.error}}
+                    </div>
+                    <div class="alert alert-success alert-mission-list" role="alert" ng-show="$ctrl.success">
+                        {{$ctrl.success}}
+                    </div>
                 </div>
+<<<<<<< HEAD
                 <div align="center" >
                     <button  class="btn btn-warning" ng-click="$ctrl.publish($index)" ng-hide="$ctrl.button">Publish</button>
                     <button  class="btn btn-danger" ng-click="$ctrl.redo($index)" ng-hide="$ctrl.button">Redo</button>
@@ -46,6 +90,14 @@
                 <div align="center" style="margin-top:15px"class="alert alert-success alert-mission-list" role="alert" ng-show="$ctrl.success">{{$ctrl.success}}</div>
                 </div>
        </uib-accordion>
+=======
+
+
+                </div>
+
+
+        </uib-accordion>
+>>>>>>> 34c651f81274c29fe62993edc5c1ae9a702f21dd
     </div>
 </div>
 

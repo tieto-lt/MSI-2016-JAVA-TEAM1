@@ -119,23 +119,32 @@
                 <h2 align="center" ng-show="order.status!='Completed'" style="background: #149286;color: white;margin:0px">No outcomes yet</h2>
                 <div ng-hide="order.status!='Completed'">
                 <h2 align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
+
                 <h3 align="center"></h3>
-                    <div id="slides_control">
+
+
+
+                <div style="height:300px">
+
+                        <div id="slides_control">
                             <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">
                                 <div uib-slide ng-repeat="image in $ctrl.result.images track by $index" index="$index">
                                     <img ng-src="data:image/png;base64,{{image.imageBase64}}">
                                 </div>
                             </div>
+
                     </div>
+                </div>
+                <h3 align="center"></h3>
                 <div >
-                    <video width="640" height="365" style=" margin-top: 20px"
-                           http-src="$ctrl.videoUrl($ctrl.result.id)"
-                           type="video/mp4"
-                           controls>
-                    </video>
+                <video width="640" height="365"
+                       http-src="{{$ctrl.videoUrls[order.id]}}"
+                       type="video/mp4"
+                       controls>
+                </video>
                 </div>
                 <div align="center">
-                    <button align="center"class="btn btn-raised btn-primary"><a href="{{$ctrl.videoUrl}}" style="color:white" download>Download video</a></button>
+                    <button align="center"class="btn btn-raised btn-primary"><a href="{{$ctrl.videoUrls[order.id]}}" style="color:white" download>Download video</a></button>
                 </div>
                 </div>
                 </div>

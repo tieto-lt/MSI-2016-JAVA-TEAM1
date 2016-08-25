@@ -15,7 +15,7 @@ public class MapItems {
     }
 
     public enum ObjectName{
-        HOUSE, LAKE, CASTLE, GARDEN, START
+        HOUSE, LAKE, CASTLE, GARDEN
     }
 
     public ObjectName getName() {
