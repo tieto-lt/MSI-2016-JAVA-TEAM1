@@ -23,4 +23,3 @@ module.service('MissionService', Service);
 
 
 
-getAllMissionsResultsByOperatorID
