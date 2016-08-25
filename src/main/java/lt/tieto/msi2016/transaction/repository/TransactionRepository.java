@@ -1,15 +1,13 @@
 package lt.tieto.msi2016.transaction.repository;
 
-import lt.tieto.msi2016.utils.repository.BaseRepository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.transaction.repository.model.TransactionDb;
+import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.util.List;
-
-import static lt.tieto.msi2016.utils.repository.BaseRepository.mapOf;
 
 
 /**

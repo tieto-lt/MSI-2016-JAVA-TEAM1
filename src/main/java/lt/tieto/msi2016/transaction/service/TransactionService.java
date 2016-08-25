@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.transaction.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lt.tieto.msi2016.transaction.model.Transaction;
 import lt.tieto.msi2016.transaction.repository.model.TransactionDb;
 
@@ -33,7 +34,10 @@ public class TransactionService {
     }
 
 
-    private TransactionDb mapToTrancactionDB ()
+    private TransactionDb mapToTrancactionDB (Long id, Transaction api, Long userId)throws JsonProcessingException{
+        TransactionDb db=new TransactionDb();
+        return db;
+    }
 
 
 }
