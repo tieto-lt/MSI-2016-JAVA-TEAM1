@@ -20,6 +20,7 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
 
 
     vm.$onInit = function() {
+       vm.getBalance();
        whatUsername();
        checkOperator();
        $interval(checkOperator, 5000);
@@ -87,6 +88,7 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
     }
 
     function getBalance(){
+    console.log("aaaaaaaa");
         UserService.get().then(
             function(response){
                // console.log(response.data.id);
@@ -105,17 +107,7 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
             }
         );
     }
-
-    /*function UpdateBalance(id){
-        UserService.updateBalance(id).then(
-            function(response){
-                vm.balance = response.data;
-            },
-            function(err){
-            }
-        );
-    }*/
-}
+ }
 
 Controller.$inject = ['$rootScope', '$state', '$interval', 'Session', 'AuthService', 'VerificationService','UserService'];
 

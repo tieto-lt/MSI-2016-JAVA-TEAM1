@@ -116,10 +116,9 @@
                         </div>
                     </div>
                     </div>
-
-
+                <h2 align="center" ng-show="order.status!='Completed'" style="background: #149286;color: white;margin:0px">No outcomes yet</h2>
+                <div ng-hide="order.status!='Completed'">
                 <h2 align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
-
                 <h3 align="center"></h3>
 
 
@@ -132,14 +131,8 @@
                                     <img ng-src="data:image/png;base64,{{image.imageBase64}}">
                                 </div>
                             </div>
-
                     </div>
-
-                </div>
-
-
                 <h3 align="center"></h3>
-
                 <div >
                 <video width="640" height="365"
                        http-src="{{$ctrl.videoUrls[order.id]}}"

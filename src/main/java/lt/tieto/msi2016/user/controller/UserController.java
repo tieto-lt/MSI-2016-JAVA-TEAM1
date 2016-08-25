@@ -45,7 +45,7 @@ public class UserController  extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/customer/balance/{id}")
     public Long getBalance(@PathVariable Long id){
-        return new Long("500");
+        return new Long("15");
     }
 
 }

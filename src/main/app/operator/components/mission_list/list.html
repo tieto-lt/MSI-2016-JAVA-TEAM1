@@ -71,7 +71,15 @@
                     </div>
                 </div>
 
-
+                <div>
+                    <button class="btn btn-warning" ng-click="$ctrl.publish($index)" ng-hide="$ctrl.clicked">Publish</button>
+                    <button class="btn btn-danger" ng-click="$ctrl.redo($index)" ng-hide="$ctrl.clicked">Redo</button>
+                </div>
+                <div class="alert alert-danger alert-mission-list" role="alert" ng-show="$ctrl.error">
+                    {{$ctrl.error}}
+                </div>
+                <div align="center" class="alert alert-success alert-mission-list" role="alert" ng-show="$ctrl.success">
+                    {{$ctrl.success}}
                 </div>
 
 
