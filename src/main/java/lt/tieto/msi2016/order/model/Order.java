@@ -96,7 +96,7 @@ public class Order {
     }
 
     public List<MissionCommand> getMissionCommands() {
-        return MissionsHolder.getMissions().get(0).getCommands();
+        return missionCommands;
     }
 
     public void setMissionCommands(List<MissionCommand> missionCommands) {

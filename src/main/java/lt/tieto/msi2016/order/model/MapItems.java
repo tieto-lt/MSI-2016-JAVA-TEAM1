@@ -1,22 +1,28 @@
 package lt.tieto.msi2016.order.model;
 
+import java.math.BigDecimal;
+
 /**
  * Created by it11 on 16.8.22.
  */
 public class MapItems {
 
-    private String name;
+    private ObjectName name;
     private CameraPosition cameraPosition;
 
     public enum CameraPosition{
         FRONT, BOTTOM
     }
 
-    public String getName() {
+    public enum ObjectName{
+        HOUSE, LAKE, CASTLE, GARDEN, START
+    }
+
+    public ObjectName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(ObjectName name) {
         this.name = name;
     }
 
