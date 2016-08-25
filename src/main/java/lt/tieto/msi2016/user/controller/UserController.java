@@ -47,16 +47,5 @@ public class UserController  extends BaseController {
         return new Long("15");
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/api/customer/payment/accept/{id}")
-    public Long acceptPayment(@PathVariable  Long id){
-        System.out.print("Accepted payment");
-        return new Long("15");
-    }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/api/customer/payment/reject/{id}")
-    public Long rejectPayment(@PathVariable  Long id){
-        System.out.print("Rejected payment");
-        return new Long("20");
-    }
 
 }
