@@ -22,7 +22,7 @@ public class TransactionRepository extends BaseRepository<TransactionDb>{
     @Autowired
     private JdbcTemplate template;
 
-    public static final String SELECT_BALANCE_BY_USER_ID = "SELECT transaction FROM transactions where user_id = ?";
+    public static final String SELECT_BALANCE_BY_USER_ID = "SELECT * FROM transactions where user_id = ?";
 
 
     private static final RowMapper<TransactionDb> ROW_MAPPER=(rs,rowNum)->{
@@ -37,8 +37,6 @@ public class TransactionRepository extends BaseRepository<TransactionDb>{
             "id", transactionDb.getId(),
             "user_id", transactionDb.getUserId(),
             "transaction", transactionDb.getTransaction()
-
-
     );
 
 

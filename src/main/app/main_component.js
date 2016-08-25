@@ -88,13 +88,11 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
     }
 
     function getBalance(){
-    console.log("aaaaaaaa");
         UserService.get().then(
             function(response){
                // console.log(response.data.id);
-                UserService.getBalance(response.data.id).then(
+                UserService.getBalance().then(
                     function(response){
-                        console.log(response.data);
                         vm.balance = response.data;
                     },
                     function(err){

@@ -23,13 +23,9 @@ function Service ($http) {
         return $http.post('/api/customer/password',password);
     };
 
-    this.getBalance = function(id){
-        return $http.get('/api/customer/balance/'+id);
+    this.getBalance = function(){
+        return $http.get('/api/customer/balance/');
     };
-
-    this.getPayseraUrl = function(amount) {
-        return $http.get('/api/customer/balance/'+id);
-    }
 
     this.getPayUrl = function(amount) {
         return $http.get('/api/customer/deposit?amount=' + amount);
