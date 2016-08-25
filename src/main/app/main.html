@@ -17,6 +17,7 @@
                 <li ng-class="{active: $ctrl.getCurrentState() == 'root.orderComponent'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.orderComponent">New Order</a></li>
                 <li ng-class="{active: $ctrl.getCurrentState() == 'root.token'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.token">Verification</a></li>
                 <li ng-class="{active: $ctrl.getCurrentState() == 'root.missions'}"><a ng-show="$ctrl.isOperator()" ui-sref="root.missions">Missions</a></li>
+                <li ng-class="{active: $ctrl.getCurrentState() == 'root.customerDeposit'}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.customerDeposit">Add money</a></li>
                 <li ng-class="{active: ($ctrl.getCurrentState() == 'root.information') || ($ctrl.getCurrentState() == 'root.password')}"><a ng-show="$ctrl.isCustomer()" ui-sref="root.information">Account Information</a></li>
             </ul>
 
@@ -25,7 +26,7 @@
                 <span class="glyphicon glyphicon-user"></span> Welcome, <span ng-bind="$ctrl.whatUsername"></span>!
             </p>
 
-            <p class="navbar-text">
+            <p ng-show="$ctrl.isCustomer()" class="navbar-text">
                 <span class="glyphicon glyphicon-shopping-cart" ></span> Your balance: <strong>{{$ctrl.balance}}</strong></span>
                 <span class="glyphicon glyphicon-euro" ></span>
             </p>

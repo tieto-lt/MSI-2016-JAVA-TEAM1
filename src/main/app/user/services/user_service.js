@@ -27,13 +27,14 @@ function Service ($http) {
         return $http.get('/api/customer/balance/'+id);
     };
 
-//    this.acceptPayment = function(id){
-//        return $http.get('/api/customer/payment/accept/'+id);
-//    };
-//
-//    this.rejectPayment = function (id){
-//        return $http.get('/api/customer/payment/reject/'+id);
-//    };
+    this.getPayseraUrl = function(amount) {
+        return $http.get('/api/customer/balance/'+id);
+    }
+
+    this.getPayUrl = function(amount) {
+        return $http.get('/api/customer/deposit?amount=' + amount);
+    }
+
 }
 
 Service.$inject = ['$http'];
