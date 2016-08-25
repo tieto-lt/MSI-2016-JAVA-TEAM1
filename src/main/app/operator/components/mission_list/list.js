@@ -15,6 +15,7 @@ function Controller($scope, MissionService) {
     vm.videoUrl = undefined;
     vm.error = '';
     vm.success = '';
+    vm.videoUrls = {};
 
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
@@ -55,8 +56,8 @@ function Controller($scope, MissionService) {
                         vm.missions = response.data;
                         console.log(vm.missions);
                         if(vm.missions.length == 0){
-                        vm.message = true;
-                        console.log(vm.message);
+                            vm.message = true;
+                            console.log(vm.message);
                         }
 
                         vm.missions.forEach(function (mission) {
@@ -79,14 +80,17 @@ function Controller($scope, MissionService) {
 
 
                         $scope.status = false;
-                        vm.videoUrl = "/api/missionsUI/video/" + vm.missions[0].id;
-                        
+                        console.log();
+                        vm.videoUrls[name] = "/api/missionsUI/video/" + vm.missions[0].id;
+
 
                     });
-
-
-
         }
+
+    function videoUrl(name) {
+        console.log(name);
+        return vm.videoUrl[name];
+    }
 
     function publish(index) {
             MissionService.publish(vm.missions[index].orderId).then(
