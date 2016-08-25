@@ -1,0 +1,40 @@
+<div class="msi-order-form">
+    <div class="row">
+        <div class="panel panel-primary" >
+
+            <div class="panel-body">
+                <form name="orderForm"  novalidate>
+                    <div class="form-group">
+                        <h3>Add money to your JavaWallet</h1>
+                        </h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="addon1">Enter the amount you want to add:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">Add amount (€):</span>
+                            <input type="text" id="addon1" class="form-control" name="amount" ng-model="$ctrl.amount">
+                            <span class="input-group-btn">
+                            <!--<button class="btn btn-raised btn-primary" type="button">Submit</button>-->
+                    </span>
+                        </div>
+                    </div>
+                    <div  class="form-group">
+                        <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.submitAmount()" class="btn btn-lg btn-block btn-raised btn-primary" ng-disabled="orderForm.$invalid">Submit</button>
+                        <p></p>
+                        <div class="alert alert-success" ng-show="$ctrl.message" align="center"><strong>Updated successfully!</strong></div>
+                        <div class="alert alert-danger" ng-show="$ctrl.error" align="center"><strong>Something went wrong</strong></div>
+                    </div>
+                    <hr>
+                </form>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+

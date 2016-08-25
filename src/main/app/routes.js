@@ -134,6 +134,14 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
                 roles: ["ROLE_CUSTOMER"]
              }
         })
+     .state('root.customerDeposit', {
+             url:"/customer/deposit",
+             template:"<customer-deposit></customer-deposit>",
+             data: {
+                roles: ["ROLE_CUSTOMER"]
+             }
+        })
+
 });
 
 

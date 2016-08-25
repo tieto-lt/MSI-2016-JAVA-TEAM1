@@ -3,7 +3,9 @@
         <div class="alert-order-list alert alert-info" ng-show="$ctrl.message"  align="center">
             <strong>You have not submitted any orders yet!</strong>
         </div>
-        <a class="btn btn-lg btn-raised btn-primary" ui-sref="root.orderComponent"> Place a new order </a>
+        <a class="btn btn-lg btn-raised btn-primary" ui-sref="root.orderComponent">Place a new order</a>
+        <a class="btn btn-lg btn-raised btn-primary" ui-sref="root.customerDeposit">Add money</a>
+
         <uib-accordion close-others="oneAtATime" >
             <div uib-accordion-group class="panel-default" style="width: 680px; border:0px" is-disabled="true" >
                 <uib-accordion-heading>

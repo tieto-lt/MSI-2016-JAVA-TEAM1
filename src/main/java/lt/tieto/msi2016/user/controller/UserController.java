@@ -2,6 +2,7 @@ package lt.tieto.msi2016.user.controller;
 
 import lt.tieto.msi2016.roles.Roles;
 import lt.tieto.msi2016.user.model.Password;
+import lt.tieto.msi2016.user.model.PaymentUrl;
 import lt.tieto.msi2016.user.model.User;
 import lt.tieto.msi2016.user.service.UserService;
 import lt.tieto.msi2016.utils.controller.BaseController;
@@ -45,7 +46,16 @@ public class UserController  extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/customer/balance/{id}")
     public Long getBalance(@PathVariable Long id){
+
         return new Long("15");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/api/customer/deposit")
+    public PaymentUrl getPayUrl(@RequestParam("amount") Integer amount){
+        System.out.println("getPayUrl amount received");
+        PaymentUrl paymentUrl = new PaymentUrl();
+        paymentUrl.setUrl("http://paysera.com");
+        return paymentUrl;
     }
 
 }
