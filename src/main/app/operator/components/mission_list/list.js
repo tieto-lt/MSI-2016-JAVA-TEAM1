@@ -25,7 +25,7 @@ function Controller($scope, MissionService) {
         };
 
     function _loadList() {
-        MissionService.getAllMissionsResults().then(
+        MissionService.getAllMissionsResultsByOperatorID().then(
             function (response) {
                 vm.missions = response.data;
                 if(vm.missions.length == 0){

@@ -113,15 +113,27 @@
 
 
                 <h2 align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
+
                 <h3 align="center"></h3>
-                    <div id="slides_control">
+
+
+
+                <div style="height:300px">
+
+                        <div id="slides_control">
                             <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">
                                 <div uib-slide ng-repeat="image in $ctrl.result.images track by $index" index="$index">
                                     <img ng-src="data:image/png;base64,{{image.imageBase64}}">
                                 </div>
                             </div>
+
                     </div>
+
+                </div>
+
+
                 <h3 align="center"></h3>
+
                 <div >
                 <video width="640" height="365"
                        http-src="{{$ctrl.videoUrl}}"
