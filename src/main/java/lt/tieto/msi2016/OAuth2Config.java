@@ -74,6 +74,7 @@ public class OAuth2Config implements AuthorizationServerConfigurer, ResourceServ
                 .antMatchers("/api/user").permitAll() // registration endpoint allowed for all
                 .antMatchers("/payment/**").permitAll() // paysera calls it
                 .antMatchers("/api/missions/**").permitAll() // missions authentication based by operator token
+                .antMatchers("/api/missionsUI/video/**").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
