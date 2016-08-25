@@ -24,9 +24,11 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
        whatUsername();
        checkOperator();
        $interval(checkOperator, 5000);
+       $interval(vm.getBalance, 5000);
        $rootScope.$on('userLoggedIn', function() {
             whatUsername();
             checkOperator();
+            vm.getBalance();
        });
     };
 
