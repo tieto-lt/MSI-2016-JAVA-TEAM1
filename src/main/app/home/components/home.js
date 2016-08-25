@@ -22,9 +22,8 @@ function Controller($scope) {
 
 }
 
-/*Controller.$inject = ['$scope','login'];*/
+//Controller.$inject = ['$scope','login'];
 require('./home.scss');
-
 module.component('homeFirst', {
     controller: Controller,
     templateUrl: require('./home.html')
