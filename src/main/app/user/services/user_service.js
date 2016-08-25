@@ -23,6 +23,9 @@ function Service ($http) {
         return $http.post('/api/customer/password',password);
     };
 
+    this.getBalance = function(id){
+        return $http.get('/api/customer/balance/'+id);
+    };
 }
 
 Service.$inject = ['$http'];
