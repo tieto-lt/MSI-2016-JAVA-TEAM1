@@ -51,16 +51,19 @@ function Controller($scope,OrdersService) {
        isFirstDisabled: false
      };
 
-    function getResults (orderId) {
+    function getResults (orderId,order) {
+        if(order.status=='Completed'){
         OrdersService.getOrderResults(orderId).then(
             function(response){
                vm.result=response.data[0];
+               console.log(vm.result);
                if(vm.result == null){
                    console.log("null");
                }
                vm.videoUrl = "/api/missionsUI/video/" + vm.result.id;
             }
         );
+        }
         for(i=0; i<vm.orders.length;i++){
             if(vm.orders[i].id == orderId){
                 //console.log(vm.orders[i].mapItems);
@@ -75,6 +78,7 @@ function Controller($scope,OrdersService) {
                 }
             }
         }
+
      }
 
 
