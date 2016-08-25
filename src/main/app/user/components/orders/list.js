@@ -60,6 +60,7 @@ function Controller($scope,OrdersService) {
                if(vm.result == null){
                    console.log("null");
                }
+               console.log(vm.result);
                vm.videoUrl = "/api/missionsUI/video/" + vm.result.id;
             }
         );

@@ -20,6 +20,8 @@ public class OrderResultsRepository extends BaseRepository<OrderResultsDb> {
     @Autowired
     private JdbcTemplate template;
     public static final String SELECT_RESULTS__BY_ORDER_ID = "SELECT * FROM order_results where order_id = ?";
+    public static final String SELECT_RESULTS__BY_OPERATOR_ID = "SELECT * FROM order_results where executed_by = ?";
+
 
 
 
@@ -61,6 +63,11 @@ public class OrderResultsRepository extends BaseRepository<OrderResultsDb> {
 
 
 
+    public List<OrderResultsDb> getOrderResultsByOperatorId(Long operator_id){
+        List <OrderResultsDb>  resultList =template.query(SELECT_RESULTS__BY_OPERATOR_ID, new Object[] {operator_id}, ROW_MAPPER);
+        return resultList;
+
+    }
 
 
 }

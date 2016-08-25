@@ -6,6 +6,10 @@ function Service ($http) {
        return $http.get("/api/missionsUI",{});
     };
 
+     this.getAllMissionsResultsByOperatorID = function() {
+           return $http.get("/api/missionsUIByOperator",{});
+        };
+
     this.publish = function(orderId) {
        return $http.put("/api/order/publish/" + orderId,{});
     };
@@ -16,3 +20,6 @@ function Service ($http) {
 }
 Service.$inject = ['$http'];
 module.service('MissionService', Service);
+
+
+

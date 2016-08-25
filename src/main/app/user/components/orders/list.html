@@ -17,7 +17,7 @@
                     </div>
                 </uib-accordion-heading>
             </div>
-            <div uib-accordion-group class="panel-default" style="width: 680px;  border:0px" is-open="status.open" ng-click="$ctrl.getResults(order.id,order)" ng-repeat="order in $ctrl.orders " >
+            <div uib-accordion-group class="panel-default" style="width: 680px;  border:0px" is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders " >
                 <uib-accordion-heading >
                     <div  class="list_header">
                         <ul>
@@ -120,15 +120,19 @@
                 <div ng-hide="order.status!='Completed'">
                 <h2 align="center" style="background: #149286;color: white;margin:0px">Outcomes</h2>
                 <h3 align="center"></h3>
-                    <div id="slides_control">
+
+
+
+                <div style="height:300px">
+
+                        <div id="slides_control">
                             <div uib-carousel active="$ctrl.activeSlide"  no-wrap="noWrapSlides">
                                 <div uib-slide ng-repeat="image in $ctrl.result.images track by $index" index="$index">
                                     <img ng-src="data:image/png;base64,{{image.imageBase64}}">
                                 </div>
                             </div>
                     </div>
-
-
+                <h3 align="center"></h3>
                 <div >
                 <video width="640" height="365"
                        http-src="{{$ctrl.videoUrl}}"
@@ -136,11 +140,8 @@
                        controls>
                 </video>
                 </div>
-
-
                 <div align="center">
                     <button align="center"class="btn btn-raised btn-primary"><a href="{{$ctrl.videoUrl}}" style="color:white" download>Download video</a></button>
-                </div>
                 </div>
                 </div>
         </uib-accordion>
