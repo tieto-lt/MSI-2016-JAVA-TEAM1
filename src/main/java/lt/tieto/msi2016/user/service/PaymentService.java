@@ -1,10 +1,17 @@
 package lt.tieto.msi2016.user.service;
 
+import lt.tieto.msi2016.transaction.repository.PaymentsRepository;
+import lt.tieto.msi2016.transaction.repository.model.PaymentsDb;
+import lt.tieto.msi2016.utils.service.SecurityService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
@@ -15,6 +22,15 @@ import java.util.UUID;
 
 @Service
 public class PaymentService {
+
+    @Value("${hostname:localhost:8080}")
+    private  String hostname;
+
+    @Autowired
+    private PaymentsRepository paymentsRepository;
+
+    @Autowired
+    private SecurityService securityService;
 
 
     public static String withQuery(Map<String, String> params) {
@@ -40,7 +56,8 @@ public class PaymentService {
     }
 
 
-    public String getEncodedUrl() {
+    @Transactional
+    public String getEncodedUrl(Long amountCents) {
 
         MessageDigest md5 = null;
         try {
@@ -55,13 +72,13 @@ public class PaymentService {
         Map<String, String> params = new LinkedHashMap<>();
         params.put("projectid", "86909");
         params.put("orderid", orderId);
-        params.put("accepturl", "http://localhost:8080/acceptPayment");
-        params.put("cancelurl", "http://localhost:8080/cancelPayment");
-        params.put("callbackurl", "http://localhost:8080/callback");
+        params.put("accepturl", String.format("http://%s/acceptPayment", hostname));
+        params.put("cancelurl", String.format("http://%s/cancelPayment", hostname));
+        params.put("callbackurl", String.format("http://%s/callback", hostname));
         params.put("version", "1.6");
         params.put("test", "1");
         params.put("sign_password", password);
-        params.put("amount", "1234");
+        params.put("amount", amountCents.toString());
         params.put("currency", "EUR");
         params.put("paytext", "For awesome drone service");
         //        params.put("lang", "EN");
@@ -79,7 +96,13 @@ public class PaymentService {
 
         String url = String.format("https://www.paysera.com/pay?data=%s&sign=%s", replaced, sign);
 
-        System.out.println(url);
+        PaymentsDb paymentsDb = new PaymentsDb();
+        paymentsDb.setUserId(securityService.getCurrentUser().getId());
+        paymentsDb.setAmount(new BigDecimal(amountCents / 100));
+        paymentsDb.setStatus(PaymentsDb.Status.Pending);
+        paymentsDb.setPayseraOrderId(orderId);
+        paymentsRepository.create(paymentsDb);
+
         return url;
     }
 }

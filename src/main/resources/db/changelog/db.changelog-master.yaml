@@ -540,3 +540,54 @@ databaseChangeLog:
               incrementBy: 1
               startWith: 1
               tableName: transactions
+
+
+  - changeSet:
+      id: 18
+      author: Elvinas
+      changes:
+        - createTable:
+            tableName: payments
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: paysera_order_id
+                  type: varchar(45)
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: integer
+              - column:
+                  name: status
+                  type: varchar(45)
+
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: payments
+            constraintName: fk_user_id_payments
+            referencedColumnNames: id
+            referencedTableName: users
+        - createIndex:
+            columns:
+              - column:
+                  name: user_id
+            indexName: idx_username_payments
+            tableName: payments
+        - addAutoIncrement:
+              columnDataType: int
+              columnName: id
+              incrementBy: 1
+              startWith: 1
+              tableName: payments
+

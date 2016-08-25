@@ -55,10 +55,10 @@ public class UserController  extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/customer/deposit")
-    public PaymentUrl getPayUrl(@RequestParam("amount") Integer amount){
+    public PaymentUrl getPayUrl(@RequestParam("amount") Long amount){
         System.out.println("getPayUrl amount received");
         PaymentUrl paymentUrl = new PaymentUrl();
-        paymentUrl.setUrl(paymentService.getEncodedUrl());
+        paymentUrl.setUrl(paymentService.getEncodedUrl(amount));
         return paymentUrl;
     }
 
