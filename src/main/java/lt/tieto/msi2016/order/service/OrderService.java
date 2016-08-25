@@ -9,6 +9,7 @@ import lt.tieto.msi2016.item.repository.model.ItemDb;
 import lt.tieto.msi2016.mission.model.Mission;
 import lt.tieto.msi2016.mission.model.MissionCommand;
 import lt.tieto.msi2016.mission.model.MissionImage;
+import lt.tieto.msi2016.mission.model.Position;
 import lt.tieto.msi2016.order.model.MapItems;
 import lt.tieto.msi2016.order.model.Order;
 import lt.tieto.msi2016.order.model.OrderResults;
@@ -24,7 +25,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,11 +56,81 @@ public class OrderService {
     @Transactional
     public Order createOrder(Order order) throws IOException {
         Long userId = securityService.getCurrentUser().getId();
+        order.setMissionCommands(generateMissionCommands(order.getMapItems()));
         OrderDb orderDb = repository.create(mapToOrdersDb(order, userId));
         orderDb.setMissionId(orderDb.getId() + "-" + order.getMissionName());
         return mapToOrders(repository.update(orderDb));
 
     }
+
+    private List<MissionCommand> generateMissionCommands(List<MapItems> mapItems){
+        List<MissionCommand> missionCommands = new ArrayList<>();
+        missionCommands.add(new MissionCommand("zero"));
+        missionCommands.add(new MissionCommand("takeoff"));
+        missionCommands.add(new MissionCommand("altitude", 1.5));
+
+        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))));
+        for (MapItems mapItem : mapItems){
+            missionCommands.add(new MissionCommand("go", getPositionByObjectAndCameraPosition(mapItem)));
+            missionCommands.add(new MissionCommand("switchVerticalCamera"));
+            missionCommands.add(new MissionCommand("hover", 2000));
+            missionCommands.add(new MissionCommand("takePicture"));
+        }
+        // go to start
+        missionCommands.add(new MissionCommand("go", new Position(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(1.5), BigDecimal.valueOf(0))));
+        missionCommands.add(new MissionCommand("land"));
+
+        return missionCommands;
+    }
+
+    private Position getPositionByObjectAndCameraPosition(MapItems mapItem){
+        BigDecimal x;
+        BigDecimal y;
+        BigDecimal z;
+        BigDecimal yaw;
+
+
+        switch(mapItem.getName()) {
+            case CASTLE:
+                x = BigDecimal.valueOf(2);
+                y = BigDecimal.valueOf(1);
+                z = BigDecimal.valueOf(1.5);
+                yaw = BigDecimal.valueOf(0);
+                break;
+            case GARDEN:
+                x = BigDecimal.valueOf(3);
+                y = BigDecimal.valueOf(-2);
+                z = BigDecimal.valueOf(1.5);
+                yaw = BigDecimal.valueOf(0);
+                break;
+            case HOUSE:
+                x = BigDecimal.valueOf(1);
+                y = BigDecimal.valueOf(-2);
+                z = BigDecimal.valueOf(1.5);
+                yaw = BigDecimal.valueOf(0);
+                break;
+            case LAKE:
+                x = BigDecimal.valueOf(-1);
+                y = BigDecimal.valueOf(-1);
+                z = BigDecimal.valueOf(1.5);
+                yaw = BigDecimal.valueOf(0);
+                break;
+            case START:
+                x = BigDecimal.valueOf(0);
+                y = BigDecimal.valueOf(0);
+                z = BigDecimal.valueOf(0);
+                yaw = BigDecimal.valueOf(0);
+                break;
+            default:
+                x = BigDecimal.valueOf(0);
+                y = BigDecimal.valueOf(0);
+                z = BigDecimal.valueOf(0);
+                yaw = BigDecimal.valueOf(0);
+                break;
+        }
+        return new Position(x, y, z, yaw);
+    }
+
 
     @Transactional(readOnly = true)
     public List<Order> all() throws IOException {

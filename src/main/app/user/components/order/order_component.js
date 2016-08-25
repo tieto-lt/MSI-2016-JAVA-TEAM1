@@ -18,10 +18,10 @@ function Controller(UserService, $state) {
 
   vm.size = 45;
   vm.all = [
-    {id :0, selected: false, color: "#928f8f", name: "1 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :1, selected: false, color: "#928f8f", name: "2 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :2, selected: false, color: "#928f8f", name: "3 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :3, selected: false, color: "#928f8f", name: "4 object", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"}
+    {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :1, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :2, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
+    {id :3, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"}
   ];
 
   vm.obj = [];
@@ -120,7 +120,7 @@ function Controller(UserService, $state) {
    }
 
    function check(){
-        if(vm.selectedObject.length<2){
+        if(vm.selectedObject.length<1){
             console.log("true");
             return true;
         }

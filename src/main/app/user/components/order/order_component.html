@@ -34,14 +34,14 @@
                     <span class="text-muted"><em><span style="color:red;">*</span>Indicates required field</em></span>
                 </div>
                 <div style="padding-top:10px">
-                   <h2>Price: {{$ctrl.selectedObject.length * 5}}</h2>
+                   <!--<h2>Price: {{$ctrl.selectedObject.length * 5}}</h2>-->
                 </div>
             <div  class="form-group">
                 <button id="signupSubmit" type="submit" name="click" ng-click="$ctrl.createOrder()" class="btn btn-lg btn-block btn-raised btn-primary" ng-disabled="orderForm.$invalid || $ctrl.check()">Place your order</button>
                 <p></p>
                 <div class="alert alert-success" ng-show="$ctrl.message" align="center"><strong>Order created successfully!</strong></div>
                 <div class="alert alert-danger" ng-show="$ctrl.error" align="center"><strong>Something went wrong</strong></div>
-                <div class="alert alert-danger" ng-show="$ctrl.money" align="center"><strong>Insufficient amount of money</strong></div>
+                <!--<div class="alert alert-danger" ng-show="$ctrl.money" align="center"><strong>Insufficient amount of money</strong></div>-->
             </div>
             </form>
         </div>
@@ -53,15 +53,15 @@
                     <text x="130" y="200" font-family="sans-serif" font-size="15px">Starting point</text>
                     <rect ng-click="$ctrl.showMessage('0')" x="215" y="70" rx="10" ry="10" width="{{$ctrl.all[0].size}}" height="{{$ctrl.all[0].size}}"
                           style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:{{$ctrl.all[0].width}};" />
-                    <text x="200" y="150" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[0].text}}">Object nr.1</text>
+                    <text x="200" y="150" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[0].text}}">CASTLE</text>
 
                     <rect ng-click="$ctrl.showMessage('1')" x="5" y="140" rx="10" ry="10" width="{{$ctrl.all[1].size}}" height="{{$ctrl.all[1].size}}"
                           style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:{{$ctrl.all[1].width}};" />
-                    <text x="0" y="220" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[1].text}}">Object nr.2</text>
+                    <text x="0" y="220" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[1].text}}">HOUSE</text>
 
                     <rect ng-click="$ctrl.showMessage('2')" x="5" y="5" rx="10" ry="10" width="{{$ctrl.all[2].size}}" height="{{$ctrl.all[2].size}}"
                           style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:{{$ctrl.all[2].width}};" />
-                    <text x="0" y="85" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[2].text}}">Object nr.3</text>
+                    <text x="0" y="85" font-family="sans-serif" font-size="15px" fill="{{$ctrl.all[2].text}}">GARDEN</text>
 
                     <rect ng-click="$ctrl.showMessage('3')" x="80" y="285" rx="10" ry="10" width="{{$ctrl.all[3].size}}" height="{{$ctrl.all[3].size}}"
                           style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:{{$ctrl.all[3].width}};" />
@@ -75,9 +75,8 @@
                             d="M609.247,314.664l-148.93-148.928c-3.672-3.671-9.627-3.672-13.299,0.001L306.001,306.753L164.984,165.737  c-3.673-3.672-9.627-3.673-13.299-0.001L2.755,314.664C0.991,316.429,0,318.821,0,321.315c0,2.494,0.991,4.886,2.755,6.651  l118.298,118.298c1.764,1.765,4.155,2.755,6.65,2.755c2.494,0,4.886-0.991,6.649-2.755l142.279-142.279l16.07,16.07l-96.84,96.84  c-3.673,3.673-3.673,9.627,0,13.3c1.836,1.836,4.243,2.753,6.649,2.753c2.406,0,4.814-0.919,6.65-2.753l96.842-96.842l96.842,96.842  c1.836,1.836,4.244,2.753,6.65,2.753s4.814-0.919,6.65-2.753c3.673-3.673,3.673-9.627,0-13.3l-96.84-96.84l16.07-16.07  L477.65,446.264c1.764,1.765,4.155,2.755,6.65,2.755c2.494,0,4.886-0.991,6.65-2.755l118.298-118.298  c1.764-1.765,2.755-4.157,2.755-6.651C612.001,318.821,611.009,316.429,609.247,314.664z M233.542,320.475l-32.785-32.783  l-37.497,37.495l32.785,32.785l-37.495,37.497l-32.785-32.785L94.919,393.53L55.491,354.1l30.842-30.842l39.427,39.427  l37.496-37.496l-39.429-39.429l-37.493,37.493l-32.783-32.783l37.497-37.495l32.785,32.785l37.497-37.497l-32.785-32.785  l29.79-29.79l32.785,32.785l-29.79,29.79l39.43,39.43l29.79-29.791l32.785,32.785L233.542,320.475z M556.514,354.1l-39.428,39.43  l-30.846-30.846l-32.785,32.785l-37.495-37.497l32.785-32.785l-37.497-37.495l-32.785,32.783l-29.79-29.79l32.782-32.785  l29.79,29.791l39.43-39.43l-29.79-29.79l32.785-32.785l29.79,29.79l-32.785,32.785l37.496,37.496l-39.424,39.424l37.495,37.495  l39.429-39.429l-37.495-37.495l32.78-32.78l37.497,37.495l-32.785,32.785L556.514,354.1z"
                             fill="#009688"/>
                     </svg>
-                    <!--<svg><img style="bottom:491px; right:234px" width="100" height="100"src="flag.svg" class="svg"/></svg>-->
                 </svg>
-                <h4 align="center">One object costs &euro;</h4>
+                <!--<h4 align="center">One object costs &euro;</h4>-->
             <div class ="myTable">
                 <div class="form-group" style="margin-top: 0;">
                     <div class="checkbox" align="center">
