@@ -65,28 +65,34 @@
                             <div class="row" style="width: 650px; height: 490px;background:#eee">
                                 <div class="col-lg-6"  style="background:#eee">
                                     <div class="login_box3">
-                                        <svg width="298" height="418"  style="background-color:white">
-                                        <circle cx="130" cy="135" r="10" stroke="#928f8f"stroke-width="3" fill="#009688" />
+                                        <svg width="298" height="418"  style="background-color:white; padding:10px">
 
-                                        <rect  x="180" y="215" rx=10 ry=10 width="35" height="35"
-                                              style="fill:#009688;stroke:#676767;stroke-width:5" />
-                                        <text x="130" y="200" font-family="sans-serif" font-size="15px">START</text>
+                                            <circle cx="135" cy="135" r="10" stroke="#928f8f"stroke-width="3" fill="#009688" />
+                                            <text x="145" y="260" color="red" font-size="15px" font-weight="bold";>START</text>
+                                            <rect ng-click="$ctrl.showMessage('0')" x="215" y="70" rx="10" ry="10"
+                                                  style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:{{$ctrl.all[0].width}}; height:{{$ctrl.all[0].size}}; width:{{$ctrl.all[0].size}}" />
+                                            <text x="217" y="150" font-size="15px" fill="{{$ctrl.all[0].text}}">CASTLE</text>
 
-                                        <rect  x="215" y="70" rx="10" ry="10" width="35" height="35"
-                                              style="fill:{{$ctrl.all[0].color}};stroke:#676767;stroke-width:5" />
-                                        <text x="200" y="150" font-family="sans-serif" font-size="15px" >CASTLE</text>
+                                            <rect ng-click="$ctrl.showMessage('1')" x="5" y="140" rx="10" ry="10"
+                                                  style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:{{$ctrl.all[1].width}};height:{{$ctrl.all[1].size}}; width:{{$ctrl.all[1].size}}" />
+                                            <text x="7" y="220"  font-size="15px" fill="{{$ctrl.all[1].text}}">HOUSE</text>
 
-                                        <rect  x="20" y="140" rx="10" ry="10" width="35" height="35"
-                                              style="fill:{{$ctrl.all[1].color}};stroke:#676767;stroke-width:5" />
-                                        <text x="0" y="220" font-family="sans-serif" font-size="15px">HOUSE</text>
+                                            <rect ng-click="$ctrl.showMessage('2')" x="5" y="5" rx="10" ry="10"
+                                                  style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:{{$ctrl.all[2].width}};height:{{$ctrl.all[2].size}}; width:{{$ctrl.all[2].size}}" />
+                                            <text x="5" y="85"  font-size="15px" fill="{{$ctrl.all[2].text}}">GARDEN</text>
 
-                                        <rect  x="20" y="5" rx="10" ry="10" width="35" height="35"
-                                              style="fill:{{$ctrl.all[2].color}};stroke:#676767;stroke-width:5" />
-                                        <text x="0" y="85" font-family="sans-serif" font-size="15px" >GARDEN</text>
-
-                                        <rect x="80" y="285" rx="10" ry="10"width="35" height="35"
-                                              style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:5" />
-                                        <text x="60" y="365" font-family="sans-serif" font-size="15px" >LAKE</text>
+                                            <rect ng-click="$ctrl.showMessage('3')" x="80" y="285" rx="10" ry="10"
+                                                  style="fill:{{$ctrl.all[3].color}};stroke:#676767;stroke-width:{{$ctrl.all[3].width}};height:{{$ctrl.all[3].size}}; width:{{$ctrl.all[3].size}}" />
+                                            <text x="90" y="365"  font-size="15px" fill="{{$ctrl.all[3].text}}">LAKE</text>
+                                            <svg id="Capa_1"
+                                                 x="130" y="180"
+                                                 viewBox="0 0 612.001 612.001"
+                                                 width="80px"
+                                                 height="80px">
+                                                <path
+                                                        d="M609.247,314.664l-148.93-148.928c-3.672-3.671-9.627-3.672-13.299,0.001L306.001,306.753L164.984,165.737  c-3.673-3.672-9.627-3.673-13.299-0.001L2.755,314.664C0.991,316.429,0,318.821,0,321.315c0,2.494,0.991,4.886,2.755,6.651  l118.298,118.298c1.764,1.765,4.155,2.755,6.65,2.755c2.494,0,4.886-0.991,6.649-2.755l142.279-142.279l16.07,16.07l-96.84,96.84  c-3.673,3.673-3.673,9.627,0,13.3c1.836,1.836,4.243,2.753,6.649,2.753c2.406,0,4.814-0.919,6.65-2.753l96.842-96.842l96.842,96.842  c1.836,1.836,4.244,2.753,6.65,2.753s4.814-0.919,6.65-2.753c3.673-3.673,3.673-9.627,0-13.3l-96.84-96.84l16.07-16.07  L477.65,446.264c1.764,1.765,4.155,2.755,6.65,2.755c2.494,0,4.886-0.991,6.65-2.755l118.298-118.298  c1.764-1.765,2.755-4.157,2.755-6.651C612.001,318.821,611.009,316.429,609.247,314.664z M233.542,320.475l-32.785-32.783  l-37.497,37.495l32.785,32.785l-37.495,37.497l-32.785-32.785L94.919,393.53L55.491,354.1l30.842-30.842l39.427,39.427  l37.496-37.496l-39.429-39.429l-37.493,37.493l-32.783-32.783l37.497-37.495l32.785,32.785l37.497-37.497l-32.785-32.785  l29.79-29.79l32.785,32.785l-29.79,29.79l39.43,39.43l29.79-29.791l32.785,32.785L233.542,320.475z M556.514,354.1l-39.428,39.43  l-30.846-30.846l-32.785,32.785l-37.495-37.497l32.785-32.785l-37.497-37.495l-32.785,32.783l-29.79-29.79l32.782-32.785  l29.79,29.791l39.43-39.43l-29.79-29.79l32.785-32.785l29.79,29.79l-32.785,32.785l37.496,37.496l-39.424,39.424l37.495,37.495  l39.429-39.429l-37.495-37.495l32.78-32.78l37.497,37.495l-32.785,32.785L556.514,354.1z"
+                                                        fill="#009688"/>
+                                            </svg>
                                     </svg>
                                     </div>
                                 </div>
