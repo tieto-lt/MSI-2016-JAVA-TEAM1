@@ -2,15 +2,14 @@ package lt.tieto.msi2016.transaction.repository.model;
 
 import lt.tieto.msi2016.utils.repository.model.DbModel;
 
-/**
- * Created by it11 on 16.8.24.
- */
+import java.math.BigDecimal;
+
+
 public class TransactionDb extends DbModel {
 
     private Long id;
     private Long userId;
-    private float transaction;
-    private float balance;
+    private BigDecimal transaction;
 
 
     public Long getId() {
@@ -29,19 +28,12 @@ public class TransactionDb extends DbModel {
         this.userId = userId;
     }
 
-    public float getTransaction() {
+    public BigDecimal getTransaction() {
         return transaction;
     }
 
-    public void setTransaction(float transaction) {
+    public void setTransaction(BigDecimal transaction) {
         this.transaction = transaction;
     }
 
-    public float getBalance() {
-        return balance;
-    }
-
-    public void setBalance(float balance) {
-        this.balance = balance;
-    }
 }
