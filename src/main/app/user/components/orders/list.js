@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller($scope,OrdersService) {
+function Controller($scope, OrdersService) {
 
     var vm = this;
     vm.orders = {};
@@ -50,8 +50,8 @@ function Controller($scope,OrdersService) {
        isFirstDisabled: false
      };
 
-    function getResults (orderId,order) {
-        if(order.status=='Completed'){
+    function getResults (orderId) {
+       if(vm.order.status=='Completed'){
         OrdersService.getOrderResults(orderId).then(
             function(response){
                vm.result=response.data[0];
@@ -63,7 +63,7 @@ function Controller($scope,OrdersService) {
                vm.videoUrls[orderId] = "/api/missionsUI/video/" + vm.result.id;
             }
         );
-        }
+     }
         for(i=0; i<vm.orders.length;i++){
             if(vm.orders[i].id == orderId){
                 //console.log(vm.orders[i].mapItems);
