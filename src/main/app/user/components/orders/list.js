@@ -12,7 +12,7 @@ function Controller($scope,OrdersService) {
     vm.fakeOrder = [];
     vm.selected = [];
     vm.list = [];
-    vm.videoUrl = undefined;
+    vm.videoUrls = {};
 
    // vm.getObjects = getObjects;
     vm.all = [
@@ -58,7 +58,8 @@ function Controller($scope,OrdersService) {
                if(vm.result == null){
                    console.log("null");
                }
-               vm.videoUrl = "/api/missionsUI/video/" + vm.result.id;
+               console.log(vm.result);
+               vm.videoUrls[orderId] = "/api/missionsUI/video/" + vm.result.id;
             }
         );
         for(i=0; i<vm.orders.length;i++){
