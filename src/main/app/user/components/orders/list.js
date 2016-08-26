@@ -13,6 +13,7 @@ function Controller($scope, OrdersService) {
     vm.selected = [];
     vm.list = [];
     vm.videoUrls = {};
+
    // vm.getObjects = getObjects;
     vm.all = [
         {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, camera: "front", icon: 80, col : "black"},
@@ -52,6 +53,7 @@ function Controller($scope, OrdersService) {
      };
 
     function getResults (index, orderId) {
+
        if(vm.orders[index].status=='Completed'){
         OrdersService.getOrderResults(orderId).then(
             function(response){
@@ -66,6 +68,12 @@ function Controller($scope, OrdersService) {
             }
         );
      }
+
+      vm.all = [{id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, camera: "front", icon: 80, col : "black"},
+               {id :1, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, camera: "front",icon :45, col :"black"},
+               {id :2, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, camera: "front",icon :40, col :"black"},
+               {id :3, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, camera: "front",icon :45, col :"black"}];
+
         for(i=0; i<vm.orders.length;i++){
             if(vm.orders[i].id == orderId){
                 //console.log(vm.orders[i].mapItems);
@@ -85,9 +93,6 @@ function Controller($scope, OrdersService) {
         $scope.test = function(text) {
           alert(text);
         }
-
-
-
 }
 
 Controller.$inject = ['$scope','OrdersService'];
