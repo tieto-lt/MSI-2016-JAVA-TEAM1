@@ -24,11 +24,11 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
        whatUsername();
        checkOperator();
        $interval(checkOperator, 5000);
-      // $interval(vm.getBalance, 5000);
+       $interval(vm.getBalance, 5000);
        $rootScope.$on('userLoggedIn', function() {
             whatUsername();
             checkOperator();
-          //  vm.getBalance();
+            vm.getBalance();
        });
        $rootScope.$on('orderWasPlaced', function(order) {
             vm.getBalance();
@@ -93,27 +93,28 @@ function Controller($rootScope, $state, $interval, Session, AuthService, Verific
     }
 
     function getBalance(){
-        UserService.get().then(
-            function(response){
-               // console.log(response.data.id);
-                UserService.getBalance().then(
-                    function(response){
-                        vm.balance = response.data;
-                    },
-                    function(err){
-                        console.log("err");
-                    }
-                );
-            },
-            function(err){
-                console.log("error");
-            }
-        );
+        if (isLoggedIn() && isCustomer()) {
+            UserService.get().then(
+                function(response){
+                   // console.log(response.data.id);
+                    UserService.getBalance().then(
+                        function(response){
+                            vm.balance = response.data;
+                        },
+                        function(err){
+                            console.log("getBalance() err");
+                        }
+                    );
+                },
+                function(err){
+                    console.log(" getBalance() error");
+                }
+            );
+        }
     }
  }
 
 Controller.$inject = ['$rootScope', '$state', '$interval', 'Session', 'AuthService', 'VerificationService','UserService'];
-
 
 var templateUrl = require('./main.html');
 require('main.scss');

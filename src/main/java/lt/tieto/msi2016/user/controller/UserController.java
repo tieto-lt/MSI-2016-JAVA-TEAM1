@@ -37,7 +37,7 @@ public class UserController  extends BaseController {
         return user;
     }
 
-    @Secured(Roles.CUSTOMER)
+    @Secured({Roles.CUSTOMER, Roles.OPERATOR, Roles.ADMIN})
     @RequestMapping(method = RequestMethod.GET, path = "/api/user/current")
     public User getUserData() {
         return securityService.getCurrentUser();
