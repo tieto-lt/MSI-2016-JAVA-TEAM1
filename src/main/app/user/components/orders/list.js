@@ -58,7 +58,6 @@ function Controller($scope, OrdersService) {
         OrdersService.getOrderResults(orderId).then(
             function(response){
                vm.result=response.data[0];
-               vm.result = response.data;
                console.log(response.data);
                if(vm.result == null){
                    console.log("null");
