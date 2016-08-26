@@ -50,8 +50,8 @@ function Controller($scope, OrdersService) {
        isFirstDisabled: false
      };
 
-    function getResults (orderId) {
-       if(vm.order.status=='Completed'){
+    function getResults (index, orderId) {
+       if(vm.orders[index].status=='Completed'){
         OrdersService.getOrderResults(orderId).then(
             function(response){
                vm.result=response.data[0];

@@ -19,7 +19,7 @@
                     </div>
                 </uib-accordion-heading>
             </div>
-            <div uib-accordion-group class="panel-default" style="width: 680px;  border:0px" is-open="status.open" ng-click="$ctrl.getResults(order.id)" ng-repeat="order in $ctrl.orders " >
+            <div uib-accordion-group class="panel-default" style="width: 680px;  border:0px" is-open="status.open" ng-click="$ctrl.getResults($index, order.id)" ng-repeat="order in $ctrl.orders " >
                 <uib-accordion-heading >
                     <div  class="list_header">
                         <ul>
