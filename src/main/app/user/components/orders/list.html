@@ -1,4 +1,11 @@
 <div>
+
+    <style>
+        video#bgvid  {
+        background: url("/load.jpg") no-repeat;
+        background-size: cover;
+        }
+    </style>
     <div>
         <div class="alert-order-list alert alert-info" ng-show="$ctrl.message"  align="center">
             <strong>You have not submitted any orders yet!</strong>
@@ -50,6 +57,10 @@
                         <tr>
                             <td>Cost: </td>
                             <td>{{order.mapItems.length * 5 }} &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Video: </td>
+                            <td>Yes</td>
                         </tr>
                         <tr>
                             <td>Execution date: </td>
