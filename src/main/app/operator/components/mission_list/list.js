@@ -3,8 +3,8 @@ var module = require('main_module');
 function Controller($scope, MissionService) {
 
     var vm = this;
-    vm.missionNames={};
-    vm.missions = {};
+    vm.missionIds={};
+    vm.mission = {};
     vm.information = {};
     vm.results = {};
     vm.message = false;
@@ -27,11 +27,11 @@ function Controller($scope, MissionService) {
         };
 
     function _loadList() {
-          MissionService.getMissionNames().then(
+          MissionService.getMissionIds().then(
                 function (response) {
-                    vm.missionNames = response.data;
-                    console.log(vm.missionNames);
-                    if(vm.missionNames.length == 0){
+                    vm.missionIds = response.data;
+                    console.log(vm.missionIds);
+                    if(vm.missionIds.length == 0){
                     vm.message = true;
                     }
 
@@ -49,51 +49,46 @@ function Controller($scope, MissionService) {
        isFirstDisabled: false
      };
 
-    function getResults (name){
+    function getResults (missionId){
 
-         MissionService.getMissionsResultsByName(name).then(
+         MissionService.getOrderResultsByMissionId(missionId).then(
                     function (response) {
-                        vm.missions = response.data;
-                        console.log(vm.missions);
-                        if(vm.missions.length == 0){
-                            vm.message = true;
-                            console.log(vm.message);
-                        }
+                        vm.mission = response.data;
+                        console.log(vm.mission);
 
-                        vm.missions.forEach(function (mission) {
 
-                            mission.startNavigationData.x = mission.startNavigationData.x || 0;
-                            mission.startNavigationData.y = mission.startNavigationData.y || 0;
-                            mission.startNavigationData.z = mission.startNavigationData.z || 0;
+                            vm.mission.startNavigationData.x = vm.mission.startNavigationData.x || 0;
+                            vm.mission.startNavigationData.y = vm.mission.startNavigationData.y || 0;
+                            vm.mission.startNavigationData.z = vm.mission.startNavigationData.z || 0;
 
-                            mission.finishNavigationData.x = mission.finishNavigationData.x || 0;
-                            mission.finishNavigationData.y = mission.finishNavigationData.y || 0;
-                            mission.finishNavigationData.z = mission.finishNavigationData.z || 0;
+                            vm.mission.finishNavigationData.x = vm.mission.finishNavigationData.x || 0;
+                            vm.mission.finishNavigationData.y = vm.mission.finishNavigationData.y || 0;
+                            vm.mission.finishNavigationData.z = vm.mission.finishNavigationData.z || 0;
 
-                            mission.startNavigationData.x = Math.round( mission.startNavigationData.x*100)/100;
-                            mission.startNavigationData.y = Math.round( mission.startNavigationData.y*100)/100;
-                            mission.startNavigationData.z = Math.round( mission.startNavigationData.z*100)/100;
-                            mission.finishNavigationData.x = Math.round( mission.finishNavigationData.x*100)/100;
-                            mission.finishNavigationData.y = Math.round( mission.finishNavigationData.y*100)/100;
-                            mission.finishNavigationData.z = Math.round( mission.startNavigationData.z*100)/100;
-                        });
+                            vm.mission.startNavigationData.x = Math.round( vm.mission.startNavigationData.x*100)/100;
+                            vm.mission.startNavigationData.y = Math.round( vm.mission.startNavigationData.y*100)/100;
+                            vm.mission.startNavigationData.z = Math.round( vm.mission.startNavigationData.z*100)/100;
+                            vm.mission.finishNavigationData.x = Math.round( vm.mission.finishNavigationData.x*100)/100;
+                            vm.mission.finishNavigationData.y = Math.round( vm.mission.finishNavigationData.y*100)/100;
+                            vm.mission.finishNavigationData.z = Math.round( vm.mission.startNavigationData.z*100)/100;
+
 
 
                         $scope.status = false;
                         console.log();
-                        vm.videoUrls[name] = "/api/missionsUI/video/" + vm.missions[0].id;
+                        vm.videoUrls[missionId] = "/api/missionsUI/video/" + vm.mission.id;
 
 
                     });
         }
 
-    function videoUrl(name) {
-        console.log(name);
-        return vm.videoUrl[name];
+    function videoUrl(missionId) {
+        console.log(missionId);
+        return vm.videoUrl[missionId];
     }
 
-    function publish(index) {
-            MissionService.publish(vm.missions[index].orderId).then(
+    function publish() {
+            MissionService.publish(vm.mission.id).then(
                 function () {
                     console.log('mission results successfully published');
                     vm.success = "mission results successfully published";
@@ -109,8 +104,8 @@ function Controller($scope, MissionService) {
                });
         }
 
-        function redo(index) {
-                MissionService.redo(vm.missions[index].id).then(
+        function redo() {
+                MissionService.redo(vm.mission.id).then(
                    function () {
                         console.log('mission status changed to accepted');
                         vm.success = "Mission status changed to accepted";

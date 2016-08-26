@@ -6,20 +6,20 @@ function Service ($http) {
        return $http.get("/api/missionsUI",{});
     };
 
-     this.getMissionsResultsByName = function(name) {
-           return $http.get("/api/missionsByName/"+name,{});
+     this.getOrderResultsByMissionId = function(missionId) {
+           return $http.get("/api/missionsByMissionId/"+missionId,{});
         };
 
-    this.publish = function(orderId) {
-       return $http.put("/api/order/publish/" + orderId,{});
+    this.publish = function(id) {
+       return $http.put("/api/order/publish/" + id,{});
     };
 
     this.redo = function(id) {
        return $http.put("/api/order/redo/" + id,{});
     };
 
-    this.getMissionNames = function() {
-               return $http.get("/api/order/names",{});
+    this.getMissionIds = function() {
+               return $http.get("/api/order/missionIds",{});
             };
 }
 Service.$inject = ['$http'];

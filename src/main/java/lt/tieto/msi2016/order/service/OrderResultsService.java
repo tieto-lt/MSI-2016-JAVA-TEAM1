@@ -64,7 +64,11 @@ public class OrderResultsService {
         return resultList;
     }
 
-
+    @Transactional(readOnly = true)
+    public OrderResults getOrderResultsByMissionId(String missionId) throws IOException {
+        List<OrderResultsDb> resultList = repository.getOrderResultsByMissionId(missionId);
+        return mapToOrderResults(resultList.get(0));
+    }
 
     @Transactional(readOnly = true)
     public List<OrderResults> getOrderResultsByOPeratorID(String name) throws IOException {
@@ -78,11 +82,11 @@ public class OrderResultsService {
 
 
     @Transactional(readOnly = true)
-    public  List<String> getMissionNamesByOperator() throws IOException {
+    public  List<String> getMissionIdsByOperator() throws IOException {
         List<OrderResults> resultList = new ArrayList();
         Long userId = securityService.getCurrentUser().getId();
-        List<String> missionNames=repository.getMissionNamesByOperator(userId);
-        return missionNames;
+        List<String> missionIds=repository.getMissionIdsByOperator(userId);
+        return missionIds;
     }
 
 
@@ -114,7 +118,7 @@ public class OrderResultsService {
         List<MissionNavigationData> navigationData = objectMapper.readValue(db.getNavigationData(), new TypeReference<List<MissionNavigationData>>() {});
         OrderResults api = new OrderResults();
         api.setId(db.getId());
-        api.setMissionId(db.getOrderId()); // our missionId is {order_id}-{mission_name}
+        api.setMissionId(db.getOrderId().toString() + "-" + db.getMissionName()); // our missionId is {order_id}-{mission_name}
         api.setOrderId(db.getOrderId());
         api.setStartNavigationData(navigationData != null ? navigationData.get(0) : null);
         api.setFinishNavigationData(navigationData != null ? navigationData.get(navigationData.size() - 1) : null);

@@ -10,7 +10,7 @@ import java.util.List;
 public class OrderResults {
 
     private Long id;
-    private Long missionId;
+    private String missionId;
     private Long orderId;
     private MissionNavigationData startNavigationData;
     private MissionNavigationData finishNavigationData;
@@ -44,11 +44,11 @@ public class OrderResults {
         this.id = id;
     }
 
-    public Long getMissionId() {
+    public String getMissionId() {
         return missionId;
     }
 
-    public void setMissionId(Long missionId) {
+    public void setMissionId(String missionId) {
         this.missionId = missionId;
     }
 

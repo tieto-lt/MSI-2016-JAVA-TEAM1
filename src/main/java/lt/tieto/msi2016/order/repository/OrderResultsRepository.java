@@ -21,7 +21,8 @@ public class OrderResultsRepository extends BaseRepository<OrderResultsDb> {
     private JdbcTemplate template;
     public static final String SELECT_RESULTS__BY_ORDER_ID = "SELECT * FROM order_results where order_id = ?";
     public static final String SELECT_RESULTS__BY_NAME = "SELECT * FROM order_results where mission_name = ?";
-    public static final String SELECT_MISSION_NAMES_BY_OPERATOR_ID = "SELECT mission_name FROM order_results where executed_by = ?";
+    public static final String SELECT_RESULTS_BY_NAME_AND_ORDER_ID = "SELECT * FROM order_results where mission_name = ? and order_id = ?";
+    public static final String SELECT_MISSION_IDS_BY_OPERATOR_ID = "SELECT concat(order_id, '-', mission_name) FROM order_results where executed_by = ?";
 
 
 
@@ -67,9 +68,14 @@ public class OrderResultsRepository extends BaseRepository<OrderResultsDb> {
 
     }
 
-    public List<String> getMissionNamesByOperator(Long operator_id){
-        List<String> missionNames = template.queryForList(SELECT_MISSION_NAMES_BY_OPERATOR_ID, String.class, new Object[]{operator_id});
-        return missionNames;
+    public List<OrderResultsDb> getOrderResultsByMissionId(String missionId){
+        List<OrderResultsDb>  resultList =template.query(SELECT_RESULTS_BY_NAME_AND_ORDER_ID, new Object[] {missionId.split("-")[1], missionId.split("-")[0]}, ROW_MAPPER);
+        return resultList;
+    }
+
+    public List<String> getMissionIdsByOperator(Long operator_id){
+        List<String> missionIds = template.queryForList(SELECT_MISSION_IDS_BY_OPERATOR_ID, String.class, new Object[]{operator_id});
+        return missionIds;
 
     }
 

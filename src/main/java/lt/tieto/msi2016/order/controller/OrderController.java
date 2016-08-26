@@ -48,9 +48,10 @@ public class OrderController extends BaseController {
     }
 
     @Secured(Roles.OPERATOR)
-    @RequestMapping(method = RequestMethod.PUT, path = "/api/order/publish/{id}")
-    public Order publishOrder(@PathVariable Long id) throws IOException {
-        return orderService.updateStatus(id, OrderDb.Status.Completed);
+    @RequestMapping(method = RequestMethod.PUT, path = "/api/order/publish/{orderResultId}")
+    public Order publishOrder(@PathVariable Long orderResultId) throws IOException {
+        OrderResults orderResults = orderResultsService.get(orderResultId);
+        return orderService.updateStatus(orderResults.getOrderId(), OrderDb.Status.Completed);
     }
 
     @Transactional
@@ -76,15 +77,15 @@ public class OrderController extends BaseController {
     }
 
     @Secured(Roles.OPERATOR)
-    @RequestMapping(method = RequestMethod.GET, path = "/api/missionsByName/{name}")
-    public List<OrderResults> getOrderResultsByOrderIdForOPerator(@PathVariable String name) throws IOException {
-        return orderResultsService.getOrderResultsByOPeratorID(name);
+    @RequestMapping(method = RequestMethod.GET, path = "/api/missionsByMissionId/{missionId}")
+    public OrderResults getOrderResultsByMissionId(@PathVariable String missionId) throws IOException {
+        return orderResultsService.getOrderResultsByMissionId(missionId);
     }
 
     @Secured(Roles.OPERATOR)
-    @RequestMapping(method = RequestMethod.GET, path = "/api/order/names")
-    public  List<String> getMissionNamesByOperator() throws IOException {
-        return orderResultsService.getMissionNamesByOperator();
+    @RequestMapping(method = RequestMethod.GET, path = "/api/order/missionIds")
+    public  List<String> getMissionIdsByOperator() throws IOException {
+        return orderResultsService.getMissionIdsByOperator();
     }
 
 
