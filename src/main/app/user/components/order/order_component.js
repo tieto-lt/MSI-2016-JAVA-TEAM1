@@ -21,10 +21,10 @@ function Controller(UserService, $state, $rootScope) {
 
   vm.size = 45;
   vm.all = [
-    {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :1, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :2, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"},
-    {id :3, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT"}
+    {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT", icon: 80, col : "black"},
+    {id :1, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT", icon :45, col :"black"},
+    {id :2, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT",icon :40, col :"black"},
+    {id :3, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, cameraPosition: "FRONT", icon :45, col :"black"}
   ];
 
   vm.obj = [];
@@ -54,7 +54,7 @@ function Controller(UserService, $state, $rootScope) {
           UserService.getBalance().then(
             function(response) {
                 console.log(response.data);
-                if(response.data < vm.selectedObject.length * 5 ){
+                if(response.data < vm.selectedObject.length * 5){
                     console.log("neuztenka");
                     vm.money= true;
                 } else {
@@ -128,8 +128,10 @@ function Controller(UserService, $state, $rootScope) {
               vm.all[index].color = '#009688';
               vm.all[index].text = '#026f65';
               vm.all[index].width = vm.all[index].width + 3;
+              vm.all[index].icon = vm.all[index].icon + 7;
               vm.selectedObject[vm.selectedObject.length] = vm.all[index];
               vm.all[index].size = vm.all[index].size + 7;
+              vm.all[index].col = 'white';
           }
           else{
               vm.all[index].selected = !vm.all[index].selected;
@@ -143,7 +145,9 @@ function Controller(UserService, $state, $rootScope) {
           vm.all[index].text = '#171313';
           vm.all[index].width = vm.all[index].width - 3;
           vm.all[index].size = vm.all[index].size - 7;
+           vm.all[index].icon = vm.all[index].icon - 7;
           vm.selectedObject.splice(find(index),1);
+          vm.all[index].col = 'black';
 
      }
      function find (index){
