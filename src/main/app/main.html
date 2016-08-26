@@ -31,7 +31,7 @@
                 <span class="glyphicon glyphicon-euro" ></span>
             </p>
 
-            <li ng-class="{active: $ctrl.getCurrentState() == 'root.registration'}"><a ng-show="!$ctrl.isLoggedIn()" ui-sref="root.registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li ng-class="{active: $ctrl.getCurrentState() == 'root.registration'}"><a ng-show="!$ctrl.isLoggedIn()" ui-sref="root.registration"><span class="glyphicon glyphicon-user"></span> Registration</a></li>
             <li ng-class="{active: $ctrl.getCurrentState() == 'root.login'}"><a ng-show="!$ctrl.isLoggedIn()" ui-sref="root.login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li ng-show="$ctrl.isOperator() && $ctrl.isOperatorVerified" class="msi-status msi-verified">
                 <span class="glyphicon glyphicon-ok"></span>
