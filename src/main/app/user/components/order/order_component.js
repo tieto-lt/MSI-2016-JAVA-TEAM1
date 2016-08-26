@@ -54,7 +54,7 @@ function Controller(UserService, $state, $rootScope) {
           UserService.getBalance().then(
             function(response) {
                 console.log(response.data);
-                if(/*response.data < vm.selectedObject.length * 5*/ false){
+                if(response.data < vm.selectedObject.length * 5){
                     console.log("neuztenka");
                     vm.money= true;
                 } else {
