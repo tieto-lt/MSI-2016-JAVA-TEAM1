@@ -45,11 +45,11 @@ function Service ($http, $httpParamSerializer, $cookies, $state, Session) {
             console.log("You are already logged in as "+role);
             role = role && role[0];
             if (ROLE_ADMIN == role) {
-                $state.go('root.admin');
+                $state.go('root.orders');
             } else if  (ROLE_OPERATOR == role) {
-                $state.go('root.operator');
+                $state.go('root.missions');
             } else if  (ROLE_CUSTOMER == role) {
-                $state.go('root.customerFirst');
+                $state.go('root.customerOrders');
             }
         }
     }

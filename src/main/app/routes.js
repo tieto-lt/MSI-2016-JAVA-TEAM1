@@ -17,7 +17,7 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     .state('root.home', {
       url: '/',
       template: "<home-first></home-first>",
-      /*template: "<login></login",*/
+
       data: {
         isPublic: true
       }
@@ -110,7 +110,6 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
                url: "/customer/information",
                template:"<customer-information></customer-information>",
                data: {
-               roles: ["ROLE_CUSTOMER"]
                }
      })
     .state('root.orderComponent', {
@@ -124,7 +123,6 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
               url:"/customer/password",
               template:"<customer-password></customer-password>",
               data: {
-                 roles: ["ROLE_CUSTOMER"]
               }
     })
      .state('root.customerOrders', {
@@ -203,6 +201,7 @@ module.run(['$transitions', 'Session', '$state', '$http', function($transitions,
                to: function (state) { return state.data && state.data.roles && state.data.roles.indexOf("ROLE_OPERATOR") >= 0; }
              },
              function () {
+             console.log(Session.getRole().indexOf("ROLE_OPERATOR"));
                 if (Session.getRole().indexOf("ROLE_OPERATOR") < 0) {
                   return $state.target('root.home');
                 }

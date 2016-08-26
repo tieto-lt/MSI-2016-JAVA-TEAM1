@@ -13,13 +13,15 @@ function Controller($scope, OrdersService) {
     vm.selected = [];
     vm.list = [];
     vm.videoUrls = {};
+
    // vm.getObjects = getObjects;
     vm.all = [
-        {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :1, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :2, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, camera: "front"},
-        {id :3, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, camera: "front"}
+        {id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, camera: "front", icon: 80, col : "black"},
+        {id :1, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, camera: "front",icon :45, col :"black"},
+        {id :2, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, camera: "front",icon :40, col :"black"},
+        {id :3, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, camera: "front",icon :45, col :"black"}
       ];
+
 
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
@@ -51,11 +53,13 @@ function Controller($scope, OrdersService) {
      };
 
     function getResults (index, orderId) {
+
        if(vm.orders[index].status=='Completed'){
         OrdersService.getOrderResults(orderId).then(
             function(response){
                vm.result=response.data[0];
-               console.log(vm.result);
+               vm.result = response.data;
+               console.log(response.data);
                if(vm.result == null){
                    console.log("null");
                }
@@ -64,6 +68,12 @@ function Controller($scope, OrdersService) {
             }
         );
      }
+
+      vm.all = [{id :0, selected: false, color: "#928f8f", name: "CASTLE", size: 55, text:"#171313", width: 5, camera: "front", icon: 80, col : "black"},
+               {id :1, selected: false, color: "#928f8f", name: "HOUSE", size: 55, text:"#171313", width: 5, camera: "front",icon :45, col :"black"},
+               {id :2, selected: false, color: "#928f8f", name: "GARDEN", size: 55, text:"#171313", width: 5, camera: "front",icon :40, col :"black"},
+               {id :3, selected: false, color: "#928f8f", name: "LAKE", size: 55, text:"#171313", width: 5, camera: "front",icon :45, col :"black"}];
+
         for(i=0; i<vm.orders.length;i++){
             if(vm.orders[i].id == orderId){
                 //console.log(vm.orders[i].mapItems);
@@ -73,28 +83,16 @@ function Controller($scope, OrdersService) {
                    for(a = 0; a<4; a++){
                         if(vm.orders[i].mapItems[j].name == vm.all[a].name){
                             vm.all[a].color = "#009688";
+                            vm.all[a].col = "white";
                         }
                    }
                 }
             }
         }
      }
-
-//     function videoUrl(resultId) {
-//        if (resultId === vm.result.id) {
-//            return vm.videoUrl = "/api/missionsUI/video/" + vm.result.id;
-//        } else {
-//            return undefined;
-//        }
-//     }
-
-
         $scope.test = function(text) {
           alert(text);
         }
-
-
-
 }
 
 Controller.$inject = ['$scope','OrdersService'];
